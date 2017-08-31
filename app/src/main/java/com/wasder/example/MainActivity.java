@@ -23,6 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The type Main activity.
  */
@@ -80,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		//region Tabbed_Navigation
 		SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		mSectionsPagerAdapter.addFragment(new FirstFragment(), "First");
+		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Second");
+		mSectionsPagerAdapter.addFragment(new ThirdFragment(), "Third");
 		// Set up the ViewPager with the sections adapter.
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -202,42 +208,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	 * The type Sections pager adapter.
 	 */
 	private class SectionsPagerAdapter extends FragmentPagerAdapter {
-		
+		private final List<Fragment> mFragmentList = new ArrayList<>();
+		private final List<String> mFragmentTitleList = new ArrayList<>();
 		/**
 		 * Instantiates a new Sections pager adapter.
 		 *
 		 * @param fm the fm
 		 */
 		SectionsPagerAdapter(FragmentManager fm) {
-			
 			super(fm);
 		}
 		
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class below).
-			return PlaceholderFragment.newInstance(position + 1);
+			return mFragmentList.get(position);
 		}
 		
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			return mFragmentList.size();
+		}
+		
+		public void addFragment(Fragment fragment, String title){
+			mFragmentList.add(fragment);
+			mFragmentTitleList.add(title);
 		}
 		
 		@Override
 		public CharSequence getPageTitle(int position) {
-			
-			switch (position) {
-				case 0:
-					return "SECTION 1";
-				case 1:
-					return "SECTION 2";
-				case 2:
-					return "SECTION 3";
-			}
-			return null;
+			return mFragmentTitleList.get(position);
+		}
+	}
+	
+	/**
+	 * First Fragment
+	 */
+	public static class FirstFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_first, container, false);
+			return view;
+		}
+	}
+	
+	/**
+	 * Second Fragment
+	 */
+	public static class SecondFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_second, container, false);
+			return view;
+		}
+	}
+	
+	/**
+	 * Third Fragment
+	 */
+	public static class ThirdFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_third, container, false);
+			return view;
 		}
 	}
 }
