@@ -1,6 +1,7 @@
 package com.wasder.example;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -10,12 +11,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +35,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private TextView mTextMessage;
-	
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 		
 		
@@ -42,9 +44,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
 					mTextMessage.setText(R.string.title_home);
+					mViewPager.removeAllViewsInLayout();
+					mViewPager.setAdapter(mSectionsPagerAdapter);
+					tabLayout.setupWithViewPager(mViewPager);
 					return true;
 				case R.id.navigation_dashboard:
 					mTextMessage.setText(R.string.title_dashboard);
+					mViewPager.removeAllViewsInLayout();
+					mViewPager.setAdapter(mSectionsPagerAdapterSecond);
+					tabLayout.setupWithViewPager(mViewPager);
 					return true;
 				case R.id.navigation_notifications:
 					mTextMessage.setText(R.string.title_notifications);
@@ -54,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		
 	};
+	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private SectionsPagerAdapter mSectionsPagerAdapterSecond;
+	private ViewPager mViewPager;
+	private TabLayout tabLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +94,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		//endregion
 		
 		//region Tabbed_Navigation
-		SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 		mSectionsPagerAdapter.addFragment(new FirstFragment(), "First");
 		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Second");
 		mSectionsPagerAdapter.addFragment(new ThirdFragment(), "Third");
 		// Set up the ViewPager with the sections adapter.
-		ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+		mViewPager = (ViewPager) findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+		tabLayout = (TabLayout) findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(mViewPager);
+		
+		// Second NavButton
+		mSectionsPagerAdapterSecond = new SectionsPagerAdapter(getSupportFragmentManager());
+		mSectionsPagerAdapterSecond.addFragment(new FourthFragment(), "Fourth");
+		mSectionsPagerAdapterSecond.addFragment(new FifthFragment(), "Fifth");
+		mSectionsPagerAdapterSecond.addFragment(new SixthFragment(), "Sixth");
+		
 		//endregion
 		
 		//region Floating_Action_Button
@@ -207,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	/**
 	 * The type Sections pager adapter.
 	 */
-	private class SectionsPagerAdapter extends FragmentPagerAdapter {
+	private class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		private final List<Fragment> mFragmentList = new ArrayList<>();
 		private final List<String> mFragmentTitleList = new ArrayList<>();
 		/**
@@ -269,6 +288,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 			View view = inflater.inflate(R.layout.fragment_tabbed_third, container, false);
+			return view;
+		}
+	}
+	
+	/**
+	 * First Fragment
+	 */
+	public static class FourthFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_fourth, container, false);
+			return view;
+		}
+	}
+	
+	/**
+	 * Second Fragment
+	 */
+	public static class FifthFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_fifth, container, false);
+			return view;
+		}
+	}
+	
+	/**
+	 * Third Fragment
+	 */
+	public static class SixthFragment extends Fragment{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+			View view = inflater.inflate(R.layout.fragment_tabbed_sixth, container, false);
 			return view;
 		}
 	}
