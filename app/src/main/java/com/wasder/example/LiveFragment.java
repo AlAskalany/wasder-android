@@ -4,16 +4,21 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,7 +33,7 @@ import java.util.List;
  * Use the {@link LiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LiveFragment extends Fragment {
+public class LiveFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private static final String TAG = "LiveFragment";
 	// TODO: Rename parameter arguments, choose names that match
@@ -108,27 +113,46 @@ public class LiveFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_live, container, false);
 		//region Toolbar
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setBackgroundColor(Color.RED);
+		//toolbar.setBackgroundColor(Color.RED);
 		
 		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 		actionBar.setTitle("Live");
 		
+		DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string
+				.navigation_drawer_close);
+		toggle.syncState();
+		NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
+		
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Twitch Streams");
-		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Fifth");
-		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Sixth");
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Twitch Feed");
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Esports Events");
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) view.findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 		tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(mViewPager);
-		tabLayout.setBackgroundColor(Color.RED);
-		tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
+		//tabLayout.setBackgroundColor(Color.RED);
+		//tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
 		
 		return view;
+	}
+	
+	/**
+	 * Called when an item in the navigation menu is selected.
+	 *
+	 * @param item The selected item
+	 * @return true to display the item as the selected item
+	 */
+	@Override
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		
+		return false;
 	}
 	
 	/**

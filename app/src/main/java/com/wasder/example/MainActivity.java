@@ -1,17 +1,19 @@
 package com.wasder.example;
 
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -23,11 +25,14 @@ import com.wasder.example.dummy.DummyContent;
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
-		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment.OnListFragmentInteractionListener {
+		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
+		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
 	
+	private static final String TAG = "MainActivity";
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
 	private TextView mTextMessage;
+	Toolbar toolbar;
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
@@ -36,25 +41,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ts = fm.beginTransaction();
+			Fragment fragment = fm.findFragmentById(R.id.framelayout_fragment_container);
+			if(fragment != null){
+				fm.saveFragmentInstanceState(fragment);
+			}
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
-					getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-					ts.replace(R.id.framelayout_fragment_container, homeFragment);
-					ts.addToBackStack(null);
-					ts.commit();
+					if (fragment != homeFragment) {
+						ts.replace(R.id.framelayout_fragment_container, homeFragment);
+						ts.addToBackStack(null);
+						ts.commit();
+					}
 					return true;
 				case R.id.navigation_dashboard:
-					getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_red_dark));
-					ts.replace(R.id.framelayout_fragment_container, liveFragment);
-					ts.addToBackStack(null);
-					ts.commit();
+					if (fragment != liveFragment) {
+						ts.replace(R.id.framelayout_fragment_container, liveFragment);
+						ts.addToBackStack(null);
+						ts.commit();
+					}
 					return true;
 				case R.id.navigation_notifications:
 					return true;
 			}
 			return false;
 		}
-		
 	};
 	
 	@Override
@@ -62,25 +72,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		homeFragment = new HomeFragment();
 		liveFragment = new LiveFragment();
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
-		//transaction.add(R.id.framelayout_fragment_container, liveFragment, "Live");
-		//transaction.hide(liveFragment);
 		transaction.commit();
-		
-		//region Navigation_Drawer
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, homeFragment.toolbar, R.string.navigation_drawer_open, R.string
-				.navigation_drawer_close);
-		drawer.setDrawerListener(toggle);
-		toggle.syncState();
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
-		//endregion
 		
 		//region Bottom_Navigation
 		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -91,12 +90,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onBackPressed() {
 		
+		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
 		} else {
 			super.onBackPressed();
 		}
+		
 	}
 	
 	@Override
@@ -154,5 +155,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onListFragmentInteraction(DummyContent.DummyItem item) {
 		
+	}
+	
+	/**
+	 * Called whenever the contents of the back stack change.
+	 */
+	@Override
+	public void onBackStackChanged() {
+		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 	}
 }

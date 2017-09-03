@@ -3,16 +3,21 @@ package com.wasder.example;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,7 +32,7 @@ import java.util.List;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private static final String TAG = "HomeFragment";
 	// TODO: Rename parameter arguments, choose names that match
@@ -112,6 +117,13 @@ public class HomeFragment extends Fragment {
 		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 		actionBar.setTitle("Home");
 		
+		DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string
+				.navigation_drawer_close);
+		toggle.syncState();
+		NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
+		
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Feed");
@@ -125,6 +137,18 @@ public class HomeFragment extends Fragment {
 		tabLayout.setupWithViewPager(mViewPager);
 		
 		return view;
+	}
+	
+	/**
+	 * Called when an item in the navigation menu is selected.
+	 *
+	 * @param item The selected item
+	 * @return true to display the item as the selected item
+	 */
+	@Override
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		
+		return false;
 	}
 	
 	/**
