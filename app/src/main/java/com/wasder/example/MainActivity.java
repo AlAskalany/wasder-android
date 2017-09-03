@@ -22,7 +22,7 @@ import com.wasder.example.dummy.DummyContent;
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
-		.OnListFragmentInteractionListener {
+		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener {
 	
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;

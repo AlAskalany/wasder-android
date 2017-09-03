@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
 		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Feed");
-		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Creators");
+		mSectionsPagerAdapter.addFragment(new CreatorFeedFragment(), "Creators");
 		mSectionsPagerAdapter.addFragment(new GroupFragment(), "Groups");
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) view.findViewById(R.id.container);
