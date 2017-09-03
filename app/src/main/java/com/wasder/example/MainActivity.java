@@ -15,11 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.wasder.example.dummy.DummyContent;
+
 /**
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
-		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener {
+		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
+		.OnListFragmentInteractionListener {
 	
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+			
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ts = fm.beginTransaction();
 			switch (item.getItemId()) {
@@ -141,6 +145,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onFragmentInteraction(Uri uri) {
+		
+	}
+	
+	@Override
+	public void onListFragmentInteraction(DummyContent.DummyItem item) {
 		
 	}
 }

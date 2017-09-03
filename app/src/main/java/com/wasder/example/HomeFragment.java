@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +32,12 @@ public class HomeFragment extends Fragment {
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
-	
+	View view;
+	Toolbar toolbar;
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
-	
 	private OnFragmentInteractionListener mListener;
-	View view;
-	Toolbar toolbar;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private TabLayout tabLayout;
@@ -105,12 +102,14 @@ public class HomeFragment extends Fragment {
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		
 		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		actionBar.setTitle("Home");
 		
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
-		mSectionsPagerAdapter.addFragment(new FirstFragment(), "First");
-		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Second");
-		mSectionsPagerAdapter.addFragment(new ThirdFragment(), "Third");
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Feed");
+		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Creators");
+		mSectionsPagerAdapter.addFragment(new GroupFragment(), "Groups");
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) view.findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -119,13 +118,6 @@ public class HomeFragment extends Fragment {
 		tabLayout.setupWithViewPager(mViewPager);
 		
 		return view;
-	}
-	
-	@Override
-	public void onDetach() {
-		
-		super.onDetach();
-		mListener = null;
 	}
 	
 	/**
@@ -142,6 +134,11 @@ public class HomeFragment extends Fragment {
 		
 		// TODO: Update argument type and name
 		void onFragmentInteraction(Uri uri);
+	}	@Override
+	public void onDetach() {
+		
+		super.onDetach();
+		mListener = null;
 	}
 	
 	/**
@@ -190,9 +187,11 @@ public class HomeFragment extends Fragment {
 	/**
 	 * First Fragment
 	 */
-	public static class FirstFragment extends Fragment{
+	public static class FirstFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_first, container, false);
 			return view;
 		}
@@ -201,9 +200,11 @@ public class HomeFragment extends Fragment {
 	/**
 	 * Second Fragment
 	 */
-	public static class SecondFragment extends Fragment{
+	public static class SecondFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_second, container, false);
 			return view;
 		}
@@ -212,11 +213,15 @@ public class HomeFragment extends Fragment {
 	/**
 	 * Third Fragment
 	 */
-	public static class ThirdFragment extends Fragment{
+	public static class ThirdFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_third, container, false);
 			return view;
 		}
 	}
+	
+
 }

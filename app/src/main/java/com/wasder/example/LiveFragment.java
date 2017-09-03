@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -103,6 +104,8 @@ public class LiveFragment extends Fragment {
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		
 		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+		ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+		actionBar.setTitle("Live");
 		
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
