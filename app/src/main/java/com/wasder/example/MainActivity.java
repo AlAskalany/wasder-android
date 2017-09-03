@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,11 +25,12 @@ import com.wasder.example.dummy.DummyContent;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
-		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
+		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
+	MarketFragment marketFragment;
 	private TextView mTextMessage;
 	Toolbar toolbar;
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
@@ -53,14 +53,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 						ts.commit();
 					}
 					return true;
-				case R.id.navigation_dashboard:
+				case R.id.navigation_live:
 					if (fragment != liveFragment) {
 						ts.replace(R.id.framelayout_fragment_container, liveFragment);
 						ts.addToBackStack(null);
 						ts.commit();
 					}
 					return true;
-				case R.id.navigation_notifications:
+				case R.id.navigation_market:
+					if(fragment != marketFragment){
+						ts.replace(R.id.framelayout_fragment_container, marketFragment);
+						ts.addToBackStack(null);
+						ts.commit();
+					}
 					return true;
 			}
 			return false;
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		homeFragment = new HomeFragment();
 		liveFragment = new LiveFragment();
+		marketFragment = new MarketFragment();
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
