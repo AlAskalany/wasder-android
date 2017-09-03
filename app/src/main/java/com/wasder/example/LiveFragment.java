@@ -1,6 +1,7 @@
 package com.wasder.example;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,18 +30,17 @@ import java.util.List;
  */
 public class LiveFragment extends Fragment {
 	
+	private static final String TAG = "LiveFragment";
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
-	
+	View view;
+	Toolbar toolbar;
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
-	
 	private OnFragmentInteractionListener mListener;
-	View view;
-	Toolbar toolbar;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private TabLayout tabLayout;
@@ -59,6 +60,7 @@ public class LiveFragment extends Fragment {
 	// TODO: Rename and change types and number of parameters
 	public static LiveFragment newInstance(String param1, String param2) {
 		
+		Log.d(TAG, "newInstance()");
 		LiveFragment fragment = new LiveFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
@@ -78,6 +80,7 @@ public class LiveFragment extends Fragment {
 	@Override
 	public void onAttach(Context context) {
 		
+		Log.d(TAG, "onAttach()");
 		super.onAttach(context);
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
@@ -89,6 +92,7 @@ public class LiveFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
+		Log.d(TAG, "onCreate()");
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
 			mParam1 = getArguments().getString(ARG_PARAM1);
@@ -98,35 +102,33 @@ public class LiveFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		Log.d(TAG, "onCreateView()");
 		// Inflate the layout for this fragment
 		view = inflater.inflate(R.layout.fragment_live, container, false);
 		//region Toolbar
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(Color.RED);
 		
 		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-		ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 		actionBar.setTitle("Live");
 		
 		//region Tabbed_Navigation
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
-		mSectionsPagerAdapter.addFragment(new FirstFragment(), "Fourth");
-		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Fifth");
-		mSectionsPagerAdapter.addFragment(new ThirdFragment(), "Sixth");
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Twitch Streams");
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Fifth");
+		mSectionsPagerAdapter.addFragment(new FeedFragment(), "Sixth");
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) view.findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 		tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(mViewPager);
+		tabLayout.setBackgroundColor(Color.RED);
+		tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
 		
 		return view;
-	}
-	
-	@Override
-	public void onDetach() {
-		
-		super.onDetach();
-		mListener = null;
 	}
 	
 	/**
@@ -191,20 +193,29 @@ public class LiveFragment extends Fragment {
 	/**
 	 * First Fragment
 	 */
-	public static class FirstFragment extends Fragment{
+	public static class FirstFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_first, container, false);
 			return view;
 		}
+	}	@Override
+	public void onStart() {
+		
+		Log.d(TAG, "onStart()");
+		super.onStart();
 	}
 	
 	/**
 	 * Second Fragment
 	 */
-	public static class SecondFragment extends Fragment{
+	public static class SecondFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_second, container, false);
 			return view;
 		}
@@ -213,11 +224,25 @@ public class LiveFragment extends Fragment {
 	/**
 	 * Third Fragment
 	 */
-	public static class ThirdFragment extends Fragment{
+	public static class ThirdFragment extends Fragment {
+		
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			
 			View view = inflater.inflate(R.layout.fragment_tabbed_third, container, false);
 			return view;
 		}
 	}
+	
+	@Override
+	public void onDetach() {
+		
+		Log.d(TAG, "onDetach()");
+		super.onDetach();
+		mListener = null;
+	}
+	
+
+	
+	
 }

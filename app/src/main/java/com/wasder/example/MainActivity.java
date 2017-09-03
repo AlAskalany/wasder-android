@@ -1,5 +1,6 @@
 package com.wasder.example;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +23,7 @@ import com.wasder.example.dummy.DummyContent;
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
-		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener {
+		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment.OnListFragmentInteractionListener {
 	
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
@@ -37,13 +38,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			FragmentTransaction ts = fm.beginTransaction();
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
-					ts.hide(liveFragment);
-					ts.show(homeFragment);
+					getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+					ts.replace(R.id.framelayout_fragment_container, homeFragment);
+					ts.addToBackStack(null);
 					ts.commit();
 					return true;
 				case R.id.navigation_dashboard:
-					ts.hide(homeFragment);
-					ts.show(liveFragment);
+					getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_red_dark));
+					ts.replace(R.id.framelayout_fragment_container, liveFragment);
+					ts.addToBackStack(null);
 					ts.commit();
 					return true;
 				case R.id.navigation_notifications:
@@ -65,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
-		transaction.add(R.id.framelayout_fragment_container, liveFragment, "Live");
-		transaction.hide(liveFragment);
+		//transaction.add(R.id.framelayout_fragment_container, liveFragment, "Live");
+		//transaction.hide(liveFragment);
 		transaction.commit();
 		
 		//region Navigation_Drawer
