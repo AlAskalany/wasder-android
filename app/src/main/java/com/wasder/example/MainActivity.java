@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
+			sheetDialog.setContentView(R.layout.bottom_sheet);
+			sheetDialog.show();
 			return true;
 		}
 		
