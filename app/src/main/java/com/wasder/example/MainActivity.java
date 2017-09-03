@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onListFragmentInteraction(DummyContent.DummyItem item) {
-		
+		ListDialog.newInstance(this).show();
 	}
 	
 	/**
