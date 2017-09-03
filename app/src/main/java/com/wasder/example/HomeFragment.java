@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private TabLayout tabLayout;
-	
+	AppCompatActivity activity;
 	public HomeFragment() {
 		// Required empty public constructor
 	}
@@ -113,15 +113,16 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 		//region Toolbar
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		
-		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		activity = ((AppCompatActivity) getActivity());
+		activity.setSupportActionBar(toolbar);
+		ActionBar actionBar = activity.getSupportActionBar();
 		actionBar.setTitle("Home");
 		
-		DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string
+		DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawer, toolbar, R.string.navigation_drawer_open, R.string
 				.navigation_drawer_close);
 		toggle.syncState();
-		NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+		NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		
 		//region Tabbed_Navigation
@@ -135,6 +136,11 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 		
 		tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(mViewPager);
+		
+		activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_indigo_800, activity.getTheme()));
+		toolbar.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
+		tabLayout.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
+		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_red_600));
 		
 		return view;
 	}

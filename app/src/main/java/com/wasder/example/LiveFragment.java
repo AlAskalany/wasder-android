@@ -1,7 +1,6 @@
 package com.wasder.example;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +41,7 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 	private static final String ARG_PARAM2 = "param2";
 	View view;
 	Toolbar toolbar;
+	AppCompatActivity activity;
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
@@ -114,16 +114,16 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		//region Toolbar
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		//toolbar.setBackgroundColor(Color.RED);
-		
-		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		activity = ((AppCompatActivity) getActivity());
+		activity.setSupportActionBar(toolbar);
+		ActionBar actionBar = activity.getSupportActionBar();
 		actionBar.setTitle("Live");
 		
-		DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string
+		DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawer, toolbar, R.string.navigation_drawer_open, R.string
 				.navigation_drawer_close);
 		toggle.syncState();
-		NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+		NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		
 		//region Tabbed_Navigation
@@ -139,6 +139,12 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		tabLayout.setupWithViewPager(mViewPager);
 		//tabLayout.setBackgroundColor(Color.RED);
 		//tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
+		
+		activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_red_900, activity.getTheme()));
+		toolbar.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
+		tabLayout.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
+		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_yellow_300));
+		
 		
 		return view;
 	}
@@ -225,11 +231,6 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 			View view = inflater.inflate(R.layout.fragment_tabbed_first, container, false);
 			return view;
 		}
-	}	@Override
-	public void onStart() {
-		
-		Log.d(TAG, "onStart()");
-		super.onStart();
 	}
 	
 	/**
@@ -243,6 +244,11 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 			View view = inflater.inflate(R.layout.fragment_tabbed_second, container, false);
 			return view;
 		}
+	}	@Override
+	public void onStart() {
+		
+		Log.d(TAG, "onStart()");
+		super.onStart();
 	}
 	
 	/**
@@ -258,6 +264,8 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		}
 	}
 	
+
+	
 	@Override
 	public void onDetach() {
 		
@@ -265,8 +273,6 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		super.onDetach();
 		mListener = null;
 	}
-	
-
 	
 	
 }
