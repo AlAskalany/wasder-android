@@ -1,86 +1,74 @@
 package com.wasder.example;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
+		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener {
 	
+	HomeFragment homeFragment;
+	LiveFragment liveFragment;
 	private TextView mTextMessage;
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-		
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+			.OnNavigationItemSelectedListener() {
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-			
+			FragmentManager fm = getSupportFragmentManager();
+			FragmentTransaction ts = fm.beginTransaction();
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
-					mTextMessage.setText(R.string.title_home);
-					mViewPager.removeAllViewsInLayout();
-					mViewPager.setAdapter(mSectionsPagerAdapter);
-					tabLayout.setupWithViewPager(mViewPager);
+					ts.hide(liveFragment);
+					ts.show(homeFragment);
+					ts.commit();
 					return true;
 				case R.id.navigation_dashboard:
-					mTextMessage.setText(R.string.title_dashboard);
-					mViewPager.removeAllViewsInLayout();
-					mViewPager.setAdapter(mSectionsPagerAdapterSecond);
-					tabLayout.setupWithViewPager(mViewPager);
+					ts.hide(homeFragment);
+					ts.show(liveFragment);
+					ts.commit();
 					return true;
 				case R.id.navigation_notifications:
-					mTextMessage.setText(R.string.title_notifications);
 					return true;
 			}
 			return false;
 		}
 		
 	};
-	private SectionsPagerAdapter mSectionsPagerAdapter;
-	private SectionsPagerAdapter mSectionsPagerAdapterSecond;
-	private ViewPager mViewPager;
-	private TabLayout tabLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		homeFragment = new HomeFragment();
+		liveFragment = new LiveFragment();
 		
-		//region Toolbar
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		//endregion
+		FragmentManager manager = getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
+		transaction.add(R.id.framelayout_fragment_container, liveFragment, "Live");
+		transaction.hide(liveFragment);
+		transaction.commit();
 		
 		//region Navigation_Drawer
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, homeFragment.toolbar, R.string.navigation_drawer_open, R.string
+				.navigation_drawer_close);
 		drawer.setDrawerListener(toggle);
 		toggle.syncState();
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -88,41 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		//endregion
 		
 		//region Bottom_Navigation
-		mTextMessage = (TextView) findViewById(R.id.message);
 		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-		//endregion
-		
-		//region Tabbed_Navigation
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		mSectionsPagerAdapter.addFragment(new FirstFragment(), "First");
-		mSectionsPagerAdapter.addFragment(new SecondFragment(), "Second");
-		mSectionsPagerAdapter.addFragment(new ThirdFragment(), "Third");
-		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.container);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
-		tabLayout = (TabLayout) findViewById(R.id.tabs);
-		tabLayout.setupWithViewPager(mViewPager);
-		
-		// Second NavButton
-		mSectionsPagerAdapterSecond = new SectionsPagerAdapter(getSupportFragmentManager());
-		mSectionsPagerAdapterSecond.addFragment(new FourthFragment(), "Fourth");
-		mSectionsPagerAdapterSecond.addFragment(new FifthFragment(), "Fifth");
-		mSectionsPagerAdapterSecond.addFragment(new SixthFragment(), "Sixth");
-		
-		//endregion
-		
-		//region Floating_Action_Button
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-			}
-		});
 		//endregion
 	}
 	
@@ -162,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+		
 		int id = item.getItemId();
 		
 		if (id == R.id.nav_camera) {
-
+			
 		} else if (id == R.id.nav_gallery) {
 			
 		} else if (id == R.id.nav_slideshow) {
@@ -184,144 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		return true;
 	}
 	
-	/**
-	 * The type Placeholder fragment.
-	 */
-	public static class PlaceholderFragment extends Fragment {
+	@Override
+	public void onFragmentInteraction(Uri uri) {
 		
-		private static final String ARG_SECTION_NUMBER = "section_number";
-		
-		/**
-		 * Instantiates a new Placeholder fragment.
-		 */
-		public PlaceholderFragment() {
-			
-		}
-		
-		/**
-		 * New instance placeholder fragment.
-		 *
-		 * @param sectionNumber the section number
-		 * @return the placeholder fragment
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-		
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			
-			View rootView = inflater.inflate(R.layout.fragment_tabbed, container, false);
-			TextView textView = rootView.findViewById(R.id.section_label);
-			textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-	
-	/**
-	 * The type Sections pager adapter.
-	 */
-	private class SectionsPagerAdapter extends FragmentStatePagerAdapter {
-		private final List<Fragment> mFragmentList = new ArrayList<>();
-		private final List<String> mFragmentTitleList = new ArrayList<>();
-		/**
-		 * Instantiates a new Sections pager adapter.
-		 *
-		 * @param fm the fm
-		 */
-		SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-		
-		@Override
-		public Fragment getItem(int position) {
-			return mFragmentList.get(position);
-		}
-		
-		@Override
-		public int getCount() {
-			return mFragmentList.size();
-		}
-		
-		public void addFragment(Fragment fragment, String title){
-			mFragmentList.add(fragment);
-			mFragmentTitleList.add(title);
-		}
-		
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return mFragmentTitleList.get(position);
-		}
-	}
-	
-	/**
-	 * First Fragment
-	 */
-	public static class FirstFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_first, container, false);
-			return view;
-		}
-	}
-	
-	/**
-	 * Second Fragment
-	 */
-	public static class SecondFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_second, container, false);
-			return view;
-		}
-	}
-	
-	/**
-	 * Third Fragment
-	 */
-	public static class ThirdFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_third, container, false);
-			return view;
-		}
-	}
-	
-	/**
-	 * First Fragment
-	 */
-	public static class FourthFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_fourth, container, false);
-			return view;
-		}
-	}
-	
-	/**
-	 * Second Fragment
-	 */
-	public static class FifthFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_fifth, container, false);
-			return view;
-		}
-	}
-	
-	/**
-	 * Third Fragment
-	 */
-	public static class SixthFragment extends Fragment{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-			View view = inflater.inflate(R.layout.fragment_tabbed_sixth, container, false);
-			return view;
-		}
 	}
 }
