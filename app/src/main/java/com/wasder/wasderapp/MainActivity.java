@@ -1,12 +1,16 @@
 package com.wasder.wasderapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -94,7 +99,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
+		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout), "Connection", 2000);
+		//snackbar.show();
+		if(activeInfo != null && activeInfo.isConnected()){
+			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
+		}
 		// Configure Google Sign In
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
 				.default_web_client_id)).requestEmail().build();
