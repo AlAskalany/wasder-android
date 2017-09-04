@@ -1,5 +1,12 @@
 package com.wasder.example.dummy;
 
+import android.app.Application;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
+import com.wasder.example.MainActivity;
+import com.wasder.example.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +24,14 @@ public class DummyContent {
 	 * An array of sample (dummy) items.
 	 */
 	public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
-	
 	/**
 	 * A map of sample (dummy) items, by ID.
 	 */
 	public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-	
+	/**
+	 * A map of sample (dummy) items, images
+	 */
+	public static final Map<Drawable, DummyItem> ITEM_IMAGE = new HashMap<Drawable, DummyItem>();
 	private static final int COUNT = 25;
 	
 	static {
@@ -36,11 +45,12 @@ public class DummyContent {
 		
 		ITEMS.add(item);
 		ITEM_MAP.put(item.id, item);
+		ITEM_IMAGE.put(item.image, item);
 	}
 	
 	private static DummyItem createDummyItem(int position) {
 		
-		return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+		return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position), makeImage(position));
 	}
 	
 	private static String makeDetails(int position) {
@@ -53,6 +63,13 @@ public class DummyContent {
 		return builder.toString();
 	}
 	
+	private static Drawable makeImage(int position) {
+		
+		String asd = "D:\\Android\\Example\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml";
+		Drawable drawable = Drawable.createFromPath(asd);
+		return drawable;
+	}
+	
 	/**
 	 * A dummy item representing a piece of content.
 	 */
@@ -61,12 +78,14 @@ public class DummyContent {
 		public final String id;
 		public final String content;
 		public final String details;
+		public final Drawable image;
 		
-		public DummyItem(String id, String content, String details) {
+		public DummyItem(String id, String content, String details, Drawable image) {
 			
 			this.id = id;
 			this.content = content;
 			this.details = details;
+			this.image = image;
 		}
 		
 		@Override

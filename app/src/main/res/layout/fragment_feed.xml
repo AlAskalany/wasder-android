@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feed_cardView"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_marginHorizontal="8dp"
@@ -11,19 +12,70 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="HELLOO"
-        android:textAppearance="?attr/textAppearanceListItem"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="HI"
-        android:textAppearance="?attr/textAppearanceListItem"/>
+        <ImageButton
+            android:id="@+id/feed_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher_round"/>
+
+        <TextView
+            android:id="@+id/feed_title_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="21dp"
+            android:text="HELLOO"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+            android:id="@+id/feed_content_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:text="Card Content"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <ImageButton
+            android:id="@+id/feed_like_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/feed_share_imageButton"
+            app:srcCompat="@drawable/ic_notifications_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/feed_share_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/feed_comment_imageButton"
+            app:srcCompat="@drawable/ic_menu_manage"/>
+
+        <ImageButton
+            android:id="@+id/feed_comment_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/feed_details_imageButton"
+            app:srcCompat="@drawable/ic_menu_send"/>
+
+        <ImageButton
+            android:id="@+id/feed_details_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_menu_share"/>
+    </RelativeLayout>
+
 </android.support.v7.widget.CardView>
