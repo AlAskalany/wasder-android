@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.dummy.DummyContent;
 
 /**
@@ -32,17 +34,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
 	MarketFragment marketFragment;
-	private TextView mTextMessage;
 	Toolbar toolbar;
+	private TextView mTextMessage;
+	private FirebaseAuth mAuth;
+	private FirebaseAuth.AuthStateListener mAuthListener;
+	
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+			
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ts = fm.beginTransaction();
 			Fragment fragment = fm.findFragmentById(R.id.framelayout_fragment_container);
-			if(fragment != null){
+			if (fragment != null) {
 				fm.saveFragmentInstanceState(fragment);
 			}
 			switch (item.getItemId()) {
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					}
 					return true;
 				case R.id.navigation_market:
-					if(fragment != marketFragment){
+					if (fragment != marketFragment) {
 						ts.replace(R.id.framelayout_fragment_container, marketFragment);
 						ts.addToBackStack(null);
 						ts.commit();
@@ -78,7 +84,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		mAuth = FirebaseAuth.getInstance();
+		mAuthListener = new FirebaseAuth.AuthStateListener() {
+			
+			@Override
+			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+				
+				FirebaseUser user = mAuth.getCurrentUser();
+				if (user != null) {
+					Log.d(TAG, "Signed in");
+				} else {
+					Log.d(TAG, "Signed out");
+				}
+			}
+		};
 		homeFragment = new HomeFragment();
 		liveFragment = new LiveFragment();
 		marketFragment = new MarketFragment();
@@ -92,6 +111,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		//endregion
+	}
+	
+	@Override
+	public void onStart() {
+		
+		super.onStart();
+		mAuth.addAuthStateListener(mAuthListener);
+	}
+	
+	@Override
+	public void onStop() {
+		
+		super.onStop();
+		if (mAuthListener != null) {
+			mAuth.removeAuthStateListener(mAuthListener);
+		}
 	}
 	
 	@Override
@@ -172,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	 */
 	@Override
 	public void onBackStackChanged() {
+		
 		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 	}
 }
