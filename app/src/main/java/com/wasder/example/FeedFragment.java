@@ -29,7 +29,7 @@ public class FeedFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
-	private MyFeedRecyclerViewAdapter adapter;
+	public MyFeedRecyclerViewAdapter adapter;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
