@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
+	private String mUserName;
+	private String mEmail;
+	private Uri mPhotoUrl;
+	private String mUid;
 	
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
@@ -94,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				FirebaseUser user = mAuth.getCurrentUser();
 				if (user != null) {
 					Log.d(TAG, "Signed in");
+					mUserName = user.getDisplayName();
+					mEmail = user.getEmail();
+					mPhotoUrl = user.getPhotoUrl();
+					mUid = user.getUid();
 				} else {
 					Log.d(TAG, "Signed out");
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
