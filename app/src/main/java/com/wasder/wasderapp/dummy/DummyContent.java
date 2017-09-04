@@ -1,11 +1,6 @@
-package com.wasder.example.dummy;
+package com.wasder.wasderapp.dummy;
 
-import android.app.Application;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-
-import com.wasder.example.MainActivity;
-import com.wasder.example.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

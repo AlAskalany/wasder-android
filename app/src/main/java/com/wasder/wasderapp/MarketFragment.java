@@ -1,4 +1,4 @@
-package com.wasder.example;
+package com.wasder.wasderapp;
 
 import android.content.Context;
 import android.net.Uri;

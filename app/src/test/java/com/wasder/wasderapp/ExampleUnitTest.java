@@ -1,4 +1,4 @@
-package com.wasder.example;
+package com.wasder.wasderapp;
 
 import org.junit.Test;
 

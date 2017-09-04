@@ -9,5 +9,5 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.wasder.example.GroupFragment"
+    tools:context="com.wasder.wasderapp.GroupFragment"
     tools:listitem="@layout/fragment_group"/>

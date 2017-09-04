@@ -1,4 +1,4 @@
-package com.wasder.example;
+package com.wasder.wasderapp;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.wasder.example.FeedFragment.OnListFragmentInteractionListener;
-import com.wasder.example.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.FeedFragment.OnListFragmentInteractionListener;
+import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 

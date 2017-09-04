@@ -6,7 +6,7 @@
     android:id="@+id/fragment_home_coordinatorlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wasder.example.MainActivity">
+    tools:context="com.wasder.wasderapp.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

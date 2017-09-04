@@ -1,6 +1,5 @@
-package com.wasder.example;
+package com.wasder.wasderapp;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wasder.example.dummy.DummyContent;
-import com.wasder.example.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import com.wasder.wasderapp.dummy.DummyContent;
+import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -22,28 +19,27 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class FeedFragment extends Fragment {
+public class CreatorFeedFragment extends Fragment {
 	
 	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
-	public MyFeedRecyclerViewAdapter adapter;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public FeedFragment() {
+	public CreatorFeedFragment() {
 		
 	}
 	
 	// TODO: Customize parameter initialization
 	@SuppressWarnings("unused")
-	public static FeedFragment newInstance(int columnCount) {
+	public static CreatorFeedFragment newInstance(int columnCount) {
 		
-		FeedFragment fragment = new FeedFragment();
+		CreatorFeedFragment fragment = new CreatorFeedFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_COLUMN_COUNT, columnCount);
 		fragment.setArguments(args);
@@ -74,7 +70,7 @@ public class FeedFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_feed_list, container, false);
+		View view = inflater.inflate(R.layout.fragment_creatorfeed_list, container, false);
 		
 		// Set the adapter
 		if (view instanceof RecyclerView) {
@@ -85,8 +81,7 @@ public class FeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			adapter = new MyFeedRecyclerViewAdapter(getActivity() ,DummyContent.ITEMS, mListener);
-			recyclerView.setAdapter(adapter);
+			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(DummyContent.ITEMS, mListener));
 		}
 		return view;
 	}

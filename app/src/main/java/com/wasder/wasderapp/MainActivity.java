@@ -1,7 +1,5 @@
-package com.wasder.example;
+package com.wasder.wasderapp;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.wasder.example.dummy.DummyContent;
+import com.wasder.wasderapp.dummy.DummyContent;
 
 /**
  * The type Main activity.

@@ -10,5 +10,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.wasder.example.TwitchStreamFragment"
+    tools:context="com.wasder.wasderapp.TwitchStreamFragment"
     tools:listitem="@layout/fragment_twitchstream"/>

@@ -10,5 +10,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.wasder.example.FeedFragment"
+    tools:context="com.wasder.wasderapp.FeedFragment"
     tools:listitem="@layout/fragment_feed"/>
