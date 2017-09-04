@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +118,6 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 		activity.setSupportActionBar(toolbar);
 		ActionBar actionBar = activity.getSupportActionBar();
 		actionBar.setTitle("Home");
-		
 		DrawerLayout drawer = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawer, toolbar, R.string.navigation_drawer_open, R.string
 				.navigation_drawer_close);

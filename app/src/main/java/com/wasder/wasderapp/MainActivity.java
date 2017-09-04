@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
+	public String mUserName = "User Name";
+	public String mEmail = "User E-mail";
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
 	MarketFragment marketFragment;
@@ -40,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
-	private String mUserName;
-	private String mEmail;
 	private Uri mPhotoUrl;
 	private String mUid;
+	TextView nameTextView;
+	TextView detailsTextView;
 	
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
@@ -92,10 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		setContentView(R.layout.activity_main);
 		
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-				.requestIdToken(getString(R.string.default_web_client_id))
-				.requestEmail()
-				.build();
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
+				.default_web_client_id)).requestEmail().build();
 		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -110,6 +112,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					mEmail = user.getEmail();
 					mPhotoUrl = user.getPhotoUrl();
 					mUid = user.getUid();
+					
+					NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+					View headerView = navigationView.getHeaderView(0);
+					TextView userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
+					userNameTextView.setText(mUserName);
+					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
+					emailTextView.setText(mEmail);
 				} else {
 					Log.d(TAG, "Signed out");
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -180,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			sheetDialog.setContentView(R.layout.bottom_sheet);
 			sheetDialog.show();
 			return true;
-		} else if (id == R.id.action_sign_outout){
+		} else if (id == R.id.action_sign_outout) {
 			mAuth.signOut();
 		}
 		
@@ -208,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
