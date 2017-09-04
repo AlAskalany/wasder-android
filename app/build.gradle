@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'wasder-release'
+            keyPassword 'Nader-2004'
+            storeFile file('D:/Android/Wasder/app/wasder-keystore.jks')
+            storePassword 'Nader-2004'
+        }
+        debug {
+            keyAlias 'wasder-debug'
+            keyPassword 'Nader-2004'
+            storeFile file('D:/Android/Wasder/app/wasder-keystore.jks')
+            storePassword 'Nader-2004'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
@@ -16,11 +30,13 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     productFlavors {
