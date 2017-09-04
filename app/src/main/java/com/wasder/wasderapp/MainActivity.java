@@ -1,5 +1,6 @@
 package com.wasder.wasderapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					Log.d(TAG, "Signed in");
 				} else {
 					Log.d(TAG, "Signed out");
+					startActivity(new Intent(MainActivity.this, LoginActivity.class));
 				}
 			}
 		};
