@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/login_linearLayout"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
@@ -31,6 +32,7 @@
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/email_TextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -40,12 +42,13 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:lines="1"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_textInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -58,8 +61,8 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:lines="1"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 

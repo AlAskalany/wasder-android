@@ -340,18 +340,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			
 			try {
 				// Simulate network access.
-				firebaseAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(LoginActivity.this, new
-						OnCompleteListener<AuthResult>() {
-					
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
-						
-						Log.d(TAG, "createdUserWithEmail:onComplete" + task.isSuccessful());
-						if (!task.isSuccessful()) {
-							Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-						}
-					}
-				});
+				firebaseAuth.signInWithEmailAndPassword(mEmail, mPassword)
+						.addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+							@Override
+							public void onComplete(@NonNull Task<AuthResult> task) {
+								Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+								
+								// If sign in fails, display a message to the user. If sign in succeeds
+								// the auth state listener will be notified and logic to handle the
+								// signed in user can be handled in the listener.
+								if (!task.isSuccessful()) {
+									Log.w(TAG, "signInWithEmail:failed", task.getException());
+									Toast.makeText(LoginActivity.this, "Authentication Failed",
+											Toast.LENGTH_SHORT).show();
+								}
+								
+								// ...
+							}
+						});
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				return false;
@@ -366,6 +372,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 			
 			// TODO: register the new account here.
+			firebaseAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(LoginActivity.this, new
+					OnCompleteListener<AuthResult>() {
+						
+						@Override
+						public void onComplete(@NonNull Task<AuthResult> task) {
+							
+							Log.d(TAG, "createdUserWithEmail:onComplete" + task.isSuccessful());
+							if (!task.isSuccessful()) {
+								Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+							}
+						}
+					});
 			return true;
 		}
 		
