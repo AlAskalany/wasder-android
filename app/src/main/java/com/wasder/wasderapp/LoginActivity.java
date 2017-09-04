@@ -30,11 +30,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +53,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener {
 	
 	private static final String TAG = "LoginActivity";
 	/**
@@ -56,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private static final String[] DUMMY_CREDENTIALS = new String[]{"foo@example.com:hello", "bar@example.com:world"};
+	private static final int RC_SIGN_IN = 9001;
 	private FirebaseAuth firebaseAuth;
 	private FirebaseAuth.AuthStateListener authStateListener;
 	/**
@@ -68,12 +78,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	private EditText mPasswordView;
 	private View mProgressView;
 	private View mLoginFormView;
+	private GoogleApiClient mGoogleApiClient;
+	private boolean mUserCreated = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		// Configure Google Sign In
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
+				.default_web_client_id)).requestEmail().build();
+		// Build a GoogleApiClient with access to the Google Sign-In API and the
+		// options specified by gso.
+		mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+		
+		// Set the dimensions of the sign-in button.
+		SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+		signInButton.setSize(SignInButton.SIZE_STANDARD);
+		findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				signIn();
+			}
+		});
+		
 		firebaseAuth = FirebaseAuth.getInstance();
 		authStateListener = new FirebaseAuth.AuthStateListener() {
 			
@@ -118,8 +150,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 		});
 		
+		Button mEmailRegisterButtor = (Button) findViewById(R.id.email_register_button);
+		mEmailRegisterButtor.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				attemptRegisteration();
+			}
+		});
+		
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
+	}
+	
+	private void signIn() {
+		
+		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+		startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
 	
 	private void populateAutoComplete() {
@@ -181,6 +229,67 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			showProgress(true);
 			mAuthTask = new UserLoginTask(email, password);
 			mAuthTask.execute((Void) null);
+		}
+	}
+	
+	public void attemptRegisteration() {
+		
+		if (mAuthTask != null) {
+			return;
+		}
+		
+		// Reset errors.
+		mEmailView.setError(null);
+		mPasswordView.setError(null);
+		
+		// Store values at the time of the login attempt.
+		String email = mEmailView.getText().toString();
+		String password = mPasswordView.getText().toString();
+		
+		boolean cancel = false;
+		View focusView = null;
+		
+		// Check for a valid password, if the user entered one.
+		if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+			mPasswordView.setError(getString(R.string.error_invalid_password));
+			focusView = mPasswordView;
+			cancel = true;
+		}
+		
+		// Check for a valid email address.
+		if (TextUtils.isEmpty(email)) {
+			mEmailView.setError(getString(R.string.error_field_required));
+			focusView = mEmailView;
+			cancel = true;
+		} else if (!isEmailValid(email)) {
+			mEmailView.setError(getString(R.string.error_invalid_email));
+			focusView = mEmailView;
+			cancel = true;
+		}
+		
+		if (cancel) {
+			// There was an error; don't attempt login and focus the first
+			// form field with an error.
+			focusView.requestFocus();
+		} else {
+			// Show a progress spinner, and kick off a background task to
+			// perform the user login attempt.
+			firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new
+					OnCompleteListener<AuthResult>() {
+				
+				@Override
+				public void onComplete(@NonNull Task<AuthResult> task) {
+					
+					mUserCreated = true;
+					Log.d(TAG, "createdUserWithEmail:onComplete" + task.isSuccessful());
+					
+					if (!task.isSuccessful()) {
+						Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+					} else {
+						attemptLogin();
+					}
+				}
+			});
 		}
 	}
 	
@@ -257,6 +366,65 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		}
 	}
 	
+	@Override
+	public void onStart() {
+		
+		super.onStart();
+		// Check if user is signed in (non-null) and update UI accordingly.
+		FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+		//updateUI(currentUser);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+		if (requestCode == RC_SIGN_IN) {
+			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+			if (result.isSuccess()) {
+				// Google Sign In was successful, authenticate with Firebase
+				GoogleSignInAccount account = result.getSignInAccount();
+				showProgress(true);
+				firebaseAuthWithGoogle(account);
+				Log.d(TAG, "Google Signin Success");
+			} else {
+				// Google Sign In failed, update UI appropriately
+				// ...
+				Log.d(TAG, "Google Signin Failed");
+			}
+		}
+	}
+	
+	private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+		
+		Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+		
+		AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+		firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+			
+			@Override
+			public void onComplete(@NonNull Task<AuthResult> task) {
+				
+				if (task.isSuccessful()) {
+					// Sign in success, update UI with the signed-in user's information
+					Log.d(TAG, "signInWithCredential:success");
+					FirebaseUser user = firebaseAuth.getCurrentUser();
+					finish();
+					//updateUI(user);
+				} else {
+					// If sign in fails, display a message to the user.
+					Log.w(TAG, "signInWithCredential:failure", task.getException());
+					Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+					//updateUI(null);
+				}
+				
+				// ...
+			}
+		});
+	}
+	
 	/**
 	 * Callback received when a permissions request has been completed.
 	 */
@@ -311,6 +479,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		mEmailView.setAdapter(adapter);
 	}
 	
+	@Override
+	public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+		
+	}
+	
 	private interface ProfileQuery {
 		
 		String[] PROJECTION = {ContactsContract.CommonDataKinds.Email.ADDRESS, ContactsContract.CommonDataKinds.Email.IS_PRIMARY,};
@@ -340,24 +513,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			
 			try {
 				// Simulate network access.
-				firebaseAuth.signInWithEmailAndPassword(mEmail, mPassword)
-						.addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-							@Override
-							public void onComplete(@NonNull Task<AuthResult> task) {
-								Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-								
-								// If sign in fails, display a message to the user. If sign in succeeds
-								// the auth state listener will be notified and logic to handle the
-								// signed in user can be handled in the listener.
-								if (!task.isSuccessful()) {
-									Log.w(TAG, "signInWithEmail:failed", task.getException());
-									Toast.makeText(LoginActivity.this, "Authentication Failed",
-											Toast.LENGTH_SHORT).show();
-								}
-								
-								// ...
-							}
-						});
+				firebaseAuth.signInWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(LoginActivity.this, new
+						OnCompleteListener<AuthResult>() {
+					
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						
+						Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+						
+						// If sign in fails, display a message to the user. If sign in succeeds
+						// the auth state listener will be notified and logic to handle the
+						// signed in user can be handled in the listener.
+						if (!task.isSuccessful()) {
+							Log.w(TAG, "signInWithEmail:failed", task.getException());
+							Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+						}
+						
+						// ...
+					}
+				});
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				return false;
@@ -372,18 +546,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 			
 			// TODO: register the new account here.
-			firebaseAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(LoginActivity.this, new
-					OnCompleteListener<AuthResult>() {
-						
-						@Override
-						public void onComplete(@NonNull Task<AuthResult> task) {
-							
-							Log.d(TAG, "createdUserWithEmail:onComplete" + task.isSuccessful());
-							if (!task.isSuccessful()) {
-								Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-							}
-						}
-					});
 			return true;
 		}
 		

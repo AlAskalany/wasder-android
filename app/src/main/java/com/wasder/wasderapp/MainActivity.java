@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.dummy.DummyContent;
@@ -89,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// Configure Google Sign In
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestIdToken(getString(R.string.default_web_client_id))
+				.requestEmail()
+				.build();
+		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
 			
@@ -172,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			sheetDialog.setContentView(R.layout.bottom_sheet);
 			sheetDialog.show();
 			return true;
+		} else if (id == R.id.action_sign_outout){
+			mAuth.signOut();
 		}
 		
 		return super.onOptionsItemSelected(item);
