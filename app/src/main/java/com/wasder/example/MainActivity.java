@@ -1,5 +1,7 @@
 package com.wasder.example;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-			
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ts = fm.beginTransaction();
 			Fragment fragment = fm.findFragmentById(R.id.framelayout_fragment_container);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
+					
 					if (fragment != homeFragment) {
 						ts.replace(R.id.framelayout_fragment_container, homeFragment);
 						ts.addToBackStack(null);
