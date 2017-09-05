@@ -92,12 +92,12 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 			mView = view;
 			mIdView = (TextView) view.findViewById(R.id.id);
 			mContentView = (TextView) view.findViewById(R.id.content);
-			mLikeButton = (ImageButton) view.findViewById(R.id.feed_like_imageButton);
+			mLikeButton = (ImageButton) view.findViewById(R.id.feed_likee_imageButton);
 			mShareButton = (ImageButton) view.findViewById(R.id.feed_share_imageButton);
 			mCommentButton = (ImageButton) view.findViewById(R.id.feed_comment_imageButton);
-			mDetailsButton = (ImageButton) view.findViewById(R.id.feed_imageButton);
-			mFeedTitle = (TextView) view.findViewById(R.id.feed_title_textView);
-			mFeedContent = (TextView) view.findViewById(R.id.feed_content_textView);
+			mDetailsButton = (ImageButton) view.findViewById(R.id.feed_card_avatar);
+			mFeedTitle = (TextView) view.findViewById(R.id.feed_card_header);
+			mFeedContent = (TextView) view.findViewById(R.id.feed_card_supplementary_text);
 		}
 		
 		@Override

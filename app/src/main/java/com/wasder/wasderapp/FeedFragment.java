@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.wasder.wasderapp.dummy.DummyContent;
 import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
 
@@ -23,10 +24,11 @@ public class FeedFragment extends Fragment {
 	
 	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
+	public MyFeedRecyclerViewAdapter adapter;
+	FirebaseRecyclerAdapter firebaseRecyclerAdapter;
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
-	public MyFeedRecyclerViewAdapter adapter;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,7 +74,6 @@ public class FeedFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.fragment_feed_list, container, false);
-		
 		// Set the adapter
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
@@ -82,7 +83,7 @@ public class FeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			adapter = new MyFeedRecyclerViewAdapter(getActivity() ,DummyContent.ITEMS, mListener);
+			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener);
 			recyclerView.setAdapter(adapter);
 		}
 		return view;
