@@ -29,6 +29,7 @@ public class FeedFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
+	private OnFeedItemShareListener mShareListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,6 +59,11 @@ public class FeedFragment extends Fragment {
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
 		}
+		if(context instanceof OnFeedItemShareListener){
+			mShareListener = (OnFeedItemShareListener) context;
+		} else {
+			throw new RuntimeException(context.toString() + " must implement OnFeedItemShareListener");
+		}
 	}
 	
 	@Override
@@ -83,7 +89,7 @@ public class FeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener);
+			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener, mShareListener);
 			recyclerView.setAdapter(adapter);
 		}
 		return view;
@@ -110,5 +116,9 @@ public class FeedFragment extends Fragment {
 		
 		// TODO: Update argument type and name
 		void onListFragmentInteraction(DummyItem item);
+	}
+	
+	public interface OnFeedItemShareListener{
+		void onFeedItemShareListener();
 	}
 }

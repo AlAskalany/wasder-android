@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.wasder.wasderapp.FeedFragment.OnFeedItemShareListener;
 import com.wasder.wasderapp.FeedFragment.OnListFragmentInteractionListener;
 import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
 
@@ -23,13 +24,15 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 	private static final String TAG = "FeedRecycViewAdapter";
 	private final List<DummyItem> mValues;
 	private final OnListFragmentInteractionListener mListener;
+	private final OnFeedItemShareListener mShareListener;
 	private final Context mContext;
 	
-	public MyFeedRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener) {
+	public MyFeedRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener, OnFeedItemShareListener shareListener) {
 		
 		mContext = context;
 		mValues = items;
 		mListener = listener;
+		mShareListener = shareListener;
 	}
 	
 	@Override
@@ -46,6 +49,16 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 		//holder.mIdView.setText(mValues.get(position).id);
 		//holder.mContentView.setText(mValues.get(position).content);
 		holder.mDetailsButton.setImageDrawable(mValues.get(position).image);
+		
+		holder.mShareButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				if(null != mShareListener){
+					mShareListener.onFeedItemShareListener();
+				}
+			}
+		});
 		
 		holder.mView.setOnClickListener(new View.OnClickListener() {
 			

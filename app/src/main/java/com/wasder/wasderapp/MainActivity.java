@@ -37,7 +37,7 @@ import com.wasder.wasderapp.dummy.DummyContent;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
-		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener {
+		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment.OnFeedItemShareListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -198,9 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
-			BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
-			sheetDialog.setContentView(R.layout.bottom_sheet);
-			sheetDialog.show();
+			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 			return true;
 		} else if (id == R.id.action_sign_outout) {
 			mAuth.signOut();
@@ -252,5 +250,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onBackStackChanged() {
 		
 		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+	}
+	
+	@Override
+	public void onFeedItemShareListener() {
+		BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
+		sheetDialog.setContentView(R.layout.bottom_sheet);
+		sheetDialog.show();
 	}
 }
