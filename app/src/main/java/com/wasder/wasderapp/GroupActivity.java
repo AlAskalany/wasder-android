@@ -22,5 +22,10 @@ public class GroupActivity extends AppCompatActivity {
 		collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+			//actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 }

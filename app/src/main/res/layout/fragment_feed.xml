@@ -31,11 +31,11 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@android:drawable/screen_background_light_transparent"
                 android:elevation="2dp">
 
                 <ImageButton
                     android:id="@+id/feed_card_avatar"
+                    style="@style/Widget.AppCompat.ImageButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0"

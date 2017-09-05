@@ -60,9 +60,7 @@ public class DummyContent {
 	
 	private static Drawable makeImage(int position) {
 		
-		String asd = "D:\\Android\\Example\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml";
-		Drawable drawable = Drawable.createFromPath(asd);
-		return drawable;
+		return null;
 	}
 	
 	/**

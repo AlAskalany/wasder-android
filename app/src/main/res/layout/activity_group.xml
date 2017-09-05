@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
             app:toolbarId="@+id/toolbar_group_activity">
 
@@ -33,7 +33,9 @@
                 android:id="@+id/toolbar_group_activity"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                >
+                android:minHeight="56dp"
+                android:theme="@style/Widget.Design.CollapsingToolbar"
+                app:layout_collapseMode="parallax">
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

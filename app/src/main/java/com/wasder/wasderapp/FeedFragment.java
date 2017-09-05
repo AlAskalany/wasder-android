@@ -30,6 +30,7 @@ public class FeedFragment extends Fragment {
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
 	private OnFeedItemShareListener mShareListener;
+	private OnAvatarListener mAvatarListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,10 +60,15 @@ public class FeedFragment extends Fragment {
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
 		}
-		if(context instanceof OnFeedItemShareListener){
+		if (context instanceof OnFeedItemShareListener) {
 			mShareListener = (OnFeedItemShareListener) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnFeedItemShareListener");
+		}
+		if (context instanceof OnAvatarListener) {
+			mAvatarListener = (OnAvatarListener) context;
+		} else {
+			throw new RuntimeException(context.toString() + " must implement OnAvatarListener");
 		}
 	}
 	
@@ -89,7 +95,7 @@ public class FeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener, mShareListener);
+			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener, mShareListener, mAvatarListener);
 			recyclerView.setAdapter(adapter);
 		}
 		return view;
@@ -118,7 +124,13 @@ public class FeedFragment extends Fragment {
 		void onListFragmentInteraction(DummyItem item);
 	}
 	
-	public interface OnFeedItemShareListener{
+	public interface OnFeedItemShareListener {
+		
 		void onFeedItemShareListener();
+	}
+	
+	public interface OnAvatarListener {
+		
+		void onAvatarListener();
 	}
 }

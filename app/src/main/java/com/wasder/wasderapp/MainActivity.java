@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +21,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +35,8 @@ import com.wasder.wasderapp.dummy.DummyContent;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
-		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener {
+		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment
+		.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -46,14 +45,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	LiveFragment liveFragment;
 	MarketFragment marketFragment;
 	Toolbar toolbar;
+	TextView nameTextView;
+	TextView detailsTextView;
 	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
-	TextView nameTextView;
-	TextView detailsTextView;
-	
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
@@ -103,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout), "Connection", 2000);
 		//snackbar.show();
-		if(activeInfo != null && activeInfo.isConnected()){
+		if (activeInfo != null && activeInfo.isConnected()) {
 			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-		}else{
+		} else {
 			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
 		}
 		// Configure Google Sign In
@@ -254,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onFeedItemShareListener() {
+		
 		BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
 		sheetDialog.setContentView(R.layout.bottom_sheet);
 		sheetDialog.show();
@@ -261,6 +260,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onGroupDetailsListener() {
+		
+		startActivity(new Intent(MainActivity.this, GroupActivity.class));
+	}
+	
+	@Override
+	public void onAvatarListener() {
 		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 }

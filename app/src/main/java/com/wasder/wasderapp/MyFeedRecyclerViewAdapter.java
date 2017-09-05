@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.wasder.wasderapp.FeedFragment.OnAvatarListener;
 import com.wasder.wasderapp.FeedFragment.OnFeedItemShareListener;
 import com.wasder.wasderapp.FeedFragment.OnListFragmentInteractionListener;
 import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
@@ -25,14 +26,17 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 	private final List<DummyItem> mValues;
 	private final OnListFragmentInteractionListener mListener;
 	private final OnFeedItemShareListener mShareListener;
+	private final OnAvatarListener mAvatarListener;
 	private final Context mContext;
 	
-	public MyFeedRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener, OnFeedItemShareListener shareListener) {
+	public MyFeedRecyclerViewAdapter(Context context, List<DummyItem> items, OnListFragmentInteractionListener listener, OnFeedItemShareListener
+			shareListener, OnAvatarListener avatarListener) {
 		
 		mContext = context;
 		mValues = items;
 		mListener = listener;
 		mShareListener = shareListener;
+		mAvatarListener = avatarListener;
 	}
 	
 	@Override
@@ -48,13 +52,22 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 		holder.mItem = mValues.get(position);
 		//holder.mIdView.setText(mValues.get(position).id);
 		//holder.mContentView.setText(mValues.get(position).content);
-		holder.mDetailsButton.setImageDrawable(mValues.get(position).image);
+		//holder.mDetailsButton.setImageDrawable(mValues.get(position).image);
+		holder.mAvatar.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				mAvatarListener.onAvatarListener();
+			}
+		});
 		
 		holder.mShareButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				if(null != mShareListener){
+				
+				if (null != mShareListener) {
 					mShareListener.onFeedItemShareListener();
 				}
 			}
@@ -91,12 +104,13 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 		public final ImageButton mLikeButton;
 		public final ImageButton mShareButton;
 		public final ImageButton mCommentButton;
-		public final ImageButton mDetailsButton;
+		//public final ImageButton mDetailsButton;
 		public final TextView mFeedTitle;
 		public final TextView mFeedContent;
 		public final View mView;
 		public final TextView mIdView;
 		public final TextView mContentView;
+		public final ImageButton mAvatar;
 		public DummyItem mItem;
 		
 		public ViewHolder(View view) {
@@ -108,9 +122,10 @@ public class MyFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedRecycl
 			mLikeButton = (ImageButton) view.findViewById(R.id.feed_likee_imageButton);
 			mShareButton = (ImageButton) view.findViewById(R.id.feed_share_imageButton);
 			mCommentButton = (ImageButton) view.findViewById(R.id.feed_comment_imageButton);
-			mDetailsButton = (ImageButton) view.findViewById(R.id.feed_card_avatar);
+			//mDetailsButton = (ImageButton) view.findViewById(R.id.feed_card_avatar);
 			mFeedTitle = (TextView) view.findViewById(R.id.feed_card_header);
 			mFeedContent = (TextView) view.findViewById(R.id.feed_card_supplementary_text);
+			mAvatar = (ImageButton) view.findViewById(R.id.feed_card_avatar);
 		}
 		
 		@Override
