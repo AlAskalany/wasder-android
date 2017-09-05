@@ -37,7 +37,7 @@ import com.wasder.wasderapp.dummy.DummyContent;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
-		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment.OnFeedItemShareListener {
+		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -257,5 +257,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
 		sheetDialog.setContentView(R.layout.bottom_sheet);
 		sheetDialog.show();
+	}
+	
+	@Override
+	public void onGroupDetailsListener() {
+		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 }

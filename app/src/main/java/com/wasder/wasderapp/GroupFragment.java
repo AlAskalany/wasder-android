@@ -26,6 +26,7 @@ public class GroupFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 2;
 	private OnListFragmentInteractionListener mListener;
+	private OnGroupDetailsListener mGroupDetailsListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,6 +56,12 @@ public class GroupFragment extends Fragment {
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
 		}
+		
+		if(context instanceof  OnGroupDetailsListener){
+			mGroupDetailsListener = (OnGroupDetailsListener) context;
+		}else {
+			throw new RuntimeException((context.toString()) + " must implement OnGroupDetailsListener");
+		}
 	}
 	
 	@Override
@@ -81,7 +88,7 @@ public class GroupFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			recyclerView.setAdapter(new MyGroupRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+			recyclerView.setAdapter(new MyGroupRecyclerViewAdapter(DummyContent.ITEMS, mListener, mGroupDetailsListener));
 		}
 		return view;
 	}
@@ -107,5 +114,9 @@ public class GroupFragment extends Fragment {
 		
 		// TODO: Update argument type and name
 		void onListFragmentInteraction(DummyItem item);
+	}
+	
+	public interface OnGroupDetailsListener{
+		void onGroupDetailsListener();
 	}
 }

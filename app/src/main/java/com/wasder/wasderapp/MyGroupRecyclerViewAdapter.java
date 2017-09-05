@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
@@ -19,11 +20,14 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
 	
 	private final List<DummyItem> mValues;
 	private final GroupFragment.OnListFragmentInteractionListener mListener;
+	private GroupFragment.OnGroupDetailsListener mGroupDetailsListener;
 	
-	public MyGroupRecyclerViewAdapter(List<DummyItem> items, GroupFragment.OnListFragmentInteractionListener listener) {
+	public MyGroupRecyclerViewAdapter(List<DummyItem> items, GroupFragment.OnListFragmentInteractionListener listener, GroupFragment
+			.OnGroupDetailsListener groupDetailsListener) {
 		
 		mValues = items;
 		mListener = listener;
+		mGroupDetailsListener = groupDetailsListener;
 	}
 	
 	@Override
@@ -39,6 +43,14 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
 		holder.mItem = mValues.get(position);
 		holder.mIdView.setText(mValues.get(position).id);
 		holder.mContentView.setText(mValues.get(position).content);
+		holder.mDetailsButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				mGroupDetailsListener.onGroupDetailsListener();
+			}
+		});
 		
 		holder.mView.setOnClickListener(new View.OnClickListener() {
 			
@@ -65,6 +77,7 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
 		public final View mView;
 		public final TextView mIdView;
 		public final TextView mContentView;
+		public final ImageButton mDetailsButton;
 		public DummyItem mItem;
 		
 		public ViewHolder(View view) {
@@ -73,6 +86,7 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
 			mView = view;
 			mIdView = (TextView) view.findViewById(R.id.id);
 			mContentView = (TextView) view.findViewById(R.id.content);
+			mDetailsButton = (ImageButton) view.findViewById(R.id.group_details_button);
 		}
 		
 		@Override
