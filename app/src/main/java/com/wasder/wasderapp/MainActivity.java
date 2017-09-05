@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
 		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment
-		.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener {
+		.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment.OnAvatarListener,
+		CreatorFeedFragment.OnFeedItemShareListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -266,6 +267,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onAvatarListener() {
-		startActivity(new Intent(MainActivity.this, GroupActivity.class));
+		
+		startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 	}
 }

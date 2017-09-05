@@ -26,6 +26,8 @@ public class CreatorFeedFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
+	private OnFeedItemShareListener mShareListener;
+	private OnAvatarListener mAvatarListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,10 +52,20 @@ public class CreatorFeedFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof OnListFragmentInteractionListener) {
+		if (context instanceof FeedFragment.OnListFragmentInteractionListener) {
 			mListener = (OnListFragmentInteractionListener) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
+		}
+		if (context instanceof FeedFragment.OnFeedItemShareListener) {
+			mShareListener = (OnFeedItemShareListener) context;
+		} else {
+			throw new RuntimeException(context.toString() + " must implement OnFeedItemShareListener");
+		}
+		if (context instanceof FeedFragment.OnAvatarListener) {
+			mAvatarListener = (OnAvatarListener) context;
+		} else {
+			throw new RuntimeException(context.toString() + " must implement OnAvatarListener");
 		}
 	}
 	
@@ -81,7 +93,7 @@ public class CreatorFeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(DummyContent.ITEMS, mListener, mAvatarListener));
 		}
 		return view;
 	}
@@ -107,5 +119,15 @@ public class CreatorFeedFragment extends Fragment {
 		
 		// TODO: Update argument type and name
 		void onListFragmentInteraction(DummyItem item);
+	}
+	
+	public interface OnFeedItemShareListener {
+		
+		void onFeedItemShareListener();
+	}
+	
+	public interface OnAvatarListener {
+		
+		void onAvatarListener();
 	}
 }
