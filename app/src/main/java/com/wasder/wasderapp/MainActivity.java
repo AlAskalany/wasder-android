@@ -25,8 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.wasder.wasderapp.dummy.DummyContent;
 
 /**
@@ -131,6 +134,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					userNameTextView.setText(mUserName);
 					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
+					
+					UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
+							(Uri.parse("http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-knives-ninja.png")).build();
+					user.updateProfile(profilUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+						
+						@Override
+						public void onComplete(@NonNull Task<Void> task) {
+							
+							if (task.isSuccessful()) {
+								Log.d(TAG, "User Profile Updated");
+							}
+						}
+					});
+					
 				} else {
 					Log.d(TAG, "Signed out");
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
