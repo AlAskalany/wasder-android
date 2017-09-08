@@ -77,20 +77,16 @@
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/feed_card_rich_media_framelayout"
+        <ImageView
+            android:id="@+id/feed_card_rich_media"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@android:drawable/screen_background_dark_transparent">
-
-            <ImageView
-                android:id="@+id/feed_card_rich_media"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/event_pic"/>
-        </FrameLayout>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:maxHeight="200dp"
+            android:minHeight="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/event_pic"/>
 
         <TextView
             android:id="@+id/feed_card_supplementary_text"

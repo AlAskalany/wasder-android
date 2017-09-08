@@ -3,15 +3,12 @@ package com.wasder.wasderapp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.wasder.wasderapp.dummy.DummyContent;
 import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
 
 /**
@@ -24,8 +21,9 @@ public class FeedFragment extends Fragment {
 	
 	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
-	public MyFeedRecyclerViewAdapter adapter;
-	FirebaseRecyclerAdapter firebaseRecyclerAdapter;
+	private FeedFirebaseRecyclerAdapter mFeedFirebaseRecyclerAdapter;
+	private RecyclerView mRecyclerView;
+	private LinearLayoutManager mLinearLayoutManager;
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
@@ -86,18 +84,11 @@ public class FeedFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.fragment_feed_list, container, false);
-		// Set the adapter
-		if (view instanceof RecyclerView) {
-			Context context = view.getContext();
-			RecyclerView recyclerView = (RecyclerView) view;
-			if (mColumnCount <= 1) {
-				recyclerView.setLayoutManager(new LinearLayoutManager(context));
-			} else {
-				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-			}
-			adapter = new MyFeedRecyclerViewAdapter(getActivity(), DummyContent.ITEMS, mListener, mShareListener, mAvatarListener);
-			recyclerView.setAdapter(adapter);
-		}
+		mRecyclerView = (RecyclerView) view.findViewById(R.id.feedRecyclerView);
+		mLinearLayoutManager = new LinearLayoutManager(getContext());
+		mFeedFirebaseRecyclerAdapter = new FeedFirebaseRecyclerAdapter(getContext(), mRecyclerView, mLinearLayoutManager);
+		mRecyclerView.setAdapter(mFeedFirebaseRecyclerAdapter);
+		
 		return view;
 	}
 	
