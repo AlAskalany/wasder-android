@@ -88,7 +88,31 @@ class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, Fee
 		} else {
 			viewHolder.feedImageView.setVisibility(ImageView.GONE);
 		}
-		viewHolder.photoImageButton.setImageDrawable(mContext.getDrawable(R.drawable.avatar));
+		final String photoUrl = model.getPhotoUrl();
+		if (photoUrl != null) {
+			if (photoUrl.startsWith("gsL//")) {
+				StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(photoUrl);
+				storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+					
+					@Override
+					public void onComplete(@NonNull Task<Uri> task) {
+						
+						if (task.isSuccessful()) {
+							String downloadUrl = task.getResult().toString();
+							Glide.with(viewHolder.photoImageButton.getContext()).load(photoUrl).into(viewHolder.photoImageButton);
+						} else {
+							Log.d(TAG, "Getting Download URL was not successful", task.getException());
+						}
+					}
+				});
+			} else {
+				Glide.with(viewHolder.photoImageButton.getContext()).load(model.getPhotoUrl()).into(viewHolder.photoImageButton);
+			}
+			
+		} else {
+			viewHolder.photoImageButton.setImageDrawable(mContext.getDrawable(R.drawable.avatar));
+		}
+		
 		viewHolder.feedImageView.setImageDrawable(mContext.getDrawable(R.drawable.event_pic));
 		viewHolder.supplementaryTextView.setText(model.getSupplementaryText());
 	}
