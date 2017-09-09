@@ -140,10 +140,10 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		//tabLayout.setBackgroundColor(Color.RED);
 		//tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
 		
-		activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_red_900, activity.getTheme()));
-		toolbar.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
-		tabLayout.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
-		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_yellow_300));
+		//activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_red_900, activity.getTheme()));
+		//toolbar.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
+		//tabLayout.setBackgroundColor(getResources().getColor(R.color.md_red_800, activity.getTheme()));
+		//tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_yellow_300));
 		
 		
 		return view;

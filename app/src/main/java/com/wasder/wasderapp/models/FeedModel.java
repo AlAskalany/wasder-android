@@ -7,6 +7,7 @@ package com.wasder.wasderapp.models;
 
 public class FeedModel {
 	
+	private String uId;
 	private String id;
 	private String title;
 	private String subhead;
@@ -18,8 +19,9 @@ public class FeedModel {
 		
 	}
 	
-	public FeedModel(String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+	public FeedModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
+		this.uId = uId;
 		this.id = id;
 		this.title = title;
 		this.subhead = subhead;
@@ -86,5 +88,15 @@ public class FeedModel {
 	public void setSupplementaryText(String supplementaryText) {
 		
 		this.supplementaryText = supplementaryText;
+	}
+	
+	public String getuId() {
+		
+		return uId;
+	}
+	
+	public void setuId(String uId) {
+		
+		this.uId = uId;
 	}
 }

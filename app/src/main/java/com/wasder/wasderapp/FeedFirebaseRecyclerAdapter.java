@@ -26,7 +26,7 @@ import com.wasder.wasderapp.models.FeedModel;
  * Created by ahmed on 9/8/2017.
  */
 
-class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedFirebaseRecyclerAdapter.FeedViewHolder> {
+public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedFirebaseRecyclerAdapter.FeedViewHolder> {
 	
 	private static final String TAG = "FeedAdapter";
 	private Context mContext;
@@ -117,7 +117,7 @@ class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, Fee
 		viewHolder.supplementaryTextView.setText(model.getSupplementaryText());
 	}
 	
-	static class FeedViewHolder extends RecyclerView.ViewHolder {
+	public static class FeedViewHolder extends RecyclerView.ViewHolder {
 		
 		TextView titleTextView;
 		TextView subheadTextView;

@@ -1,11 +1,14 @@
 package com.wasder.wasderapp;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetDialog;
@@ -24,12 +27,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.wasder.wasderapp.dummy.DummyContent;
 
 /**
@@ -45,6 +46,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
 	public String mEmail = "User E-mail";
+	IInAppBillingService mService;
+	ServiceConnection mServiceConn = new ServiceConnection() {
+		
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			
+			mService = IInAppBillingService.Stub.asInterface(service);
+		}
+		
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			
+			mService = null;
+		}
+	};
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
 	MarketFragment marketFragment;
@@ -101,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+		serviceIntent.setPackage("com.android.vending");
+		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout), "Connection", 2000);
@@ -135,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
 					
-					UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
+					/*UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
 							(Uri.parse("http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-knives-ninja.png")).build();
 					user.updateProfile(profilUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
 						
@@ -146,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 								Log.d(TAG, "User Profile Updated");
 							}
 						}
-					});
+					});*/
 					
 				} else {
 					Log.d(TAG, "Signed out");
@@ -182,6 +201,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		super.onStop();
 		if (mAuthListener != null) {
 			mAuth.removeAuthStateListener(mAuthListener);
+		}
+	}
+	
+	@Override
+	public void onDestroy() {
+		
+		super.onDestroy();
+		if (mService != null) {
+			unbindService(mServiceConn);
 		}
 	}
 	

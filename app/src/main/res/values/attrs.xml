@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Large ProgressBar style. This is a large circular progress bar. -->
+    <attr name="progressBarStyleLarge" format="reference" />
+</resources>

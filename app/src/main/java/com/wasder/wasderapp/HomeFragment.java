@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 	private static final String ARG_PARAM2 = "param2";
 	View view;
 	Toolbar toolbar;
+	AppCompatActivity activity;
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private TabLayout tabLayout;
-	AppCompatActivity activity;
+	
 	public HomeFragment() {
 		// Required empty public constructor
 	}
@@ -114,7 +115,6 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 		view = inflater.inflate(R.layout.fragment_home, container, false);
 		//region Toolbar
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		
 		activity = ((AppCompatActivity) getActivity());
 		activity.setSupportActionBar(toolbar);
 		ActionBar actionBar = activity.getSupportActionBar();
@@ -138,12 +138,19 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 		tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 		tabLayout.setupWithViewPager(mViewPager);
 		
-		activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_indigo_800, activity.getTheme()));
-		toolbar.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
-		tabLayout.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
-		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_red_600));
+		//activity.getWindow().setStatusBarColor(getResources().getColor(R.color.md_indigo_800, activity.getTheme()));
+		//toolbar.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
+		//tabLayout.setBackgroundColor(getResources().getColor(R.color.md_indigo_500, activity.getTheme()));
+		//tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_red_600));
 		
 		return view;
+	}
+	
+	@Override
+	public void onStart() {
+		
+		Log.d(TAG, "onStart()");
+		super.onStart();
 	}
 	
 	/**
@@ -154,6 +161,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 	 */
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		
 		int id = item.getItemId();
 		
 		if (id == R.id.nav_camera) {
@@ -233,10 +241,5 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 			mFragmentList.add(fragment);
 			mFragmentTitleList.add(title);
 		}
-	}	@Override
-	public void onStart() {
-		
-		Log.d(TAG, "onStart()");
-		super.onStart();
 	}
 }
