@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.home;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.models.DummyContent.DummyItem;
 
 import java.util.List;
 

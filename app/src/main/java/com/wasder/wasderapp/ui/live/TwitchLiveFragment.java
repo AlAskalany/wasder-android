@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.live;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wasder.wasderapp.dummy.DummyContent;
-import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.ui.live.dummy.DummyContent;
+import com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -19,29 +22,27 @@ import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class CreatorFeedFragment extends Fragment {
+public class TwitchLiveFragment extends Fragment {
 	
 	// TODO: Customize parameter argument names
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
-	private OnFeedItemShareListener mShareListener;
-	private OnAvatarListener mAvatarListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public CreatorFeedFragment() {
+	public TwitchLiveFragment() {
 		
 	}
 	
 	// TODO: Customize parameter initialization
 	@SuppressWarnings("unused")
-	public static CreatorFeedFragment newInstance(int columnCount) {
+	public static TwitchLiveFragment newInstance(int columnCount) {
 		
-		CreatorFeedFragment fragment = new CreatorFeedFragment();
+		TwitchLiveFragment fragment = new TwitchLiveFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_COLUMN_COUNT, columnCount);
 		fragment.setArguments(args);
@@ -52,20 +53,10 @@ public class CreatorFeedFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof FeedFragment.OnListFragmentInteractionListener) {
+		if (context instanceof OnListFragmentInteractionListener) {
 			mListener = (OnListFragmentInteractionListener) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
-		}
-		if (context instanceof FeedFragment.OnFeedItemShareListener) {
-			mShareListener = (OnFeedItemShareListener) context;
-		} else {
-			throw new RuntimeException(context.toString() + " must implement OnFeedItemShareListener");
-		}
-		if (context instanceof FeedFragment.OnAvatarListener) {
-			mAvatarListener = (OnAvatarListener) context;
-		} else {
-			throw new RuntimeException(context.toString() + " must implement OnAvatarListener");
 		}
 	}
 	
@@ -82,7 +73,7 @@ public class CreatorFeedFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_creatorfeed_list, container, false);
+		View view = inflater.inflate(R.layout.fragment_twitchlive_list, container, false);
 		
 		// Set the adapter
 		if (view instanceof RecyclerView) {
@@ -93,7 +84,7 @@ public class CreatorFeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(DummyContent.ITEMS, mListener, mAvatarListener));
+			recyclerView.setAdapter(new MyTwitchLiveRecyclerViewAdapter(DummyContent.ITEMS, mListener));
 		}
 		return view;
 	}
@@ -119,15 +110,5 @@ public class CreatorFeedFragment extends Fragment {
 		
 		// TODO: Update argument type and name
 		void onListFragmentInteraction(DummyItem item);
-	}
-	
-	public interface OnFeedItemShareListener {
-		
-		void onFeedItemShareListener();
-	}
-	
-	public interface OnAvatarListener {
-		
-		void onAvatarListener();
 	}
 }

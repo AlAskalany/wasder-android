@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -44,6 +44,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.wasder.wasderapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

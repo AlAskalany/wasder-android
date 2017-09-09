@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
 import android.net.Uri;
@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.FeedModel;
 
 /**

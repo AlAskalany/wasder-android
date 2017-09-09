@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wasder.wasderapp.R;
 
 import java.io.InputStream;
 

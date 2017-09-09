@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/WasderAppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/WasderAppTheme.MainActivity">
             <intent-filter>
@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/WasderAppTheme.LoginActivity">
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/WasderAppTheme.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,19 +39,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".ui.ProfileActivity"
             android:theme="@style/WasderAppTheme.ProfileActivity">
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.wasder.wasderapp.MainActivity"/>
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".GroupActivity"
+            android:name=".ui.GroupActivity"
             android:theme="@style/WasderAppTheme.GroupActivity">
         </activity>
     </application>

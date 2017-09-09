@@ -1,6 +1,4 @@
-package com.wasder.wasderapp.dummy;
-
-import android.graphics.drawable.Drawable;
+package com.wasder.wasderapp.ui.live.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +17,12 @@ public class DummyContent {
 	 * An array of sample (dummy) items.
 	 */
 	public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+	
 	/**
 	 * A map of sample (dummy) items, by ID.
 	 */
 	public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-	/**
-	 * A map of sample (dummy) items, images
-	 */
-	public static final Map<Drawable, DummyItem> ITEM_IMAGE = new HashMap<Drawable, DummyItem>();
+	
 	private static final int COUNT = 25;
 	
 	static {
@@ -40,12 +36,11 @@ public class DummyContent {
 		
 		ITEMS.add(item);
 		ITEM_MAP.put(item.id, item);
-		ITEM_IMAGE.put(item.image, item);
 	}
 	
 	private static DummyItem createDummyItem(int position) {
 		
-		return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position), makeImage(position));
+		return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
 	}
 	
 	private static String makeDetails(int position) {
@@ -58,11 +53,6 @@ public class DummyContent {
 		return builder.toString();
 	}
 	
-	private static Drawable makeImage(int position) {
-		
-		return null;
-	}
-	
 	/**
 	 * A dummy item representing a piece of content.
 	 */
@@ -71,14 +61,12 @@ public class DummyContent {
 		public final String id;
 		public final String content;
 		public final String details;
-		public final Drawable image;
 		
-		public DummyItem(String id, String content, String details, Drawable image) {
+		public DummyItem(String id, String content, String details) {
 			
 			this.id = id;
 			this.content = content;
 			this.details = details;
-			this.image = image;
 		}
 		
 		@Override

@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.live;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wasder.wasderapp.dummy.DummyContent;
-import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.models.DummyContent;
+import com.wasder.wasderapp.models.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.

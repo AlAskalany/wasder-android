@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,7 +31,20 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wasder.wasderapp.dummy.DummyContent;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.models.DummyContent;
+import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
+import com.wasder.wasderapp.ui.home.FeedFragment;
+import com.wasder.wasderapp.ui.home.GroupFragment;
+import com.wasder.wasderapp.ui.home.HomeFragment;
+import com.wasder.wasderapp.ui.live.EsportsFragment;
+import com.wasder.wasderapp.ui.live.LiveFragment;
+import com.wasder.wasderapp.ui.live.TwitchLiveFragment;
+import com.wasder.wasderapp.ui.live.TwitchStreamFragment;
+import com.wasder.wasderapp.ui.market.EventFragment;
+import com.wasder.wasderapp.ui.market.FriendEventFragment;
+import com.wasder.wasderapp.ui.market.MarketFragment;
+import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
 
 /**
  * The type Main activity.
@@ -41,7 +54,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
 		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment
 		.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment.OnAvatarListener,
-		CreatorFeedFragment.OnFeedItemShareListener {
+		CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment.OnListFragmentInteractionListener, EsportsFragment
+				.OnListFragmentInteractionListener, EventFragment.OnListFragmentInteractionListener, FriendEventFragment
+				.OnListFragmentInteractionListener, RecommendedEventFragment.OnListFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -314,5 +329,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onAvatarListener() {
 		
 		startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+	}
+	
+	@Override
+	public void onListFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
+		
+	}
+	
+	@Override
+	public void onListFragmentInteraction(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.wasder.wasderapp.ui.ProfileActivity;
+import com.wasder.wasderapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

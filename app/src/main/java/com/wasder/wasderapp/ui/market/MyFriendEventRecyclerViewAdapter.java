@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.market;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.TwitchStreamFragment.OnListFragmentInteractionListener;
-import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.ui.market.FriendEventFragment.OnListFragmentInteractionListener;
+import com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -16,12 +17,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyTwitchStreamRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitchStreamRecyclerViewAdapter.ViewHolder> {
+public class MyFriendEventRecyclerViewAdapter extends RecyclerView.Adapter<MyFriendEventRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
 	private final OnListFragmentInteractionListener mListener;
 	
-	public MyTwitchStreamRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+	public MyFriendEventRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -30,7 +31,7 @@ public class MyTwitchStreamRecyclerViewAdapter extends RecyclerView.Adapter<MyTw
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_twitchstream, parent, false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_friendevent, parent, false);
 		return new ViewHolder(view);
 	}
 	

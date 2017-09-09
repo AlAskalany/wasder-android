@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui.home;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,27 +7,24 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.dummy.DummyContent.DummyItem;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.models.DummyContent.DummyItem;
 
 import java.util.List;
 
-import static com.wasder.wasderapp.CreatorFeedFragment.OnAvatarListener;
-import static com.wasder.wasderapp.CreatorFeedFragment.OnFeedItemShareListener;
-import static com.wasder.wasderapp.CreatorFeedFragment.OnListFragmentInteractionListener;
-
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link CreatorFeedFragment.OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCreatorFeedRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final OnListFragmentInteractionListener mListener;
-	private OnFeedItemShareListener mShareListener;
-	private OnAvatarListener mAvatarListener;
+	private final CreatorFeedFragment.OnListFragmentInteractionListener mListener;
+	private CreatorFeedFragment.OnFeedItemShareListener mShareListener;
+	private CreatorFeedFragment.OnAvatarListener mAvatarListener;
 	
-	public MyCreatorFeedRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener, OnAvatarListener avatarListener) {
+	public MyCreatorFeedRecyclerViewAdapter(List<DummyItem> items, CreatorFeedFragment.OnListFragmentInteractionListener listener, CreatorFeedFragment.OnAvatarListener avatarListener) {
 		
 		mValues = items;
 		mListener = listener;

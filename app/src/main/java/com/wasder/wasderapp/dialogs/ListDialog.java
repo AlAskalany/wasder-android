@@ -1,8 +1,10 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import com.wasder.wasderapp.R;
 
 /**
  * Wasder AB CONFIDENTIAL
