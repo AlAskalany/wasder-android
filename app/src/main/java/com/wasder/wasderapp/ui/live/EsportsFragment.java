@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnEsportsFragmentInteractionListener}
  * interface.
  */
 public class EsportsFragment extends Fragment {
@@ -28,7 +28,7 @@ public class EsportsFragment extends Fragment {
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
-	private OnListFragmentInteractionListener mListener;
+	private OnEsportsFragmentInteractionListener mListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,10 +53,10 @@ public class EsportsFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof OnListFragmentInteractionListener) {
-			mListener = (OnListFragmentInteractionListener) context;
+		if (context instanceof OnEsportsFragmentInteractionListener) {
+			mListener = (OnEsportsFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement OnTwitchLiveFragmentInteractionListener");
 		}
 	}
 	
@@ -106,9 +106,9 @@ public class EsportsFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnListFragmentInteractionListener {
+	public interface OnEsportsFragmentInteractionListener {
 		
 		// TODO: Update argument type and name
-		void onListFragmentInteraction(DummyItem item);
+		void onEsportsFragmentInteraction(DummyItem item);
 	}
 }

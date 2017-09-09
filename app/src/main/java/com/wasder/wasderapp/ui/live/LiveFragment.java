@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.home.FeedFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +131,8 @@ public class LiveFragment extends Fragment implements NavigationView.OnNavigatio
 		//region Tabbed_Navigation
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		mSectionsPagerAdapter.addFragment(new TwitchStreamFragment(), "Twitch Streams");
-		mSectionsPagerAdapter.addFragment(new TwitchLiveFragment(), "Twitch Feed");
-		mSectionsPagerAdapter.addFragment(new EsportsFragment(), "Esports Events");
+		mSectionsPagerAdapter.addFragment(new TwitchLiveFragment(), "Twitch Live");
+		mSectionsPagerAdapter.addFragment(new EsportsFragment(), "Esports");
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) view.findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);

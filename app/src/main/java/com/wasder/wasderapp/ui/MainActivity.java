@@ -33,30 +33,39 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.DummyContent;
+import com.wasder.wasderapp.models.FeedModel;
+import com.wasder.wasderapp.ui.home.CreatorFeedActivity;
 import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
+import com.wasder.wasderapp.ui.home.FeedActivity;
 import com.wasder.wasderapp.ui.home.FeedFragment;
 import com.wasder.wasderapp.ui.home.GroupFragment;
 import com.wasder.wasderapp.ui.home.HomeFragment;
+import com.wasder.wasderapp.ui.live.EsportsActivity;
 import com.wasder.wasderapp.ui.live.EsportsFragment;
 import com.wasder.wasderapp.ui.live.LiveFragment;
+import com.wasder.wasderapp.ui.live.TwitchLiveActivity;
 import com.wasder.wasderapp.ui.live.TwitchLiveFragment;
+import com.wasder.wasderapp.ui.live.TwitchStreamActivity;
 import com.wasder.wasderapp.ui.live.TwitchStreamFragment;
+import com.wasder.wasderapp.ui.market.EventActivity;
 import com.wasder.wasderapp.ui.market.EventFragment;
+import com.wasder.wasderapp.ui.market.FriendEventActivity;
 import com.wasder.wasderapp.ui.market.FriendEventFragment;
 import com.wasder.wasderapp.ui.market.MarketFragment;
+import com.wasder.wasderapp.ui.market.RecommendedEventActivity;
 import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
 
 /**
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
-		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnListFragmentInteractionListener, GroupFragment
-		.OnListFragmentInteractionListener, CreatorFeedFragment.OnListFragmentInteractionListener, TwitchStreamFragment
-		.OnListFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener, FeedFragment
-		.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment.OnAvatarListener,
-		CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment.OnListFragmentInteractionListener, EsportsFragment
-				.OnListFragmentInteractionListener, EventFragment.OnListFragmentInteractionListener, FriendEventFragment
-				.OnListFragmentInteractionListener, RecommendedEventFragment.OnListFragmentInteractionListener {
+		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnFeedFragmentInteractionListener, GroupFragment
+		.OnGroupFragmentInteractionListener, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener, TwitchStreamFragment
+		.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener,
+		FeedFragment.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment
+				.OnAvatarListener, CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener,
+		EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment.OnEventFragmentInteractionListener, FriendEventFragment
+				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment.OnRecommendedEventFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -297,11 +306,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 	}
 	
-	@Override
-	public void onListFragmentInteraction(DummyContent.DummyItem item) {
-		//ListDialog.newInstance(this).show();
-	}
-	
 	/**
 	 * Called whenever the contents of the back stack change.
 	 */
@@ -321,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onGroupDetailsListener() {
-		
+		//ListDialog.newInstance(this).show();
 		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 	
@@ -332,12 +336,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 	
 	@Override
-	public void onListFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
+	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
 		
+		startActivity(new Intent(MainActivity.this, EsportsActivity.class));
 	}
 	
 	@Override
-	public void onListFragmentInteraction(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
 		
+		startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
+	}
+	
+	@Override
+	public void onTiwtchStreamFragmentInteractionListener(DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
+	}
+	
+	@Override
+	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, EventActivity.class));
+	}
+	
+	@Override
+	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
+	}
+	
+	@Override
+	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
+	}
+	
+	@Override
+	public void onCreatorFeedFragmentInteractionListener(DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
+	}
+	
+	@Override
+	public void onFeedFragmentInteractionListener(FeedModel feedModel) {
+		
+		startActivity(new Intent(MainActivity.this, FeedActivity.class));
+	}
+	
+	@Override
+	public void onGroupFragmentInteractionListener(DummyContent.DummyItem item) {
+		
+		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 }

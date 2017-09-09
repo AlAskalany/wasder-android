@@ -17,7 +17,7 @@ import com.wasder.wasderapp.models.DummyContent.DummyItem;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnGroupFragmentInteractionListener}
  * interface.
  */
 public class GroupFragment extends Fragment {
@@ -26,7 +26,7 @@ public class GroupFragment extends Fragment {
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 2;
-	private OnListFragmentInteractionListener mListener;
+	private OnGroupFragmentInteractionListener mListener;
 	private OnGroupDetailsListener mGroupDetailsListener;
 	
 	/**
@@ -52,10 +52,10 @@ public class GroupFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof OnListFragmentInteractionListener) {
-			mListener = (OnListFragmentInteractionListener) context;
+		if (context instanceof OnGroupFragmentInteractionListener) {
+			mListener = (OnGroupFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement OnTwitchLiveFragmentInteractionListener");
 		}
 		
 		if(context instanceof  OnGroupDetailsListener){
@@ -111,10 +111,10 @@ public class GroupFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnListFragmentInteractionListener {
+	public interface OnGroupFragmentInteractionListener {
 		
 		// TODO: Update argument type and name
-		void onListFragmentInteraction(DummyItem item);
+		void onGroupFragmentInteractionListener(DummyItem item);
 	}
 	
 	public interface OnGroupDetailsListener{

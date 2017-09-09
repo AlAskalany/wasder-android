@@ -7,22 +7,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.live.TwitchLiveFragment.OnListFragmentInteractionListener;
 import com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTwitchLiveRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitchLiveRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final OnListFragmentInteractionListener mListener;
+	private final TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener mListener;
 	
-	public MyTwitchLiveRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+	public MyTwitchLiveRecyclerViewAdapter(List<DummyItem> items, TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener listener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -50,7 +49,7 @@ public class MyTwitchLiveRecyclerViewAdapter extends RecyclerView.Adapter<MyTwit
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onTwitchLiveFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

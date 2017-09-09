@@ -7,22 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.market.RecommendedEventFragment.OnListFragmentInteractionListener;
+import com.wasder.wasderapp.ui.market.RecommendedEventFragment.OnRecommendedEventFragmentInteractionListener;
 import com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnRecommendedEventFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyRecommendedEventRecyclerViewAdapter extends RecyclerView.Adapter<MyRecommendedEventRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final OnListFragmentInteractionListener mListener;
+	private final OnRecommendedEventFragmentInteractionListener mListener;
 	
-	public MyRecommendedEventRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+	public MyRecommendedEventRecyclerViewAdapter(List<DummyItem> items, OnRecommendedEventFragmentInteractionListener listener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -50,7 +50,7 @@ public class MyRecommendedEventRecyclerViewAdapter extends RecyclerView.Adapter<
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onRecommendedEventFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

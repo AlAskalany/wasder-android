@@ -14,16 +14,16 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link GroupFragment.OnListFragmentInteractionListener}.
+ * specified {@link GroupFragment.OnGroupFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final GroupFragment.OnListFragmentInteractionListener mListener;
+	private final GroupFragment.OnGroupFragmentInteractionListener mListener;
 	private GroupFragment.OnGroupDetailsListener mGroupDetailsListener;
 	
-	public MyGroupRecyclerViewAdapter(List<DummyItem> items, GroupFragment.OnListFragmentInteractionListener listener, GroupFragment
+	public MyGroupRecyclerViewAdapter(List<DummyItem> items, GroupFragment.OnGroupFragmentInteractionListener listener, GroupFragment
 			.OnGroupDetailsListener groupDetailsListener) {
 		
 		mValues = items;
@@ -61,7 +61,7 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onGroupFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

@@ -54,6 +54,22 @@
             android:name=".ui.GroupActivity"
             android:theme="@style/WasderAppTheme.GroupActivity">
         </activity>
+        <activity android:name=".ui.home.CreatorFeedActivity">
+        </activity>
+        <activity android:name=".ui.home.FeedActivity">
+        </activity>
+        <activity android:name=".ui.live.EsportsActivity">
+        </activity>
+        <activity android:name=".ui.live.TwitchStreamActivity">
+        </activity>
+        <activity android:name=".ui.live.TwitchLiveActivity">
+        </activity>
+        <activity android:name=".ui.market.EventActivity">
+        </activity>
+        <activity android:name=".ui.market.FriendEventActivity">
+        </activity>
+        <activity android:name=".ui.market.RecommendedEventActivity">
+        </activity>
     </application>
 
 </manifest>

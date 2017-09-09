@@ -31,11 +31,13 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 	
 	private static final String TAG = "FeedAdapter";
 	private Context mContext;
+	private FeedFragment.OnFeedFragmentInteractionListener mListener;
 	
-	public FeedFirebaseRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager) {
+	public FeedFirebaseRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager, FeedFragment.OnFeedFragmentInteractionListener mListener) {
 		
 		super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"));
 		this.mContext = context;
+		this.mListener = mListener;
 		this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			
 			@Override
@@ -63,7 +65,13 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 	
 	@Override
 	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int position) {
-		
+		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				mListener.onFeedFragmentInteractionListener(viewHolder.feedModel);
+			}
+		});
 		viewHolder.titleTextView.setText(model.getTitle());
 		viewHolder.subheadTextView.setText(model.getSubhead());
 		final String imageUrl = model.getImageUrl();
@@ -119,7 +127,7 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 	}
 	
 	public static class FeedViewHolder extends RecyclerView.ViewHolder {
-		
+		View mview;
 		TextView titleTextView;
 		TextView subheadTextView;
 		ImageButton photoImageButton;
@@ -129,10 +137,12 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 		ImageButton likeImageButton;
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
+		FeedModel feedModel;
 		
 		public FeedViewHolder(View itemView) {
 			
 			super(itemView);
+			mview = itemView;
 			titleTextView = (TextView) itemView.findViewById(R.id.feed_card_header);
 			subheadTextView = (TextView) itemView.findViewById(R.id.feed_card_subheader);
 			photoImageButton = (ImageButton) itemView.findViewById(R.id.feed_card_avatar);

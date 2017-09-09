@@ -19,9 +19,9 @@ import java.util.List;
 public class MyTwitchStreamRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitchStreamRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final TwitchStreamFragment.OnListFragmentInteractionListener mListener;
+	private final TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener mListener;
 	
-	public MyTwitchStreamRecyclerViewAdapter(List<DummyItem> items, TwitchStreamFragment.OnListFragmentInteractionListener listener) {
+	public MyTwitchStreamRecyclerViewAdapter(List<DummyItem> items, TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener listener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -49,7 +49,7 @@ public class MyTwitchStreamRecyclerViewAdapter extends RecyclerView.Adapter<MyTw
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onTiwtchStreamFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

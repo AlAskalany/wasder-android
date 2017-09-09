@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.DummyContent.DummyItem;
+import com.wasder.wasderapp.models.FeedModel;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnFeedFragmentInteractionListener}
  * interface.
  */
 public class FeedFragment extends Fragment {
@@ -27,7 +27,7 @@ public class FeedFragment extends Fragment {
 	private LinearLayoutManager mLinearLayoutManager;
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
-	private OnListFragmentInteractionListener mListener;
+	private OnFeedFragmentInteractionListener mListener;
 	private OnFeedItemShareListener mShareListener;
 	private OnAvatarListener mAvatarListener;
 	
@@ -54,10 +54,10 @@ public class FeedFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof OnListFragmentInteractionListener) {
-			mListener = (OnListFragmentInteractionListener) context;
+		if (context instanceof OnFeedFragmentInteractionListener) {
+			mListener = (OnFeedFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement OnTwitchLiveFragmentInteractionListener");
 		}
 		if (context instanceof OnFeedItemShareListener) {
 			mShareListener = (OnFeedItemShareListener) context;
@@ -87,7 +87,7 @@ public class FeedFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_feed_list, container, false);
 		mRecyclerView = (RecyclerView) view.findViewById(R.id.feedRecyclerView);
 		mLinearLayoutManager = new LinearLayoutManager(getContext());
-		mFeedFirebaseRecyclerAdapter = new FeedFirebaseRecyclerAdapter(getContext(), mRecyclerView, mLinearLayoutManager);
+		mFeedFirebaseRecyclerAdapter = new FeedFirebaseRecyclerAdapter(getContext(), mRecyclerView, mLinearLayoutManager, mListener);
 		mRecyclerView.setAdapter(mFeedFirebaseRecyclerAdapter);
 		
 		return view;
@@ -110,10 +110,10 @@ public class FeedFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnListFragmentInteractionListener {
+	public interface OnFeedFragmentInteractionListener {
 		
 		// TODO: Update argument type and name
-		void onListFragmentInteraction(DummyItem item);
+		void onFeedFragmentInteractionListener(FeedModel feedModel);
 	}
 	
 	public interface OnFeedItemShareListener {

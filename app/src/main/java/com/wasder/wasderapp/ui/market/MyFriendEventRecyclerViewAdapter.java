@@ -7,22 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.market.FriendEventFragment.OnListFragmentInteractionListener;
+import com.wasder.wasderapp.ui.market.FriendEventFragment.OnFriendEventFragmentInteractionListener;
 import com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnFriendEventFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyFriendEventRecyclerViewAdapter extends RecyclerView.Adapter<MyFriendEventRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final OnListFragmentInteractionListener mListener;
+	private final OnFriendEventFragmentInteractionListener mListener;
 	
-	public MyFriendEventRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+	public MyFriendEventRecyclerViewAdapter(List<DummyItem> items, OnFriendEventFragmentInteractionListener listener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -50,7 +50,7 @@ public class MyFriendEventRecyclerViewAdapter extends RecyclerView.Adapter<MyFri
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onFriendEventFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

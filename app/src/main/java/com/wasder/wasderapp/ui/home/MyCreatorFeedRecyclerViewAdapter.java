@@ -14,17 +14,18 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link CreatorFeedFragment.OnListFragmentInteractionListener}.
+ * specified {@link CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCreatorFeedRecyclerViewAdapter.ViewHolder> {
 	
 	private final List<DummyItem> mValues;
-	private final CreatorFeedFragment.OnListFragmentInteractionListener mListener;
+	private final CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener mListener;
 	private CreatorFeedFragment.OnFeedItemShareListener mShareListener;
 	private CreatorFeedFragment.OnAvatarListener mAvatarListener;
 	
-	public MyCreatorFeedRecyclerViewAdapter(List<DummyItem> items, CreatorFeedFragment.OnListFragmentInteractionListener listener, CreatorFeedFragment.OnAvatarListener avatarListener) {
+	public MyCreatorFeedRecyclerViewAdapter(List<DummyItem> items, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener listener,
+	                                        CreatorFeedFragment.OnAvatarListener avatarListener) {
 		
 		mValues = items;
 		mListener = listener;
@@ -73,7 +74,7 @@ public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCre
 				if (null != mListener) {
 					// Notify the active callbacks interface (the activity, if the
 					// fragment is attached to one) that an item has been selected.
-					mListener.onListFragmentInteraction(holder.mItem);
+					mListener.onCreatorFeedFragmentInteractionListener(holder.mItem);
 				}
 			}
 		});

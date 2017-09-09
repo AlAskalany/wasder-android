@@ -17,7 +17,7 @@ import com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnRecommendedEventFragmentInteractionListener}
  * interface.
  */
 public class RecommendedEventFragment extends Fragment {
@@ -26,7 +26,7 @@ public class RecommendedEventFragment extends Fragment {
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
-	private OnListFragmentInteractionListener mListener;
+	private OnRecommendedEventFragmentInteractionListener mListener;
 	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,10 +51,10 @@ public class RecommendedEventFragment extends Fragment {
 	public void onAttach(Context context) {
 		
 		super.onAttach(context);
-		if (context instanceof OnListFragmentInteractionListener) {
-			mListener = (OnListFragmentInteractionListener) context;
+		if (context instanceof OnRecommendedEventFragmentInteractionListener) {
+			mListener = (OnRecommendedEventFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement OnTwitchLiveFragmentInteractionListener");
 		}
 	}
 	
@@ -104,9 +104,9 @@ public class RecommendedEventFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnListFragmentInteractionListener {
+	public interface OnRecommendedEventFragmentInteractionListener {
 		
 		// TODO: Update argument type and name
-		void onListFragmentInteraction(DummyItem item);
+		void onRecommendedEventFragmentInteractionListener(DummyItem item);
 	}
 }
