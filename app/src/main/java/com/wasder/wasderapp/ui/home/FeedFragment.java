@@ -30,7 +30,7 @@ public class FeedFragment extends TabFragment {
 	
 	public static class MyFeedRecyclerAdapter extends RecyclerViewAdapterBase<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
 		
-		public MyFeedRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager,
+		public MyFeedRecyclerAdapter(Context context,   LinearLayoutManager feedLinearLayoutManager,
 		                             OnFragmentInteractionListener mListener) {
 			
 			super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),

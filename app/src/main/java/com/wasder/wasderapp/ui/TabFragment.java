@@ -73,7 +73,7 @@ public abstract class TabFragment extends Fragment {
 			LinearLayoutManager layoutManager;
 			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
 			recyclerView.setLayoutManager(layoutManager);
-			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, recyclerView, layoutManager,
+			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager,
 					mListener);
 			recyclerView.setAdapter(b);
 			

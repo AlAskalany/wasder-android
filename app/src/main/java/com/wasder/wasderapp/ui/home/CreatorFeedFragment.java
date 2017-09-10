@@ -26,7 +26,7 @@ public class CreatorFeedFragment extends TabFragment {
 	public static class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter
 			.CreatorFeedViewHolder> {
 		
-		public MyCreatorFeedRecyclerViewAdapter(Context context, final RecyclerView recyclerView, final LinearLayoutManager linearLayoutManager,
+		public MyCreatorFeedRecyclerViewAdapter(Context context,  LinearLayoutManager linearLayoutManager,
 		                                        OnFragmentInteractionListener mListener) {
 			
 			super(CreatorFeedModel.class, R.layout.fragment_creatorfeed, CreatorFeedViewHolder.class, FirebaseDatabase.getInstance().getReference()

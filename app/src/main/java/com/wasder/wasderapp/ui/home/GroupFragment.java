@@ -29,7 +29,7 @@ public class GroupFragment extends TabFragment {
 	
 	public static class MyGroupRecyclerAdapter extends RecyclerViewAdapterBase<GroupModel, MyGroupRecyclerAdapter.GroupViewHolder> {
 		
-		public MyGroupRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager,
+		public MyGroupRecyclerAdapter(Context context,  LinearLayoutManager feedLinearLayoutManager,
 		                              OnFragmentInteractionListener mListener) {
 			
 			super(GroupModel.class, R.layout.fragment_group, GroupViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
