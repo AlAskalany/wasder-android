@@ -13,14 +13,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
+import com.wasder.wasderapp.ui.RecyclerViewAdapterBase;
 import com.wasder.wasderapp.ui.TabFragment;
+import com.wasder.wasderapp.ui.WasderDataModel;
 import com.wasder.wasderapp.util.Helpers;
 
 public class FeedFragment extends TabFragment {
 	
 	public FeedFragment() {
 		
-		super(1, R.layout.fragment_feed_list, 1);
+		super("Feed",1, R.layout.fragment_feed_list, 1);
 	}
 	
 	/**
@@ -28,42 +30,16 @@ public class FeedFragment extends TabFragment {
 	 * Created by ahmed on 9/8/2017.
 	 */
 	
-	public static class MyFeedRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
-		
-		private static final String TAG = "FeedAdapter";
-		private Context mContext;
-		private OnFragmentInteractionListener mListener;
+	public static class MyFeedRecyclerAdapter extends RecyclerViewAdapterBase<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
 		
 		public MyFeedRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager,
 		                             OnFragmentInteractionListener mListener) {
 			
-			super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"));
-			this.mContext = context;
-			this.mListener = mListener;
-			this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-				
-				@Override
-				public void onItemRangeInserted(int positionStart, int itemCount) {
-					
-					super.onItemRangeInserted(positionStart, itemCount);
-					int feedModelCount = getItemCount();
-					int lastVisiblePosition = feedLinearLayoutManager.findLastVisibleItemPosition();
-					if (lastVisiblePosition == -1 || ((positionStart >= (feedModelCount - 1)) && (lastVisiblePosition == (positionStart - 1)))) {
-						feedRecyclerView.scrollToPosition(positionStart);
-					}
-				}
-			});
+			super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
+					"MyGroupRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+			
 		}
 		
-		@Override
-		protected FeedModel parseSnapshot(DataSnapshot snapshot) {
-			
-			FeedModel feedModel = super.parseSnapshot(snapshot);
-			if (feedModel != null) {
-				feedModel.setId(snapshot.getKey());
-			}
-			return feedModel;
-		}
 		
 		@Override
 		protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int position) {
@@ -122,7 +98,7 @@ public class FeedFragment extends TabFragment {
 	 * Created by ahmed on 9/8/2017.
 	 */
 	
-	public static class FeedModel {
+	public static class FeedModel implements WasderDataModel {
 		
 		private String uId;
 		private String id;

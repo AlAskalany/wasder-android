@@ -63,7 +63,7 @@ public class Helpers {
 	
 	public static class Fragments{
 		
-		public static void SwitchToNavigationFragment(int layout, FragmentTransaction ts, NavigationFragment fragment) {
+		public static void switchToNavigationFragment(int layout, FragmentTransaction ts, NavigationFragment fragment) {
 			
 			ts.replace(layout, fragment);
 			ts.addToBackStack(null);

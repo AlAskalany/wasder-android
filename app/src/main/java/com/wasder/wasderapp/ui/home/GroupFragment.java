@@ -1,214 +1,184 @@
 package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.DummyContent;
-import com.wasder.wasderapp.models.DummyContent.DummyItem;
+import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
+import com.wasder.wasderapp.ui.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.ui.TabFragment;
+import com.wasder.wasderapp.ui.WasderDataModel;
 
-import java.util.List;
-
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnGroupFragmentInteractionListener}
- * interface.
- */
-public class GroupFragment extends Fragment {
+public class GroupFragment extends TabFragment {
 	
-	// TODO: Customize parameter argument names
-	private static final String ARG_COLUMN_COUNT = "column-count";
-	// TODO: Customize parameters
-	private int mColumnCount = 2;
-	private OnGroupFragmentInteractionListener mListener;
-	private OnGroupDetailsListener mGroupDetailsListener;
-	
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the
-	 * fragment (e.g. upon screen orientation changes).
-	 */
 	public GroupFragment() {
 		
-	}
-	
-	// TODO: Customize parameter initialization
-	@SuppressWarnings("unused")
-	public static GroupFragment newInstance(int columnCount) {
-		
-		GroupFragment fragment = new GroupFragment();
-		Bundle args = new Bundle();
-		args.putInt(ARG_COLUMN_COUNT, columnCount);
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onAttach(Context context) {
-		
-		super.onAttach(context);
-		if (context instanceof OnGroupFragmentInteractionListener) {
-			mListener = (OnGroupFragmentInteractionListener) context;
-		} else {
-			throw new RuntimeException(context.toString() + " must implement " + "OnTwitchLiveFragmentInteractionListener");
-		}
-		
-		if (context instanceof OnGroupDetailsListener) {
-			mGroupDetailsListener = (OnGroupDetailsListener) context;
-		} else {
-			throw new RuntimeException((context.toString()) + " must implement " + "OnGroupDetailsListener");
-		}
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-		
-		if (getArguments() != null) {
-			mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-		}
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
-		View view = inflater.inflate(R.layout.fragment_group_list, container, false);
-		
-		// Set the adapter
-		if (view instanceof RecyclerView) {
-			Context context = view.getContext();
-			RecyclerView recyclerView = (RecyclerView) view;
-			if (mColumnCount <= 1) {
-				recyclerView.setLayoutManager(new LinearLayoutManager(context));
-			} else {
-				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-			}
-			recyclerView.setAdapter(new MyGroupRecyclerViewAdapter(DummyContent.ITEMS, mListener, mGroupDetailsListener));
-		}
-		return view;
-	}
-	
-	@Override
-	public void onDetach() {
-		
-		super.onDetach();
-		mListener = null;
+		super("Groups", 2, R.layout.fragment_group_list, 3);
 	}
 	
 	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated
-	 * to the activity and potentially other fragments contained in that
-	 * activity.
-	 * <p/>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
+	 * Wasder AB CONFIDENTIAL
+	 * Created by ahmed on 9/8/2017.
 	 */
-	public interface OnGroupFragmentInteractionListener {
-		
-		// TODO: Update argument type and name
-		void onGroupFragmentInteractionListener(DummyItem item);
-	}
 	
-	public interface OnGroupDetailsListener {
+	public static class MyGroupRecyclerAdapter extends RecyclerViewAdapterBase<GroupModel, MyGroupRecyclerAdapter.GroupViewHolder> {
 		
-		void onGroupDetailsListener();
-	}
-	
-	/**
-	 * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
-	 * specified {@link OnGroupFragmentInteractionListener}.
-	 * TODO: Replace the implementation with code for your data type.
-	 */
-	public static class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecyclerViewAdapter.ViewHolder> {
-		
-		private final List<DummyItem> mValues;
-		private final OnGroupFragmentInteractionListener mListener;
-		private OnGroupDetailsListener mGroupDetailsListener;
-		
-		public MyGroupRecyclerViewAdapter(List<DummyItem> items, OnGroupFragmentInteractionListener listener, OnGroupDetailsListener
-				groupDetailsListener) {
+		public MyGroupRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager,
+		                              OnFragmentInteractionListener mListener) {
 			
-			mValues = items;
-			mListener = listener;
-			mGroupDetailsListener = groupDetailsListener;
+			super(GroupModel.class, R.layout.fragment_group, GroupViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
+					"MyGroupRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+			
 		}
 		
 		@Override
-		public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		protected void populateViewHolder(final GroupViewHolder viewHolder, GroupModel model, int position) {
 			
-			View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_group, parent, false);
-			return new ViewHolder(view);
-		}
-		
-		@Override
-		public void onBindViewHolder(final ViewHolder holder, int position) {
-			
-			holder.mItem = mValues.get(position);
-			holder.mIdView.setText(mValues.get(position).id);
-			holder.mContentView.setText(mValues.get(position).content);
-			holder.mDetailsButton.setOnClickListener(new View.OnClickListener() {
+			viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View view) {
 					
-					mGroupDetailsListener.onGroupDetailsListener();
+					mListener.onFragmentInteractionListener(viewHolder.feedModel);
 				}
 			});
-			
-			holder.mView.setOnClickListener(new View.OnClickListener() {
+			viewHolder.groupImageView.setImageDrawable(mContext.getDrawable(R.drawable.gamers));
+			viewHolder.groupTitleTextView.setText("My Group!");
+			viewHolder.groupSubheadTextView.setText("Best Eva!");
+			viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
-				public void onClick(View v) {
+				public void onClick(View view) {
 					
-					if (null != mListener) {
-						// Notify the active callbacks interface (the activity, if the
-						// fragment is attached to one) that an item has been selected.
-						mListener.onGroupFragmentInteractionListener(holder.mItem);
-					}
 				}
 			});
 		}
 		
-		@Override
-		public int getItemCount() {
+		public static class GroupViewHolder extends RecyclerView.ViewHolder {
 			
-			return mValues.size();
+			View mview;
+			ImageView groupImageView;
+			TextView groupTitleTextView;
+			TextView groupSubheadTextView;
+			ImageButton groupDetailsImageButton;
+			GroupModel feedModel;
+			
+			public GroupViewHolder(View itemView) {
+				
+				super(itemView);
+				mview = itemView;
+				groupImageView = itemView.findViewById(R.id.fragment_group_imageView);
+				groupTitleTextView = itemView.findViewById(R.id.fragment_group_title_textView);
+				groupSubheadTextView = itemView.findViewById(R.id.fragment_group_subhead_textView);
+				groupDetailsImageButton = itemView.findViewById(R.id.fragment_group_details_imageButton);
+			}
+		}
+	}
+	
+	/**
+	 * Wasder AB CONFIDENTIAL
+	 * Created by ahmed on 9/8/2017.
+	 */
+	
+	public static class GroupModel implements WasderDataModel {
+		
+		private String uId;
+		private String id;
+		private String title;
+		private String subhead;
+		private String photoUrl;
+		private String imageUrl;
+		private String supplementaryText;
+		
+		public GroupModel() {
+			
 		}
 		
-		public class ViewHolder extends RecyclerView.ViewHolder {
+		public GroupModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 			
-			public final View mView;
-			public final TextView mIdView;
-			public final TextView mContentView;
-			public final ImageButton mDetailsButton;
-			public DummyItem mItem;
+			this.uId = uId;
+			this.id = id;
+			this.title = title;
+			this.subhead = subhead;
+			this.photoUrl = photoUrl;
+			this.imageUrl = imageUrl;
+			this.supplementaryText = supplementaryText;
+		}
+		
+		public String getId() {
 			
-			public ViewHolder(View view) {
-				
-				super(view);
-				mView = view;
-				mIdView = view.findViewById(R.id.id);
-				mContentView = view.findViewById(R.id.content);
-				mDetailsButton = view.findViewById(R.id.group_details_button);
-			}
+			return this.id;
+		}
+		
+		public void setId(String id) {
 			
-			@Override
-			public String toString() {
-				
-				return super.toString() + " '" + mContentView.getText() + "'";
-			}
+			this.id = id;
+		}
+		
+		public String getTitle() {
+			
+			return title;
+		}
+		
+		public void setTitle(String title) {
+			
+			this.title = title;
+		}
+		
+		public String getSubhead() {
+			
+			return subhead;
+		}
+		
+		public void setSubhead(String subhead) {
+			
+			this.subhead = subhead;
+		}
+		
+		public String getPhotoUrl() {
+			
+			return photoUrl;
+		}
+		
+		public void setPhotoUrl(String photoUrl) {
+			
+			this.photoUrl = photoUrl;
+		}
+		
+		public String getImageUrl() {
+			
+			return imageUrl;
+		}
+		
+		public void setImageUrl(String imageUrl) {
+			
+			this.imageUrl = imageUrl;
+		}
+		
+		public String getSupplementaryText() {
+			
+			return supplementaryText;
+		}
+		
+		public void setSupplementaryText(String supplementaryText) {
+			
+			this.supplementaryText = supplementaryText;
+		}
+		
+		public String getuId() {
+			
+			return uId;
+		}
+		
+		public void setuId(String uId) {
+			
+			this.uId = uId;
 		}
 	}
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
 import com.wasder.wasderapp.ui.home.FeedFragment;
+import com.wasder.wasderapp.ui.home.GroupFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -23,6 +24,8 @@ public abstract class TabFragment extends Fragment {
 	private static String ARG_COLUMN_COUNT = "column-count";
 	private static int FEED_FRAGMENT = 1;
 	private static int CREATOR_FEED_FRAGMENT = 2;
+	private static int GROUP_FRAGMENT = 3;
+	private String title;
 	private int columnCount;
 	private OnFragmentInteractionListener mListener;
 	private View view;
@@ -31,8 +34,9 @@ public abstract class TabFragment extends Fragment {
 	private FeedFragment.MyFeedRecyclerAdapter myFeedRecyclerAdapter;
 	private CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter myCreatorFeedRecyclerViewAdapter;
 	
-	protected TabFragment(int columnCount, int resLayout, int fragmentType) {
+	public TabFragment(String title, int columnCount, int resLayout, int fragmentType) {
 		
+		this.title = title;
 		this.columnCount = columnCount;
 		this.resLayout = resLayout;
 		this.fragmentType = fragmentType;
@@ -49,8 +53,7 @@ public abstract class TabFragment extends Fragment {
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement " +
-					"OnFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement " + "OnFragmentInteractionListener");
 		}
 	}
 	
@@ -64,8 +67,7 @@ public abstract class TabFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-			savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		view = inflater.inflate(resLayout, container, false);
 		if (view instanceof RecyclerView) {
@@ -75,21 +77,23 @@ public abstract class TabFragment extends Fragment {
 				LinearLayoutManager layoutManager = new LinearLayoutManager(context);
 				recyclerView.setLayoutManager(layoutManager);
 				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView,
-							layoutManager, mListener));
+					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView, layoutManager, mListener));
 				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context,
-							recyclerView, layoutManager, mListener));
+					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context, recyclerView, layoutManager,
+							mListener));
+				} else if (fragmentType == GROUP_FRAGMENT) {
+					recyclerView.setAdapter(new GroupFragment.MyGroupRecyclerAdapter(context, recyclerView, layoutManager, mListener));
 				}
 			} else {
 				GridLayoutManager layoutManager = new GridLayoutManager(context, columnCount);
 				recyclerView.setLayoutManager(layoutManager);
 				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView,
-							layoutManager, mListener));
+					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView, layoutManager, mListener));
 				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context,
-							recyclerView, layoutManager, mListener));
+					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context, recyclerView, layoutManager,
+							mListener));
+				} else if (fragmentType == GROUP_FRAGMENT) {
+					recyclerView.setAdapter(new GroupFragment.MyGroupRecyclerAdapter(context, recyclerView, layoutManager, mListener));
 				}
 			}
 		}
@@ -101,5 +105,10 @@ public abstract class TabFragment extends Fragment {
 		
 		super.onDetach();
 		mListener = null;
+	}
+	
+	public String getTitle() {
+		
+		return title;
 	}
 }

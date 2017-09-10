@@ -1,74 +1,37 @@
 package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
+import com.wasder.wasderapp.ui.RecyclerViewAdapterBase;
 import com.wasder.wasderapp.ui.TabFragment;
+import com.wasder.wasderapp.ui.WasderDataModel;
 import com.wasder.wasderapp.util.Helpers;
 
 public class CreatorFeedFragment extends TabFragment {
 	
 	public CreatorFeedFragment() {
 		
-		super(1, R.layout.fragment_creatorfeed_list, 2);
+		super("Creators", 1, R.layout.fragment_creatorfeed_list, 2);
 	}
 	
-	public static class MyCreatorFeedRecyclerViewAdapter extends FirebaseRecyclerAdapter<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter
+	public static class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter
 			.CreatorFeedViewHolder> {
-		
-		private static final String TAG = "FeedAdapter";
-		private Context mContext;
-		private OnFragmentInteractionListener mListener;
 		
 		public MyCreatorFeedRecyclerViewAdapter(Context context, final RecyclerView recyclerView, final LinearLayoutManager linearLayoutManager,
 		                                        OnFragmentInteractionListener mListener) {
 			
 			super(CreatorFeedModel.class, R.layout.fragment_creatorfeed, CreatorFeedViewHolder.class, FirebaseDatabase.getInstance().getReference()
-					.child("feed"));
-			this.mContext = context;
-			this.mListener = mListener;
-			this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-				
-				@Override
-				public void onItemRangeInserted(int positionStart, int itemCount) {
-					
-					super.onItemRangeInserted(positionStart, itemCount);
-					int creatorFeedModelCount = getItemCount();
-					int lastVisiblePosition = linearLayoutManager.findLastVisibleItemPosition();
-					if (lastVisiblePosition == -1 || ((positionStart >= (creatorFeedModelCount - 1)) && (lastVisiblePosition == (positionStart - 1))
-					)) {
-						recyclerView.scrollToPosition(positionStart);
-					}
-				}
-			});
-		}
-		
-		@Override
-		protected CreatorFeedModel parseSnapshot(DataSnapshot snapshot) {
-			
-			CreatorFeedModel creatorFeedModel = super.parseSnapshot(snapshot);
-			if (creatorFeedModel != null) {
-				creatorFeedModel.setId(snapshot.getKey());
-			}
-			return creatorFeedModel;
+					.child("feed"), "MyCreatorAdapter", context, mListener, linearLayoutManager);
 		}
 		
 		@Override
@@ -131,7 +94,7 @@ public class CreatorFeedFragment extends TabFragment {
 	 * <p>
 	 * TODO: Replace all uses of this class before publishing your app.
 	 */
-	public static class CreatorFeedModel {
+	public static class CreatorFeedModel implements WasderDataModel {
 		
 		private String uId;
 		private String id;

@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -23,16 +24,16 @@ import android.view.ViewGroup;
 
 import com.wasder.wasderapp.R;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/10/2017.
  */
 
-public abstract class NavigationFragment extends Fragment implements NavigationView
-		.OnNavigationItemSelectedListener {
+public abstract class NavigationFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private static String TAG;
 	private static String ARG_PARAM1 = "param1";
@@ -53,13 +54,10 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 	private int resTabLayout;
 	private TabLayout tabLayout;
 	private OnFragmentInteractionListener mListener;
-	private Fragment firstFragment;
-	private Fragment secondFragment;
-	private Fragment thirdFragment;
+	private List<TabFragment> tabFragments;
 	
-	protected NavigationFragment(String TAG, String fragmentTitle, int layout, int resToolbar, int
-			resDrawerLayout, int resNavigationView, int resViewPager, int resTabLayout, Fragment
-			firstFragment, Fragment secondFragment, Fragment thirdFragment) {
+	protected NavigationFragment(String TAG, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout, int resNavigationView, int
+			resViewPager, int resTabLayout, List<TabFragment> tabFragments) {
 		
 		this.TAG = TAG;
 		this.fragmentTitle = fragmentTitle;
@@ -69,9 +67,7 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		this.resNavigationView = resNavigationView;
 		this.resViewPager = resViewPager;
 		this.resTabLayout = resTabLayout;
-		this.firstFragment = firstFragment;
-		this.secondFragment = secondFragment;
-		this.thirdFragment = thirdFragment;
+		this.tabFragments = tabFragments;
 	}
 	
 	public NavigationFragment() {
@@ -85,8 +81,7 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString() + " must implement " +
-					"OnFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement " + "OnFragmentInteractionListener");
 		}
 	}
 	
@@ -101,8 +96,7 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-			savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		view = inflater.inflate(this.layout, container, false);
 		toolbar = view.findViewById(resToolbar);
@@ -111,15 +105,15 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		ActionBar actionBar = activity.getSupportActionBar();
 		actionBar.setTitle(fragmentTitle);
 		DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(resDrawerLayout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar,
-				R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string
+				.navigation_drawer_close);
 		toggle.syncState();
 		NavigationView navigationView = (NavigationView) activity.findViewById(resNavigationView);
 		navigationView.setNavigationItemSelectedListener(this);
 		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-		sectionPagerAdapter.addFragment(firstFragment, "Feed");
-		sectionPagerAdapter.addFragment(secondFragment, "Creators");
-		sectionPagerAdapter.addFragment(thirdFragment, "Groups");
+		for (TabFragment tab : tabFragments) {
+			sectionPagerAdapter.addFragment(tab, tab.getTitle());
+		}
 		viewPager = (ViewPager) view.findViewById(resViewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
 		tabLayout = (TabLayout) view.findViewById(resTabLayout);
@@ -176,8 +170,7 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 	 */
 	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		
-		private final List<Fragment> mFragmentList = new ArrayList<>();
-		private final List<String> mFragmentTitleList = new ArrayList<>();
+		private Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		
 		/**
 		 * Instantiates a new Sections pager adapter.
@@ -192,25 +185,25 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		@Override
 		public Fragment getItem(int position) {
 			
-			return mFragmentList.get(position);
+			return fragmentMap.get(position).second;
 		}
 		
 		@Override
 		public int getCount() {
 			
-			return mFragmentList.size();
+			return fragmentMap.size();
 		}
 		
 		@Override
 		public CharSequence getPageTitle(int position) {
 			
-			return mFragmentTitleList.get(position);
+			return fragmentMap.get(position).first;
 		}
 		
 		public void addFragment(Fragment fragment, String title) {
 			
-			mFragmentList.add(fragment);
-			mFragmentTitleList.add(title);
+			int positon = fragmentMap.size();
+			fragmentMap.put(positon, new Pair<String, Fragment>(title, fragment));
 		}
 	}
 }

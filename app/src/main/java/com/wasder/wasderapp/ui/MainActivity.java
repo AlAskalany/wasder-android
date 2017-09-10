@@ -18,7 +18,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +31,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.DummyContent;
-import com.wasder.wasderapp.ui.home.GroupFragment;
 import com.wasder.wasderapp.ui.home.HomeFragment;
 import com.wasder.wasderapp.ui.live.EsportsActivity;
 import com.wasder.wasderapp.ui.live.EsportsFragment;
@@ -48,16 +46,18 @@ import com.wasder.wasderapp.ui.market.FriendEventFragment;
 import com.wasder.wasderapp.ui.market.MarketFragment;
 import com.wasder.wasderapp.ui.market.RecommendedEventActivity;
 import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
-import com.wasder.wasderapp.util.Helpers;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener,
-		GroupFragment.OnGroupFragmentInteractionListener, TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener, FragmentManager
-				.OnBackStackChangedListener, GroupFragment.OnGroupDetailsListener, TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener,
-		EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment.OnEventFragmentInteractionListener, FriendEventFragment
-				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment.OnRecommendedEventFragmentInteractionListener {
+		TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, TwitchLiveFragment
+				.OnTwitchLiveFragmentInteractionListener, EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment
+				.OnEventFragmentInteractionListener, FriendEventFragment.OnFriendEventFragmentInteractionListener, RecommendedEventFragment
+				.OnRecommendedEventFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -80,54 +80,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	HomeFragment homeFragment;
 	LiveFragment liveFragment;
 	MarketFragment marketFragment;
-	Toolbar toolbar;
-	TextView nameTextView;
-	TextView detailsTextView;
+	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
 	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
-	private FragmentManager fragmentManager;
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 			
-			fragmentManager = getSupportFragmentManager();
-			FragmentTransaction ts = fragmentManager.beginTransaction();
-			Fragment currentFragment = fragmentManager.findFragmentById(R.id.framelayout_fragment_container);
+			FragmentManager manager = getSupportFragmentManager();
+			FragmentTransaction ts = manager.beginTransaction();
+			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
 			NavigationFragment newFragment = null;
 			int container = R.id.framelayout_fragment_container;
 			if (currentFragment != null) {
-				fragmentManager.saveFragmentInstanceState(currentFragment);
+				manager.saveFragmentInstanceState(currentFragment);
 			}
-			switch (item.getItemId()) {
-				case R.id.navigation_home:
-					
-					if (currentFragment != homeFragment) {
-						newFragment = homeFragment;
-					}
-					break;
-				case R.id.navigation_live:
-					if (currentFragment != liveFragment) {
-						newFragment = liveFragment;
-					}
-					break;
-				case R.id.navigation_market:
-					if (currentFragment != marketFragment) {
-						newFragment = marketFragment;
-					}
-					break;
-			}
-			if (newFragment != null) {
-				Helpers.Fragments.SwitchToNavigationFragment(container, ts, newFragment);
+			newFragment = fragmentMap.get(item.getItemId());
+			if (newFragment != currentFragment) {
+				ts.replace(R.id.framelayout_fragment_container, newFragment);
+				ts.addToBackStack(null);
+				ts.commit();
+				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
 				return true;
 			}
 			return false;
 		}
 	};
+	private NavigationView navigationView;
+	private View headerView;
+	private TextView userNameTextView;
+	private TextView emailTextView;
+	private BottomNavigationView bottomNavigationView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -165,39 +153,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					mPhotoUrl = user.getPhotoUrl();
 					mUid = user.getUid();
 					
-					NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-					View headerView = navigationView.getHeaderView(0);
-					TextView userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
+					navigationView = (NavigationView) findViewById(R.id.nav_view);
+					headerView = navigationView.getHeaderView(0);
+					userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
 					userNameTextView.setText(mUserName);
-					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
+					emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
-					
-					/*UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest
-					.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
-							(Uri.parse("http://www.lovemarks
-							.com/wp-content/uploads/profile-avatars/default-avatar-knives-ninja
-							.png")).build();
-					user.updateProfile(profilUpdates).addOnCompleteListener(new
-					OnCompleteListener<Void>() {
-						
-						@Override
-						public void onComplete(@NonNull Task<Void> task) {
-							
-							if (task.isSuccessful()) {
-								Log.d(TAG, "User Profile Updated");
-							}
-						}
-					});*/
-					
 				} else {
 					Log.d(TAG, "Signed out");
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
 				}
 			}
 		};
+		
 		homeFragment = new HomeFragment();
 		liveFragment = new LiveFragment();
 		marketFragment = new MarketFragment();
+		
+		fragmentMap.put(R.id.navigation_home, homeFragment);
+		fragmentMap.put(R.id.navigation_live, liveFragment);
+		fragmentMap.put(R.id.navigation_market, marketFragment);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
@@ -205,8 +180,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		transaction.commit();
 		
 		//region Bottom_Navigation
-		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+		bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		//endregion
 	}
 	
@@ -309,12 +284,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 	
 	@Override
-	public void onGroupDetailsListener() {
-		//ListDialog.newInstance(this).show();
-		startActivity(new Intent(MainActivity.this, GroupActivity.class));
-	}
-	
-	@Override
 	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, EsportsActivity.class));
@@ -348,12 +317,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
-	}
-	
-	@Override
-	public void onGroupFragmentInteractionListener(DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 	
 	@Override
