@@ -123,7 +123,6 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 	
 	@Override
 	public void onStart() {
-		
 		super.onStart();
 	}
 	

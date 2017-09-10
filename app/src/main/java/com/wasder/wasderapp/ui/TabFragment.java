@@ -15,32 +15,17 @@ import android.view.ViewGroup;
  * Created by ahmed on 9/10/2017.
  */
 
-public abstract class TabFragment extends Fragment {
+public class TabFragment extends Fragment {
 	
-	private static String ARG_COLUMN_COUNT = "column-count";
-	private static int FEED_FRAGMENT = 1;
-	private static int CREATOR_FEED_FRAGMENT = 2;
-	private static int GROUP_FRAGMENT = 3;
-	private String title;
 	private int columnCount;
+	private String title;
+	private int resLayout;
 	private OnFragmentInteractionListener mListener;
 	private View view;
-	private int resLayout;
-	private int fragmentType;
 	private Class<? extends RecyclerViewAdapterBase> recyclerViewAdapterBaseClass;
 	
-	public TabFragment(String title, int columnCount, int resLayout, Class<? extends RecyclerViewAdapterBase>
-			recyclerViewAdapterBaseClass) {
-		
-		this.title = title;
-		this.columnCount = columnCount;
-		this.resLayout = resLayout;
-		this.fragmentType = fragmentType;
-		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
-	}
-	
 	public TabFragment() {
-		
+		super();
 	}
 	
 	@Override
@@ -58,9 +43,6 @@ public abstract class TabFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-			columnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-		}
 	}
 	
 	@Override
@@ -73,8 +55,7 @@ public abstract class TabFragment extends Fragment {
 			LinearLayoutManager layoutManager;
 			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
 			recyclerView.setLayoutManager(layoutManager);
-			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager,
-					mListener);
+			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager, mListener);
 			recyclerView.setAdapter(b);
 			
 		}
@@ -91,5 +72,24 @@ public abstract class TabFragment extends Fragment {
 	public String getTitle() {
 		
 		return title;
+	}
+	public void setColumnCount(int columnCount) {
+		
+		this.columnCount = columnCount;
+	}
+	
+	public void setTitle(String title) {
+		
+		this.title = title;
+	}
+	
+	public void setResLayout(int resLayout) {
+		
+		this.resLayout = resLayout;
+	}
+	
+	public void setRecyclerViewAdapterBaseClass(Class<? extends RecyclerViewAdapterBase> recyclerViewAdapterBaseClass) {
+		
+		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
 	}
 }
