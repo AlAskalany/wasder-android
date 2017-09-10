@@ -59,14 +59,19 @@ import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment
-		.OnFragmentInteractionListener, LiveFragment.OnFragmentInteractionListener, FeedFragment.OnFeedFragmentInteractionListener, GroupFragment
-		.OnGroupFragmentInteractionListener, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener, TwitchStreamFragment
-		.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, MarketFragment.OnFragmentInteractionListener,
-		FeedFragment.OnFeedItemShareListener, GroupFragment.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment
-				.OnAvatarListener, CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener,
-		EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment.OnEventFragmentInteractionListener, FriendEventFragment
-				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment.OnRecommendedEventFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView
+		.OnNavigationItemSelectedListener, OnFragmentInteractionListener, FeedFragment
+		.OnFeedFragmentInteractionListener, GroupFragment.OnGroupFragmentInteractionListener,
+		CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener, TwitchStreamFragment
+				.OnTiwtchStreamFragmentInteractionListener, FragmentManager
+				.OnBackStackChangedListener, FeedFragment.OnFeedItemShareListener, GroupFragment
+				.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment
+				.OnAvatarListener, CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment
+				.OnTwitchLiveFragmentInteractionListener, EsportsFragment
+				.OnEsportsFragmentInteractionListener, EventFragment
+				.OnEventFragmentInteractionListener, FriendEventFragment
+				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment
+				.OnRecommendedEventFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -97,7 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+	private BottomNavigationView.OnNavigationItemSelectedListener
+			mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
 		@Override
@@ -145,9 +151,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
 		serviceIntent.setPackage("com.android.vending");
 		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context
+				.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
-		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout), "Connection", 2000);
+		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout),
+		// "Connection", 2000);
 		//snackbar.show();
 		if (activeInfo != null && activeInfo.isConnected()) {
 			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
@@ -155,8 +163,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
 		}
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
-				.default_web_client_id)).requestEmail().build();
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions
+				.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+				.requestEmail().build();
 		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -174,14 +183,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					
 					NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 					View headerView = navigationView.getHeaderView(0);
-					TextView userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
+					TextView userNameTextView = (TextView) headerView.findViewById(R.id
+							.nav_header_user_name);
 					userNameTextView.setText(mUserName);
-					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
+					TextView emailTextView = (TextView) headerView.findViewById(R.id
+							.nav_header_user_details);
 					emailTextView.setText(mEmail);
 					
-					/*UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
-							(Uri.parse("http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-knives-ninja.png")).build();
-					user.updateProfile(profilUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+					/*UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest
+					.Builder().setDisplayName("Ahmed AlAskalany").setPhotoUri
+							(Uri.parse("http://www.lovemarks
+							.com/wp-content/uploads/profile-avatars/default-avatar-knives-ninja
+							.png")).build();
+					user.updateProfile(profilUpdates).addOnCompleteListener(new
+					OnCompleteListener<Void>() {
 						
 						@Override
 						public void onComplete(@NonNull Task<Void> task) {
@@ -241,7 +256,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onBackPressed() {
 		
-		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount
+				()));
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
@@ -302,11 +318,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		return true;
 	}
 	
-	@Override
-	public void onFragmentInteraction(Uri uri) {
-		
-	}
-	
 	/**
 	 * Called whenever the contents of the back stack change.
 	 */
@@ -337,13 +348,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 	
 	@Override
-	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
+	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent
+			                                             .DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, EsportsActivity.class));
 	}
 	
 	@Override
-	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
+	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy
+			                                                        .DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
 	}
@@ -355,19 +368,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 	
 	@Override
-	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
+			                                                   .DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, EventActivity.class));
 	}
 	
 	@Override
-	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
+			                                                         .DummyContent.DummyItem
+			                                                         item) {
 		
 		startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
 	}
 	
 	@Override
-	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
+	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
+			                                                              .DummyContent.DummyItem
+			                                                              item) {
 		
 		startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
 	}
@@ -390,5 +408,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onGroupFragmentInteractionListener(DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, GroupActivity.class));
+	}
+	
+	@Override
+	public void onFragmentInteractionListener(Uri uri) {
+		
 	}
 }
