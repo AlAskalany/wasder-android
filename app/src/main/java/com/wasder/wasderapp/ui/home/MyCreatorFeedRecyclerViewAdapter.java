@@ -1,124 +1,176 @@
 package com.wasder.wasderapp.ui.home;
 
+import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.home.models.CreatorFeedContent.CreatorFeedItem;
+import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
+import com.wasder.wasderapp.ui.home.models.CreatorFeedModel;
 
-import java.util.List;
-
-/**
- * {@link RecyclerView.Adapter} that can display a {@link CreatorFeedItem} and makes a call to the
- * specified {@link CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCreatorFeedRecyclerViewAdapter.ViewHolder> {
+public class MyCreatorFeedRecyclerViewAdapter extends FirebaseRecyclerAdapter<CreatorFeedModel,
+		MyCreatorFeedRecyclerViewAdapter.CreatorFeedViewHolder> {
 	
-	private final List<CreatorFeedItem> mValues;
-	private final CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener mListener;
-	private CreatorFeedFragment.OnFeedItemShareListener mShareListener;
-	private CreatorFeedFragment.OnAvatarListener mAvatarListener;
+	private static final String TAG = "FeedAdapter";
+	private Context mContext;
+	private OnFragmentInteractionListener mListener;
 	
-	public MyCreatorFeedRecyclerViewAdapter(List<CreatorFeedItem> items, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener listener,
-	                                        CreatorFeedFragment.OnAvatarListener avatarListener) {
+	public MyCreatorFeedRecyclerViewAdapter(Context context, final RecyclerView recyclerView,
+	                                        final LinearLayoutManager linearLayoutManager,
+	                                        OnFragmentInteractionListener mListener) {
 		
-		mValues = items;
-		mListener = listener;
-		mAvatarListener = avatarListener;
-	}
-	
-	@Override
-	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_creatorfeed, parent, false);
-		return new ViewHolder(view);
-	}
-	
-	@Override
-	public void onBindViewHolder(final ViewHolder holder, int position) {
-		
-		holder.mItem = mValues.get(position);
-		//holder.mIdView.setText(mValues.get(position).id);
-		//holder.mContentView.setText(mValues.get(position).content);
-		//holder.mDetailsButton.setImageDrawable(mValues.get(position).image);
-		holder.mAvatar.setOnClickListener(new View.OnClickListener() {
+		super(CreatorFeedModel.class, R.layout.fragment_creatorfeed, CreatorFeedViewHolder.class,
+				FirebaseDatabase.getInstance().getReference().child("feed"));
+		this.mContext = context;
+		this.mListener = mListener;
+		this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			
 			@Override
-			public void onClick(View view) {
+			public void onItemRangeInserted(int positionStart, int itemCount) {
 				
-				mAvatarListener.onAvatarListener();
-			}
-		});
-		
-		holder.mShareButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				
-				if (null != mShareListener) {
-					mShareListener.onFeedItemShareListener();
-				}
-			}
-		});
-		
-		holder.mView.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				if (null != mListener) {
-					// Notify the active callbacks interface (the activity, if the
-					// fragment is attached to one) that an item has been selected.
-					mListener.onCreatorFeedFragmentInteractionListener(holder.mItem);
+				super.onItemRangeInserted(positionStart, itemCount);
+				int creatorFeedModelCount = getItemCount();
+				int lastVisiblePosition = linearLayoutManager.findLastVisibleItemPosition();
+				if (lastVisiblePosition == -1 || ((positionStart >= (creatorFeedModelCount - 1))
+						&& (lastVisiblePosition == (positionStart - 1)))) {
+					recyclerView.scrollToPosition(positionStart);
 				}
 			}
 		});
 	}
 	
 	@Override
-	public int getItemCount() {
+	protected CreatorFeedModel parseSnapshot(DataSnapshot snapshot) {
 		
-		return mValues.size();
+		CreatorFeedModel creatorFeedModel = super.parseSnapshot(snapshot);
+		if (creatorFeedModel != null) {
+			creatorFeedModel.setId(snapshot.getKey());
+		}
+		return creatorFeedModel;
 	}
 	
-	public class ViewHolder extends RecyclerView.ViewHolder {
+	@Override
+	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, CreatorFeedModel
+			creatorFeedModel, int position) {
 		
-		public final ImageButton mLikeButton;
-		public final ImageButton mShareButton;
-		public final ImageButton mCommentButton;
-		//public final ImageButton mDetailsButton;
-		public final TextView mFeedTitle;
-		public final TextView mFeedContent;
-		public final View mView;
-		public final TextView mIdView;
-		public final TextView mContentView;
-		public final ImageButton mAvatar;
-		public CreatorFeedItem mItem;
+		viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				mListener.onFragmentInteractionListener(viewHolder.creatorFeedModel);
+			}
+		});
+		viewHolder.titleTextView.setText(creatorFeedModel.getTitle());
+		viewHolder.subheadTextView.setText(creatorFeedModel.getSubhead());
+		final String imageUrl = creatorFeedModel.getImageUrl();
+		if (imageUrl != null) {
+			if (imageUrl.startsWith("gs://")) {
+				StorageReference storageReference = FirebaseStorage.getInstance()
+						.getReferenceFromUrl(imageUrl);
+				storageReference.getDownloadUrl().addOnCompleteListener(new
+						                                                        OnCompleteListener<Uri>() {
+					
+					@Override
+					public void onComplete(@NonNull Task<Uri> task) {
+						
+						if (task.isSuccessful()) {
+							String downloadUrl = task.getResult().toString();
+							Glide.with(viewHolder.creatorFeedImageView.getContext()).load
+									(imageUrl).into(viewHolder.creatorFeedImageView);
+						} else {
+							Log.d(TAG, "Getting Download URL was not successful", task
+									.getException());
+						}
+					}
+				});
+			} else {
+				Glide.with(viewHolder.creatorFeedImageView.getContext()).load(creatorFeedModel
+						.getImageUrl()).into(viewHolder.creatorFeedImageView);
+			}
+		} else {
+			viewHolder.creatorFeedImageView.setVisibility(ImageView.GONE);
+		}
+		final String photoUrl = creatorFeedModel.getPhotoUrl();
+		if (photoUrl != null) {
+			if (photoUrl.startsWith("gsL//")) {
+				StorageReference storageReference = FirebaseStorage.getInstance()
+						.getReferenceFromUrl(photoUrl);
+				storageReference.getDownloadUrl().addOnCompleteListener(new
+						                                                        OnCompleteListener<Uri>() {
+					
+					@Override
+					public void onComplete(@NonNull Task<Uri> task) {
+						
+						if (task.isSuccessful()) {
+							String downloadUrl = task.getResult().toString();
+							Glide.with(viewHolder.photoImageButton.getContext()).load(photoUrl)
+									.into(viewHolder.photoImageButton);
+						} else {
+							Log.d(TAG, "Getting Download URL was not successful", task
+									.getException());
+						}
+					}
+				});
+			} else {
+				Glide.with(viewHolder.photoImageButton.getContext()).load(creatorFeedModel
+						.getPhotoUrl()).into(viewHolder.photoImageButton);
+			}
+			
+		} else {
+			viewHolder.photoImageButton.setImageDrawable(mContext.getDrawable(R.drawable.avatar));
+		}
 		
-		public ViewHolder(View view) {
+		viewHolder.creatorFeedImageView.setImageDrawable(mContext.getDrawable(R.drawable
+				.event_pic));
+		viewHolder.supplementaryTextView.setText(creatorFeedModel.getSupplementaryText());
+	}
+	
+	public static class CreatorFeedViewHolder extends RecyclerView.ViewHolder {
+		
+		View mView;
+		TextView titleTextView;
+		TextView subheadTextView;
+		ImageButton photoImageButton;
+		ImageView creatorFeedImageView;
+		TextView supplementaryTextView;
+		ImageButton commentImageButton;
+		ImageButton likeImageButton;
+		ImageButton bookmarkImageButton;
+		ImageButton shareImageButton;
+		CreatorFeedModel creatorFeedModel;
+		
+		public CreatorFeedViewHolder(View view) {
 			
 			super(view);
 			mView = view;
-			mIdView = (TextView) view.findViewById(R.id.id);
-			mContentView = (TextView) view.findViewById(R.id.content);
-			mLikeButton = (ImageButton) view.findViewById(R.id.feed_likee_imageButton);
-			mShareButton = (ImageButton) view.findViewById(R.id.feed_share_imageButton);
-			mCommentButton = (ImageButton) view.findViewById(R.id.feed_comment_imageButton);
+			creatorFeedImageView = (ImageView) view.findViewById(R.id.creator_feed_imageView);
+			subheadTextView = (TextView) view.findViewById(R.id.creator_feed_subhead_textView);
+			likeImageButton = (ImageButton) view.findViewById(R.id.creator_feed_likee_imageButton);
+			shareImageButton = (ImageButton) view.findViewById(R.id
+					.creator_feed_share_imageButton);
+			commentImageButton = (ImageButton) view.findViewById(R.id
+					.creator_feed_comment_imageButton);
 			//mDetailsButton = (ImageButton) view.findViewById(R.id.feed_card_avatar);
-			mFeedTitle = (TextView) view.findViewById(R.id.feed_card_header);
-			mFeedContent = (TextView) view.findViewById(R.id.feed_card_supplementary_text);
-			mAvatar = (ImageButton) view.findViewById(R.id.feed_card_avatar);
-		}
-		
-		@Override
-		public String toString() {
-			
-			return super.toString() + " '" + mContentView.getText() + "'";
+			titleTextView = (TextView) view.findViewById(R.id.creator_feed_name_textView);
+			supplementaryTextView = (TextView) view.findViewById(R.id
+					.creator_feed_description_textView);
+			photoImageButton = (ImageButton) view.findViewById(R.id.creator_feed_card_avatar);
 		}
 	}
 }

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,14 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.DummyContent;
-import com.wasder.wasderapp.models.FeedModel;
-import com.wasder.wasderapp.ui.home.CreatorFeedActivity;
-import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
-import com.wasder.wasderapp.ui.home.FeedActivity;
-import com.wasder.wasderapp.ui.home.FeedFragment;
 import com.wasder.wasderapp.ui.home.GroupFragment;
 import com.wasder.wasderapp.ui.home.HomeFragment;
-import com.wasder.wasderapp.ui.home.models.CreatorFeedContent.CreatorFeedItem;
 import com.wasder.wasderapp.ui.live.EsportsActivity;
 import com.wasder.wasderapp.ui.live.EsportsFragment;
 import com.wasder.wasderapp.ui.live.LiveFragment;
@@ -60,13 +53,10 @@ import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView
-		.OnNavigationItemSelectedListener, OnFragmentInteractionListener, FeedFragment
-		.OnFeedFragmentInteractionListener, GroupFragment.OnGroupFragmentInteractionListener,
-		CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener, TwitchStreamFragment
-				.OnTiwtchStreamFragmentInteractionListener, FragmentManager
-				.OnBackStackChangedListener, FeedFragment.OnFeedItemShareListener, GroupFragment
-				.OnGroupDetailsListener, FeedFragment.OnAvatarListener, CreatorFeedFragment
-				.OnAvatarListener, CreatorFeedFragment.OnFeedItemShareListener, TwitchLiveFragment
+		.OnNavigationItemSelectedListener, OnFragmentInteractionListener, GroupFragment
+		.OnGroupFragmentInteractionListener, TwitchStreamFragment
+		.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener,
+		GroupFragment.OnGroupDetailsListener, TwitchLiveFragment
 				.OnTwitchLiveFragmentInteractionListener, EsportsFragment
 				.OnEsportsFragmentInteractionListener, EventFragment
 				.OnEventFragmentInteractionListener, FriendEventFragment
@@ -328,23 +318,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	}
 	
 	@Override
-	public void onFeedItemShareListener() {
-		
-		BottomSheetDialog sheetDialog = new BottomSheetDialog(this);
-		sheetDialog.setContentView(R.layout.bottom_sheet);
-		sheetDialog.show();
-	}
-	
-	@Override
 	public void onGroupDetailsListener() {
 		//ListDialog.newInstance(this).show();
 		startActivity(new Intent(MainActivity.this, GroupActivity.class));
-	}
-	
-	@Override
-	public void onAvatarListener() {
-		
-		startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 	}
 	
 	@Override
@@ -391,27 +367,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	}
 	
 	@Override
-	public void onCreatorFeedFragmentInteractionListener(CreatorFeedItem item) {
-		
-		Intent intent = new Intent(getBaseContext(), CreatorFeedActivity.class);
-		intent.putExtra("Name", item.content);
-		startActivity(intent);
-	}
-	
-	@Override
-	public void onFeedFragmentInteractionListener(FeedModel feedModel) {
-		
-		startActivity(new Intent(MainActivity.this, FeedActivity.class));
-	}
-	
-	@Override
 	public void onGroupFragmentInteractionListener(DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, GroupActivity.class));
 	}
 	
 	@Override
-	public void onFragmentInteractionListener(Uri uri) {
+	public void onFragmentInteractionListener(Object object) {
 		
 	}
 }

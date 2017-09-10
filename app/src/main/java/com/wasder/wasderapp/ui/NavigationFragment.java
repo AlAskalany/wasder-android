@@ -22,9 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
-import com.wasder.wasderapp.ui.home.FeedFragment;
-import com.wasder.wasderapp.ui.home.GroupFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +72,10 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		this.firstFragment = firstFragment;
 		this.secondFragment = secondFragment;
 		this.thirdFragment = thirdFragment;
+	}
+	
+	public NavigationFragment() {
+		
 	}
 	
 	@Override
@@ -130,6 +131,13 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 	public void onStart() {
 		
 		super.onStart();
+	}
+	
+	@Override
+	public void onDetach() {
+		
+		super.onDetach();
+		mListener = null;
 	}
 	
 	/**

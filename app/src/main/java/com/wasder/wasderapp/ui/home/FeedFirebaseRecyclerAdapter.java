@@ -21,21 +21,25 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.FeedModel;
+import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
 
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/8/2017.
  */
 
-public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedFirebaseRecyclerAdapter.FeedViewHolder> {
+public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedModel,
+		FeedFirebaseRecyclerAdapter.FeedViewHolder> {
 	
 	private static final String TAG = "FeedAdapter";
 	private Context mContext;
-	private FeedFragment.OnFeedFragmentInteractionListener mListener;
+	private OnFragmentInteractionListener mListener;
 	
-	public FeedFirebaseRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final LinearLayoutManager feedLinearLayoutManager, FeedFragment.OnFeedFragmentInteractionListener mListener) {
+	public FeedFirebaseRecyclerAdapter(Context context, final RecyclerView feedRecyclerView, final
+	LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"));
+		super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase
+				.getInstance().getReference().child("feed"));
 		this.mContext = context;
 		this.mListener = mListener;
 		this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -46,7 +50,8 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 				super.onItemRangeInserted(positionStart, itemCount);
 				int feedModelCount = getItemCount();
 				int lastVisiblePosition = feedLinearLayoutManager.findLastVisibleItemPosition();
-				if (lastVisiblePosition == -1 || ((positionStart >= (feedModelCount - 1)) && (lastVisiblePosition == (positionStart - 1)))) {
+				if (lastVisiblePosition == -1 || ((positionStart >= (feedModelCount - 1)) &&
+						(lastVisiblePosition == (positionStart - 1)))) {
 					feedRecyclerView.scrollToPosition(positionStart);
 				}
 			}
@@ -64,12 +69,15 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 	}
 	
 	@Override
-	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int position) {
+	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int
+			position) {
+		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				mListener.onFeedFragmentInteractionListener(viewHolder.feedModel);
+				
+				mListener.onFragmentInteractionListener(viewHolder.feedModel);
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());
@@ -77,22 +85,27 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 		final String imageUrl = model.getImageUrl();
 		if (imageUrl != null) {
 			if (imageUrl.startsWith("gs://")) {
-				StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
-				storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+				StorageReference storageReference = FirebaseStorage.getInstance()
+						.getReferenceFromUrl(imageUrl);
+				storageReference.getDownloadUrl().addOnCompleteListener(new
+						                                                        OnCompleteListener<Uri>() {
 					
 					@Override
 					public void onComplete(@NonNull Task<Uri> task) {
 						
 						if (task.isSuccessful()) {
 							String downloadUrl = task.getResult().toString();
-							Glide.with(viewHolder.feedImageView.getContext()).load(imageUrl).into(viewHolder.feedImageView);
+							Glide.with(viewHolder.feedImageView.getContext()).load(imageUrl).into
+									(viewHolder.feedImageView);
 						} else {
-							Log.d(TAG, "Getting Download URL was not successful", task.getException());
+							Log.d(TAG, "Getting Download URL was not successful", task
+									.getException());
 						}
 					}
 				});
 			} else {
-				Glide.with(viewHolder.feedImageView.getContext()).load(model.getImageUrl()).into(viewHolder.feedImageView);
+				Glide.with(viewHolder.feedImageView.getContext()).load(model.getImageUrl()).into
+						(viewHolder.feedImageView);
 			}
 		} else {
 			viewHolder.feedImageView.setVisibility(ImageView.GONE);
@@ -100,22 +113,27 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 		final String photoUrl = model.getPhotoUrl();
 		if (photoUrl != null) {
 			if (photoUrl.startsWith("gsL//")) {
-				StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(photoUrl);
-				storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+				StorageReference storageReference = FirebaseStorage.getInstance()
+						.getReferenceFromUrl(photoUrl);
+				storageReference.getDownloadUrl().addOnCompleteListener(new
+						                                                        OnCompleteListener<Uri>() {
 					
 					@Override
 					public void onComplete(@NonNull Task<Uri> task) {
 						
 						if (task.isSuccessful()) {
 							String downloadUrl = task.getResult().toString();
-							Glide.with(viewHolder.photoImageButton.getContext()).load(photoUrl).into(viewHolder.photoImageButton);
+							Glide.with(viewHolder.photoImageButton.getContext()).load(photoUrl)
+									.into(viewHolder.photoImageButton);
 						} else {
-							Log.d(TAG, "Getting Download URL was not successful", task.getException());
+							Log.d(TAG, "Getting Download URL was not successful", task
+									.getException());
 						}
 					}
 				});
 			} else {
-				Glide.with(viewHolder.photoImageButton.getContext()).load(model.getPhotoUrl()).into(viewHolder.photoImageButton);
+				Glide.with(viewHolder.photoImageButton.getContext()).load(model.getPhotoUrl())
+						.into(viewHolder.photoImageButton);
 			}
 			
 		} else {
@@ -127,6 +145,7 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 	}
 	
 	public static class FeedViewHolder extends RecyclerView.ViewHolder {
+		
 		View mview;
 		TextView titleTextView;
 		TextView subheadTextView;
@@ -147,10 +166,13 @@ public class FeedFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<FeedMod
 			subheadTextView = (TextView) itemView.findViewById(R.id.feed_card_subheader);
 			photoImageButton = (ImageButton) itemView.findViewById(R.id.feed_card_avatar);
 			feedImageView = (ImageView) itemView.findViewById(R.id.feed_card_rich_media);
-			supplementaryTextView = (TextView) itemView.findViewById(R.id.feed_card_supplementary_text);
-			commentImageButton = (ImageButton) itemView.findViewById(R.id.feed_card_comment_imageButton);
+			supplementaryTextView = (TextView) itemView.findViewById(R.id
+					.feed_card_supplementary_text);
+			commentImageButton = (ImageButton) itemView.findViewById(R.id
+					.feed_card_comment_imageButton);
 			likeImageButton = (ImageButton) itemView.findViewById(R.id.feed_likee_imageButton);
-			bookmarkImageButton = (ImageButton) itemView.findViewById(R.id.feed_bookmark_imageButton);
+			bookmarkImageButton = (ImageButton) itemView.findViewById(R.id
+					.feed_bookmark_imageButton);
 			shareImageButton = (ImageButton) itemView.findViewById(R.id.feed_share_imageButton);
 		}
 	}

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feed_cardView"
+    android:id="@+id/creator_feed_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -21,13 +21,13 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/feed_card_rich_media_framelayout"
+            android:id="@+id/creator_feed_card_rich_media_framelayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:background="@android:drawable/screen_background_dark_transparent">
 
             <ImageView
-                android:id="@+id/feed_card_rich_media"
+                android:id="@+id/creator_feed_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -35,7 +35,7 @@
                 app:srcCompat="@drawable/gameplay"/>
 
             <LinearLayout
-                android:id="@+id/feed_card_header_area"
+                android:id="@+id/creator_feed_card_header_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -44,14 +44,14 @@
                 android:padding="16dp">
 
                 <LinearLayout
-                    android:id="@+id/feed_card_title_subheader_area"
+                    android:id="@+id/creator_feed_card_title_subheader_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/creator_feed_play_imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -59,7 +59,7 @@
                         app:srcCompat="@mipmap/ic_play"/>
 
                     <TextView
-                        android:id="@+id/feed_card_header"
+                        android:id="@+id/creator_feed_subhead_textView"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -78,23 +78,27 @@
 
         </FrameLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_marginStart="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/feed_card_avatar"
+                    android:id="@+id/creator_feed_card_avatar"
                     style="@style/Widget.AppCompat.ImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_vertical|start"
-                    android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
                     android:scaleType="fitCenter"
                     app:srcCompat="@mipmap/ic_launcher_round"
@@ -103,13 +107,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/creator_feed_name_textView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -119,7 +122,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/creator_feed_description_textView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -132,16 +135,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/feed_card_action_area_bottom"
+                android:id="@+id/creator_feed_card_action_area_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                >
 
                 <ImageButton
-                    android:id="@+id/feed_comment_imageButton"
+                    android:id="@+id/creator_feed_comment_imageButton"
                     style="@style/Widget.AppCompat.ImageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
@@ -154,7 +157,7 @@
                     tools:layout_editor_absoluteY="58dp"/>
 
                 <ImageButton
-                    android:id="@+id/feed_likee_imageButton"
+                    android:id="@+id/creator_feed_likee_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
@@ -166,7 +169,7 @@
                     tools:layout_editor_absoluteY="58dp"/>
 
                 <ImageButton
-                    android:id="@+id/feed_bookmark_imageButton"
+                    android:id="@+id/creator_feed_bookmark_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
@@ -178,7 +181,7 @@
                     tools:layout_editor_absoluteY="58dp"/>
 
                 <ImageButton
-                    android:id="@+id/feed_share_imageButton"
+                    android:id="@+id/creator_feed_share_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
@@ -189,7 +192,7 @@
                     tools:layout_editor_absoluteX="306dp"
                     tools:layout_editor_absoluteY="58dp"/>
             </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
