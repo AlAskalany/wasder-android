@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
@@ -21,7 +20,7 @@ public class CreatorFeedFragment extends TabFragment {
 	
 	public CreatorFeedFragment() {
 		
-		super("Creators", 1, R.layout.fragment_creatorfeed_list, 2);
+		super("Creators", 1, R.layout.fragment_creatorfeed_list, MyCreatorFeedRecyclerViewAdapter.class);
 	}
 	
 	public static class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter

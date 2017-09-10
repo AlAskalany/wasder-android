@@ -8,8 +8,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.OnFragmentInteractionListener;
@@ -22,7 +20,7 @@ public class FeedFragment extends TabFragment {
 	
 	public FeedFragment() {
 		
-		super("Feed",1, R.layout.fragment_feed_list, 1);
+		super("Feed", 1, R.layout.fragment_feed_list, MyFeedRecyclerAdapter.class);
 	}
 	
 	/**
@@ -39,7 +37,6 @@ public class FeedFragment extends TabFragment {
 					"MyGroupRecyclerAdapter", context, mListener, feedLinearLayoutManager);
 			
 		}
-		
 		
 		@Override
 		protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int position) {

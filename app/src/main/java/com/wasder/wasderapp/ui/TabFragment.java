@@ -10,10 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
-import com.wasder.wasderapp.ui.home.FeedFragment;
-import com.wasder.wasderapp.ui.home.GroupFragment;
-
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/10/2017.
@@ -31,15 +27,16 @@ public abstract class TabFragment extends Fragment {
 	private View view;
 	private int resLayout;
 	private int fragmentType;
-	private FeedFragment.MyFeedRecyclerAdapter myFeedRecyclerAdapter;
-	private CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter myCreatorFeedRecyclerViewAdapter;
+	private Class<? extends RecyclerViewAdapterBase> recyclerViewAdapterBaseClass;
 	
-	public TabFragment(String title, int columnCount, int resLayout, int fragmentType) {
+	public TabFragment(String title, int columnCount, int resLayout, Class<? extends RecyclerViewAdapterBase>
+			recyclerViewAdapterBaseClass) {
 		
 		this.title = title;
 		this.columnCount = columnCount;
 		this.resLayout = resLayout;
 		this.fragmentType = fragmentType;
+		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
 	}
 	
 	public TabFragment() {
@@ -73,29 +70,13 @@ public abstract class TabFragment extends Fragment {
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
-			if (columnCount <= 1) {
-				LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-				recyclerView.setLayoutManager(layoutManager);
-				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView, layoutManager, mListener));
-				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context, recyclerView, layoutManager,
-							mListener));
-				} else if (fragmentType == GROUP_FRAGMENT) {
-					recyclerView.setAdapter(new GroupFragment.MyGroupRecyclerAdapter(context, recyclerView, layoutManager, mListener));
-				}
-			} else {
-				GridLayoutManager layoutManager = new GridLayoutManager(context, columnCount);
-				recyclerView.setLayoutManager(layoutManager);
-				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView, layoutManager, mListener));
-				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context, recyclerView, layoutManager,
-							mListener));
-				} else if (fragmentType == GROUP_FRAGMENT) {
-					recyclerView.setAdapter(new GroupFragment.MyGroupRecyclerAdapter(context, recyclerView, layoutManager, mListener));
-				}
-			}
+			LinearLayoutManager layoutManager;
+			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
+			recyclerView.setLayoutManager(layoutManager);
+			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, recyclerView, layoutManager,
+					mListener);
+			recyclerView.setAdapter(b);
+			
 		}
 		return view;
 	}

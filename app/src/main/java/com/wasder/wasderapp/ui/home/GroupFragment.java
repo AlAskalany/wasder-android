@@ -19,7 +19,7 @@ public class GroupFragment extends TabFragment {
 	
 	public GroupFragment() {
 		
-		super("Groups", 2, R.layout.fragment_group_list, 3);
+		super("Groups", 2, R.layout.fragment_group_list, MyGroupRecyclerAdapter.class);
 	}
 	
 	/**
