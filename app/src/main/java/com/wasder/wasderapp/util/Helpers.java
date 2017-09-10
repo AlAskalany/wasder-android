@@ -3,6 +3,7 @@ package com.wasder.wasderapp.util;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -11,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.wasder.wasderapp.ui.NavigationFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -56,6 +58,16 @@ public class Helpers {
 					imageView.setVisibility(ImageView.GONE);
 				}
 			}
+		}
+	}
+	
+	public static class Fragments{
+		
+		public static void SwitchToNavigationFragment(int layout, FragmentTransaction ts, NavigationFragment fragment) {
+			
+			ts.replace(layout, fragment);
+			ts.addToBackStack(null);
+			ts.commit();
 		}
 	}
 	

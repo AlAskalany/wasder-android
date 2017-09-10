@@ -48,6 +48,7 @@ import com.wasder.wasderapp.ui.market.FriendEventFragment;
 import com.wasder.wasderapp.ui.market.MarketFragment;
 import com.wasder.wasderapp.ui.market.RecommendedEventActivity;
 import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
+import com.wasder.wasderapp.util.Helpers;
 
 /**
  * The type Main activity.
@@ -87,41 +88,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
+	private FragmentManager fragmentManager;
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 			
-			FragmentManager fm = getSupportFragmentManager();
-			FragmentTransaction ts = fm.beginTransaction();
-			Fragment fragment = fm.findFragmentById(R.id.framelayout_fragment_container);
-			if (fragment != null) {
-				fm.saveFragmentInstanceState(fragment);
+			fragmentManager = getSupportFragmentManager();
+			FragmentTransaction ts = fragmentManager.beginTransaction();
+			Fragment currentFragment = fragmentManager.findFragmentById(R.id.framelayout_fragment_container);
+			NavigationFragment newFragment = null;
+			int container = R.id.framelayout_fragment_container;
+			if (currentFragment != null) {
+				fragmentManager.saveFragmentInstanceState(currentFragment);
 			}
 			switch (item.getItemId()) {
 				case R.id.navigation_home:
 					
-					if (fragment != homeFragment) {
-						ts.replace(R.id.framelayout_fragment_container, homeFragment);
-						ts.addToBackStack(null);
-						ts.commit();
+					if (currentFragment != homeFragment) {
+						newFragment = homeFragment;
 					}
-					return true;
+					break;
 				case R.id.navigation_live:
-					if (fragment != liveFragment) {
-						ts.replace(R.id.framelayout_fragment_container, liveFragment);
-						ts.addToBackStack(null);
-						ts.commit();
+					if (currentFragment != liveFragment) {
+						newFragment = liveFragment;
 					}
-					return true;
+					break;
 				case R.id.navigation_market:
-					if (fragment != marketFragment) {
-						ts.replace(R.id.framelayout_fragment_container, marketFragment);
-						ts.addToBackStack(null);
-						ts.commit();
+					if (currentFragment != marketFragment) {
+						newFragment = marketFragment;
 					}
-					return true;
+					break;
+			}
+			if (newFragment != null) {
+				Helpers.Fragments.SwitchToNavigationFragment(container, ts, newFragment);
+				return true;
 			}
 			return false;
 		}
