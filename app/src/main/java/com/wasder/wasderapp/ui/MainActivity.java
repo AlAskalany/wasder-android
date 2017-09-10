@@ -52,16 +52,11 @@ import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView
-		.OnNavigationItemSelectedListener, OnFragmentInteractionListener, GroupFragment
-		.OnGroupFragmentInteractionListener, TwitchStreamFragment
-		.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener,
-		GroupFragment.OnGroupDetailsListener, TwitchLiveFragment
-				.OnTwitchLiveFragmentInteractionListener, EsportsFragment
-				.OnEsportsFragmentInteractionListener, EventFragment
-				.OnEventFragmentInteractionListener, FriendEventFragment
-				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment
-				.OnRecommendedEventFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener,
+		GroupFragment.OnGroupFragmentInteractionListener, TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener, FragmentManager
+				.OnBackStackChangedListener, GroupFragment.OnGroupDetailsListener, TwitchLiveFragment.OnTwitchLiveFragmentInteractionListener,
+		EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment.OnEventFragmentInteractionListener, FriendEventFragment
+				.OnFriendEventFragmentInteractionListener, RecommendedEventFragment.OnRecommendedEventFragmentInteractionListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -92,8 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
-	private BottomNavigationView.OnNavigationItemSelectedListener
-			mOnNavigationItemSelectedListener = new BottomNavigationView
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		
 		@Override
@@ -141,8 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
 		serviceIntent.setPackage("com.android.vending");
 		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context
-				.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout),
 		// "Connection", 2000);
@@ -153,9 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
 		}
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions
-				.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-				.requestEmail().build();
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
+				.default_web_client_id)).requestEmail().build();
 		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -173,11 +165,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 					
 					NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 					View headerView = navigationView.getHeaderView(0);
-					TextView userNameTextView = (TextView) headerView.findViewById(R.id
-							.nav_header_user_name);
+					TextView userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
 					userNameTextView.setText(mUserName);
-					TextView emailTextView = (TextView) headerView.findViewById(R.id
-							.nav_header_user_details);
+					TextView emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
 					
 					/*UserProfileChangeRequest profilUpdates = new UserProfileChangeRequest
@@ -246,8 +236,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	@Override
 	public void onBackPressed() {
 		
-		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount
-				()));
+		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
@@ -324,15 +313,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	}
 	
 	@Override
-	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent
-			                                             .DummyItem item) {
+	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, EsportsActivity.class));
 	}
 	
 	@Override
-	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy
-			                                                        .DummyContent.DummyItem item) {
+	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
 	}
@@ -344,24 +331,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView
 	}
 	
 	@Override
-	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
-			                                                   .DummyContent.DummyItem item) {
+	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, EventActivity.class));
 	}
 	
 	@Override
-	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
-			                                                         .DummyContent.DummyItem
-			                                                         item) {
+	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
 	}
 	
 	@Override
-	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy
-			                                                              .DummyContent.DummyItem
-			                                                              item) {
+	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
 		
 		startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
 	}

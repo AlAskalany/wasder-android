@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wasder.wasderapp.ui.home.FeedFirebaseRecyclerAdapter;
-import com.wasder.wasderapp.ui.home.MyCreatorFeedRecyclerViewAdapter;
+import com.wasder.wasderapp.ui.home.CreatorFeedFragment;
+import com.wasder.wasderapp.ui.home.FeedFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -28,8 +28,8 @@ public abstract class TabFragment extends Fragment {
 	private View view;
 	private int resLayout;
 	private int fragmentType;
-	private FeedFirebaseRecyclerAdapter feedFirebaseRecyclerAdapter;
-	private MyCreatorFeedRecyclerViewAdapter myCreatorFeedRecyclerViewAdapter;
+	private FeedFragment.MyFeedRecyclerAdapter myFeedRecyclerAdapter;
+	private CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter myCreatorFeedRecyclerViewAdapter;
 	
 	protected TabFragment(int columnCount, int resLayout, int fragmentType) {
 		
@@ -75,20 +75,20 @@ public abstract class TabFragment extends Fragment {
 				LinearLayoutManager layoutManager = new LinearLayoutManager(context);
 				recyclerView.setLayoutManager(layoutManager);
 				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFirebaseRecyclerAdapter(context, recyclerView,
+					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView,
 							layoutManager, mListener));
 				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(context,
+					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context,
 							recyclerView, layoutManager, mListener));
 				}
 			} else {
 				GridLayoutManager layoutManager = new GridLayoutManager(context, columnCount);
 				recyclerView.setLayoutManager(layoutManager);
 				if (fragmentType == FEED_FRAGMENT) {
-					recyclerView.setAdapter(new FeedFirebaseRecyclerAdapter(context, recyclerView,
+					recyclerView.setAdapter(new FeedFragment.MyFeedRecyclerAdapter(context, recyclerView,
 							layoutManager, mListener));
 				} else if (fragmentType == CREATOR_FEED_FRAGMENT) {
-					recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(context,
+					recyclerView.setAdapter(new CreatorFeedFragment.MyCreatorFeedRecyclerViewAdapter(context,
 							recyclerView, layoutManager, mListener));
 				}
 			}

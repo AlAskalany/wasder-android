@@ -14,7 +14,7 @@ public class CreatorFeedActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_creator_feed);
 		String s = getIntent().getStringExtra("Name");
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar8);
+		Toolbar toolbar = findViewById(R.id.toolbar8);
 		toolbar.setTitle(s);
 	}
 }
