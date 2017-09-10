@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.DummyContent;
-import com.wasder.wasderapp.models.DummyContent.DummyItem;
+import com.wasder.wasderapp.ui.home.models.CreatorFeedContent;
+import com.wasder.wasderapp.ui.home.models.CreatorFeedContent.CreatorFeedItem;
 
 /**
  * A fragment representing a list of Items.
@@ -94,7 +94,7 @@ public class CreatorFeedFragment extends Fragment {
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
-			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(DummyContent.ITEMS, mListener, mAvatarListener));
+			recyclerView.setAdapter(new MyCreatorFeedRecyclerViewAdapter(CreatorFeedContent.ITEMS, mListener, mAvatarListener));
 		}
 		return view;
 	}
@@ -119,7 +119,7 @@ public class CreatorFeedFragment extends Fragment {
 	public interface OnCreatorFeedFragmentInteractionListener {
 		
 		// TODO: Update argument type and name
-		void onCreatorFeedFragmentInteractionListener(DummyItem item);
+		void onCreatorFeedFragmentInteractionListener(CreatorFeedItem item);
 	}
 	
 	public interface OnFeedItemShareListener {

@@ -40,6 +40,7 @@ import com.wasder.wasderapp.ui.home.FeedActivity;
 import com.wasder.wasderapp.ui.home.FeedFragment;
 import com.wasder.wasderapp.ui.home.GroupFragment;
 import com.wasder.wasderapp.ui.home.HomeFragment;
+import com.wasder.wasderapp.ui.home.models.CreatorFeedContent.CreatorFeedItem;
 import com.wasder.wasderapp.ui.live.EsportsActivity;
 import com.wasder.wasderapp.ui.live.EsportsFragment;
 import com.wasder.wasderapp.ui.live.LiveFragment;
@@ -372,9 +373,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 	
 	@Override
-	public void onCreatorFeedFragmentInteractionListener(DummyContent.DummyItem item) {
+	public void onCreatorFeedFragmentInteractionListener(CreatorFeedItem item) {
 		
-		startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
+		Intent intent = new Intent(getBaseContext(), CreatorFeedActivity.class);
+		intent.putExtra("Name", item.content);
+		startActivity(intent);
 	}
 	
 	@Override

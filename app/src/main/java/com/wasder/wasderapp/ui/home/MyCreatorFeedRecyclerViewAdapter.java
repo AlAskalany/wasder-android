@@ -8,23 +8,23 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.DummyContent.DummyItem;
+import com.wasder.wasderapp.ui.home.models.CreatorFeedContent.CreatorFeedItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link CreatorFeedItem} and makes a call to the
  * specified {@link CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCreatorFeedRecyclerViewAdapter.ViewHolder> {
 	
-	private final List<DummyItem> mValues;
+	private final List<CreatorFeedItem> mValues;
 	private final CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener mListener;
 	private CreatorFeedFragment.OnFeedItemShareListener mShareListener;
 	private CreatorFeedFragment.OnAvatarListener mAvatarListener;
 	
-	public MyCreatorFeedRecyclerViewAdapter(List<DummyItem> items, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener listener,
+	public MyCreatorFeedRecyclerViewAdapter(List<CreatorFeedItem> items, CreatorFeedFragment.OnCreatorFeedFragmentInteractionListener listener,
 	                                        CreatorFeedFragment.OnAvatarListener avatarListener) {
 		
 		mValues = items;
@@ -98,7 +98,7 @@ public class MyCreatorFeedRecyclerViewAdapter extends RecyclerView.Adapter<MyCre
 		public final TextView mIdView;
 		public final TextView mContentView;
 		public final ImageButton mAvatar;
-		public DummyItem mItem;
+		public CreatorFeedItem mItem;
 		
 		public ViewHolder(View view) {
 			
