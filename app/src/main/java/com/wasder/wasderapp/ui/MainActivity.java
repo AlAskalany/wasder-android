@@ -29,23 +29,12 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
+import com.wasder.wasderapp.NavigationFragments.HomeFragment;
+import com.wasder.wasderapp.NavigationFragments.LiveFragment;
+import com.wasder.wasderapp.NavigationFragments.MarketFragment;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.DummyContent;
-import com.wasder.wasderapp.ui.home.HomeFragment;
-import com.wasder.wasderapp.ui.live.EsportsActivity;
-import com.wasder.wasderapp.ui.live.EsportsFragment;
-import com.wasder.wasderapp.ui.live.LiveFragment;
-import com.wasder.wasderapp.ui.live.TwitchLiveActivity;
-import com.wasder.wasderapp.ui.live.TwitchLiveFragment;
-import com.wasder.wasderapp.ui.live.TwitchStreamActivity;
-import com.wasder.wasderapp.ui.live.TwitchStreamFragment;
-import com.wasder.wasderapp.ui.market.EventActivity;
-import com.wasder.wasderapp.ui.market.EventFragment;
-import com.wasder.wasderapp.ui.market.FriendEventActivity;
-import com.wasder.wasderapp.ui.market.FriendEventFragment;
-import com.wasder.wasderapp.ui.market.MarketFragment;
-import com.wasder.wasderapp.ui.market.RecommendedEventActivity;
-import com.wasder.wasderapp.ui.market.RecommendedEventFragment;
+import com.wasder.wasderapp.Templates.NavigationFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,11 +42,7 @@ import java.util.Map;
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener,
-		TwitchStreamFragment.OnTiwtchStreamFragmentInteractionListener, FragmentManager.OnBackStackChangedListener, TwitchLiveFragment
-				.OnTwitchLiveFragmentInteractionListener, EsportsFragment.OnEsportsFragmentInteractionListener, EventFragment
-				.OnEventFragmentInteractionListener, FriendEventFragment.OnFriendEventFragmentInteractionListener, RecommendedEventFragment
-				.OnRecommendedEventFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -153,11 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					mPhotoUrl = user.getPhotoUrl();
 					mUid = user.getUid();
 					
-					navigationView = (NavigationView) findViewById(R.id.nav_view);
+					navigationView = findViewById(R.id.nav_view);
 					headerView = navigationView.getHeaderView(0);
-					userNameTextView = (TextView) headerView.findViewById(R.id.nav_header_user_name);
+					userNameTextView = headerView.findViewById(R.id.nav_header_user_name);
 					userNameTextView.setText(mUserName);
-					emailTextView = (TextView) headerView.findViewById(R.id.nav_header_user_details);
+					emailTextView = headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
 				} else {
 					Log.d(TAG, "Signed out");
@@ -180,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		transaction.commit();
 		
 		//region Bottom_Navigation
-		bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+		bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		//endregion
 	}
@@ -214,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onBackPressed() {
 		
 		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
 		} else {
@@ -268,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			
 		}
 		
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
@@ -281,42 +266,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onBackStackChanged() {
 		
 		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
-	}
-	
-	@Override
-	public void onEsportsFragmentInteraction(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, EsportsActivity.class));
-	}
-	
-	@Override
-	public void onTwitchLiveFragmentInteractionListener(com.wasder.wasderapp.ui.live.dummy.DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
-	}
-	
-	@Override
-	public void onTiwtchStreamFragmentInteractionListener(DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
-	}
-	
-	@Override
-	public void onEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, EventActivity.class));
-	}
-	
-	@Override
-	public void onFriendEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
-	}
-	
-	@Override
-	public void onRecommendedEventFragmentInteractionListener(com.wasder.wasderapp.ui.market.dummy.DummyContent.DummyItem item) {
-		
-		startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
 	}
 	
 	@Override

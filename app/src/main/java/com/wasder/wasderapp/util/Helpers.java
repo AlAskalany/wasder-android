@@ -12,7 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.wasder.wasderapp.ui.NavigationFragment;
+import com.wasder.wasderapp.Templates.NavigationFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -48,7 +48,7 @@ public class Helpers {
 				}
 			} else {
 				if (replace) {
-					Drawable defaultImage = (Drawable) imageView.getContext().getDrawable(resImage);
+					Drawable defaultImage = imageView.getContext().getDrawable(resImage);
 					if (defaultImage != null) {
 						imageView.setImageDrawable(defaultImage);
 					} else {
