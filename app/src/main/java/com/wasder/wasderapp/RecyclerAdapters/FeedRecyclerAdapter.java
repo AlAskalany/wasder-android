@@ -25,8 +25,7 @@ public class FeedRecyclerAdapter
 	
 	public FeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedModel.class,
-		      R.layout.fragment_feed,
+		super(FeedModel.class, R.layout.feed_item,
 		      FeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

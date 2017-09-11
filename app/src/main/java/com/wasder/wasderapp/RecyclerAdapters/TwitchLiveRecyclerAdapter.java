@@ -22,8 +22,7 @@ public class TwitchLiveRecyclerAdapter
 	
 	public TwitchLiveRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchLiveModel.class,
-		      R.layout.fragment_esports,
+		super(TwitchLiveModel.class, R.layout.esports_item,
 		      TwitchLiveViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

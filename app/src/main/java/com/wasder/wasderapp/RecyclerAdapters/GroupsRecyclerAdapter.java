@@ -24,8 +24,7 @@ public class GroupsRecyclerAdapter
 	
 	public GroupsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(GroupModel.class,
-		      R.layout.fragment_group,
+		super(GroupModel.class, R.layout.group_item,
 		      GroupViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

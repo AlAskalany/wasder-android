@@ -14,5 +14,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_twitchlive"/>
+        tools:listitem="@layout/twitch_live_item"/>
 </FrameLayout>

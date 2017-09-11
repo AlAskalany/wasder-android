@@ -24,15 +24,15 @@ import java.util.List;
 public class WasderUiBuilder {
 	
 	public enum TabType {
-		Feed("Feed", R.layout.fragment_feed_list, FeedRecyclerAdapter.class),
-		Creators("Creators", R.layout.fragment_creatorfeed_list, CreatorFeedRecyclerAdapter.class),
-		Groups("Groups", R.layout.fragment_group_list, GroupsRecyclerAdapter.class),
-		TwitchStream("Twitch Streams", R.layout.fragment_twitchstream_list, TwitchStreamRecyclerAdapter.class),
-		TwitchLive("Twitch Live", R.layout.fragment_twitchlive_list, TwitchLiveRecyclerAdapter.class),
-		Esports("Esports", R.layout.fragment_esports_list, EsportsRecyclerAdapter.class),
-		AllEvents("All Events", R.layout.fragment_event_list, EventRecyclerAdapter.class),
-		RecommendedEvents("Recommended Events", R.layout.fragment_recommendedevent_list, RecommendedEventsRecyclerAdapter.class),
-		FriendsEvents("Friends Events", R.layout.fragment_friendevent_list, FriendsEventsRecyclerAdapter.class);
+		Feed("Feed", R.layout.feed_recycler_view, FeedRecyclerAdapter.class),
+		Creators("Creators", R.layout.creators_feed_recycler_view, CreatorFeedRecyclerAdapter.class),
+		Groups("Groups", R.layout.groups_recycler_view, GroupsRecyclerAdapter.class),
+		TwitchStream("Twitch Streams", R.layout.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class),
+		TwitchLive("Twitch Live", R.layout.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class),
+		Esports("Esports", R.layout.esports_recycler_view, EsportsRecyclerAdapter.class),
+		AllEvents("All Events", R.layout.events_recycler_view, EventRecyclerAdapter.class),
+		RecommendedEvents("Recommended Events", R.layout.recommended_events_recycler_view, RecommendedEventsRecyclerAdapter.class),
+		FriendsEvents("Friends Events", R.layout.friends_events_recycler_view, FriendsEventsRecyclerAdapter.class);
 		
 		private final String title;
 		private final int layout;

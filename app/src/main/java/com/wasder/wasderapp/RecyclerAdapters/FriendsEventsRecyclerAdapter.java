@@ -22,8 +22,7 @@ public class FriendsEventsRecyclerAdapter
 	
 	public FriendsEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FriendEventModel.class,
-		      R.layout.fragment_esports,
+		super(FriendEventModel.class, R.layout.esports_item,
 		      FriendEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

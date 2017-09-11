@@ -24,8 +24,7 @@ public class CreatorFeedRecyclerAdapter
 	
 	public CreatorFeedRecyclerAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(CreatorFeedModel.class,
-		      R.layout.fragment_creatorfeed,
+		super(CreatorFeedModel.class, R.layout.creators_feed_item,
 		      CreatorFeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

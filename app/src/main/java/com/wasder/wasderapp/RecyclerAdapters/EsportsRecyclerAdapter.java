@@ -22,8 +22,7 @@ public class EsportsRecyclerAdapter
 	
 	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EsportsModel.class,
-		      R.layout.fragment_esports,
+		super(EsportsModel.class, R.layout.esports_item,
 		      EsportsViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

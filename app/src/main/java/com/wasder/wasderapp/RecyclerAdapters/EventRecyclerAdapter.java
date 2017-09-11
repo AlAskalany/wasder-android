@@ -22,8 +22,7 @@ public class EventRecyclerAdapter
 	
 	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EventModel.class,
-		      R.layout.fragment_esports,
+		super(EventModel.class, R.layout.esports_item,
 		      EventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()

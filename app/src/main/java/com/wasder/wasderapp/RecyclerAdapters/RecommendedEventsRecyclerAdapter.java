@@ -23,8 +23,7 @@ public class RecommendedEventsRecyclerAdapter
 	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
 			OnFragmentInteractionListener mListener) {
 		
-		super(RecommendedEventModel.class,
-		      R.layout.fragment_recommendedevent,
+		super(RecommendedEventModel.class, R.layout.recommended_event_item,
 		      RecommendedEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
