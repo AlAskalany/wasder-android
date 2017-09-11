@@ -1,7 +1,6 @@
 package com.wasder.wasderapp.Templates;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,10 +12,7 @@ import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +20,8 @@ import android.view.ViewGroup;
 
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.ui.ProfileActivity;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,24 +35,23 @@ public class NavigationFragment
 		extends Fragment
 		implements NavigationView.OnNavigationItemSelectedListener {
 	
-	private static final String ARG_TAG = "param_tag";
-	private static final String ARG_TITLE = "param_title";
-	private static final String ARG_LAYOUT = "param_layout";
-	private static final String ARG_TOOLBAR = "param_toolbar";
-	private static final String ARG_DRAWER_LAYOUT = "param_drawer_layout";
-	private static final String ARG_NAVIGATION_VIEW = "param_navigation_view";
-	private static final String ARG_VIEWPAGER = "param_viewpager";
-	private static final String ARG_TAB_LAYOUT = "param_tab_layout";
-	private static final String ARG_TAB_FRAGMENTS = "param_tab_fragments";
-	String mTAG;
-	String mFragmentTitle;
-	int mResLayout;
-	int mResToolbar;
-	int mResDrawerLayout;
-	int mResNavigationView;
-	int mResViewPager;
-	int mResTabLayout;
-	List<TabFragment> mTabFragments;
+	//	private static final String ARG_TAG = "param_tag";
+	//	private static final String ARG_TITLE = "param_title";
+	//	private static final String ARG_LAYOUT = "param_layout";
+	//	private static final String ARG_TOOLBAR = "param_toolbar";
+	//	private static final String ARG_DRAWER_LAYOUT = "param_drawer_layout";
+	//	private static final String ARG_NAVIGATION_VIEW = "param_navigation_view";
+	//	private static final String ARG_VIEWPAGER = "param_viewpager";
+	//	private static final String ARG_TAB_LAYOUT = "param_tab_layout";
+	private String mTAG;
+	private String mFragmentTitle;
+	private int mResLayout;
+	private int mResToolbar;
+	private int mResDrawerLayout;
+	private int mResNavigationView;
+	private int mResViewPager;
+	private int mResTabLayout;
+	private List<TabFragment> mTabFragments = new ArrayList<>();
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
 	
@@ -66,21 +60,30 @@ public class NavigationFragment
 	}
 	
 	public static NavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout,
-			int resNavigationView, int resViewPager, int resTabLayout, List<TabFragment> tabFragments) {
+			int resNavigationView, int resViewPager, int resTabLayout) {
 		
 		NavigationFragment fragment = new NavigationFragment();
-		Bundle args = new Bundle();
-		args.putString(ARG_TAG, tag);
-		args.putString(ARG_TITLE, fragmentTitle);
-		args.putInt(ARG_LAYOUT, layout);
-		args.putInt(ARG_TOOLBAR, resToolbar);
-		args.putInt(ARG_DRAWER_LAYOUT, resDrawerLayout);
-		args.putInt(ARG_NAVIGATION_VIEW, resNavigationView);
-		args.putInt(ARG_VIEWPAGER, resViewPager);
-		args.putInt(ARG_TAB_LAYOUT, resTabLayout);
-		args.putSerializable(ARG_TAB_FRAGMENTS, (Serializable) tabFragments);
-		fragment.setArguments(args);
+		//		Bundle args = new Bundle();
+		//		args.putString(ARG_TAG, tag);
+		//		args.putString(ARG_TITLE, fragmentTitle);
+		//		args.putInt(ARG_LAYOUT, layout);
+		//		args.putInt(ARG_TOOLBAR, resToolbar);
+		//		args.putInt(ARG_DRAWER_LAYOUT, resDrawerLayout);
+		//		args.putInt(ARG_NAVIGATION_VIEW, resNavigationView);
+		//		args.putInt(ARG_VIEWPAGER, resViewPager);
+		//		args.putInt(ARG_TAB_LAYOUT, resTabLayout);
+		//		fragment.setArguments(args);
 		return fragment;
+	}
+	
+	public List<TabFragment> getmTabFragments() {
+		
+		return mTabFragments;
+	}
+	
+	public void setmTabFragments(List<TabFragment> mTabFragments) {
+		
+		this.mTabFragments = mTabFragments;
 	}
 	
 	@Override
@@ -99,15 +102,14 @@ public class NavigationFragment
 		
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mTAG = getArguments().getString(ARG_TAG);
-			mFragmentTitle = getArguments().getString(ARG_TITLE);
-			mResLayout = getArguments().getInt(ARG_LAYOUT);
-			mResToolbar = getArguments().getInt(ARG_TOOLBAR);
-			mResDrawerLayout = getArguments().getInt(ARG_DRAWER_LAYOUT);
-			mResNavigationView = getArguments().getInt(ARG_NAVIGATION_VIEW);
-			mResViewPager = getArguments().getInt(ARG_VIEWPAGER);
-			mResTabLayout = getArguments().getInt(ARG_TAB_LAYOUT);
-			mTabFragments = (List<TabFragment>) getArguments().getSerializable(ARG_TAB_FRAGMENTS);
+			//			mTAG = getArguments().getString(ARG_TAG);
+			//			mFragmentTitle = getArguments().getString(ARG_TITLE);
+			//			mResLayout = getArguments().getInt(ARG_LAYOUT);
+			//			mResToolbar = getArguments().getInt(ARG_TOOLBAR);
+			//			mResDrawerLayout = getArguments().getInt(ARG_DRAWER_LAYOUT);
+			//			mResNavigationView = getArguments().getInt(ARG_NAVIGATION_VIEW);
+			//			mResViewPager = getArguments().getInt(ARG_VIEWPAGER);
+			//			mResTabLayout = getArguments().getInt(ARG_TAB_LAYOUT);
 		}
 	}
 	
@@ -115,19 +117,13 @@ public class NavigationFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(this.mResLayout, container, false);
-		Toolbar toolbar = view.findViewById(mResToolbar);
-		activity = (AppCompatActivity) getActivity();
-		activity.setSupportActionBar(toolbar);
-		ActionBar actionBar = activity.getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setTitle(mFragmentTitle);
-		}
-		DrawerLayout drawerLayout = activity.findViewById(mResDrawerLayout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open,
-				R.string.navigation_drawer_close);
-		toggle.syncState();
-		NavigationView navigationView = activity.findViewById(mResNavigationView);
-		navigationView.setNavigationItemSelectedListener(this);
+		//Toolbar toolbar = view.findViewById(mResToolbar);
+		//activity = (AppCompatActivity) getActivity();
+		//activity.setSupportActionBar(toolbar);
+		//ActionBar actionBar = activity.getSupportActionBar();
+		//if (actionBar != null) {
+		//	actionBar.setTitle(mFragmentTitle);
+		//}
 		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
@@ -163,26 +159,26 @@ public class NavigationFragment
 		
 		int id = item.getItemId();
 		
-		if (id == R.id.nav_camera) {
-			startActivity(new Intent(activity, ProfileActivity.class));
-		} else {
-			switch (id) {
-				case R.id.nav_gallery:
-					
-					break;
-				case R.id.nav_slideshow:
-					
-					break;
-				case R.id.nav_manage:
-					
-					break;
-				case R.id.nav_share:
-					
-					break;
-				case R.id.nav_send:
-					
-					break;
-			}
+		switch (id) {
+			case R.id.nav_camera:
+				break;
+			case R.id.nav_gallery:
+				
+				break;
+			case R.id.nav_slideshow:
+				
+				break;
+			case R.id.nav_manage:
+				
+				break;
+			case R.id.nav_share:
+				
+				break;
+			case R.id.nav_send:
+				
+				break;
+			default:
+				break;
 		}
 		
 		DrawerLayout drawer = getActivity().findViewById(mResDrawerLayout);
@@ -201,10 +197,71 @@ public class NavigationFragment
 		this.mListener = mListener;
 	}
 	
+	public String getmTAG() {
+		
+		return mTAG;
+	}
+	
+	public void setmTAG(String mTAG) {
+		
+		this.mTAG = mTAG;
+	}
+	
+	public String getmFragmentTitle() {
+		
+		return mFragmentTitle;
+	}
+	
+	public void setmFragmentTitle(String mFragmentTitle) {
+		
+		this.mFragmentTitle = mFragmentTitle;
+	}
+	
+	public void setmResLayout(int mResLayout) {
+		
+		this.mResLayout = mResLayout;
+	}
+	
+	public int getmResToolbar() {
+		
+		return mResToolbar;
+	}
+	
+	public void setmResToolbar(int mResToolbar) {
+		
+		this.mResToolbar = mResToolbar;
+	}
+	
+	public void setmResDrawerLayout(int mResDrawerLayout) {
+		
+		this.mResDrawerLayout = mResDrawerLayout;
+	}
+	
+	public int getmResNavigationView() {
+		
+		return mResNavigationView;
+	}
+	
+	public void setmResNavigationView(int mResNavigationView) {
+		
+		this.mResNavigationView = mResNavigationView;
+	}
+	
+	public void setmResViewPager(int mResViewPager) {
+		
+		this.mResViewPager = mResViewPager;
+	}
+	
+	public void setmResTabLayout(int mResTabLayout) {
+		
+		this.mResTabLayout = mResTabLayout;
+	}
+	
 	/**
 	 * The type Sections pager adapter.
 	 */
-	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+	static class SectionsPagerAdapter
+			extends FragmentStatePagerAdapter {
 		
 		private Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		

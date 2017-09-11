@@ -17,7 +17,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +37,6 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,11 +68,10 @@ public class MainActivity
 		}
 	};
 	
-	NavigationFragment navigationFragment1;
-	NavigationFragment navigationFragment2;
-	NavigationFragment navigationFragment3;
+	NavigationFragment homeFragment;
+	NavigationFragment liveFragment;
+	NavigationFragment marketFragment;
 	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
-	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
@@ -105,6 +106,7 @@ public class MainActivity
 	private TextView userNameTextView;
 	private TextView emailTextView;
 	private BottomNavigationView bottomNavigationView;
+	private Toolbar mToolbar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +129,8 @@ public class MainActivity
 			     .show();
 		}
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(
-				getString(R.string.default_web_client_id))
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
+				                                                                                                                        .default_web_client_id))
 		
 		                                                                                              .requestEmail()
 		                                                                                              .build();
@@ -156,48 +158,71 @@ public class MainActivity
 				} else {
 					Log.d(TAG, "Signed out");
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
-					finish();
 				}
 			}
 		};
 		
-		Bundle args = new Bundle();
+		homeFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
+		                                                              .setmFragmentTitle("Home")
+		                                                              .setmResNavigationView(R.id.nav_view)
+		                                                              .setmResDrawerLayout(R.id.drawer_layout)
+		                                                              .setmResLayout(R.layout.fragment_home)
+		                                                              .setmResTabLayout(R.id.home_tablayout)
+		                                                              .setmResViewPager(R.id.home_viewpager)
+		                                                              .setmTAG("HomeFragment")
+		                                                              .addTab(WasderUiBuilder.TabType.Feed)
+		                                                              .addTab(WasderUiBuilder.TabType.Creators)
+		                                                              .addTab(WasderUiBuilder.TabType.Groups)
+		                                                              .build();
 		
-		navigationFragment1 = NavigationFragment.newInstance("HomeFragment", "Home", R.layout.fragment_home, R.id.home_toolbar, R.id.drawer_layout,
-				R.id.nav_view, R.id.home_viewpager, R.id.home_tablayout, Arrays.asList(
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Feed)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Creators)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Groups)
-						                                        .build()));
+		liveFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
+		                                                              .setmFragmentTitle("Live")
+		                                                              .setmResNavigationView(R.id.nav_view)
+		                                                              .setmResDrawerLayout(R.id.drawer_layout)
+		                                                              .setmResLayout(R.layout.fragment_live)
+		                                                              .setmResTabLayout(R.id.live_tablayout)
+		                                                              .setmResViewPager(R.id.live_viewpager)
+		                                                              .setmTAG("LiveFragment")
+		                                                              .addTab(WasderUiBuilder.TabType.TwitchStream)
+		                                                              .addTab(WasderUiBuilder.TabType.TwitchLive)
+		                                                              .addTab(WasderUiBuilder.TabType.Esports)
+		                                                              .build();
 		
-		navigationFragment2 = NavigationFragment.newInstance("LiveFragment", "Live", R.layout.fragment_live, R.id.live_toolbar, R.id.drawer_layout,
-				R.id.nav_view, R.id.live_viewpager, R.id.live_tablayout, Arrays.asList(
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.TwitchStream)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.TwitchLive)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Esports)
-						                                        .build()));
+		marketFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
+		                                                                .setmFragmentTitle("Market")
+		                                                                .setmResNavigationView(R.id.nav_view)
+		                                                                .setmResDrawerLayout(R.id.drawer_layout)
+		                                                                .setmResLayout(R.layout.fragment_market)
+		                                                                .setmResTabLayout(R.id.market_tablayout)
+		                                                                .setmResViewPager(R.id.market_viewpager)
+		                                                                .setmTAG("MarketFragment")
+		                                                                .addTab(WasderUiBuilder.TabType.AllEvents)
+		                                                                .addTab(WasderUiBuilder.TabType.RecommendedEvents)
+		                                                                .addTab(WasderUiBuilder.TabType.FriendsEvents)
+		                                                                .build();
 		
-		navigationFragment3 = NavigationFragment.newInstance("MarketFragment", "Market", R.layout.fragment_market, R.id.market_toolbar,
-				R.id.drawer_layout, R.id.nav_view, R.id.market_viewpager, R.id.market_tablayout, Arrays.asList(
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.AllEvents)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.RecommendedEvents)
-						                                        .build(),
-						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.FriendsEvents)
-						                                        .build()));
-		
-		fragmentMap.put(R.id.navigation_home, navigationFragment1);
-		fragmentMap.put(R.id.navigation_live, navigationFragment2);
-		fragmentMap.put(R.id.navigation_market, navigationFragment3);
+		fragmentMap.put(R.id.navigation_home, homeFragment);
+		fragmentMap.put(R.id.navigation_live, liveFragment);
+		fragmentMap.put(R.id.navigation_market, marketFragment);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.framelayout_fragment_container, navigationFragment1, "Home");
+		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
 		transaction.commit();
+		
+		mToolbar = findViewById(R.id.toolbar_main_activity);
+		setSupportActionBar(mToolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Wasder");
+		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+		                                                         drawerLayout,
+		                                                         mToolbar,
+		                                                         R.string.navigation_drawer_open,
+		                                                         R.string.navigation_drawer_close);
+		toggle.syncState();
+		NavigationView navigationView = findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
 		
 		//region Bottom_Navigation
 		bottomNavigationView = findViewById(R.id.navigation);
@@ -274,18 +299,24 @@ public class MainActivity
 		
 		int id = item.getItemId();
 		
-		if (id == R.id.nav_camera) {
-			
-		} else if (id == R.id.nav_gallery) {
-			
-		} else if (id == R.id.nav_slideshow) {
-			
-		} else if (id == R.id.nav_manage) {
-			
-		} else if (id == R.id.nav_share) {
-			
-		} else if (id == R.id.nav_send) {
-			
+		switch (id) {
+			case R.id.nav_camera:
+				break;
+			case R.id.nav_gallery:
+				
+				break;
+			case R.id.nav_slideshow:
+				
+				break;
+			case R.id.nav_manage:
+				
+				break;
+			case R.id.nav_share:
+				
+				break;
+			case R.id.nav_send:
+				
+				break;
 		}
 		
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);

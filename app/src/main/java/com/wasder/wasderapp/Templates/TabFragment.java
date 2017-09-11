@@ -19,7 +19,8 @@ import com.wasder.wasderapp.R;
  * Created by ahmed on 9/10/2017.
  */
 
-public class TabFragment extends Fragment {
+public class TabFragment
+		extends Fragment {
 	
 	private int columnCount;
 	private String title;
