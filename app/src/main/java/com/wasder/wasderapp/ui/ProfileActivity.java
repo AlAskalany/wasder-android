@@ -28,11 +28,11 @@ public class ProfileActivity extends AppCompatActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
+		Toolbar toolbar = findViewById(R.id.toolbar_profile);
 		toolbar.setTitleTextColor(Color.WHITE);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar_profile);
+		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_profile);
 		collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
 		
 		FirebaseAuth mAuth = FirebaseAuth.getInstance();
 		FirebaseUser user = mAuth.getCurrentUser();
-		ImageView imageView = (ImageView) findViewById(R.id.app_bar_image);
+		ImageView imageView = findViewById(R.id.app_bar_image);
 		Uri imageUri = user.getPhotoUrl();
 		new DownloadImageTask((ImageView) findViewById(R.id.app_bar_image)).execute(imageUri.toString());
 	}

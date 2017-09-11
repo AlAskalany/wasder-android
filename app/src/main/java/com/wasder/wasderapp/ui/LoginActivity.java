@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 		
 		// Set the dimensions of the sign-in button.
-		SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+		SignInButton signInButton = findViewById(R.id.sign_in_button);
 		signInButton.setSize(SignInButton.SIZE_STANDARD);
 		findViewById(R.id.sign_in_button).setOnClickListener(new OnClickListener() {
 			
@@ -124,10 +124,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 		};
 		// Set up the login form.
-		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+		mEmailView = findViewById(R.id.email);
 		populateAutoComplete();
 		
-		mPasswordView = (EditText) findViewById(R.id.password);
+		mPasswordView = findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			
 			@Override
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 		});
 		
-		Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+		Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			}
 		});
 		
-		Button mEmailRegisterButtor = (Button) findViewById(R.id.email_register_button);
+		Button mEmailRegisterButtor = findViewById(R.id.email_register_button);
 		mEmailRegisterButtor.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -412,6 +412,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 					// Sign in success, update UI with the signed-in user's information
 					Log.d(TAG, "signInWithCredential:success");
 					FirebaseUser user = firebaseAuth.getCurrentUser();
+					startActivity(new Intent(LoginActivity.this, MainActivity.class));
 					finish();
 					//updateUI(user);
 				} else {
