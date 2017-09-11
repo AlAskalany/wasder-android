@@ -11,6 +11,7 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="6dp"
     android:orientation="horizontal"
+    android:theme="@style/AppTheme"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp"
     app:cardMaxElevation="8dp">
