@@ -17,19 +17,10 @@ public class RecyclerAdapterFactory {
 			layoutManager, OnFragmentInteractionListener mListener) {
 		
 		try {
-			Constructor<? extends RecyclerViewAdapterBase> con = fragmentClass.getConstructor(
-					Context.class,
-					LinearLayoutManager.class,
-					OnFragmentInteractionListener.class
-			);
+			Constructor<? extends RecyclerViewAdapterBase> con = fragmentClass.getConstructor(Context.class, LinearLayoutManager.class,
+					OnFragmentInteractionListener.class);
 			return con.newInstance(context, layoutManager, mListener);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
+		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		return null;
