@@ -20,18 +20,17 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyFeedRecyclerAdapter
-		extends RecyclerViewAdapterBase<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
+public class FeedRecyclerAdapter
+		extends RecyclerViewAdapterBase<FeedModel, FeedRecyclerAdapter.FeedViewHolder> {
 	
-	public MyFeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public FeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
 		super(FeedModel.class,
 		      R.layout.fragment_feed,
 		      FeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
-		                      .child("feed"),
-		      "MyFeedRecyclerAdapter",
+		                      .child("feed"), "FeedRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);

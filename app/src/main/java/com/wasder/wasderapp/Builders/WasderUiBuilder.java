@@ -1,15 +1,15 @@
 package com.wasder.wasderapp.Builders;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.RecyclerAdapters.MyCreatorFeedRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyEsportsRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyEventRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyFeedRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyFriendEventRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyGroupRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyRecommendedEventRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyTwitchLiveRecyclerViewAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.MyTwitchStreamRecyclerViewAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.CreatorFeedRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.EsportsRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.EventRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.FeedRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.FriendsEventsRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.GroupsRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.RecommendedEventsRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.TwitchLiveRecyclerAdapter;
+import com.wasder.wasderapp.RecyclerAdapters.TwitchStreamRecyclerAdapter;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
 import com.wasder.wasderapp.Templates.TabFragment;
@@ -24,15 +24,15 @@ import java.util.List;
 public class WasderUiBuilder {
 	
 	public enum TabType {
-		Feed("Feed", R.layout.fragment_feed_list, MyFeedRecyclerAdapter.class),
-		Creators("Creators", R.layout.fragment_creatorfeed_list, MyCreatorFeedRecyclerViewAdapter.class),
-		Groups("Groups", R.layout.fragment_group_list, MyGroupRecyclerAdapter.class),
-		TwitchStream("Twitch Streams", R.layout.fragment_twitchstream_list, MyTwitchStreamRecyclerViewAdapter.class),
-		TwitchLive("Twitch Live", R.layout.fragment_twitchlive_list, MyTwitchLiveRecyclerViewAdapter.class),
-		Esports("Esports", R.layout.fragment_esports_list, MyEsportsRecyclerViewAdapter.class),
-		AllEvents("All Events", R.layout.fragment_event_list, MyEventRecyclerViewAdapter.class),
-		RecommendedEvents("Recommended Events", R.layout.fragment_recommendedevent_list, MyRecommendedEventRecyclerViewAdapter.class),
-		FriendsEvents("Friends Events", R.layout.fragment_friendevent_list, MyFriendEventRecyclerViewAdapter.class);
+		Feed("Feed", R.layout.fragment_feed_list, FeedRecyclerAdapter.class),
+		Creators("Creators", R.layout.fragment_creatorfeed_list, CreatorFeedRecyclerAdapter.class),
+		Groups("Groups", R.layout.fragment_group_list, GroupsRecyclerAdapter.class),
+		TwitchStream("Twitch Streams", R.layout.fragment_twitchstream_list, TwitchStreamRecyclerAdapter.class),
+		TwitchLive("Twitch Live", R.layout.fragment_twitchlive_list, TwitchLiveRecyclerAdapter.class),
+		Esports("Esports", R.layout.fragment_esports_list, EsportsRecyclerAdapter.class),
+		AllEvents("All Events", R.layout.fragment_event_list, EventRecyclerAdapter.class),
+		RecommendedEvents("Recommended Events", R.layout.fragment_recommendedevent_list, RecommendedEventsRecyclerAdapter.class),
+		FriendsEvents("Friends Events", R.layout.fragment_friendevent_list, FriendsEventsRecyclerAdapter.class);
 		
 		private final String title;
 		private final int layout;

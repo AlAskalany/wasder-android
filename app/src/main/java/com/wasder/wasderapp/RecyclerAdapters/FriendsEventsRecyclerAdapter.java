@@ -10,25 +10,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
-import com.wasder.wasderapp.models.TwitchStreamModel;
+import com.wasder.wasderapp.models.FriendEventModel;
 
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyTwitchStreamRecyclerViewAdapter
-		extends RecyclerViewAdapterBase<TwitchStreamModel, MyTwitchStreamRecyclerViewAdapter.TwitchStreamViewHolder> {
+public class FriendsEventsRecyclerAdapter
+		extends RecyclerViewAdapterBase<FriendEventModel, FriendsEventsRecyclerAdapter.FriendEventViewHolder> {
 	
-	public MyTwitchStreamRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public FriendsEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchStreamModel.class,
+		super(FriendEventModel.class,
 		      R.layout.fragment_esports,
-		      TwitchStreamViewHolder.class,
+		      FriendEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "MyTwitchStreamAdapter",
+		      "MyFriendRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -36,29 +36,29 @@ public class MyTwitchStreamRecyclerViewAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final TwitchStreamViewHolder viewHolder, TwitchStreamModel model, int position) {
+	protected void populateViewHolder(final FriendEventViewHolder viewHolder, FriendEventModel model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchStreamModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.friendEventModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class TwitchStreamViewHolder
+	public static class FriendEventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		TwitchStreamModel twitchStreamModel;
+		FriendEventModel friendEventModel;
 		
-		public TwitchStreamViewHolder(View itemView) {
+		public FriendEventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;

@@ -19,10 +19,10 @@ import com.wasder.wasderapp.util.Helpers;
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/10/2017.
  */
-public class MyCreatorFeedRecyclerViewAdapter
-		extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter.CreatorFeedViewHolder> {
+public class CreatorFeedRecyclerAdapter
+		extends RecyclerViewAdapterBase<CreatorFeedModel, CreatorFeedRecyclerAdapter.CreatorFeedViewHolder> {
 	
-	public MyCreatorFeedRecyclerViewAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
+	public CreatorFeedRecyclerAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
 		
 		super(CreatorFeedModel.class,
 		      R.layout.fragment_creatorfeed,

@@ -17,10 +17,10 @@ import com.wasder.wasderapp.models.EsportsModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyEsportsRecyclerViewAdapter
-		extends RecyclerViewAdapterBase<EsportsModel, MyEsportsRecyclerViewAdapter.EsportsViewHolder> {
+public class EsportsRecyclerAdapter
+		extends RecyclerViewAdapterBase<EsportsModel, EsportsRecyclerAdapter.EsportsViewHolder> {
 	
-	public MyEsportsRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
 		super(EsportsModel.class,
 		      R.layout.fragment_esports,

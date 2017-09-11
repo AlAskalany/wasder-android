@@ -17,10 +17,10 @@ import com.wasder.wasderapp.models.RecommendedEventModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyRecommendedEventRecyclerViewAdapter
-		extends RecyclerViewAdapterBase<RecommendedEventModel, MyRecommendedEventRecyclerViewAdapter.RecommendedEventViewHolder> {
+public class RecommendedEventsRecyclerAdapter
+		extends RecyclerViewAdapterBase<RecommendedEventModel, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
 	
-	public MyRecommendedEventRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
+	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
 			OnFragmentInteractionListener mListener) {
 		
 		super(RecommendedEventModel.class,

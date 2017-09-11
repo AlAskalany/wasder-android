@@ -10,25 +10,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
-import com.wasder.wasderapp.models.TwitchLiveModel;
+import com.wasder.wasderapp.models.EventModel;
 
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyTwitchLiveRecyclerViewAdapter
-		extends RecyclerViewAdapterBase<TwitchLiveModel, MyTwitchLiveRecyclerViewAdapter.TwitchLiveViewHolder> {
+public class EventRecyclerAdapter
+		extends RecyclerViewAdapterBase<EventModel, EventRecyclerAdapter.EventViewHolder> {
 	
-	public MyTwitchLiveRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchLiveModel.class,
+		super(EventModel.class,
 		      R.layout.fragment_esports,
-		      TwitchLiveViewHolder.class,
+		      EventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "MyTwitchLiveAdapter",
+		      "MyEventRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -36,29 +36,29 @@ public class MyTwitchLiveRecyclerViewAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, TwitchLiveModel model, int position) {
+	protected void populateViewHolder(final EventViewHolder viewHolder, EventModel model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchLiveModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.eventModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class TwitchLiveViewHolder
+	public static class EventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		TwitchLiveModel twitchLiveModel;
+		EventModel eventModel;
 		
-		public TwitchLiveViewHolder(View itemView) {
+		public EventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
