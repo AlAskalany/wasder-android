@@ -1,26 +1,22 @@
 <resources>
 
-    <style name="WasderAppTheme" parent="Base.Theme.AppCompat.Light">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowActionBarOverlay">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@android:color/primary_text_dark</item>
+        <item name="android:textColorSecondary">@android:color/secondary_text_dark</item>
     </style>
 
-    <style name="WasderAppTheme.SplashActivity" parent="WasderAppTheme">
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="WasderAppTheme.LoginActivity" parent="WasderAppTheme">
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="WasderAppTheme.MainActivity" parent="WasderAppTheme">
-    </style>
-
-    <style name="WasderAppTheme.ProfileActivity" parent="WasderAppTheme">
-    </style>
-
-    <style name="WasderAppTheme.GroupActivity" parent="WasderAppTheme">
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

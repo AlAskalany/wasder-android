@@ -15,23 +15,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/WasderAppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/WasderAppTheme.MainActivity">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/WasderAppTheme.LoginActivity">
+            android:label="@string/title_activity_login">
         </activity>
         <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/WasderAppTheme.SplashActivity">
+            android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -39,8 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ProfileActivity"
-            android:theme="@style/WasderAppTheme.ProfileActivity">
+            android:name=".ui.ProfileActivity">
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
@@ -51,8 +47,7 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.home.GroupActivity"
-            android:theme="@style/WasderAppTheme.GroupActivity">
+            android:name=".ui.home.GroupActivity">
         </activity>
         <activity android:name=".ui.home.CreatorFeedActivity">
         </activity>
