@@ -149,7 +149,7 @@ public class WasderUiBuilder {
 		
 		public NavigationFragmentBuilder addTab(TabType tabType) {
 			
-			mBaseTabFragments.add(new WasderUiBuilder.TabFragmentBuilder().addTab(tabType)
+			mBaseTabFragments.add(new WasderUiBuilder.TabFragmentBuilder().createTab(tabType)
 			                                                              .build());
 			return this;
 		}
@@ -245,7 +245,7 @@ public class WasderUiBuilder {
 			return this;
 		}
 		
-		public TabFragmentBuilder addTab(TabType tabType) {
+		public TabFragmentBuilder createTab(TabType tabType) {
 			
 			return tab(tabType.getTitle(), NumColumns.ONE, tabType.getLayout(), tabType.getTabAdapter());
 		}
