@@ -40,6 +40,22 @@ android {
         }
     }
     productFlavors {
+        MinKitKat {
+            minSdkVersion 19
+            applicationId 'com.wasder.wasderapp'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 8
+            versionName '1.0'
+        }
+        MinMarshmallow {
+            minSdkVersion 23
+            applicationId 'com.wasder.wasderapp'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 8
+            versionName '1.0'
+        }
     }
 }
 
