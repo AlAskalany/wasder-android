@@ -26,6 +26,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.ProfileActivity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,45 +36,51 @@ import java.util.Map;
  * Created by ahmed on 9/10/2017.
  */
 
-public abstract class NavigationFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationFragment
+		extends Fragment
+		implements NavigationView.OnNavigationItemSelectedListener {
 	
-	private static String TAG;
-	private static String ARG_PARAM1 = "param1";
-	private static String ARG_PARAM2 = "param2";
-	private String param1;
-	private String param2;
-	private View view;
-	private int layout;
-	private int resToolbar;
+	private static final String ARG_TAG = "param_tag";
+	private static final String ARG_TITLE = "param_title";
+	private static final String ARG_LAYOUT = "param_layout";
+	private static final String ARG_TOOLBAR = "param_toolbar";
+	private static final String ARG_DRAWER_LAYOUT = "param_drawer_layout";
+	private static final String ARG_NAVIGATION_VIEW = "param_navigation_view";
+	private static final String ARG_VIEWPAGER = "param_viewpager";
+	private static final String ARG_TAB_LAYOUT = "param_tab_layout";
+	private static final String ARG_TAB_FRAGMENTS = "param_tab_fragments";
+	String mTAG;
+	String mFragmentTitle;
+	int mResLayout;
+	int mResToolbar;
+	int mResDrawerLayout;
+	int mResNavigationView;
+	int mResViewPager;
+	int mResTabLayout;
+	List<TabFragment> mTabFragments;
 	private AppCompatActivity activity;
-	private Toolbar toolbar;
-	private String fragmentTitle;
-	private int resDrawerLayout;
-	private int resNavigationView;
-	private SectionsPagerAdapter sectionPagerAdapter;
-	private int resViewPager;
-	private ViewPager viewPager;
-	private int resTabLayout;
-	private TabLayout tabLayout;
 	private OnFragmentInteractionListener mListener;
-	private List<TabFragment> tabFragments;
-	
-	protected NavigationFragment(String TAG, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout, int resNavigationView, int
-			resViewPager, int resTabLayout, List<TabFragment> tabFragments) {
-		
-		NavigationFragment.TAG = TAG;
-		this.fragmentTitle = fragmentTitle;
-		this.layout = layout;
-		this.resToolbar = resToolbar;
-		this.resDrawerLayout = resDrawerLayout;
-		this.resNavigationView = resNavigationView;
-		this.resViewPager = resViewPager;
-		this.resTabLayout = resTabLayout;
-		this.tabFragments = tabFragments;
-	}
 	
 	public NavigationFragment() {
 		
+	}
+	
+	public static NavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout,
+			int resNavigationView, int resViewPager, int resTabLayout, List<TabFragment> tabFragments) {
+		
+		NavigationFragment fragment = new NavigationFragment();
+		Bundle args = new Bundle();
+		args.putString(ARG_TAG, tag);
+		args.putString(ARG_TITLE, fragmentTitle);
+		args.putInt(ARG_LAYOUT, layout);
+		args.putInt(ARG_TOOLBAR, resToolbar);
+		args.putInt(ARG_DRAWER_LAYOUT, resDrawerLayout);
+		args.putInt(ARG_NAVIGATION_VIEW, resNavigationView);
+		args.putInt(ARG_VIEWPAGER, resViewPager);
+		args.putInt(ARG_TAB_LAYOUT, resTabLayout);
+		args.putSerializable(ARG_TAB_FRAGMENTS, (Serializable) tabFragments);
+		fragment.setArguments(args);
+		return fragment;
 	}
 	
 	@Override
@@ -92,39 +99,49 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			param1 = getArguments().getString(ARG_PARAM1);
-			param2 = getArguments().getString(ARG_PARAM2);
+			mTAG = getArguments().getString(ARG_TAG);
+			mFragmentTitle = getArguments().getString(ARG_TITLE);
+			mResLayout = getArguments().getInt(ARG_LAYOUT);
+			mResToolbar = getArguments().getInt(ARG_TOOLBAR);
+			mResDrawerLayout = getArguments().getInt(ARG_DRAWER_LAYOUT);
+			mResNavigationView = getArguments().getInt(ARG_NAVIGATION_VIEW);
+			mResViewPager = getArguments().getInt(ARG_VIEWPAGER);
+			mResTabLayout = getArguments().getInt(ARG_TAB_LAYOUT);
+			mTabFragments = (List<TabFragment>) getArguments().getSerializable(ARG_TAB_FRAGMENTS);
 		}
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(this.layout, container, false);
-		toolbar = view.findViewById(resToolbar);
+		View view = inflater.inflate(this.mResLayout, container, false);
+		Toolbar toolbar = view.findViewById(mResToolbar);
 		activity = (AppCompatActivity) getActivity();
 		activity.setSupportActionBar(toolbar);
 		ActionBar actionBar = activity.getSupportActionBar();
-		actionBar.setTitle(fragmentTitle);
-		DrawerLayout drawerLayout = activity.findViewById(resDrawerLayout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string
-				.navigation_drawer_close);
+		if (actionBar != null) {
+			actionBar.setTitle(mFragmentTitle);
+		}
+		DrawerLayout drawerLayout = activity.findViewById(mResDrawerLayout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(activity, drawerLayout, toolbar, R.string.navigation_drawer_open,
+				R.string.navigation_drawer_close);
 		toggle.syncState();
-		NavigationView navigationView = activity.findViewById(resNavigationView);
+		NavigationView navigationView = activity.findViewById(mResNavigationView);
 		navigationView.setNavigationItemSelectedListener(this);
-		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-		for (TabFragment tab : tabFragments) {
+		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		viewPager = view.findViewById(resViewPager);
+		ViewPager viewPager = view.findViewById(mResViewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
-		tabLayout = view.findViewById(resTabLayout);
+		TabLayout tabLayout = view.findViewById(mResTabLayout);
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
 	}
 	
 	@Override
 	public void onStart() {
+		
 		super.onStart();
 	}
 	
@@ -148,22 +165,40 @@ public abstract class NavigationFragment extends Fragment implements NavigationV
 		
 		if (id == R.id.nav_camera) {
 			startActivity(new Intent(activity, ProfileActivity.class));
-		} else if (id == R.id.nav_gallery) {
-			
-		} else if (id == R.id.nav_slideshow) {
-			
-		} else if (id == R.id.nav_manage) {
-			
-		} else if (id == R.id.nav_share) {
-			
-		} else if (id == R.id.nav_send) {
-			
+		} else {
+			switch (id) {
+				case R.id.nav_gallery:
+					
+					break;
+				case R.id.nav_slideshow:
+					
+					break;
+				case R.id.nav_manage:
+					
+					break;
+				case R.id.nav_share:
+					
+					break;
+				case R.id.nav_send:
+					
+					break;
+			}
 		}
 		
-		DrawerLayout drawer = getActivity().findViewById(resDrawerLayout);
+		DrawerLayout drawer = getActivity().findViewById(mResDrawerLayout);
 		
 		drawer.closeDrawer(GravityCompat.START);
 		return false;
+	}
+	
+	public OnFragmentInteractionListener getmListener() {
+		
+		return mListener;
+	}
+	
+	public void setmListener(OnFragmentInteractionListener mListener) {
+		
+		this.mListener = mListener;
 	}
 	
 	/**

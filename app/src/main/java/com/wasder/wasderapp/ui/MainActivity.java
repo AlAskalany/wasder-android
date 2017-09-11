@@ -29,13 +29,12 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
-import com.wasder.wasderapp.NavigationFragments.HomeFragment;
-import com.wasder.wasderapp.NavigationFragments.LiveFragment;
-import com.wasder.wasderapp.NavigationFragments.MarketFragment;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +54,7 @@ public class MainActivity
 	ServiceConnection mServiceConn = new ServiceConnection() {
 		
 		@Override
-		public void onServiceConnected(ComponentName name,
-		                               IBinder service) {
+		public void onServiceConnected(ComponentName name, IBinder service) {
 			
 			mService = IInAppBillingService.Stub.asInterface(service);
 		}
@@ -67,9 +65,10 @@ public class MainActivity
 			mService = null;
 		}
 	};
-	HomeFragment homeFragment;
-	LiveFragment liveFragment;
-	MarketFragment marketFragment;
+	
+	NavigationFragment navigationFragment1;
+	NavigationFragment navigationFragment2;
+	NavigationFragment navigationFragment3;
 	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
 	private TextView mTextMessage;
 	private FirebaseAuth mAuth;
@@ -92,8 +91,7 @@ public class MainActivity
 			}
 			newFragment = fragmentMap.get(item.getItemId());
 			if (newFragment != currentFragment) {
-				ts.replace(R.id.framelayout_fragment_container,
-				           newFragment);
+				ts.replace(R.id.framelayout_fragment_container, newFragment);
 				ts.addToBackStack(null);
 				ts.commit();
 				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
@@ -115,27 +113,22 @@ public class MainActivity
 		setContentView(R.layout.activity_main);
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
 		serviceIntent.setPackage("com.android.vending");
-		bindService(serviceIntent,
-		            mServiceConn,
-		            Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout),
 		// "Connection", 2000);
 		//snackbar.show();
 		if (activeInfo != null && activeInfo.isConnected()) {
-			Toast.makeText(this,
-			               "Connected",
-			               Toast.LENGTH_SHORT)
+			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT)
 			     .show();
 		} else {
-			Toast.makeText(this,
-			               "No Network Connection",
-			               Toast.LENGTH_SHORT)
+			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT)
 			     .show();
 		}
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(
+				getString(R.string.default_web_client_id))
 		
 		                                                                                              .requestEmail()
 		                                                                                              .build();
@@ -148,8 +141,7 @@ public class MainActivity
 				
 				FirebaseUser user = mAuth.getCurrentUser();
 				if (user != null) {
-					Log.d(TAG,
-					      "Signed in");
+					Log.d(TAG, "Signed in");
 					mUserName = user.getDisplayName();
 					mEmail = user.getEmail();
 					mPhotoUrl = user.getPhotoUrl();
@@ -162,31 +154,49 @@ public class MainActivity
 					emailTextView = headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
 				} else {
-					Log.d(TAG,
-					      "Signed out");
-					startActivity(new Intent(MainActivity.this,
-					                         LoginActivity.class));
+					Log.d(TAG, "Signed out");
+					startActivity(new Intent(MainActivity.this, LoginActivity.class));
 					finish();
 				}
 			}
 		};
 		
-		homeFragment = new HomeFragment();
-		liveFragment = new LiveFragment();
-		marketFragment = new MarketFragment();
+		Bundle args = new Bundle();
 		
-		fragmentMap.put(R.id.navigation_home,
-		                homeFragment);
-		fragmentMap.put(R.id.navigation_live,
-		                liveFragment);
-		fragmentMap.put(R.id.navigation_market,
-		                marketFragment);
+		navigationFragment1 = NavigationFragment.newInstance("HomeFragment", "Home", R.layout.fragment_home, R.id.home_toolbar, R.id.drawer_layout,
+				R.id.nav_view, R.id.home_viewpager, R.id.home_tablayout, Arrays.asList(
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Feed)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Creators)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Groups)
+						                                        .build()));
+		
+		navigationFragment2 = NavigationFragment.newInstance("LiveFragment", "Live", R.layout.fragment_live, R.id.live_toolbar, R.id.drawer_layout,
+				R.id.nav_view, R.id.live_viewpager, R.id.live_tablayout, Arrays.asList(
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.TwitchStream)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.TwitchLive)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.Esports)
+						                                        .build()));
+		
+		navigationFragment3 = NavigationFragment.newInstance("MarketFragment", "Market", R.layout.fragment_market, R.id.market_toolbar,
+				R.id.drawer_layout, R.id.nav_view, R.id.market_viewpager, R.id.market_tablayout, Arrays.asList(
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.AllEvents)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.RecommendedEvents)
+						                                        .build(),
+						new WasderUiBuilder.TabFragmentBuilder().addTab(WasderUiBuilder.TabType.FriendsEvents)
+						                                        .build()));
+		
+		fragmentMap.put(R.id.navigation_home, navigationFragment1);
+		fragmentMap.put(R.id.navigation_live, navigationFragment2);
+		fragmentMap.put(R.id.navigation_market, navigationFragment3);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.framelayout_fragment_container,
-		                homeFragment,
-		                "Home");
+		transaction.add(R.id.framelayout_fragment_container, navigationFragment1, "Home");
 		transaction.commit();
 		
 		//region Bottom_Navigation
@@ -223,8 +233,7 @@ public class MainActivity
 	@Override
 	public void onBackPressed() {
 		
-		Log.d("BackStackCount",
-		      String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
@@ -237,8 +246,7 @@ public class MainActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main,
-		                          menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
@@ -251,8 +259,7 @@ public class MainActivity
 		
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
-			startActivity(new Intent(MainActivity.this,
-			                         SettingsActivity.class));
+			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 			return true;
 		} else if (id == R.id.action_sign_outout) {
 			mAuth.signOut();
@@ -293,8 +300,7 @@ public class MainActivity
 	@Override
 	public void onBackStackChanged() {
 		
-		Log.d(TAG,
-		      String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 	}
 	
 	@Override
