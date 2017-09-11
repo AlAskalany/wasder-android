@@ -131,6 +131,8 @@ public class NavigationFragment
 		ViewPager viewPager = view.findViewById(mResViewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
 		TabLayout tabLayout = view.findViewById(mResTabLayout);
+		tabLayout.setTabTextColors(getResources().getColor(R.color.md_grey_200), getResources().getColor(R.color.md_white_1000));
+		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.md_yellow_500));
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
 	}
