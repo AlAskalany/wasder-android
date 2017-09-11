@@ -10,5 +10,4 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.wasder.wasderapp.ui.live.TwitchLiveFragment"
     tools:listitem="@layout/fragment_twitchlive"/>
