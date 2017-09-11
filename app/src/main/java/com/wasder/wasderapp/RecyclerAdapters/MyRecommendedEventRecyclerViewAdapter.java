@@ -17,14 +17,22 @@ import com.wasder.wasderapp.models.RecommendedEventModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyRecommendedEventRecyclerViewAdapter extends RecyclerViewAdapterBase<RecommendedEventModel, MyRecommendedEventRecyclerViewAdapter
-		.RecommendedEventViewHolder> {
+public class MyRecommendedEventRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<RecommendedEventModel, MyRecommendedEventRecyclerViewAdapter.RecommendedEventViewHolder> {
 	
-	public MyRecommendedEventRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener
-			mListener) {
+	public MyRecommendedEventRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
+			OnFragmentInteractionListener mListener) {
 		
-		super(RecommendedEventModel.class, R.layout.fragment_recommendedevent, RecommendedEventViewHolder.class, FirebaseDatabase.getInstance()
-				.getReference().child("feed"), "MyEsportsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(RecommendedEventModel.class,
+		      R.layout.fragment_recommendedevent,
+		      RecommendedEventViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyRecommendedRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -36,14 +44,15 @@ public class MyRecommendedEventRecyclerViewAdapter extends RecyclerViewAdapterBa
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.recommendedEventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.recommendedEventModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class RecommendedEventViewHolder extends RecyclerView.ViewHolder {
+	public static class RecommendedEventViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;

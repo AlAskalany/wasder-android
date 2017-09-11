@@ -19,13 +19,21 @@ import com.wasder.wasderapp.models.GroupModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyGroupRecyclerAdapter extends RecyclerViewAdapterBase<GroupModel, MyGroupRecyclerAdapter.GroupViewHolder> {
+public class MyGroupRecyclerAdapter
+		extends RecyclerViewAdapterBase<GroupModel, MyGroupRecyclerAdapter.GroupViewHolder> {
 	
-	public MyGroupRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
-	                              OnFragmentInteractionListener mListener) {
+	public MyGroupRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(GroupModel.class, R.layout.fragment_group, GroupViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
-				"MyGroupRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(GroupModel.class,
+		      R.layout.fragment_group,
+		      GroupViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyGroupRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -37,7 +45,7 @@ public class MyGroupRecyclerAdapter extends RecyclerViewAdapterBase<GroupModel, 
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
 			}
 		});
 		viewHolder.groupImageView.setImageDrawable(mContext.getDrawable(R.drawable.gamers));
@@ -52,7 +60,8 @@ public class MyGroupRecyclerAdapter extends RecyclerViewAdapterBase<GroupModel, 
 		});
 	}
 	
-	public static class GroupViewHolder extends RecyclerView.ViewHolder {
+	public static class GroupViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		ImageView groupImageView;

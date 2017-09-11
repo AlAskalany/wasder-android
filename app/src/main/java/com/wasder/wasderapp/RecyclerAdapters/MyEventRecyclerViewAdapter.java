@@ -17,12 +17,21 @@ import com.wasder.wasderapp.models.EventModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyEventRecyclerViewAdapter extends RecyclerViewAdapterBase<EventModel, MyEventRecyclerViewAdapter.EventViewHolder> {
+public class MyEventRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<EventModel, MyEventRecyclerViewAdapter.EventViewHolder> {
 	
 	public MyEventRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EventModel.class, R.layout.fragment_esports, EventViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
-				"MyEsportsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(EventModel.class,
+		      R.layout.fragment_esports,
+		      EventViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyEventRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -34,14 +43,15 @@ public class MyEventRecyclerViewAdapter extends RecyclerViewAdapterBase<EventMod
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.eventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.eventModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class EventViewHolder extends RecyclerView.ViewHolder {
+	public static class EventViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;

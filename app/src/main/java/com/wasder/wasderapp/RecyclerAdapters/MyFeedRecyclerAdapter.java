@@ -20,13 +20,21 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyFeedRecyclerAdapter extends RecyclerViewAdapterBase<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
+public class MyFeedRecyclerAdapter
+		extends RecyclerViewAdapterBase<FeedModel, MyFeedRecyclerAdapter.FeedViewHolder> {
 	
-	public MyFeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
-	                             OnFragmentInteractionListener mListener) {
+	public MyFeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedModel.class, R.layout.fragment_feed, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
-				"MyGroupRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(FeedModel.class,
+		      R.layout.fragment_feed,
+		      FeedViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyFeedRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -38,7 +46,8 @@ public class MyFeedRecyclerAdapter extends RecyclerViewAdapterBase<FeedModel, My
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.feedModel);
+				//mListener.onFragmentInteractionListener(viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());
@@ -47,11 +56,13 @@ public class MyFeedRecyclerAdapter extends RecyclerViewAdapterBase<FeedModel, My
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
 		final String photoUrl = model.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
-		viewHolder.feedImageView.setImageDrawable(mContext.getDrawable(R.drawable.event_pic));
+		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
+		                                                  .getDrawable(R.drawable.event_pic));
 		viewHolder.supplementaryTextView.setText(model.getSupplementaryText());
 	}
 	
-	public static class FeedViewHolder extends RecyclerView.ViewHolder {
+	public static class FeedViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView titleTextView;

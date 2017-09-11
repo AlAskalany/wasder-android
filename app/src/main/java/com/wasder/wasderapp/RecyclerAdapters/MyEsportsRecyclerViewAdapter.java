@@ -17,12 +17,21 @@ import com.wasder.wasderapp.models.EsportsModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyEsportsRecyclerViewAdapter extends RecyclerViewAdapterBase<EsportsModel, MyEsportsRecyclerViewAdapter.EsportsViewHolder> {
+public class MyEsportsRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<EsportsModel, MyEsportsRecyclerViewAdapter.EsportsViewHolder> {
 	
 	public MyEsportsRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EsportsModel.class, R.layout.fragment_esports, EsportsViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
-				"MyEsportsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(EsportsModel.class,
+		      R.layout.fragment_esports,
+		      EsportsViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyEsportsRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -34,14 +43,15 @@ public class MyEsportsRecyclerViewAdapter extends RecyclerViewAdapterBase<Esport
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class EsportsViewHolder extends RecyclerView.ViewHolder {
+	public static class EsportsViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;

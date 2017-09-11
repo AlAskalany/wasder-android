@@ -19,11 +19,21 @@ import com.wasder.wasderapp.util.Helpers;
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/10/2017.
  */
-public class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter.CreatorFeedViewHolder> {
+public class MyCreatorFeedRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<CreatorFeedModel, MyCreatorFeedRecyclerViewAdapter.CreatorFeedViewHolder> {
 	
 	public MyCreatorFeedRecyclerViewAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(CreatorFeedModel.class, R.layout.fragment_creatorfeed, CreatorFeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"), "MyCreatorAdapter", context, mListener, linearLayoutManager);
+		super(CreatorFeedModel.class,
+		      R.layout.fragment_creatorfeed,
+		      CreatorFeedViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyCreatorAdapter",
+		      context,
+		      mListener,
+		      linearLayoutManager);
 	}
 	
 	@Override
@@ -34,7 +44,7 @@ public class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<Cr
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.creatorFeedModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.creatorFeedModel);
 			}
 		});
 		viewHolder.titleTextView.setText(creatorFeedModel.getTitle());
@@ -49,7 +59,8 @@ public class MyCreatorFeedRecyclerViewAdapter extends RecyclerViewAdapterBase<Cr
 		viewHolder.supplementaryTextView.setText(creatorFeedModel.getSupplementaryText());
 	}
 	
-	public static class CreatorFeedViewHolder extends RecyclerView.ViewHolder {
+	public static class CreatorFeedViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mView;
 		TextView titleTextView;

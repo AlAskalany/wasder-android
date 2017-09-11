@@ -46,7 +46,7 @@ import java.util.Map;
 public class MainActivity
 		extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener,
-		           OnFragmentInteractionListener,
+		           OnFragmentInteractionListener<Object>,
 		           FragmentManager.OnBackStackChangedListener {
 	
 	private static final String TAG = "MainActivity";
@@ -131,7 +131,7 @@ public class MainActivity
 		// Configure Google Sign In
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
 				                                                                                                                        .default_web_client_id))
-		                                                                                              
+		
 		                                                                                              .requestEmail()
 		                                                                                              .build();
 		
@@ -335,7 +335,8 @@ public class MainActivity
 	}
 	
 	@Override
-	public void onFragmentInteractionListener(Object object) {
+	public void onFragmentInteractionListener(String tag, Object data) {
 		
+		Log.d(TAG, tag);
 	}
 }

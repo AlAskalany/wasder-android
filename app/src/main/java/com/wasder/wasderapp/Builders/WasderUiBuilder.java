@@ -25,14 +25,14 @@ public class WasderUiBuilder {
 	
 	public enum TabType {
 		Feed("Feed", R.layout.fragment_feed_list, MyFeedRecyclerAdapter.class),
-		Creators("Creators", R.layout.fragment_feed_list, MyCreatorFeedRecyclerViewAdapter.class),
-		Groups("Groups", R.layout.fragment_feed_list, MyGroupRecyclerAdapter.class),
-		TwitchStream("Twitch Streams", R.layout.fragment_feed_list, MyTwitchStreamRecyclerViewAdapter.class),
-		TwitchLive("Twitch Live", R.layout.fragment_feed_list, MyTwitchLiveRecyclerViewAdapter.class),
-		Esports("Esports", R.layout.fragment_feed_list, MyEsportsRecyclerViewAdapter.class),
-		AllEvents("All Events", R.layout.fragment_feed_list, MyEventRecyclerViewAdapter.class),
-		RecommendedEvents("Recommended Events", R.layout.fragment_feed_list, MyRecommendedEventRecyclerViewAdapter.class),
-		FriendsEvents("Friends Events", R.layout.fragment_feed_list, MyFriendEventRecyclerViewAdapter.class);
+		Creators("Creators", R.layout.fragment_creatorfeed_list, MyCreatorFeedRecyclerViewAdapter.class),
+		Groups("Groups", R.layout.fragment_group_list, MyGroupRecyclerAdapter.class),
+		TwitchStream("Twitch Streams", R.layout.fragment_twitchstream_list, MyTwitchStreamRecyclerViewAdapter.class),
+		TwitchLive("Twitch Live", R.layout.fragment_twitchlive_list, MyTwitchLiveRecyclerViewAdapter.class),
+		Esports("Esports", R.layout.fragment_esports_list, MyEsportsRecyclerViewAdapter.class),
+		AllEvents("All Events", R.layout.fragment_event_list, MyEventRecyclerViewAdapter.class),
+		RecommendedEvents("Recommended Events", R.layout.fragment_recommendedevent_list, MyRecommendedEventRecyclerViewAdapter.class),
+		FriendsEvents("Friends Events", R.layout.fragment_friendevent_list, MyFriendEventRecyclerViewAdapter.class);
 		
 		private final String title;
 		private final int layout;

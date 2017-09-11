@@ -17,12 +17,21 @@ import com.wasder.wasderapp.models.TwitchLiveModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyTwitchLiveRecyclerViewAdapter extends RecyclerViewAdapterBase<TwitchLiveModel, MyTwitchLiveRecyclerViewAdapter.TwitchLiveViewHolder> {
+public class MyTwitchLiveRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<TwitchLiveModel, MyTwitchLiveRecyclerViewAdapter.TwitchLiveViewHolder> {
 	
 	public MyTwitchLiveRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchLiveModel.class, R.layout.fragment_esports, TwitchLiveViewHolder.class, FirebaseDatabase.getInstance().getReference().child
-				("feed"), "MyEsportsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(TwitchLiveModel.class,
+		      R.layout.fragment_esports,
+		      TwitchLiveViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyTwitchLiveAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -34,14 +43,15 @@ public class MyTwitchLiveRecyclerViewAdapter extends RecyclerViewAdapterBase<Twi
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.twitchLiveModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchLiveModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class TwitchLiveViewHolder extends RecyclerView.ViewHolder {
+	public static class TwitchLiveViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;

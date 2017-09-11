@@ -17,13 +17,21 @@ import com.wasder.wasderapp.models.FriendEventModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class MyFriendEventRecyclerViewAdapter extends RecyclerViewAdapterBase<FriendEventModel, MyFriendEventRecyclerViewAdapter
-		.FriendEventViewHolder> {
+public class MyFriendEventRecyclerViewAdapter
+		extends RecyclerViewAdapterBase<FriendEventModel, MyFriendEventRecyclerViewAdapter.FriendEventViewHolder> {
 	
 	public MyFriendEventRecyclerViewAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FriendEventModel.class, R.layout.fragment_esports, FriendEventViewHolder.class, FirebaseDatabase.getInstance().getReference().child
-				("feed"), "MyEsportsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+		super(FriendEventModel.class,
+		      R.layout.fragment_esports,
+		      FriendEventViewHolder.class,
+		      FirebaseDatabase.getInstance()
+		                      .getReference()
+		                      .child("feed"),
+		      "MyFriendRecyclerAdapter",
+		      context,
+		      mListener,
+		      feedLinearLayoutManager);
 		
 	}
 	
@@ -35,14 +43,15 @@ public class MyFriendEventRecyclerViewAdapter extends RecyclerViewAdapterBase<Fr
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(viewHolder.friendEventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.friendEventModel);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
 		viewHolder.contentTextView.setText("Twitch Stream content");
 	}
 	
-	public static class FriendEventViewHolder extends RecyclerView.ViewHolder {
+	public static class FriendEventViewHolder
+			extends RecyclerView.ViewHolder {
 		
 		View mview;
 		TextView idTextView;

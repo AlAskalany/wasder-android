@@ -5,7 +5,7 @@ package com.wasder.wasderapp.Interfaces;
  * Created by ahmed on 9/10/2017.
  */
 
-public interface OnFragmentInteractionListener {
+public interface OnFragmentInteractionListener<T> {
 	
-	void onFragmentInteractionListener(Object object);
+	void onFragmentInteractionListener(String tag, T data);
 }
