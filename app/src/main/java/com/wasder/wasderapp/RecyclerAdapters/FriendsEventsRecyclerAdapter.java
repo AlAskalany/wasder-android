@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.FriendEventModel;
+import com.wasder.wasderapp.models.FriendEventItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -18,11 +18,11 @@ import com.wasder.wasderapp.models.FriendEventModel;
  */
 
 public class FriendsEventsRecyclerAdapter
-		extends BaseRecyclerAdapter<FriendEventModel, FriendsEventsRecyclerAdapter.FriendEventViewHolder> {
+		extends BaseRecyclerAdapter<FriendEventItem, FriendsEventsRecyclerAdapter.FriendEventViewHolder> {
 	
 	public FriendsEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FriendEventModel.class, R.layout.esports_item,
+		super(FriendEventItem.class, R.layout.esports_item,
 		      FriendEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -35,14 +35,14 @@ public class FriendsEventsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FriendEventViewHolder viewHolder, FriendEventModel model, int position) {
+	protected void populateViewHolder(final FriendEventViewHolder viewHolder, FriendEventItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.friendEventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.friendEventItem);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
@@ -55,7 +55,7 @@ public class FriendsEventsRecyclerAdapter
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		FriendEventModel friendEventModel;
+		FriendEventItem friendEventItem;
 		
 		public FriendEventViewHolder(View itemView) {
 			

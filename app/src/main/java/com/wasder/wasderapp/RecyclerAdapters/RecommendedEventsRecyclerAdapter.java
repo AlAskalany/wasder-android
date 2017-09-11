@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.RecommendedEventModel;
+import com.wasder.wasderapp.models.RecommendedEventItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -18,12 +18,12 @@ import com.wasder.wasderapp.models.RecommendedEventModel;
  */
 
 public class RecommendedEventsRecyclerAdapter
-		extends BaseRecyclerAdapter<RecommendedEventModel, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
+		extends BaseRecyclerAdapter<RecommendedEventItem, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
 	
 	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
 			OnFragmentInteractionListener mListener) {
 		
-		super(RecommendedEventModel.class, R.layout.recommended_event_item,
+		super(RecommendedEventItem.class, R.layout.recommended_event_item,
 		      RecommendedEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -36,14 +36,14 @@ public class RecommendedEventsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, RecommendedEventModel model, int position) {
+	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, RecommendedEventItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.recommendedEventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.recommendedEventItem);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
@@ -56,7 +56,7 @@ public class RecommendedEventsRecyclerAdapter
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		RecommendedEventModel recommendedEventModel;
+		RecommendedEventItem recommendedEventItem;
 		
 		public RecommendedEventViewHolder(View itemView) {
 			

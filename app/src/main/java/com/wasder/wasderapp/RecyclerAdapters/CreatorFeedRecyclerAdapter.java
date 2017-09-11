@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.CreatorFeedModel;
+import com.wasder.wasderapp.models.CreatorFeedItem;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -20,11 +20,11 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/10/2017.
  */
 public class CreatorFeedRecyclerAdapter
-		extends BaseRecyclerAdapter<CreatorFeedModel, CreatorFeedRecyclerAdapter.CreatorFeedViewHolder> {
+		extends BaseRecyclerAdapter<CreatorFeedItem, CreatorFeedRecyclerAdapter.CreatorFeedViewHolder> {
 	
 	public CreatorFeedRecyclerAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(CreatorFeedModel.class, R.layout.creators_feed_item,
+		super(CreatorFeedItem.class, R.layout.creators_feed_item,
 		      CreatorFeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -36,26 +36,26 @@ public class CreatorFeedRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, CreatorFeedModel creatorFeedModel, int position) {
+	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, CreatorFeedItem creatorFeedItem, int position) {
 		
 		viewHolder.mView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.creatorFeedModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.creatorFeedItem);
 			}
 		});
-		viewHolder.titleTextView.setText(creatorFeedModel.getTitle());
-		viewHolder.subheadTextView.setText(creatorFeedModel.getSubhead());
-		final String imageUrl = creatorFeedModel.getImageUrl();
+		viewHolder.titleTextView.setText(creatorFeedItem.getTitle());
+		viewHolder.subheadTextView.setText(creatorFeedItem.getSubhead());
+		final String imageUrl = creatorFeedItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.creatorFeedImageView, false, 0);
 		
-		final String photoUrl = creatorFeedModel.getPhotoUrl();
+		final String photoUrl = creatorFeedItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		
 		viewHolder.creatorFeedImageView.setImageDrawable(mContext.getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(creatorFeedModel.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(creatorFeedItem.getSupplementaryText());
 	}
 	
 	public static class CreatorFeedViewHolder
@@ -71,7 +71,7 @@ public class CreatorFeedRecyclerAdapter
 		ImageButton likeImageButton;
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
-		CreatorFeedModel creatorFeedModel;
+		CreatorFeedItem creatorFeedItem;
 		
 		public CreatorFeedViewHolder(View view) {
 			

@@ -7,7 +7,8 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class TwitchStreamModel implements WasderDataModel {
+public class TwitchStreamItem
+		implements WasderDataModel {
 	
 	private String uId;
 	private String id;
@@ -17,11 +18,11 @@ public class TwitchStreamModel implements WasderDataModel {
 	private String imageUrl;
 	private String supplementaryText;
 	
-	public TwitchStreamModel() {
+	public TwitchStreamItem() {
 		
 	}
 	
-	public TwitchStreamModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+	public TwitchStreamItem(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
 		this.uId = uId;
 		this.id = id;

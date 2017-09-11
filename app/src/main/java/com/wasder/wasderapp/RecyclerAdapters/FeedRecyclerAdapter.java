@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.FeedModel;
+import com.wasder.wasderapp.models.FeedItem;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,11 +21,11 @@ import com.wasder.wasderapp.util.Helpers;
  */
 
 public class FeedRecyclerAdapter
-		extends BaseRecyclerAdapter<FeedModel, FeedRecyclerAdapter.FeedViewHolder> {
+		extends BaseRecyclerAdapter<FeedItem, FeedRecyclerAdapter.FeedViewHolder> {
 	
 	public FeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedModel.class, R.layout.feed_item,
+		super(FeedItem.class, R.layout.feed_item,
 		      FeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -37,15 +37,15 @@ public class FeedRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedModel model, int position) {
+	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				//mListener.onFragmentInteractionListener(viewHolder.feedModel);
-				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
+				//mListener.onFragmentInteractionListener(viewHolder.feedItem);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.feedItem);
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());
@@ -72,7 +72,7 @@ public class FeedRecyclerAdapter
 		ImageButton likeImageButton;
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
-		FeedModel feedModel;
+		FeedItem feedItem;
 		
 		public FeedViewHolder(View itemView) {
 			

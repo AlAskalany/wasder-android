@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.EsportsModel;
+import com.wasder.wasderapp.models.EsportsItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -18,11 +18,11 @@ import com.wasder.wasderapp.models.EsportsModel;
  */
 
 public class EsportsRecyclerAdapter
-		extends BaseRecyclerAdapter<EsportsModel, EsportsRecyclerAdapter.EsportsViewHolder> {
+		extends BaseRecyclerAdapter<EsportsItem, EsportsRecyclerAdapter.EsportsViewHolder> {
 	
 	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EsportsModel.class, R.layout.esports_item,
+		super(EsportsItem.class, R.layout.esports_item,
 		      EsportsViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -35,7 +35,7 @@ public class EsportsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EsportsViewHolder viewHolder, EsportsModel model, int position) {
+	protected void populateViewHolder(final EsportsViewHolder viewHolder, EsportsItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
@@ -55,7 +55,7 @@ public class EsportsRecyclerAdapter
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		EsportsModel feedModel;
+		EsportsItem feedModel;
 		
 		public EsportsViewHolder(View itemView) {
 			

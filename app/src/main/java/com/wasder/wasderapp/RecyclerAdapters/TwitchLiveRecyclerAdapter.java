@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.TwitchLiveModel;
+import com.wasder.wasderapp.models.TwitchLiveItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -18,11 +18,11 @@ import com.wasder.wasderapp.models.TwitchLiveModel;
  */
 
 public class TwitchLiveRecyclerAdapter
-		extends BaseRecyclerAdapter<TwitchLiveModel, TwitchLiveRecyclerAdapter.TwitchLiveViewHolder> {
+		extends BaseRecyclerAdapter<TwitchLiveItem, TwitchLiveRecyclerAdapter.TwitchLiveViewHolder> {
 	
 	public TwitchLiveRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchLiveModel.class, R.layout.esports_item,
+		super(TwitchLiveItem.class, R.layout.esports_item,
 		      TwitchLiveViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -35,14 +35,14 @@ public class TwitchLiveRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, TwitchLiveModel model, int position) {
+	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, TwitchLiveItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchLiveModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchLiveItem);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
@@ -55,7 +55,7 @@ public class TwitchLiveRecyclerAdapter
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		TwitchLiveModel twitchLiveModel;
+		TwitchLiveItem twitchLiveItem;
 		
 		public TwitchLiveViewHolder(View itemView) {
 			

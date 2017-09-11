@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.GroupModel;
+import com.wasder.wasderapp.models.GroupItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -20,11 +20,11 @@ import com.wasder.wasderapp.models.GroupModel;
  */
 
 public class GroupsRecyclerAdapter
-		extends BaseRecyclerAdapter<GroupModel, GroupsRecyclerAdapter.GroupViewHolder> {
+		extends BaseRecyclerAdapter<GroupItem, GroupsRecyclerAdapter.GroupViewHolder> {
 	
 	public GroupsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(GroupModel.class, R.layout.group_item,
+		super(GroupItem.class, R.layout.group_item,
 		      GroupViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -36,7 +36,7 @@ public class GroupsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupModel model, int position) {
+	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
@@ -66,7 +66,7 @@ public class GroupsRecyclerAdapter
 		TextView groupTitleTextView;
 		TextView groupSubheadTextView;
 		ImageButton groupDetailsImageButton;
-		GroupModel feedModel;
+		GroupItem feedModel;
 		
 		public GroupViewHolder(View itemView) {
 			

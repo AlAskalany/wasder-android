@@ -7,7 +7,8 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class FeedModel implements WasderDataModel {
+public class GroupItem
+		implements WasderDataModel {
 	
 	private String uId;
 	private String id;
@@ -17,11 +18,11 @@ public class FeedModel implements WasderDataModel {
 	private String imageUrl;
 	private String supplementaryText;
 	
-	public FeedModel() {
+	public GroupItem() {
 		
 	}
 	
-	public FeedModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+	public GroupItem(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
 		this.uId = uId;
 		this.id = id;

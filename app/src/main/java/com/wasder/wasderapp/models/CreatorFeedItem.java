@@ -3,11 +3,13 @@ package com.wasder.wasderapp.models;
 import com.wasder.wasderapp.Interfaces.WasderDataModel;
 
 /**
- * Wasder AB CONFIDENTIAL
- * Created by ahmed on 9/8/2017.
+ * Helper class for providing sample content for user interfaces created by
+ * Android template wizards.
+ * <p>
+ * TODO: Replace all uses of this class before publishing your app.
  */
-
-public class TwitchLiveModel implements WasderDataModel {
+public class CreatorFeedItem
+		implements WasderDataModel {
 	
 	private String uId;
 	private String id;
@@ -17,11 +19,11 @@ public class TwitchLiveModel implements WasderDataModel {
 	private String imageUrl;
 	private String supplementaryText;
 	
-	public TwitchLiveModel() {
+	public CreatorFeedItem() {
 		
 	}
 	
-	public TwitchLiveModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+	public CreatorFeedItem(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
 		this.uId = uId;
 		this.id = id;

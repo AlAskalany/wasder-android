@@ -7,7 +7,8 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
  * Created by ahmed on 9/8/2017.
  */
 
-public class EventModel implements WasderDataModel {
+public class FriendEventItem
+		implements WasderDataModel {
 	
 	private String uId;
 	private String id;
@@ -17,11 +18,11 @@ public class EventModel implements WasderDataModel {
 	private String imageUrl;
 	private String supplementaryText;
 	
-	public EventModel() {
+	public FriendEventItem() {
 		
 	}
 	
-	public EventModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+	public FriendEventItem(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
 		this.uId = uId;
 		this.id = id;

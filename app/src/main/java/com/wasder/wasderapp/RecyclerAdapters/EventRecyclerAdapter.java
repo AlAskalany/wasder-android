@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.EventModel;
+import com.wasder.wasderapp.models.EventItem;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -18,11 +18,11 @@ import com.wasder.wasderapp.models.EventModel;
  */
 
 public class EventRecyclerAdapter
-		extends BaseRecyclerAdapter<EventModel, EventRecyclerAdapter.EventViewHolder> {
+		extends BaseRecyclerAdapter<EventItem, EventRecyclerAdapter.EventViewHolder> {
 	
 	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EventModel.class, R.layout.esports_item,
+		super(EventItem.class, R.layout.esports_item,
 		      EventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
@@ -35,14 +35,14 @@ public class EventRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EventViewHolder viewHolder, EventModel model, int position) {
+	protected void populateViewHolder(final EventViewHolder viewHolder, EventItem model, int position) {
 		
 		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.eventModel);
+				mListener.onFragmentInteractionListener(TAG, viewHolder.eventItem);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
@@ -55,7 +55,7 @@ public class EventRecyclerAdapter
 		View mview;
 		TextView idTextView;
 		TextView contentTextView;
-		EventModel eventModel;
+		EventItem eventItem;
 		
 		public EventViewHolder(View itemView) {
 			
