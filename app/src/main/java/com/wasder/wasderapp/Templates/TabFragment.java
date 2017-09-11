@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.wasder.wasderapp.Factories.RecyclerAdapterFactory;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
+import com.wasder.wasderapp.R;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -53,9 +54,9 @@ public class TabFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		view = inflater.inflate(resLayout, container, false);
-		if (view instanceof RecyclerView) {
+		RecyclerView recyclerView = view.findViewById(R.id.feedRecyclerView);
+		if (recyclerView instanceof RecyclerView) {
 			Context context = view.getContext();
-			RecyclerView recyclerView = (RecyclerView) view;
 			LinearLayoutManager layoutManager;
 			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
 			recyclerView.setLayoutManager(layoutManager);

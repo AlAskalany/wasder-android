@@ -95,32 +95,32 @@ public class WasderUiBuilder {
 		
 		public TabFragmentBuilder TwitchStreamTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_twitchstream_list, MyTwitchStreamRecyclerViewAdapter.class);
+			return tab("Twitch Stream", 2, R.layout.fragment_twitchstream_list, MyTwitchStreamRecyclerViewAdapter.class);
 		}
 		
 		public TabFragmentBuilder TwitchLiveTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_twitchlive_list, MyTwitchLiveRecyclerViewAdapter.class);
+			return tab("Twitch Live", 2, R.layout.fragment_twitchlive_list, MyTwitchLiveRecyclerViewAdapter.class);
 		}
 		
 		public TabFragmentBuilder EsportsTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_esports_list, MyEsportsRecyclerViewAdapter.class);
+			return tab("Esports", 2, R.layout.fragment_esports_list, MyEsportsRecyclerViewAdapter.class);
 		}
 		
 		public TabFragmentBuilder AllEventsTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_event_list, MyEventRecyclerViewAdapter.class);
+			return tab("All Events", 2, R.layout.fragment_event_list, MyEventRecyclerViewAdapter.class);
 		}
 		
 		public TabFragmentBuilder RecommendedEventsTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_recommendedevent_list, MyRecommendedEventRecyclerViewAdapter.class);
+			return tab("Recommended Events", 2, R.layout.fragment_recommendedevent_list, MyRecommendedEventRecyclerViewAdapter.class);
 		}
 		
 		public TabFragmentBuilder FriendsEventsTab() {
 			
-			return tab("Groups Feed", 2, R.layout.fragment_friendevent_list, MyFriendEventRecyclerViewAdapter.class);
+			return tab("Friends Events", 2, R.layout.fragment_friendevent_list, MyFriendEventRecyclerViewAdapter.class);
 		}
 		
 		
