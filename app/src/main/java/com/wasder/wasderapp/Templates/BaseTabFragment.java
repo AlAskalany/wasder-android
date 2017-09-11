@@ -19,7 +19,7 @@ import com.wasder.wasderapp.R;
  * Created by ahmed on 9/10/2017.
  */
 
-public class TabFragment
+public class BaseTabFragment
 		extends Fragment {
 	
 	private int columnCount;
@@ -27,9 +27,9 @@ public class TabFragment
 	private int resLayout;
 	private OnFragmentInteractionListener<Object> mListener;
 	private View view;
-	private Class<? extends RecyclerViewAdapterBase> recyclerViewAdapterBaseClass;
+	private Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass;
 	
-	public TabFragment() {
+	public BaseTabFragment() {
 		
 		super();
 	}
@@ -61,7 +61,7 @@ public class TabFragment
 			LinearLayoutManager layoutManager;
 			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
 			recyclerView.setLayoutManager(layoutManager);
-			RecyclerViewAdapterBase b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager, mListener);
+			BaseRecyclerAdapter b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager, mListener);
 			recyclerView.setAdapter(b);
 			
 		}
@@ -95,7 +95,7 @@ public class TabFragment
 		this.resLayout = resLayout;
 	}
 	
-	public void setRecyclerViewAdapterBaseClass(Class<? extends RecyclerViewAdapterBase> recyclerViewAdapterBaseClass) {
+	public void setRecyclerViewAdapterBaseClass(Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass) {
 		
 		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
 	}

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.TwitchStreamModel;
 
 /**
@@ -18,7 +18,7 @@ import com.wasder.wasderapp.models.TwitchStreamModel;
  */
 
 public class TwitchStreamRecyclerAdapter
-		extends RecyclerViewAdapterBase<TwitchStreamModel, TwitchStreamRecyclerAdapter.TwitchStreamViewHolder> {
+		extends BaseRecyclerAdapter<TwitchStreamModel, TwitchStreamRecyclerAdapter.TwitchStreamViewHolder> {
 	
 	public TwitchStreamRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		

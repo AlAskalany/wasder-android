@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.Templates.NavigationFragment;
+import com.wasder.wasderapp.Templates.BaseNavigationFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,10 +68,10 @@ public class MainActivity
 		}
 	};
 	
-	NavigationFragment homeFragment;
-	NavigationFragment liveFragment;
-	NavigationFragment marketFragment;
-	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
+	BaseNavigationFragment homeFragment;
+	BaseNavigationFragment liveFragment;
+	BaseNavigationFragment marketFragment;
+	private Map<Integer, BaseNavigationFragment> fragmentMap = new HashMap<>();
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
@@ -85,7 +85,7 @@ public class MainActivity
 			FragmentManager manager = getSupportFragmentManager();
 			FragmentTransaction ts = manager.beginTransaction();
 			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
-			NavigationFragment newFragment = null;
+			BaseNavigationFragment newFragment = null;
 			int container = R.id.framelayout_fragment_container;
 			if (currentFragment != null) {
 				manager.saveFragmentInstanceState(currentFragment);

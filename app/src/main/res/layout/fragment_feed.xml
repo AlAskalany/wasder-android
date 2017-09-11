@@ -11,7 +11,6 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="6dp"
     android:orientation="horizontal"
-    android:theme="@style/AppTheme"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp"
     app:cardMaxElevation="8dp">
@@ -108,7 +107,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/actionBarItemBackground"
-                android:tint="@color/colorPrimaryDark"
                 app:srcCompat="@drawable/ic_comment"/>
 
             <LinearLayout
@@ -128,7 +126,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_send"
                     tools:layout_editor_absoluteX="209dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -140,7 +137,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_manage"
                     tools:layout_editor_absoluteX="112dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -152,7 +148,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_bookmark"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -164,7 +159,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_share"
                     tools:layout_editor_absoluteX="306dp"
                     tools:layout_editor_absoluteY="58dp"/>

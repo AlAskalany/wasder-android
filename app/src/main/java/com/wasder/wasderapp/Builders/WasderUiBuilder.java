@@ -10,9 +10,9 @@ import com.wasder.wasderapp.RecyclerAdapters.GroupsRecyclerAdapter;
 import com.wasder.wasderapp.RecyclerAdapters.RecommendedEventsRecyclerAdapter;
 import com.wasder.wasderapp.RecyclerAdapters.TwitchLiveRecyclerAdapter;
 import com.wasder.wasderapp.RecyclerAdapters.TwitchStreamRecyclerAdapter;
-import com.wasder.wasderapp.Templates.NavigationFragment;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
-import com.wasder.wasderapp.Templates.TabFragment;
+import com.wasder.wasderapp.Templates.BaseNavigationFragment;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
+import com.wasder.wasderapp.Templates.BaseTabFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ public class WasderUiBuilder {
 		
 		private final String title;
 		private final int layout;
-		private final Class<? extends RecyclerViewAdapterBase> tabAdapter;
+		private final Class<? extends BaseRecyclerAdapter> tabAdapter;
 		
-		TabType(String title, int layout, Class<? extends RecyclerViewAdapterBase> tabAdapter) {
+		TabType(String title, int layout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
 			
 			this.title = title;
 			this.layout = layout;
@@ -55,7 +55,7 @@ public class WasderUiBuilder {
 			return this.layout;
 		}
 		
-		public Class<? extends RecyclerViewAdapterBase> getTabAdapter() {
+		public Class<? extends BaseRecyclerAdapter> getTabAdapter() {
 			
 			return this.tabAdapter;
 		}
@@ -113,9 +113,9 @@ public class WasderUiBuilder {
 	}
 	
 	public static class NavigationFragmentBuilder
-			implements BuilderBase<NavigationFragment> {
+			implements BuilderBase<BaseNavigationFragment> {
 		
-		List<TabFragment> mTabFragments = new ArrayList<>();
+		List<BaseTabFragment> mBaseTabFragments = new ArrayList<>();
 		private String mTAG;
 		private String mFragmentTitle;
 		private int mResLayout;
@@ -131,26 +131,26 @@ public class WasderUiBuilder {
 		 * @return the t
 		 */
 		@Override
-		public NavigationFragment build() {
+		public BaseNavigationFragment build() {
 			
-			NavigationFragment navigationFragment = new NavigationFragment();
+			BaseNavigationFragment baseNavigationFragment = new BaseNavigationFragment();
 			
-			navigationFragment.setmTAG(mTAG);
-			navigationFragment.setmFragmentTitle(mFragmentTitle);
-			navigationFragment.setmResLayout(mResLayout);
-			navigationFragment.setmResToolbar(mResToolbar);
-			navigationFragment.setmResDrawerLayout(mResDrawerLayout);
-			navigationFragment.setmResNavigationView(mResNavigationView);
-			navigationFragment.setmResViewPager(mResViewPager);
-			navigationFragment.setmResTabLayout(mResTabLayout);
-			navigationFragment.setmTabFragments(mTabFragments);
-			return navigationFragment;
+			baseNavigationFragment.setmTAG(mTAG);
+			baseNavigationFragment.setmFragmentTitle(mFragmentTitle);
+			baseNavigationFragment.setmResLayout(mResLayout);
+			baseNavigationFragment.setmResToolbar(mResToolbar);
+			baseNavigationFragment.setmResDrawerLayout(mResDrawerLayout);
+			baseNavigationFragment.setmResNavigationView(mResNavigationView);
+			baseNavigationFragment.setmResViewPager(mResViewPager);
+			baseNavigationFragment.setmResTabLayout(mResTabLayout);
+			baseNavigationFragment.setmBaseTabFragments(mBaseTabFragments);
+			return baseNavigationFragment;
 		}
 		
 		public NavigationFragmentBuilder addTab(TabType tabType) {
 			
-			mTabFragments.add(new WasderUiBuilder.TabFragmentBuilder().addTab(tabType)
-			                                                          .build());
+			mBaseTabFragments.add(new WasderUiBuilder.TabFragmentBuilder().addTab(tabType)
+			                                                              .build());
 			return this;
 		}
 		
@@ -212,14 +212,14 @@ public class WasderUiBuilder {
 	 * The type Tab fragment builder.
 	 */
 	public static class TabFragmentBuilder
-			implements BuilderBase<TabFragment> {
+			implements BuilderBase<BaseTabFragment> {
 		
-		//(String title, int columnCount, int resLayout, Class<? extends RecyclerViewAdapterBase>
+		//(String title, int columnCount, int resLayout, Class<? extends BaseRecyclerAdapter>
 		//recyclerViewAdapterBaseClass)
 		private String title;
 		private Integer columnCount = 1;
 		private Integer resLayout = null;
-		private Class<? extends RecyclerViewAdapterBase> recyclerAdapterClass = null;
+		private Class<? extends BaseRecyclerAdapter> recyclerAdapterClass = null;
 		
 		/**
 		 * Title tab fragment builder.
@@ -259,7 +259,7 @@ public class WasderUiBuilder {
 		 * @param tabAdapter the tab adapter
 		 * @return the tab fragment builder
 		 */
-		TabFragmentBuilder tab(String title, NumColumns numColumns, int resLayout, Class<? extends RecyclerViewAdapterBase> tabAdapter) {
+		TabFragmentBuilder tab(String title, NumColumns numColumns, int resLayout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
 			
 			this.title = title;
 			this.columnCount = numColumns.getValue();
@@ -269,9 +269,9 @@ public class WasderUiBuilder {
 		}
 		
 		@Override
-		public TabFragment build() {
+		public BaseTabFragment build() {
 			
-			TabFragment fragment = new TabFragment();
+			BaseTabFragment fragment = new BaseTabFragment();
 			fragment.setTitle(title);
 			fragment.setResLayout(resLayout);
 			fragment.setColumnCount(columnCount);

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.EventModel;
 
 /**
@@ -18,7 +18,7 @@ import com.wasder.wasderapp.models.EventModel;
  */
 
 public class EventRecyclerAdapter
-		extends RecyclerViewAdapterBase<EventModel, EventRecyclerAdapter.EventViewHolder> {
+		extends BaseRecyclerAdapter<EventModel, EventRecyclerAdapter.EventViewHolder> {
 	
 	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		

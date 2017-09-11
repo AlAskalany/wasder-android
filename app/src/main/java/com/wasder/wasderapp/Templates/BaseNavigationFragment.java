@@ -31,7 +31,7 @@ import java.util.Map;
  * Created by ahmed on 9/10/2017.
  */
 
-public class NavigationFragment
+public class BaseNavigationFragment
 		extends Fragment
 		implements NavigationView.OnNavigationItemSelectedListener {
 	
@@ -51,18 +51,18 @@ public class NavigationFragment
 	private int mResNavigationView;
 	private int mResViewPager;
 	private int mResTabLayout;
-	private List<TabFragment> mTabFragments = new ArrayList<>();
+	private List<BaseTabFragment> mBaseTabFragments = new ArrayList<>();
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
 	
-	public NavigationFragment() {
+	public BaseNavigationFragment() {
 		
 	}
 	
-	public static NavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout,
+	public static BaseNavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resToolbar, int resDrawerLayout,
 			int resNavigationView, int resViewPager, int resTabLayout) {
 		
-		NavigationFragment fragment = new NavigationFragment();
+		BaseNavigationFragment fragment = new BaseNavigationFragment();
 		//		Bundle args = new Bundle();
 		//		args.putString(ARG_TAG, tag);
 		//		args.putString(ARG_TITLE, fragmentTitle);
@@ -76,14 +76,14 @@ public class NavigationFragment
 		return fragment;
 	}
 	
-	public List<TabFragment> getmTabFragments() {
+	public List<BaseTabFragment> getmBaseTabFragments() {
 		
-		return mTabFragments;
+		return mBaseTabFragments;
 	}
 	
-	public void setmTabFragments(List<TabFragment> mTabFragments) {
+	public void setmBaseTabFragments(List<BaseTabFragment> mBaseTabFragments) {
 		
-		this.mTabFragments = mTabFragments;
+		this.mBaseTabFragments = mBaseTabFragments;
 	}
 	
 	@Override
@@ -125,7 +125,7 @@ public class NavigationFragment
 		//	actionBar.setTitle(mFragmentTitle);
 		//}
 		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-		for (TabFragment tab : mTabFragments) {
+		for (BaseTabFragment tab : mBaseTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
 		ViewPager viewPager = view.findViewById(mResViewPager);

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,12 +16,13 @@ import java.lang.reflect.InvocationTargetException;
 
 public class RecyclerAdapterFactory {
 	
-	public static RecyclerViewAdapterBase getInstance(Class<? extends RecyclerViewAdapterBase> fragmentClass, Context context, LinearLayoutManager
+	public static BaseRecyclerAdapter getInstance(Class<? extends BaseRecyclerAdapter> fragmentClass, Context context, LinearLayoutManager
 			layoutManager, OnFragmentInteractionListener mListener) {
 		
 		try {
-			Constructor<? extends RecyclerViewAdapterBase> con = fragmentClass.getConstructor(Context.class, LinearLayoutManager.class,
-					OnFragmentInteractionListener.class);
+			Constructor<? extends BaseRecyclerAdapter> con = fragmentClass.getConstructor(Context.class,
+			                                                                              LinearLayoutManager.class,
+			                                                                              OnFragmentInteractionListener.class);
 			return con.newInstance(context, layoutManager, mListener);
 		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();

@@ -18,8 +18,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
@@ -29,8 +28,7 @@
             android:label="@string/title_activity_login">
         </activity>
         <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -38,53 +36,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.ProfileActivity">
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.home.GroupActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.home.GroupActivity">
         </activity>
         <activity
-            android:name=".ui.home.CreatorFeedActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.home.CreatorFeedActivity">
         </activity>
         <activity
-            android:name=".ui.home.FeedActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.home.FeedActivity">
         </activity>
         <activity
-            android:name=".ui.live.EsportsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.live.EsportsActivity">
         </activity>
         <activity
-            android:name=".ui.live.TwitchStreamActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.live.TwitchStreamActivity">
         </activity>
         <activity
-            android:name=".ui.live.TwitchLiveActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.live.TwitchLiveActivity">
         </activity>
         <activity
-            android:name=".ui.market.EventActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.market.EventActivity">
         </activity>
         <activity
-            android:name=".ui.market.FriendEventActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.market.FriendEventActivity">
         </activity>
         <activity
-            android:name=".ui.market.RecommendedEventActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.market.RecommendedEventActivity">
         </activity>
     </application>
 

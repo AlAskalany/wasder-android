@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.EsportsModel;
 
 /**
@@ -18,7 +18,7 @@ import com.wasder.wasderapp.models.EsportsModel;
  */
 
 public class EsportsRecyclerAdapter
-		extends RecyclerViewAdapterBase<EsportsModel, EsportsRecyclerAdapter.EsportsViewHolder> {
+		extends BaseRecyclerAdapter<EsportsModel, EsportsRecyclerAdapter.EsportsViewHolder> {
 	
 	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		

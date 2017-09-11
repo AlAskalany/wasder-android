@@ -151,7 +151,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_send"
                     tools:layout_editor_absoluteX="209dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -163,7 +162,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_manage"
                     tools:layout_editor_absoluteX="112dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -175,7 +173,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_bookmark"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -187,7 +184,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_menu_share"
                     tools:layout_editor_absoluteX="306dp"
                     tools:layout_editor_absoluteY="58dp"/>

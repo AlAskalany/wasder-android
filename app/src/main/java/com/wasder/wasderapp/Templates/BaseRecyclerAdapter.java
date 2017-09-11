@@ -15,14 +15,15 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
  * Created by ahmed on 9/10/2017.
  */
 
-public abstract class RecyclerViewAdapterBase<M extends WasderDataModel, V extends RecyclerView.ViewHolder> extends FirebaseRecyclerAdapter<M, V> {
+public abstract class BaseRecyclerAdapter<M extends WasderDataModel, V extends RecyclerView.ViewHolder>
+		extends FirebaseRecyclerAdapter<M, V> {
 	
 	protected String TAG;
 	protected Context mContext;
 	protected OnFragmentInteractionListener<Object> mListener;
 	protected RecyclerView.LayoutManager layoutManager;
 	
-	public RecyclerViewAdapterBase(Class<M> modelClass, int modelLayout, Class<V> viewHolderClass, Query ref, String TAG, Context mContext,
+	public BaseRecyclerAdapter(Class<M> modelClass, int modelLayout, Class<V> viewHolderClass, Query ref, String TAG, Context mContext,
 	                               OnFragmentInteractionListener mListener, final LinearLayoutManager layoutManager) {
 		
 		super(modelClass, modelLayout, viewHolderClass, ref);

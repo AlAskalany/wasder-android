@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.Templates.RecyclerViewAdapterBase;
+import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.CreatorFeedModel;
 import com.wasder.wasderapp.util.Helpers;
 
@@ -20,7 +20,7 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/10/2017.
  */
 public class CreatorFeedRecyclerAdapter
-		extends RecyclerViewAdapterBase<CreatorFeedModel, CreatorFeedRecyclerAdapter.CreatorFeedViewHolder> {
+		extends BaseRecyclerAdapter<CreatorFeedModel, CreatorFeedRecyclerAdapter.CreatorFeedViewHolder> {
 	
 	public CreatorFeedRecyclerAdapter(Context context, LinearLayoutManager linearLayoutManager, OnFragmentInteractionListener mListener) {
 		
