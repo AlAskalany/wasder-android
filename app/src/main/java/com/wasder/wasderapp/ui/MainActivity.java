@@ -42,7 +42,11 @@ import java.util.Map;
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener, FragmentManager.OnBackStackChangedListener {
+public class MainActivity
+		extends AppCompatActivity
+		implements NavigationView.OnNavigationItemSelectedListener,
+		           OnFragmentInteractionListener,
+		           FragmentManager.OnBackStackChangedListener {
 	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
@@ -51,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	ServiceConnection mServiceConn = new ServiceConnection() {
 		
 		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
+		public void onServiceConnected(ComponentName name,
+		                               IBinder service) {
 			
 			mService = IInAppBillingService.Stub.asInterface(service);
 		}
@@ -87,7 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}
 			newFragment = fragmentMap.get(item.getItemId());
 			if (newFragment != currentFragment) {
-				ts.replace(R.id.framelayout_fragment_container, newFragment);
+				ts.replace(R.id.framelayout_fragment_container,
+				           newFragment);
 				ts.addToBackStack(null);
 				ts.commit();
 				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
@@ -109,20 +115,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		setContentView(R.layout.activity_main);
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
 		serviceIntent.setPackage("com.android.vending");
-		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent,
+		            mServiceConn,
+		            Context.BIND_AUTO_CREATE);
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
 		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout),
 		// "Connection", 2000);
 		//snackbar.show();
 		if (activeInfo != null && activeInfo.isConnected()) {
-			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,
+			               "Connected",
+			               Toast.LENGTH_SHORT)
+			     .show();
 		} else {
-			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,
+			               "No Network Connection",
+			               Toast.LENGTH_SHORT)
+			     .show();
 		}
 		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
-				.default_web_client_id)).requestEmail().build();
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+		
+		                                                                                              .requestEmail()
+		                                                                                              .build();
 		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -132,7 +148,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				
 				FirebaseUser user = mAuth.getCurrentUser();
 				if (user != null) {
-					Log.d(TAG, "Signed in");
+					Log.d(TAG,
+					      "Signed in");
 					mUserName = user.getDisplayName();
 					mEmail = user.getEmail();
 					mPhotoUrl = user.getPhotoUrl();
@@ -145,8 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					emailTextView = headerView.findViewById(R.id.nav_header_user_details);
 					emailTextView.setText(mEmail);
 				} else {
-					Log.d(TAG, "Signed out");
-					startActivity(new Intent(MainActivity.this, LoginActivity.class));
+					Log.d(TAG,
+					      "Signed out");
+					startActivity(new Intent(MainActivity.this,
+					                         LoginActivity.class));
 					finish();
 				}
 			}
@@ -156,13 +175,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		liveFragment = new LiveFragment();
 		marketFragment = new MarketFragment();
 		
-		fragmentMap.put(R.id.navigation_home, homeFragment);
-		fragmentMap.put(R.id.navigation_live, liveFragment);
-		fragmentMap.put(R.id.navigation_market, marketFragment);
+		fragmentMap.put(R.id.navigation_home,
+		                homeFragment);
+		fragmentMap.put(R.id.navigation_live,
+		                liveFragment);
+		fragmentMap.put(R.id.navigation_market,
+		                marketFragment);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
+		transaction.add(R.id.framelayout_fragment_container,
+		                homeFragment,
+		                "Home");
 		transaction.commit();
 		
 		//region Bottom_Navigation
@@ -199,7 +223,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onBackPressed() {
 		
-		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+		Log.d("BackStackCount",
+		      String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
@@ -212,7 +237,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main,
+		                          menu);
 		return true;
 	}
 	
@@ -225,7 +251,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
-			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+			startActivity(new Intent(MainActivity.this,
+			                         SettingsActivity.class));
 			return true;
 		} else if (id == R.id.action_sign_outout) {
 			mAuth.signOut();
@@ -266,7 +293,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onBackStackChanged() {
 		
-		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+		Log.d(TAG,
+		      String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 	}
 	
 	@Override
