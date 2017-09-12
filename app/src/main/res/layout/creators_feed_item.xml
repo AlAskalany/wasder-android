@@ -170,6 +170,7 @@
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
                     android:contentDescription="@string/bookmark_button_description"
+                    android:tint="@android:color/white"
                     app:srcCompat="@drawable/ic_bookmark_black_24dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="58dp"/>
