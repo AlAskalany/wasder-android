@@ -10,6 +10,7 @@
     android:layout_marginEnd="@dimen/card_view_margin_end"
     android:layout_marginStart="@dimen/card_view_margin_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
+    android:elevation="2dp"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal"
     app:cardCornerRadius="@dimen/cardview_corner_radius"
