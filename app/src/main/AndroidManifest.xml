@@ -53,39 +53,81 @@
         </activity>
         <activity
             android:name=".ui.home.GroupActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.home.CreatorFeedActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.home.FeedActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.live.EsportsActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.live.TwitchStreamActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.live.TwitchLiveActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.social.EventActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
             android:name=".ui.social.FriendEventActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.social.RecommendedEventActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
     </application>
 

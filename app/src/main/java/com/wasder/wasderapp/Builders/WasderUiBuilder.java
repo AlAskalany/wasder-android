@@ -24,21 +24,25 @@ import java.util.List;
 public class WasderUiBuilder {
 	
 	public enum TabType {
-		Feed("Feed", R.layout.feed_recycler_view, FeedRecyclerAdapter.class),
-		Creators("Creators", R.layout.creators_feed_recycler_view, CreatorFeedRecyclerAdapter.class),
-		Groups("Groups", R.layout.groups_recycler_view, GroupsRecyclerAdapter.class),
-		TwitchStream("Twitch Streams", R.layout.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class),
-		TwitchLive("Twitch Live", R.layout.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class),
-		Esports("Esports", R.layout.esports_recycler_view, EsportsRecyclerAdapter.class),
-		AllEvents("All Events", R.layout.events_recycler_view, EventRecyclerAdapter.class),
-		RecommendedEvents("Recommended Events", R.layout.recommended_events_recycler_view, RecommendedEventsRecyclerAdapter.class),
-		FriendsEvents("Friends Events", R.layout.friends_events_recycler_view, FriendsEventsRecyclerAdapter.class);
+		Feed("FeedFragment", "Feed", R.layout.feed_recycler_view, FeedRecyclerAdapter.class),
+		Creators("CreatorsFragment", "Creators", R.layout.creators_feed_recycler_view, CreatorFeedRecyclerAdapter.class),
+		Groups("GroupsFragment", "Groups", R.layout.groups_recycler_view, GroupsRecyclerAdapter.class),
+		TwitchStream("TwitchStreamFragment", "Twitch Streams", R.layout.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class),
+		TwitchLive("TwitchLiveFragment", "Twitch Live", R.layout.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class),
+		Esports("EsportsFragment", "Esports", R.layout.esports_recycler_view, EsportsRecyclerAdapter.class),
+		AllEvents("EventsFragment", "All Events", R.layout.events_recycler_view, EventRecyclerAdapter.class),
+		RecommendedEvents("RecommendedEventsFragment",
+		                  "Recommended Events",
+		                  R.layout.recommended_events_recycler_view,
+		                  RecommendedEventsRecyclerAdapter.class),
+		FriendsEvents("FriendsEventsFragment", "Friends Events", R.layout.friends_events_recycler_view, FriendsEventsRecyclerAdapter.class);
 		
 		private final String title;
 		private final int layout;
 		private final Class<? extends BaseRecyclerAdapter> tabAdapter;
+		private String tag;
 		
-		TabType(String title, int layout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
+		TabType(String tag, String title, int layout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
 			
 			this.title = title;
 			this.layout = layout;
@@ -58,6 +62,11 @@ public class WasderUiBuilder {
 		public Class<? extends BaseRecyclerAdapter> getTabAdapter() {
 			
 			return this.tabAdapter;
+		}
+		
+		public String getTag() {
+			
+			return tag;
 		}
 	}
 	
@@ -216,6 +225,7 @@ public class WasderUiBuilder {
 		
 		//(String title, int columnCount, int resLayout, Class<? extends BaseRecyclerAdapter>
 		//recyclerViewAdapterBaseClass)
+		private String mTAG;
 		private String title;
 		private Integer columnCount = 1;
 		private Integer resLayout = null;
@@ -247,7 +257,7 @@ public class WasderUiBuilder {
 		
 		public TabFragmentBuilder createTab(TabType tabType) {
 			
-			return tab(tabType.getTitle(), NumColumns.ONE, tabType.getLayout(), tabType.getTabAdapter());
+			return tab(tabType.getTag(), tabType.getTitle(), NumColumns.ONE, tabType.getLayout(), tabType.getTabAdapter());
 		}
 		
 		/**
@@ -259,8 +269,9 @@ public class WasderUiBuilder {
 		 * @param tabAdapter the tab adapter
 		 * @return the tab fragment builder
 		 */
-		TabFragmentBuilder tab(String title, NumColumns numColumns, int resLayout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
+		TabFragmentBuilder tab(String tag, String title, NumColumns numColumns, int resLayout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
 			
+			this.mTAG = tag;
 			this.title = title;
 			this.columnCount = numColumns.getValue();
 			this.resLayout = resLayout;
@@ -272,6 +283,7 @@ public class WasderUiBuilder {
 		public BaseTabFragment build() {
 			
 			BaseTabFragment fragment = new BaseTabFragment();
+			fragment.setTag(mTAG);
 			fragment.setTitle(title);
 			fragment.setResLayout(resLayout);
 			fragment.setColumnCount(columnCount);

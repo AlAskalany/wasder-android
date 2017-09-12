@@ -11,6 +11,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.TwitchStreamItem;
+import com.wasder.wasderapp.util.Helpers;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -42,7 +43,7 @@ public class TwitchStreamRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.twitchStreamItem);
+				mListener.onFragmentInteractionListener(Helpers.TAG.TwitchStreamFragment, viewHolder.twitchStreamItem);
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");

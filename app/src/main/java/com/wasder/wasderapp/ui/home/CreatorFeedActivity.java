@@ -6,7 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.wasder.wasderapp.R;
 
-public class CreatorFeedActivity extends AppCompatActivity {
+public class CreatorFeedActivity
+		extends AppCompatActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +15,7 @@ public class CreatorFeedActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_creator_feed);
 		String s = getIntent().getStringExtra("Name");
-		Toolbar toolbar = findViewById(R.id.toolbar8);
+		Toolbar toolbar = findViewById(R.id.creator_feed_toolbar);
 		toolbar.setTitle(s);
 	}
 }

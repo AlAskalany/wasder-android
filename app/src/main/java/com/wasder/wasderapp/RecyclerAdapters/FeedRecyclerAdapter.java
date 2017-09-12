@@ -45,7 +45,7 @@ public class FeedRecyclerAdapter
 			public void onClick(View view) {
 				
 				//mListener.onFragmentInteractionListener(viewHolder.feedItem);
-				mListener.onFragmentInteractionListener(TAG, viewHolder.feedItem);
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem);
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());

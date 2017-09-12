@@ -32,10 +32,20 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wasder.wasderapp.AccountActivity;
 import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
+import com.wasder.wasderapp.ui.home.CreatorFeedActivity;
+import com.wasder.wasderapp.ui.home.GroupActivity;
+import com.wasder.wasderapp.ui.live.EsportsActivity;
+import com.wasder.wasderapp.ui.live.TwitchLiveActivity;
+import com.wasder.wasderapp.ui.live.TwitchStreamActivity;
+import com.wasder.wasderapp.ui.social.EventActivity;
+import com.wasder.wasderapp.ui.social.FriendEventActivity;
+import com.wasder.wasderapp.ui.social.RecommendedEventActivity;
+import com.wasder.wasderapp.util.Helpers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -301,9 +311,10 @@ public class MainActivity
 		
 		switch (id) {
 			case R.id.nav_account:
+				startActivity(new Intent(MainActivity.this, AccountActivity.class));
 				break;
 			case R.id.nav_settings:
-				
+				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 				break;
 		}
 		
@@ -325,6 +336,35 @@ public class MainActivity
 	@Override
 	public void onFragmentInteractionListener(String tag, Object data) {
 		
-		Log.d(TAG, tag);
+		switch (tag) {
+			case Helpers.TAG.FeedFragment:
+				startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+				break;
+			case Helpers.TAG.CreatorsFragment:
+				startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
+				break;
+			case Helpers.TAG.GroupsFragment:
+				startActivity(new Intent(MainActivity.this, GroupActivity.class));
+				break;
+			case Helpers.TAG.TwitchStreamFragment:
+				startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
+				break;
+			case Helpers.TAG.TwitchLiveFragment:
+				startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
+				break;
+			case Helpers.TAG.EsportsFragment:
+				startActivity(new Intent(MainActivity.this, EsportsActivity.class));
+				break;
+			case Helpers.TAG.EventsFragment:
+				startActivity(new Intent(MainActivity.this, EventActivity.class));
+				break;
+			case Helpers.TAG.RecommendedEventsFragment:
+				startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
+				break;
+			case Helpers.TAG.FriendsEventsFragment:
+				startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
+				break;
+			
+		}
 	}
 }

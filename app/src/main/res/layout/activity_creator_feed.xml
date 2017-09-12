@@ -8,7 +8,7 @@
     tools:context="com.wasder.wasderapp.ui.home.CreatorFeedActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar8"
+        android:id="@+id/creator_feed_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

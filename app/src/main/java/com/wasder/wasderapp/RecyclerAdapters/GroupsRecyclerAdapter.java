@@ -13,6 +13,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.GroupItem;
+import com.wasder.wasderapp.util.Helpers;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -43,7 +44,7 @@ public class GroupsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel);
 			}
 		});
 		viewHolder.groupImageView.setImageDrawable(mContext.getResources()

@@ -110,4 +110,15 @@
     <string name="id">id</string>
     <string name="nav_action_account">Account</string>
     <string name="nav_action_settings">Settings</string>
+    <string name="feed_fragment_tag">FeedFragment</string>
+    <string name="creators_fragment_tag">CreatorsFragment</string>
+    <string name="groups_fragment_tag">GroupsFragment</string>
+    <string name="twitch_stream_fragment_tag">TwitchStreamFragment</string>
+    <string name="twitch_live_fragment_tag">TwitchLiveFragment</string>
+    <string name="esports_fragment_tag">EsportsFragment</string>
+    <string name="events_fragment_tag">EventsFragment</string>
+    <string name="recommended_events_fragment_tag">RecommendedFragment</string>
+    <string name="friends_events_fragment_tag">FriendsEventsFragment</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

@@ -21,6 +21,19 @@ import com.wasder.wasderapp.Templates.BaseNavigationFragment;
 
 public class Helpers {
 	
+	public static class TAG {
+		
+		public static final String FeedFragment = "FeedFragment";
+		public static final String CreatorsFragment = "CreatorsFragment";
+		public static final String GroupsFragment = "GroupsFragment";
+		public static final String TwitchLiveFragment = "TwitchLiveFragment";
+		public static final String TwitchStreamFragment = "TwitchStreamFragment";
+		public static final String EsportsFragment = "EsportsFragment";
+		public static final String EventsFragment = "EventsFragment";
+		public static final String RecommendedEventsFragment = "RecommendedEventsFragment";
+		public static final String FriendsEventsFragment = "FriendsEventsFragment";
+	}
+	
 	public static class Firebase {
 		
 		private static final String TAG = "FirebaseHelper";

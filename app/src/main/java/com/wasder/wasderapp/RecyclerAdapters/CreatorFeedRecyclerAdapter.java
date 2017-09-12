@@ -43,7 +43,7 @@ public class CreatorFeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(TAG, viewHolder.creatorFeedItem);
+				mListener.onFragmentInteractionListener(Helpers.TAG.CreatorsFragment, viewHolder.creatorFeedItem);
 			}
 		});
 		viewHolder.titleTextView.setText(creatorFeedItem.getTitle());

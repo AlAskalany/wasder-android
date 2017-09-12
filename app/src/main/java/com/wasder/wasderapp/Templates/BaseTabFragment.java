@@ -28,6 +28,7 @@ public class BaseTabFragment
 	private OnFragmentInteractionListener<Object> mListener;
 	private View view;
 	private Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass;
+	private String mTAG;
 	
 	public BaseTabFragment() {
 		
@@ -98,5 +99,10 @@ public class BaseTabFragment
 	public void setRecyclerViewAdapterBaseClass(Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass) {
 		
 		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
+	}
+	
+	public void setTag(String tag) {
+		
+		this.mTAG = tag;
 	}
 }

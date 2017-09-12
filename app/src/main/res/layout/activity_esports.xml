@@ -8,6 +8,7 @@
     tools:context="com.wasder.wasderapp.ui.live.EsportsActivity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/esports_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

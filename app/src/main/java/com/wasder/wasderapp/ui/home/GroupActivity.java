@@ -9,7 +9,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.wasder.wasderapp.R;
 
-public class GroupActivity extends AppCompatActivity {
+public class GroupActivity
+		extends AppCompatActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,7 @@ public class GroupActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			actionBar.setDisplayShowHomeEnabled(true);
-			actionBar.setHomeAsUpIndicator(R.drawable.ic_home_black_24dp);
-			actionBar.setHomeButtonEnabled(true);
-			actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
 			//actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 	}
