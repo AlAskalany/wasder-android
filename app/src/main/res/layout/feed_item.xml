@@ -6,14 +6,13 @@
     android:id="@+id/feed_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="6dp"
+    android:layout_marginBottom="@dimen/card_view_margin_bottom"
+    android:layout_marginEnd="@dimen/card_view_margin_end"
+    android:layout_marginStart="@dimen/card_view_margin_start"
+    android:layout_marginTop="@dimen/card_view_margin_top"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="2dp"
-    app:cardMaxElevation="8dp">
+    app:cardCornerRadius="@dimen/cardview_corner_radius">
 
     <LinearLayout
         android:layout_width="match_parent"

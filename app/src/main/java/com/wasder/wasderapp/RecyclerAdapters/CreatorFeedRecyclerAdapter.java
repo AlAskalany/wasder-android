@@ -79,7 +79,7 @@ public class CreatorFeedRecyclerAdapter
 			mView = view;
 			creatorFeedImageView = view.findViewById(R.id.creator_feed_imageView);
 			subheadTextView = view.findViewById(R.id.creator_feed_subhead_textView);
-			likeImageButton = view.findViewById(R.id.creator_feed_likee_imageButton);
+			likeImageButton = view.findViewById(R.id.creator_feed_like_imageButton);
 			shareImageButton = view.findViewById(R.id.creator_feed_share_imageButton);
 			commentImageButton = view.findViewById(R.id.creator_feed_comment_imageButton);
 			//mDetailsButton = (ImageButton) view.findViewById(R.id.feed_card_avatar);

@@ -109,4 +109,14 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="creators_feed_title">Title</string>
+    <string name="creator">Creator</string>
+    <string name="creator_description">Description</string>
+    <string name="bookmark_button_description">bookmark button</string>
+    <string name="comment_button_description">comment button</string>
+    <string name="like_button_description">like button</string>
+    <string name="share_button_description">share button</string>
+    <string name="creator_avatar_description">creator avatar</string>
+    <string name="creator_event_photo_description">creator event photo</string>
+    <string name="play_button_description">play button</string>
 </resources>
