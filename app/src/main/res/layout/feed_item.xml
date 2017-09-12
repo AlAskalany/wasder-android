@@ -12,7 +12,9 @@
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal"
-    app:cardCornerRadius="@dimen/cardview_corner_radius">
+    app:cardCornerRadius="@dimen/cardview_corner_radius"
+    app:cardElevation="@dimen/cardView_elevation"
+    app:cardMaxElevation="@dimen/cardView_max_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
