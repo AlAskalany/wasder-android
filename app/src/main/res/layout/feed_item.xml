@@ -87,86 +87,78 @@
             android:text="@string/cardView_supplementary_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <ImageButton
                 android:id="@+id/feed_card_comment_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:background="?attr/actionBarItemBackground"
                 android:contentDescription="@string/image_description"
                 android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_comment_black_24dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="8dp">
+            <ImageButton
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                app:srcCompat="@drawable/ic_menu_send"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="58dp"/>
 
-                <ImageButton
-                    style="@style/Widget.AppCompat.ImageButton"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/image_description"
-                    app:srcCompat="@drawable/ic_menu_send"
-                    tools:layout_editor_absoluteX="209dp"
-                    tools:layout_editor_absoluteY="58dp"/>
+            <ImageButton
+                android:id="@+id/feed_likee_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                app:srcCompat="@drawable/ic_menu_manage"
+                tools:layout_editor_absoluteX="112dp"
+                tools:layout_editor_absoluteY="58dp"/>
 
-                <ImageButton
-                    android:id="@+id/feed_likee_imageButton"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/image_description"
-                    app:srcCompat="@drawable/ic_menu_manage"
-                    tools:layout_editor_absoluteX="112dp"
-                    tools:layout_editor_absoluteY="58dp"/>
+            <ImageButton
+                android:id="@+id/feed_bookmark_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_bookmark_black_24dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp"/>
 
-                <ImageButton
-                    android:id="@+id/feed_bookmark_imageButton"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/image_description"
-                    android:tint="@android:color/white"
-                    app:srcCompat="@drawable/ic_bookmark_black_24dp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="58dp"/>
-
-                <ImageButton
-                    android:id="@+id/feed_share_imageButton"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:contentDescription="@string/image_description"
-                    app:srcCompat="@drawable/ic_menu_share"
-                    tools:layout_editor_absoluteX="306dp"
-                    tools:layout_editor_absoluteY="58dp"/>
-            </LinearLayout>
-        </FrameLayout>
+            <ImageButton
+                android:id="@+id/feed_share_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                app:srcCompat="@drawable/ic_menu_share"
+                tools:layout_editor_absoluteX="306dp"
+                tools:layout_editor_absoluteY="58dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
