@@ -46,7 +46,8 @@ public class GroupsRecyclerAdapter
 				mListener.onFragmentInteractionListener(TAG, viewHolder.feedModel);
 			}
 		});
-		viewHolder.groupImageView.setImageDrawable(mContext.getDrawable(R.drawable.gamers));
+		viewHolder.groupImageView.setImageDrawable(mContext.getResources()
+		                                                   .getDrawable(R.drawable.gamers));
 		viewHolder.groupTitleTextView.setText("My Group!");
 		viewHolder.groupSubheadTextView.setText("Best Eva!");
 		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -10,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:visibility="visible"
     tools:context="com.wasder.wasderapp.ui.LoginActivity">
 
     <!-- Login progress -->
@@ -24,18 +24,21 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:visibility="visible"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/email_TextInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
@@ -44,14 +47,14 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    />
+                    android:visibility="visible"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/password_textInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
                 <EditText
                     android:id="@+id/password"
@@ -63,7 +66,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:lines="1"
-                    />
+                    android:visibility="visible"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="visible"/>
 
             <Button
                 android:id="@+id/email_register_button"
@@ -83,13 +87,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_register"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="visible"/>
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:visibility="visible"/>
 
         </LinearLayout>
     </ScrollView>

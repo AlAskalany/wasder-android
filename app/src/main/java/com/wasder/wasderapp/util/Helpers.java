@@ -48,7 +48,9 @@ public class Helpers {
 				}
 			} else {
 				if (replace) {
-					Drawable defaultImage = imageView.getContext().getDrawable(resImage);
+					Drawable defaultImage = imageView.getContext()
+					                                 .getResources()
+					                                 .getDrawable(resImage);
 					if (defaultImage != null) {
 						imageView.setImageDrawable(defaultImage);
 					} else {

@@ -5,15 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_tabbed">TabbedActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_live">Live</string>
     <string name="title_market">Market</string>
     <string name="title_activity_login">Sign in</string>
@@ -33,9 +27,6 @@
     <string name="action_sign_out">Sign Out</string>
     <string name="action_register">Register</string>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -84,20 +75,6 @@
         <item>-1</item>
     </string-array>
 
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value"/>
-
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
@@ -119,4 +96,16 @@
     <string name="creator_avatar_description">creator avatar</string>
     <string name="creator_event_photo_description">creator event photo</string>
     <string name="play_button_description">play button</string>
+    <string name="image_description">image description</string>
+    <string name="cardView_supplementary_text">Card gutters and margins may vary on larger screen sizes, as long as they follow Material Design 8dp grid. Card margins and gutters can be 8, 16, 24, or 40dp wide.</string>
+    <string name="subhead">Subhead</string>
+    <string name="title">Title</string>
+    <string name="chat_message">TextView</string>
+    <string name="button">Button</string>
+    <string name="textview">TextView</string>
+    <string name="event">Event</string>
+    <string name="content">Content</string>
+    <string name="nav_header_name">Android Studio</string>
+    <string name="nav_header_email">android.studio@android.com</string>
+    <string name="id">id</string>
 </resources>

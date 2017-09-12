@@ -3,14 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/feed_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_view_margin_bottom"
     android:layout_marginEnd="@dimen/card_view_margin_end"
     android:layout_marginStart="@dimen/card_view_margin_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
-    android:elevation="2dp"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal"
     app:cardCornerRadius="@dimen/cardview_corner_radius"
@@ -23,35 +21,28 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/feed_card_header_area"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:elevation="2dp">
-
-                <ImageButton
-                    android:id="@+id/feed_card_avatar"
-                    style="@style/Widget.AppCompat.ImageButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:background="?android:attr/actionBarItemBackground"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/ic_launcher_round"
-                    tools:layout_editor_absoluteX="32dp"
-                    tools:layout_editor_absoluteY="37dp"/>
-            </FrameLayout>
-
-            <LinearLayout
-                android:id="@+id/feed_card_title_subheader_area"
+            <ImageButton
+                android:id="@+id/feed_card_avatar"
+                style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/ic_launcher_round"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="37dp"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -60,8 +51,7 @@
                     android:id="@+id/feed_card_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Title"
+                    android:text="@string/title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     tools:layout_editor_absoluteX="220dp"
                     tools:layout_editor_absoluteY="37dp"/>
@@ -70,8 +60,7 @@
                     android:id="@+id/feed_card_subheader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Subhead"
+                    android:text="@string/subhead"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     tools:layout_editor_absoluteX="112dp"
                     tools:layout_editor_absoluteY="37dp"/>
@@ -85,6 +74,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:contentDescription="@string/image_description"
             android:maxHeight="200dp"
             android:minHeight="100dp"
             android:scaleType="centerCrop"
@@ -95,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Card gutters and margins may vary on larger screen sizes, as long as they follow Material Design 8dp grid. Card margins and gutters can be 8, 16, 24, or 40dp wide."
+            android:text="@string/cardView_supplementary_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
         <FrameLayout
@@ -109,10 +99,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/actionBarItemBackground"
-                app:srcCompat="@drawable/ic_comment"/>
+                android:contentDescription="@string/image_description"
+                app:srcCompat="@drawable/ic_comment_black_24dp"/>
 
             <LinearLayout
-                android:id="@+id/feed_card_action_area_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
@@ -121,13 +111,13 @@
                 android:padding="8dp">
 
                 <ImageButton
-                    android:id="@+id/feed_comment_imageButton"
                     style="@style/Widget.AppCompat.ImageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
+                    android:contentDescription="@string/image_description"
                     app:srcCompat="@drawable/ic_menu_send"
                     tools:layout_editor_absoluteX="209dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -139,6 +129,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
+                    android:contentDescription="@string/image_description"
                     app:srcCompat="@drawable/ic_menu_manage"
                     tools:layout_editor_absoluteX="112dp"
                     tools:layout_editor_absoluteY="58dp"/>
@@ -150,7 +141,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
-                    app:srcCompat="@drawable/ic_bookmark"
+                    android:contentDescription="@string/image_description"
+                    app:srcCompat="@drawable/ic_bookmark_black_24dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="58dp"/>
 
@@ -161,12 +153,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
+                    android:contentDescription="@string/image_description"
                     app:srcCompat="@drawable/ic_menu_share"
                     tools:layout_editor_absoluteX="306dp"
                     tools:layout_editor_absoluteY="58dp"/>
             </LinearLayout>
         </FrameLayout>
 
-    </LinearLayout>
 
 </android.support.v7.widget.CardView>

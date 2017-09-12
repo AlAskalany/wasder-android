@@ -1,8 +1,10 @@
 package com.alaskalany.testapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -23,7 +25,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TabbedSpinnerActivity extends AppCompatActivity {
+public class TabbedSpinnerActivity
+		extends AppCompatActivity {
 	
 	Map<Integer, PlaceholderFragment> fragmentMap = new HashMap<>();
 	
@@ -43,7 +46,10 @@ public class TabbedSpinnerActivity extends AppCompatActivity {
 		
 		// Setup spinner
 		Spinner spinner = findViewById(R.id.spinner);
-		spinner.setAdapter(new MyAdapter(toolbar.getContext(), new String[]{"Section 1", "Section 2", "Section 3",}));
+		spinner.setAdapter(new MyAdapter(toolbar.getContext(),
+		                                 new String[]{"Section 1",
+		                                              "Section 2",
+		                                              "Section 3",}));
 		
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			
@@ -51,7 +57,9 @@ public class TabbedSpinnerActivity extends AppCompatActivity {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				// When the given dropdown item is selected, show its contents in the
 				// container view.
-				getSupportFragmentManager().beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1)).commit();
+				getSupportFragmentManager().beginTransaction()
+				                           .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+				                           .commit();
 			}
 			
 			@Override
@@ -66,7 +74,9 @@ public class TabbedSpinnerActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+				        .setAction("Action", null)
+				        .show();
 			}
 		});
 		
@@ -88,24 +98,27 @@ public class TabbedSpinnerActivity extends AppCompatActivity {
 		
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			startActivity(new Intent(this, NavigationDrawerActivity.class));
 			return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
+	private static class MyAdapter
+			extends ArrayAdapter<String>
+			implements ThemedSpinnerAdapter {
 		
 		private final ThemedSpinnerAdapter.Helper mDropDownHelper;
 		
-		public MyAdapter(Context context, String[] objects) {
+		MyAdapter(Context context, String[] objects) {
 			
 			super(context, android.R.layout.simple_list_item_1, objects);
 			mDropDownHelper = new ThemedSpinnerAdapter.Helper(context);
 		}
 		
 		@Override
-		public View getDropDownView(int position, View convertView, ViewGroup parent) {
+		public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
 			
 			View view;
 			
@@ -139,7 +152,8 @@ public class TabbedSpinnerActivity extends AppCompatActivity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class PlaceholderFragment
+			extends Fragment {
 		
 		/**
 		 * The fragment argument representing the section number for this

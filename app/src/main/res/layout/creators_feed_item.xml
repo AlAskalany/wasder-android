@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/creator_feed_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_view_margin_bottom"
@@ -22,7 +21,6 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/creator_feed_card_rich_media_framelayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:background="@android:drawable/screen_background_dark_transparent"
@@ -38,7 +36,6 @@
                 app:srcCompat="@drawable/gameplay"/>
 
             <LinearLayout
-                android:id="@+id/creator_feed_card_header_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -61,7 +58,6 @@
                     tools:layout_editor_absoluteY="37dp"/>
 
                 <ImageButton
-                    android:id="@+id/creator_feed_play_imageButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -133,7 +129,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/creator_feed_card_action_area_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
@@ -167,14 +162,13 @@
                     tools:layout_editor_absoluteY="58dp"/>
 
                 <ImageButton
-                    android:id="@+id/creator_feed_bookmark_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
                     android:contentDescription="@string/bookmark_button_description"
-                    app:srcCompat="@drawable/ic_bookmark"
+                    app:srcCompat="@drawable/ic_bookmark_black_24dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="58dp"/>
 

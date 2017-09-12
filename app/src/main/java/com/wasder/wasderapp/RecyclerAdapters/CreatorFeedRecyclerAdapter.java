@@ -54,7 +54,8 @@ public class CreatorFeedRecyclerAdapter
 		final String photoUrl = creatorFeedItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		
-		viewHolder.creatorFeedImageView.setImageDrawable(mContext.getDrawable(R.drawable.event_pic));
+		viewHolder.creatorFeedImageView.setImageDrawable(mContext.getResources()
+		                                                         .getDrawable(R.drawable.event_pic));
 		viewHolder.supplementaryTextView.setText(creatorFeedItem.getSupplementaryText());
 	}
 	
