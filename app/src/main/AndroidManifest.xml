@@ -76,15 +76,15 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.market.EventActivity"
+            android:name=".ui.social.EventActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.market.FriendEventActivity"
+            android:name=".ui.social.FriendEventActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.market.RecommendedEventActivity"
+            android:name=".ui.social.RecommendedEventActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

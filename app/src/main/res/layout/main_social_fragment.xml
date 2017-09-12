@@ -13,7 +13,7 @@
         >
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/market_tablayout"
+            android:id="@+id/social_tablayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -21,7 +21,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/market_viewpager"
+        android:id="@+id/social_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

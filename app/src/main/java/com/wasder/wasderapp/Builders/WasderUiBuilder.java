@@ -94,7 +94,7 @@ public class WasderUiBuilder {
 	public enum NavigationFragmentType {
 		HOME,
 		LIVE,
-		MARKET
+		SOCIAL
 	}
 	
 	/**

@@ -70,7 +70,7 @@ public class MainActivity
 	
 	BaseNavigationFragment homeFragment;
 	BaseNavigationFragment liveFragment;
-	BaseNavigationFragment marketFragment;
+	BaseNavigationFragment socialFragment;
 	private Map<Integer, BaseNavigationFragment> fragmentMap = new HashMap<>();
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
@@ -188,14 +188,14 @@ public class MainActivity
 		                                                              .addTab(WasderUiBuilder.TabType.Esports)
 		                                                              .build();
 		
-		marketFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
-		                                                                .setmFragmentTitle("Market")
+		socialFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
+		                                                                .setmFragmentTitle("Social")
 		                                                                .setmResNavigationView(R.id.nav_view)
 		                                                                .setmResDrawerLayout(R.id.drawer_layout)
-		                                                                .setmResLayout(R.layout.main_market_fragment)
-		                                                                .setmResTabLayout(R.id.market_tablayout)
-		                                                                .setmResViewPager(R.id.market_viewpager)
-		                                                                .setmTAG("MarketFragment")
+		                                                                .setmResLayout(R.layout.main_social_fragment)
+		                                                                .setmResTabLayout(R.id.social_tablayout)
+		                                                                .setmResViewPager(R.id.social_viewpager)
+		                                                                .setmTAG("SocialFragment")
 		                                                                .addTab(WasderUiBuilder.TabType.AllEvents)
 		                                                                .addTab(WasderUiBuilder.TabType.RecommendedEvents)
 		                                                                .addTab(WasderUiBuilder.TabType.FriendsEvents)
@@ -203,7 +203,7 @@ public class MainActivity
 		
 		fragmentMap.put(R.id.navigation_home, homeFragment);
 		fragmentMap.put(R.id.navigation_live, liveFragment);
-		fragmentMap.put(R.id.navigation_market, marketFragment);
+		fragmentMap.put(R.id.navigation_social, socialFragment);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
