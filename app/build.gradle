@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId 'com.wasder.wasderapp'
         vectorDrawables.useSupportLibrary true
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 8
         versionName "1.0"
@@ -41,22 +41,6 @@ android {
         }
     }
     productFlavors {
-        MinKitKat {
-            minSdkVersion 19
-            applicationId 'com.wasder.wasderapp'
-            targetSdkVersion 26
-            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 8
-            versionName '1.0'
-        }
-        MinMarshmallow {
-            minSdkVersion 23
-            applicationId 'com.wasder.wasderapp'
-            targetSdkVersion 26
-            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 8
-            versionName '1.0'
-        }
     }
 }
 

@@ -153,6 +153,7 @@
                     android:id="@+id/creator_feed_like_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
@@ -164,6 +165,7 @@
                 <ImageButton
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
@@ -176,6 +178,7 @@
                     android:id="@+id/creator_feed_share_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"

@@ -7,6 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_view_margin_bottom"
     android:layout_marginEnd="@dimen/card_view_margin_end"
+    android:layout_marginLeft="@dimen/card_view_margin_start"
+    android:layout_marginRight="@dimen/card_view_margin_end"
     android:layout_marginStart="@dimen/card_view_margin_start"
     android:layout_marginTop="@dimen/card_view_margin_top"
     android:foreground="?attr/selectableItemBackground"
@@ -43,6 +45,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -91,6 +94,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp">
 
             <ImageButton
@@ -114,6 +118,7 @@
                     style="@style/Widget.AppCompat.ImageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
@@ -126,6 +131,7 @@
                     android:id="@+id/feed_likee_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
@@ -138,6 +144,7 @@
                     android:id="@+id/feed_bookmark_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
@@ -150,6 +157,7 @@
                     android:id="@+id/feed_share_imageButton"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/actionBarItemBackground"
