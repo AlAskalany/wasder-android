@@ -108,4 +108,6 @@
     <string name="nav_header_name">Android Studio</string>
     <string name="nav_header_email">android.studio@android.com</string>
     <string name="id">id</string>
+    <string name="nav_action_account">Account</string>
+    <string name="nav_action_settings">Settings</string>
 </resources>
