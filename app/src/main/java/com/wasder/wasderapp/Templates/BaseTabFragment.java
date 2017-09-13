@@ -25,7 +25,7 @@ public class BaseTabFragment
 	private int columnCount;
 	private String title;
 	private int resLayout;
-	private OnFragmentInteractionListener<Object> mListener;
+	private OnFragmentInteractionListener<Object, String> mListener;
 	private View view;
 	private Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass;
 	private String mTAG;

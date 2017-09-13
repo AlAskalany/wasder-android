@@ -44,7 +44,7 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem);
+				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Item");
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");

@@ -43,7 +43,7 @@ public class EsportsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.EsportsFragment, viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(Helpers.TAG.EsportsFragment, viewHolder.feedModel, "Item");
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");

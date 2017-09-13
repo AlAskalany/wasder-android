@@ -44,7 +44,7 @@ public class GroupsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel);
+				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel, "Item");
 			}
 		});
 		viewHolder.groupImageView.setImageDrawable(mContext.getResources()

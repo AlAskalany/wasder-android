@@ -43,7 +43,7 @@ public class TwitchLiveRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.TwitchLiveFragment, viewHolder.twitchLiveItem);
+				mListener.onFragmentInteractionListener(Helpers.TAG.TwitchLiveFragment, viewHolder.twitchLiveItem, "Item");
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");

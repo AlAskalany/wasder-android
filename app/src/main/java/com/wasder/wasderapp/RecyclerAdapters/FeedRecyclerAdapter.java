@@ -45,7 +45,7 @@ public class FeedRecyclerAdapter
 			public void onClick(View view) {
 				
 				//mListener.onFragmentInteractionListener(viewHolder.feedItem);
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem);
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Item");
 			}
 		});
 		
@@ -54,7 +54,7 @@ public class FeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem);
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Share");
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());

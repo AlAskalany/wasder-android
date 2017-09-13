@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,7 +30,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.AccountActivity;
@@ -57,7 +57,7 @@ import java.util.Map;
 public class MainActivity
 		extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener,
-		           OnFragmentInteractionListener<Object>,
+		           OnFragmentInteractionListener<Object, String>,
 		           FragmentManager.OnBackStackChangedListener {
 	
 	private static final String TAG = "MainActivity";
@@ -96,8 +96,7 @@ public class MainActivity
 			FragmentManager manager = getSupportFragmentManager();
 			FragmentTransaction ts = manager.beginTransaction();
 			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
-			BaseNavigationFragment newFragment = null;
-			int container = R.id.framelayout_fragment_container;
+			BaseNavigationFragment newFragment;
 			if (currentFragment != null) {
 				manager.saveFragmentInstanceState(currentFragment);
 			}
@@ -139,12 +138,6 @@ public class MainActivity
 			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT)
 			     .show();
 		}
-		// Configure Google Sign In
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
-				                                                                                                                        .default_web_client_id))
-		
-		                                                                                              .requestEmail()
-		                                                                                              .build();
 		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -224,7 +217,9 @@ public class MainActivity
 		mToolbar = findViewById(R.id.toolbar_main_activity);
 		setSupportActionBar(mToolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Wasder");
+		if (actionBar != null) {
+			actionBar.setTitle("Wasder");
+		}
 		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
 		                                                         drawerLayout,
@@ -335,11 +330,18 @@ public class MainActivity
 	}
 	
 	@Override
-	public void onFragmentInteractionListener(String tag, Object data) {
+	public void onFragmentInteractionListener(String tag, Object data, String extra) {
 		
+		Log.d(TAG, "Tag: " + tag + " object: " + data + " Extra: " + extra);
 		switch (tag) {
 			case Helpers.TAG.FeedFragment:
-				startActivity(new Intent(MainActivity.this, FeedActivity.class));
+				if (extra == "Item") {
+					startActivity(new Intent(MainActivity.this, FeedActivity.class));
+				} else if (extra == "Share") {
+					BottomSheetDialog dialog = new BottomSheetDialog(this);
+					dialog.setContentView(R.layout.bottom_sheet_feed_share);
+					dialog.show();
+				}
 				break;
 			case Helpers.TAG.CreatorsFragment:
 				startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));

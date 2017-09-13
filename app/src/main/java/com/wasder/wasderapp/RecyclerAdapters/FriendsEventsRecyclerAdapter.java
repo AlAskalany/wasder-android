@@ -43,7 +43,7 @@ public class FriendsEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.FriendsEventsFragment, viewHolder.friendEventItem);
+				mListener.onFragmentInteractionListener(Helpers.TAG.FriendsEventsFragment, viewHolder.friendEventItem, "Item");
 			}
 		});
 		viewHolder.idTextView.setText("Twitch Stream id");
