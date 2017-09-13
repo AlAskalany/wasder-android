@@ -38,6 +38,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
 import com.wasder.wasderapp.ui.home.CreatorFeedActivity;
+import com.wasder.wasderapp.ui.home.FeedActivity;
 import com.wasder.wasderapp.ui.home.GroupActivity;
 import com.wasder.wasderapp.ui.live.EsportsActivity;
 import com.wasder.wasderapp.ui.live.TwitchLiveActivity;
@@ -338,7 +339,7 @@ public class MainActivity
 		
 		switch (tag) {
 			case Helpers.TAG.FeedFragment:
-				startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+				startActivity(new Intent(MainActivity.this, FeedActivity.class));
 				break;
 			case Helpers.TAG.CreatorsFragment:
 				startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));

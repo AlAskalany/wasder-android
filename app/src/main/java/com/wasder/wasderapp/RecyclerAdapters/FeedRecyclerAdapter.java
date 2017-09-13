@@ -48,6 +48,15 @@ public class FeedRecyclerAdapter
 				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem);
 			}
 		});
+		
+		viewHolder.shareImageButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem);
+			}
+		});
 		viewHolder.titleTextView.setText(model.getTitle());
 		viewHolder.subheadTextView.setText(model.getSubhead());
 		final String imageUrl = model.getImageUrl();

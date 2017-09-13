@@ -16,7 +16,7 @@ public class FeedActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		Toolbar toolbar = findViewById(R.id.feed_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Feed");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
