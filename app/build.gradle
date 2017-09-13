@@ -65,8 +65,11 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'com.google.firebase:firebase-storage:11.2.0'
     compile 'com.android.support:support-v13:26.+'
+    compile 'com.android.support:gridlayout-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }
+
+
 
 
 

@@ -126,4 +126,5 @@
     <string name="bottom_sheet_market_button">Market</string>
     <string name="bottom_sheet_calendar_button">Calendar</string>
     <string name="feed_sheet_event_time_data">8:00 PM, Oct 26 (3d 23h 14m)</string>
+    <string name="action_center">Action Center</string>
 </resources>

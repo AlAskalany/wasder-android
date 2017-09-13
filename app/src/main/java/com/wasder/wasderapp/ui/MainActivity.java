@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -87,42 +89,38 @@ public class MainActivity
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
 	private String mUid;
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
-			.OnNavigationItemSelectedListener() {
-		
-		@Override
-		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-			
-			if (item.getItemId() == R.id.navigation_action_center) {
-				BottomSheetDialog dialog = new BottomSheetDialog(getBaseContext());
-				dialog.setContentView(R.layout.bottom_sheet_action_center);
-				dialog.show();
-			} else {
-				FragmentManager manager = getSupportFragmentManager();
-				FragmentTransaction ts = manager.beginTransaction();
-				Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
-				BaseNavigationFragment newFragment;
-				if (currentFragment != null) {
-					manager.saveFragmentInstanceState(currentFragment);
-				}
-				newFragment = fragmentMap.get(item.getItemId());
-				if (newFragment != currentFragment) {
-					ts.replace(R.id.framelayout_fragment_container, newFragment);
-					ts.addToBackStack(null);
-					ts.commit();
-					//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
-					return true;
-				}
-			}
-			return false;
-		}
-	};
 	private NavigationView navigationView;
 	private View headerView;
 	private TextView userNameTextView;
 	private TextView emailTextView;
 	private BottomNavigationView bottomNavigationView;
 	private Toolbar mToolbar;
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+			.OnNavigationItemSelectedListener() {
+		
+		@Override
+		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+			
+			FragmentManager manager = getSupportFragmentManager();
+			FragmentTransaction ts = manager.beginTransaction();
+			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
+			BaseNavigationFragment newFragment;
+			if (currentFragment != null) {
+				manager.saveFragmentInstanceState(currentFragment);
+			}
+			newFragment = fragmentMap.get(item.getItemId());
+			if (newFragment != currentFragment) {
+				ts.replace(R.id.framelayout_fragment_container, newFragment);
+				ts.addToBackStack(null);
+				ts.commit();
+				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
+				return true;
+			}
+			
+			return false;
+		}
+	};
+	private BottomSheetBehavior sheetBehavior;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -236,10 +234,21 @@ public class MainActivity
 		NavigationView navigationView = findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		
-		//region Bottom_Navigation
 		bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-		//endregion
+		
+		final BottomSheetDialog actionCenterBottomSheetDialog = new BottomSheetDialog(this);
+		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
+		
+		FloatingActionButton floatingActionCenterButton = findViewById(R.id.floatingActionCenterButton);
+		floatingActionCenterButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				actionCenterBottomSheetDialog.show();
+			}
+		});
 	}
 	
 	@Override
@@ -268,6 +277,14 @@ public class MainActivity
 	}
 	
 	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+		savedInstanceState.putString("UserName", mUserName);
+		// ... save more data
+		super.onSaveInstanceState(savedInstanceState);
+	}
+	
+	@Override
 	public void onBackPressed() {
 		
 		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
@@ -278,31 +295,6 @@ public class MainActivity
 			super.onBackPressed();
 		}
 		
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-			return true;
-		} else if (id == R.id.action_sign_outout) {
-			mAuth.signOut();
-		}
-		
-		return super.onOptionsItemSelected(item);
 	}
 	
 	@SuppressWarnings("StatementWithEmptyBody")
@@ -333,6 +325,40 @@ public class MainActivity
 	public void onBackStackChanged() {
 		
 		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		mUserName = savedInstanceState.getString("UserName");
+		// ... recover more data
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+			return true;
+		} else if (id == R.id.action_sign_outout) {
+			mAuth.signOut();
+		}
+		
+		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override

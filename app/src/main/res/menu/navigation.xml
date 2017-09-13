@@ -16,9 +16,4 @@
         android:icon="@drawable/ic_people_black_24dp"
         android:title="@string/title_social"/>
 
-    <item
-        android:id="@+id/navigation_action_center"
-        android:icon="@drawable/ic_center_focus_strong_black_24dp"
-        android:title="@string/title_social"/>
-
 </menu>

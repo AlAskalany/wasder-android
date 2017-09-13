@@ -33,6 +33,7 @@ import java.util.Map;
 
 public class BaseNavigationFragment
 		extends Fragment
+		
 		implements NavigationView.OnNavigationItemSelectedListener {
 	
 	//	private static final String ARG_TAG = "param_tag";
@@ -54,6 +55,9 @@ public class BaseNavigationFragment
 	private List<BaseTabFragment> mBaseTabFragments = new ArrayList<>();
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
+	private ViewPager viewPager;
+	private TabLayout tabLayout;
+	private SectionsPagerAdapter sectionPagerAdapter;
 	
 	public BaseNavigationFragment() {
 		
@@ -124,13 +128,13 @@ public class BaseNavigationFragment
 		//if (actionBar != null) {
 		//	actionBar.setTitle(mFragmentTitle);
 		//}
-		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (BaseTabFragment tab : mBaseTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		ViewPager viewPager = view.findViewById(mResViewPager);
+		viewPager = view.findViewById(mResViewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
-		TabLayout tabLayout = view.findViewById(mResTabLayout);
+		tabLayout = view.findViewById(mResTabLayout);
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
 	}
@@ -147,6 +151,20 @@ public class BaseNavigationFragment
 		super.onDetach();
 		mListener = null;
 	}
+	
+	//@Override
+	//public void onSaveInstanceState(Bundle outState) {
+	//super.onSaveInstanceState(outState);
+	//outState.putInt("someVarA", someVarA);
+	//outState.putString("someVarB", someVarB);
+	//}
+	
+	//@Override
+	//public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+	//super.onActivityCreated(savedInstanceState);
+	//someVarA = savedInstanceState.getInt("someVarA");
+	//someVarB = savedInstanceState.getString("someVarB");
+	//}
 	
 	/**
 	 * Called when an item in the navigation menu is selected.

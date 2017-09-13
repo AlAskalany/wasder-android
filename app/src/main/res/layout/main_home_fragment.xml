@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:elevation="0dp"
+    android:orientation="vertical"
     tools:context="com.wasder.wasderapp.ui.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/home_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/home_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/Widget.Design.TabLayout"
-            />
-
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="56dp"
+        android:elevation="16dp"
+        android:isScrollContainer="false"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never"
+        android:theme="@style/Widget.Design.TabLayout"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_height="0dp"
+        android:layout_marginBottom="56dp"
+        android:layout_weight="1"
+        android:elevation="0dp"
+        android:nestedScrollingEnabled="false"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
