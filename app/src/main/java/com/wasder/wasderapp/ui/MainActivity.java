@@ -111,6 +111,8 @@ public class MainActivity
 			}
 			newFragment = fragmentMap.get(item.getItemId());
 			if (newFragment != currentFragment) {
+				String title = newFragment.getmFragmentTitle();
+				mToolbar.setTitle(title);
 				ts.replace(R.id.framelayout_fragment_container, newFragment);
 				ts.addToBackStack(null);
 				ts.commit();
@@ -122,6 +124,7 @@ public class MainActivity
 		}
 	};
 	private BottomSheetBehavior sheetBehavior;
+	private CollapsingToolbarLayout collapsingToolbarLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +226,7 @@ public class MainActivity
 		setSupportActionBar(mToolbar);
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			actionBar.setTitle("Wasder");
+			mToolbar.setTitle(homeFragment.getmFragmentTitle());
 		}
 		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -240,8 +243,7 @@ public class MainActivity
 		
 		final BottomSheetDialog actionCenterBottomSheetDialog = new BottomSheetDialog(this);
 		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
-		
-		FloatingActionButton floatingActionCenterButton = findViewById(R.id.floatingActionCenterButton);
+		final FloatingActionButton floatingActionCenterButton = findViewById(R.id.floatingActionCenterButton);
 		floatingActionCenterButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -250,9 +252,6 @@ public class MainActivity
 				actionCenterBottomSheetDialog.show();
 			}
 		});
-		
-		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.main_collapsing_toolbar);
-		collapsingToolbarLayout.setTitle("Wasder");
 	}
 	
 	@Override

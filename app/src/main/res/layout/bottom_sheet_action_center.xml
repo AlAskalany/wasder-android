@@ -8,6 +8,7 @@
     android:background="@android:color/white">
 
     <LinearLayout
+        android:id="@+id/action_center_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

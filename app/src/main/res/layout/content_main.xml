@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -59,7 +60,7 @@
     </android.support.design.widget.BottomNavigationView>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frameLayout_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_peekHeight="0dp"
@@ -75,14 +76,17 @@
         android:id="@+id/floatingActionCenterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
+        android:layout_gravity="center_vertical|left"
         android:layout_marginBottom="70dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/frameLayout"
+        android:src="@drawable/ic_pages_black_24dp"
+        android:tint="@android:color/white"
+        app:backgroundTint="?attr/colorPrimary"
+        app:elevation="38dp"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/action_center_bottom_sheet"
         app:layout_anchorGravity="top|right"/>
 
 
