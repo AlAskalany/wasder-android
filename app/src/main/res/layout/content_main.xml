@@ -8,21 +8,28 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="26dp">
+        android:layout_height="56dp"
+        app:elevation="26dp"
+        app:expanded="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:collapsedTitleGravity="top|left|start"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="top|left|start"
             app:layout_scrollFlags="scroll|enterAlways"
+            app:titleEnabled="false"
             app:toolbarId="@+id/toolbar">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_main_activity"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:minHeight="56dp"/>
+                android:minHeight="56dp"
+                app:title="Wasder"
+                app:titleTextColor="@android:color/white"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

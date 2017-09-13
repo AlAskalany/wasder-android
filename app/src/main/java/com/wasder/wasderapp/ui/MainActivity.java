@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -249,6 +250,9 @@ public class MainActivity
 				actionCenterBottomSheetDialog.show();
 			}
 		});
+		
+		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.main_collapsing_toolbar);
+		collapsingToolbarLayout.setTitle("Wasder");
 	}
 	
 	@Override
