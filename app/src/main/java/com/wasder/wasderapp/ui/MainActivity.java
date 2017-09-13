@@ -93,20 +93,26 @@ public class MainActivity
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 			
-			FragmentManager manager = getSupportFragmentManager();
-			FragmentTransaction ts = manager.beginTransaction();
-			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
-			BaseNavigationFragment newFragment;
-			if (currentFragment != null) {
-				manager.saveFragmentInstanceState(currentFragment);
-			}
-			newFragment = fragmentMap.get(item.getItemId());
-			if (newFragment != currentFragment) {
-				ts.replace(R.id.framelayout_fragment_container, newFragment);
-				ts.addToBackStack(null);
-				ts.commit();
-				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
-				return true;
+			if (item.getItemId() == R.id.navigation_action_center) {
+				BottomSheetDialog dialog = new BottomSheetDialog(getBaseContext());
+				dialog.setContentView(R.layout.bottom_sheet_action_center);
+				dialog.show();
+			} else {
+				FragmentManager manager = getSupportFragmentManager();
+				FragmentTransaction ts = manager.beginTransaction();
+				Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
+				BaseNavigationFragment newFragment;
+				if (currentFragment != null) {
+					manager.saveFragmentInstanceState(currentFragment);
+				}
+				newFragment = fragmentMap.get(item.getItemId());
+				if (newFragment != currentFragment) {
+					ts.replace(R.id.framelayout_fragment_container, newFragment);
+					ts.addToBackStack(null);
+					ts.commit();
+					//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
+					return true;
+				}
 			}
 			return false;
 		}
@@ -338,9 +344,7 @@ public class MainActivity
 				if (extra == "Item") {
 					startActivity(new Intent(MainActivity.this, FeedActivity.class));
 				} else if (extra == "Share") {
-					BottomSheetDialog dialog = new BottomSheetDialog(this);
-					dialog.setContentView(R.layout.bottom_sheet_feed_share);
-					dialog.show();
+					
 				}
 				break;
 			case Helpers.TAG.CreatorsFragment:
