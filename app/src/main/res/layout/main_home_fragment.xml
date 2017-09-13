@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     android:elevation="0dp"
     android:orientation="vertical"
     tools:context="com.wasder.wasderapp.ui.MainActivity">
@@ -13,6 +12,7 @@
         android:id="@+id/home_tablayout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="?attr/colorPrimary"
         android:elevation="16dp"
         android:isScrollContainer="false"
         android:nestedScrollingEnabled="false"
