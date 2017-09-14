@@ -68,6 +68,16 @@
 
             </LinearLayout>
 
+            <ImageButton
+                android:id="@+id/creators_feed_details_imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_center_focus_strong_black_24dp"/>
+
         </FrameLayout>
 
         <LinearLayout

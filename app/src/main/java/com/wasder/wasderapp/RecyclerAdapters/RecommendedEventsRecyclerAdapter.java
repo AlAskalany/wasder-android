@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,8 +22,7 @@ import com.wasder.wasderapp.util.Helpers;
 public class RecommendedEventsRecyclerAdapter
 		extends BaseRecyclerAdapter<RecommendedEventItem, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
 	
-	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager,
-			OnFragmentInteractionListener mListener) {
+	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
 		super(RecommendedEventItem.class, R.layout.recommended_event_item,
 		      RecommendedEventViewHolder.class,
@@ -39,7 +39,7 @@ public class RecommendedEventsRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, RecommendedEventItem model, int position) {
 		
-		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+		viewHolder.recommendedEventDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -58,6 +58,7 @@ public class RecommendedEventsRecyclerAdapter
 		TextView idTextView;
 		TextView contentTextView;
 		RecommendedEventItem recommendedEventItem;
+		ImageButton recommendedEventDetailsImageButton;
 		
 		public RecommendedEventViewHolder(View itemView) {
 			
@@ -66,6 +67,7 @@ public class RecommendedEventsRecyclerAdapter
 			mview = itemView;
 			idTextView = itemView.findViewById(R.id.id);
 			contentTextView = itemView.findViewById(R.id.content);
+			recommendedEventDetailsImageButton = itemView.findViewById(R.id.recommended_event_details_imageButton);
 		}
 	}
 }

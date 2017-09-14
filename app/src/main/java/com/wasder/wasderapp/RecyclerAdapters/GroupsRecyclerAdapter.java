@@ -39,7 +39,7 @@ public class GroupsRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupItem model, int position) {
 		
-		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -51,13 +51,6 @@ public class GroupsRecyclerAdapter
 		                                                   .getDrawable(R.drawable.gamers));
 		viewHolder.groupTitleTextView.setText("My Group!");
 		viewHolder.groupSubheadTextView.setText("Best Eva!");
-		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				
-			}
-		});
 	}
 	
 	public static class GroupViewHolder
@@ -77,7 +70,7 @@ public class GroupsRecyclerAdapter
 			groupImageView = itemView.findViewById(R.id.fragment_group_imageView);
 			groupTitleTextView = itemView.findViewById(R.id.fragment_group_title_textView);
 			groupSubheadTextView = itemView.findViewById(R.id.fragment_group_subhead_textView);
-			groupDetailsImageButton = itemView.findViewById(R.id.fragment_group_details_imageButton);
+			groupDetailsImageButton = itemView.findViewById(R.id.groups_details_imageButton);
 		}
 	}
 }

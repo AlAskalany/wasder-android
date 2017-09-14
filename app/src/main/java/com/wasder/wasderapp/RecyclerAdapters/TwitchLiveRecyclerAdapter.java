@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,7 +39,7 @@ public class TwitchLiveRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, TwitchLiveItem model, int position) {
 		
-		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+		viewHolder.twitchLiveDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -57,6 +58,7 @@ public class TwitchLiveRecyclerAdapter
 		TextView idTextView;
 		TextView contentTextView;
 		TwitchLiveItem twitchLiveItem;
+		ImageButton twitchLiveDetailsImageButton;
 		
 		public TwitchLiveViewHolder(View itemView) {
 			
@@ -64,6 +66,7 @@ public class TwitchLiveRecyclerAdapter
 			mview = itemView;
 			idTextView = itemView.findViewById(R.id.id);
 			contentTextView = itemView.findViewById(R.id.content);
+			twitchLiveDetailsImageButton = itemView.findViewById(R.id.twitch_live_details_imageButton);
 		}
 	}
 }

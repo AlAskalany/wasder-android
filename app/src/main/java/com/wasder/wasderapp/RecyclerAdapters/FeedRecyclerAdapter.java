@@ -39,13 +39,12 @@ public class FeedRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedItem model, int position) {
 		
-		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				//mListener.onFragmentInteractionListener(viewHolder.feedItem);
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Item");
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Details");
 			}
 		});
 		
@@ -55,6 +54,15 @@ public class FeedRecyclerAdapter
 			public void onClick(View view) {
 				
 				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Share");
+			}
+		});
+		
+		viewHolder.photoImageButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Profile");
 			}
 		});
 		viewHolder.titleTextView.setText(model.getTitle());
@@ -81,6 +89,7 @@ public class FeedRecyclerAdapter
 		ImageButton likeImageButton;
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
+		ImageButton detailsImageButton;
 		FeedItem feedItem;
 		
 		public FeedViewHolder(View itemView) {
@@ -96,6 +105,7 @@ public class FeedRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.feed_details_imageButton);
 		}
 	}
 }

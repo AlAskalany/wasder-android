@@ -370,10 +370,12 @@ public class MainActivity
 		Log.d(TAG, "Tag: " + tag + " object: " + data + " Extra: " + extra);
 		switch (tag) {
 			case Helpers.TAG.FeedFragment:
-				if (extra == "Item") {
+				if (extra == "Details") {
 					startActivity(new Intent(MainActivity.this, FeedActivity.class));
 				} else if (extra == "Share") {
 					
+				} else if (extra == "Profile") {
+					startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 				}
 				break;
 			case Helpers.TAG.CreatorsFragment:

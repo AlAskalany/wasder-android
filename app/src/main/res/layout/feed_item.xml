@@ -66,6 +66,14 @@
                     tools:layout_editor_absoluteX="112dp"
                     tools:layout_editor_absoluteY="37dp"/>
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/feed_details_imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_center_focus_strong_black_24dp"/>
         </LinearLayout>
 
         <ImageView
@@ -115,6 +123,7 @@
                 android:layout_weight="1"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_menu_send"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="58dp"/>
@@ -128,6 +137,7 @@
                 android:layout_weight="1"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_menu_manage"
                 tools:layout_editor_absoluteX="112dp"
                 tools:layout_editor_absoluteY="58dp"/>
@@ -155,6 +165,7 @@
                 android:layout_weight="1"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_menu_share"
                 tools:layout_editor_absoluteX="306dp"
                 tools:layout_editor_absoluteY="58dp"/>

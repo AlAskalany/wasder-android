@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,7 +39,7 @@ public class EventRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final EventViewHolder viewHolder, EventItem model, int position) {
 		
-		viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+		viewHolder.eventDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -57,6 +58,7 @@ public class EventRecyclerAdapter
 		TextView idTextView;
 		TextView contentTextView;
 		EventItem eventItem;
+		ImageButton eventDetailsImageButton;
 		
 		public EventViewHolder(View itemView) {
 			
@@ -64,6 +66,7 @@ public class EventRecyclerAdapter
 			mview = itemView;
 			idTextView = itemView.findViewById(R.id.id);
 			contentTextView = itemView.findViewById(R.id.content);
+			eventDetailsImageButton = itemView.findViewById(R.id.events_details_imageButton);
 		}
 	}
 }

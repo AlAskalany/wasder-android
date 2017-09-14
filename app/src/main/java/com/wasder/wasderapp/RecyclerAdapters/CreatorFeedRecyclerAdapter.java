@@ -38,7 +38,7 @@ public class CreatorFeedRecyclerAdapter
 	@Override
 	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, CreatorFeedItem creatorFeedItem, int position) {
 		
-		viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+		viewHolder.creatorFeedDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -73,6 +73,7 @@ public class CreatorFeedRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		CreatorFeedItem creatorFeedItem;
+		ImageButton creatorFeedDetailsImageButton;
 		
 		public CreatorFeedViewHolder(View view) {
 			
@@ -87,6 +88,7 @@ public class CreatorFeedRecyclerAdapter
 			titleTextView = view.findViewById(R.id.creator_feed_name_textView);
 			supplementaryTextView = view.findViewById(R.id.creator_feed_description_textView);
 			photoImageButton = view.findViewById(R.id.creator_feed_card_avatar);
+			creatorFeedDetailsImageButton = itemView.findViewById(R.id.creators_feed_details_imageButton);
 		}
 	}
 }
