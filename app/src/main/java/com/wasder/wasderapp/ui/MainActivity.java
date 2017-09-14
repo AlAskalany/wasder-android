@@ -14,7 +14,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -125,6 +124,7 @@ public class MainActivity
 	};
 	private BottomSheetBehavior sheetBehavior;
 	private CollapsingToolbarLayout collapsingToolbarLayout;
+	private BottomSheetDialog actionCenterBottomSheetDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -241,17 +241,8 @@ public class MainActivity
 		bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		
-		final BottomSheetDialog actionCenterBottomSheetDialog = new BottomSheetDialog(this);
+		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
 		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
-		final FloatingActionButton floatingActionCenterButton = findViewById(R.id.floatingActionCenterButton);
-		floatingActionCenterButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				
-				actionCenterBottomSheetDialog.show();
-			}
-		});
 	}
 	
 	@Override
@@ -354,11 +345,16 @@ public class MainActivity
 		int id = item.getItemId();
 		
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-			return true;
-		} else if (id == R.id.action_sign_outout) {
-			mAuth.signOut();
+		switch (id) {
+			case R.id.action_open_action_center:
+				actionCenterBottomSheetDialog.show();
+				break;
+			case R.id.action_settings:
+				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+				return true;
+			case R.id.action_sign_outout:
+				mAuth.signOut();
+				break;
 		}
 		
 		return super.onOptionsItemSelected(item);
