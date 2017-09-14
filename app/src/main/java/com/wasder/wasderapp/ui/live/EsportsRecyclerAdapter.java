@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.RecyclerAdapters;
+package com.wasder.wasderapp.ui.live;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.FeedItem;
+import com.wasder.wasderapp.models.EsportsItem;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -20,16 +20,18 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class FeedRecyclerAdapter
-		extends BaseRecyclerAdapter<FeedItem, FeedRecyclerAdapter.FeedViewHolder> {
+public class EsportsRecyclerAdapter
+		extends BaseRecyclerAdapter<EsportsItem, EsportsRecyclerAdapter.EsportsViewHolder> {
 	
-	public FeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedItem.class, R.layout.feed_item,
-		      FeedViewHolder.class,
+		super(EsportsItem.class,
+		      R.layout.esports_item,
+		      EsportsViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
-		                      .child("feed"), "FeedRecyclerAdapter",
+		                      .child("feed"),
+		      "EsportsRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -37,14 +39,14 @@ public class FeedRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedItem model, int position) {
+	protected void populateViewHolder(final EsportsViewHolder viewHolder, EsportsItem esportsItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Details");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Details");
 			}
 		});
 		
@@ -53,7 +55,7 @@ public class FeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Share");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Share");
 			}
 		});
 		
@@ -62,21 +64,21 @@ public class FeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.feedItem, "Profile");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Profile");
 			}
 		});
-		viewHolder.titleTextView.setText(model.getTitle());
-		viewHolder.subheadTextView.setText(model.getSubhead());
-		final String imageUrl = model.getImageUrl();
+		viewHolder.titleTextView.setText(esportsItem.getTitle());
+		viewHolder.subheadTextView.setText(esportsItem.getSubhead());
+		final String imageUrl = esportsItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = model.getPhotoUrl();
+		final String photoUrl = esportsItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(model.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(esportsItem.getSupplementaryText());
 	}
 	
-	public static class FeedViewHolder
+	public static class EsportsViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -90,9 +92,9 @@ public class FeedRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		FeedItem feedItem;
+		EsportsItem esportsItem;
 		
-		public FeedViewHolder(View itemView) {
+		public EsportsViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -105,7 +107,7 @@ public class FeedRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.feed_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.esports_details_imageButton);
 		}
 	}
 }

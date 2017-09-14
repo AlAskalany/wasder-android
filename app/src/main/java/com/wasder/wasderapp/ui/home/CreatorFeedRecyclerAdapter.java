@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.RecyclerAdapters;
+package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,8 +28,7 @@ public class CreatorFeedRecyclerAdapter
 		      CreatorFeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
-		                      .child("feed"),
-		      "MyCreatorAdapter",
+		                      .child("feed"), "CreatorFeedAdapter",
 		      context,
 		      mListener,
 		      linearLayoutManager);

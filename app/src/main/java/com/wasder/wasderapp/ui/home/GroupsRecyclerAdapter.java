@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.RecyclerAdapters;
+package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +37,7 @@ public class GroupsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupItem model, int position) {
+	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupItem groupItem, int position) {
 		
 		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			

@@ -1,18 +1,18 @@
 package com.wasder.wasderapp.Builders;
 
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.RecyclerAdapters.CreatorFeedRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.EsportsRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.EventRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.FeedRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.FriendsEventsRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.GroupsRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.RecommendedEventsRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.TwitchLiveRecyclerAdapter;
-import com.wasder.wasderapp.RecyclerAdapters.TwitchStreamRecyclerAdapter;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.Templates.BaseTabFragment;
+import com.wasder.wasderapp.ui.home.CreatorFeedRecyclerAdapter;
+import com.wasder.wasderapp.ui.home.FeedRecyclerAdapter;
+import com.wasder.wasderapp.ui.home.GroupsRecyclerAdapter;
+import com.wasder.wasderapp.ui.live.EsportsRecyclerAdapter;
+import com.wasder.wasderapp.ui.live.TwitchLiveRecyclerAdapter;
+import com.wasder.wasderapp.ui.live.TwitchStreamRecyclerAdapter;
+import com.wasder.wasderapp.ui.social.EventRecyclerAdapter;
+import com.wasder.wasderapp.ui.social.FriendsEventsRecyclerAdapter;
+import com.wasder.wasderapp.ui.social.RecommendedEventsRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

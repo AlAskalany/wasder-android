@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_view_margin_bottom"
@@ -16,31 +17,161 @@
     app:cardElevation="@dimen/cardView_elevation"
     app:cardMaxElevation="@dimen/cardView_max_elevation">
 
-    <ImageButton
-        android:id="@+id/events_details_imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_margin="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_center_focus_strong_black_24dp"/>
-
-    <TextView
-        android:id="@+id/id"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/event"
-        android:textAppearance="?attr/textAppearanceListItem"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/content"
-        android:textAppearance="?attr/textAppearanceListItem"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/feed_card_avatar"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/ic_launcher_round"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="37dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/feed_card_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    tools:layout_editor_absoluteX="220dp"
+                    tools:layout_editor_absoluteY="37dp"/>
+
+                <TextView
+                    android:id="@+id/feed_card_subheader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subhead"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    tools:layout_editor_absoluteX="112dp"
+                    tools:layout_editor_absoluteY="37dp"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/events_details_imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_center_focus_strong_black_24dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/feed_card_rich_media"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/image_description"
+            android:maxHeight="200dp"
+            android:minHeight="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/event_pic"/>
+
+        <TextView
+            android:id="@+id/feed_card_supplementary_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/cardView_supplementary_text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageButton
+                android:id="@+id/feed_card_comment_imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="?attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_comment_black_24dp"/>
+
+            <ImageButton
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_menu_send"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="58dp"/>
+
+            <ImageButton
+                android:id="@+id/feed_likee_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_menu_manage"
+                tools:layout_editor_absoluteX="112dp"
+                tools:layout_editor_absoluteY="58dp"/>
+
+            <ImageButton
+                android:id="@+id/feed_bookmark_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_bookmark_black_24dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp"/>
+
+            <ImageButton
+                android:id="@+id/feed_share_imageButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/image_description"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_menu_share"
+                tools:layout_editor_absoluteX="306dp"
+                tools:layout_editor_absoluteY="58dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </android.support.v7.widget.CardView>

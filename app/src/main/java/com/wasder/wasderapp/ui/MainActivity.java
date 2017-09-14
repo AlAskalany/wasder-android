@@ -147,6 +147,44 @@ public class MainActivity
 			     .show();
 		}
 		
+		SetupFirebaseAuth();
+		
+		CreateNavigationFragments();
+		
+		fragmentMap.put(R.id.navigation_home, homeFragment);
+		fragmentMap.put(R.id.navigation_live, liveFragment);
+		fragmentMap.put(R.id.navigation_social, socialFragment);
+		
+		FragmentManager manager = getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
+		transaction.commit();
+		
+		mToolbar = findViewById(R.id.toolbar_main_activity);
+		setSupportActionBar(mToolbar);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			mToolbar.setTitle(homeFragment.getmFragmentTitle());
+		}
+		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+		                                                         drawerLayout,
+		                                                         mToolbar,
+		                                                         R.string.navigation_drawer_open,
+		                                                         R.string.navigation_drawer_close);
+		toggle.syncState();
+		NavigationView navigationView = findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
+		
+		bottomNavigationView = findViewById(R.id.navigation);
+		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+		
+		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
+		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
+	}
+	
+	private void SetupFirebaseAuth() {
+		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
 			
@@ -173,6 +211,9 @@ public class MainActivity
 				}
 			}
 		};
+	}
+	
+	private void CreateNavigationFragments() {
 		
 		homeFragment = new WasderUiBuilder.NavigationFragmentBuilder().Create()
 		                                                              .setmFragmentTitle("Home")
@@ -212,37 +253,6 @@ public class MainActivity
 		                                                                .addTab(WasderUiBuilder.TabType.RecommendedEvents)
 		                                                                .addTab(WasderUiBuilder.TabType.FriendsEvents)
 		                                                                .build();
-		
-		fragmentMap.put(R.id.navigation_home, homeFragment);
-		fragmentMap.put(R.id.navigation_live, liveFragment);
-		fragmentMap.put(R.id.navigation_social, socialFragment);
-		
-		FragmentManager manager = getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
-		transaction.commit();
-		
-		mToolbar = findViewById(R.id.toolbar_main_activity);
-		setSupportActionBar(mToolbar);
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			mToolbar.setTitle(homeFragment.getmFragmentTitle());
-		}
-		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-		                                                         drawerLayout,
-		                                                         mToolbar,
-		                                                         R.string.navigation_drawer_open,
-		                                                         R.string.navigation_drawer_close);
-		toggle.syncState();
-		NavigationView navigationView = findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
-		
-		bottomNavigationView = findViewById(R.id.navigation);
-		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-		
-		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
-		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
 	}
 	
 	@Override
