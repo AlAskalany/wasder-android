@@ -1,9 +1,10 @@
 package com.wasder.wasderapp;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 /**
@@ -13,7 +14,7 @@ import android.view.MenuItem;
  * in a {@link MarketItemListActivity}.
  */
 public class MarketItemDetailActivity
-		extends Activity {
+		extends AppCompatActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,8 @@ public class MarketItemDetailActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_marketitem_detail);
 		
+		Toolbar mToolbar = findViewById(R.id.toolbar_market_item_detail);
+		setSupportActionBar(mToolbar);
 		// Show the Up button in the action bar.
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
@@ -43,9 +46,9 @@ public class MarketItemDetailActivity
 			arguments.putString(MarketItemDetailFragment.ARG_ITEM_ID, getIntent().getStringExtra(MarketItemDetailFragment.ARG_ITEM_ID));
 			MarketItemDetailFragment fragment = new MarketItemDetailFragment();
 			fragment.setArguments(arguments);
-			getFragmentManager().beginTransaction()
-			                    .add(R.id.marketitem_detail_container, fragment)
-			                    .commit();
+			getSupportFragmentManager().beginTransaction()
+			                           .add(R.id.marketitem_detail_container, fragment)
+			                           .commit();
 		}
 	}
 	

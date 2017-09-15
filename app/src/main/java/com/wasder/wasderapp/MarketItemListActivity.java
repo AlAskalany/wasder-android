@@ -1,12 +1,13 @@
 package com.wasder.wasderapp;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.wasder.wasderapp.dummy.DummyContent;
 
 import java.util.List;
 
+import static android.support.v4.app.NavUtils.navigateUpFromSameTask;
+
 /**
  * An activity representing a list of MarketItems. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -26,7 +29,7 @@ import java.util.List;
  * item details side-by-side using two vertical panes.
  */
 public class MarketItemListActivity
-		extends Activity {
+		extends AppCompatActivity {
 	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -39,6 +42,8 @@ public class MarketItemListActivity
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_marketitem_list);
+		Toolbar mToolbar = findViewById(R.id.toolbar_market_item_list);
+		setSupportActionBar(mToolbar);
 		// Show the Up button in the action bar.
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
@@ -58,6 +63,11 @@ public class MarketItemListActivity
 		}
 	}
 	
+	private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+		
+		recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
@@ -74,11 +84,6 @@ public class MarketItemListActivity
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-		
-		recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
 	}
 	
 	public class SimpleItemRecyclerViewAdapter

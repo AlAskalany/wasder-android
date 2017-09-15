@@ -35,9 +35,9 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.AccountActivity;
-import com.wasder.wasderapp.BaseActivity;
 import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
+import com.wasder.wasderapp.MarketItemListActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
 
@@ -334,7 +334,7 @@ public class MainActivity
 				actionCenterBottomSheetDialog.show();
 				break;
 			case R.id.action_settings:
-				startActivity(new Intent(MainActivity.this, BaseActivity.class));
+				startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
 				return true;
 			case R.id.action_sign_outout:
 				mAuth.signOut();
