@@ -2,13 +2,16 @@ package com.wasder.wasderapp.models;
 
 import com.wasder.wasderapp.Interfaces.WasderDataModel;
 
+import java.io.Serializable;
+
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/8/2017.
  */
 
 public class TwitchStreamItem
-		implements WasderDataModel {
+		implements WasderDataModel,
+		           Serializable {
 	
 	private String uId;
 	private String id;

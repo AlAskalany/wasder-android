@@ -38,15 +38,17 @@ public class FeedRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FeedViewHolder viewHolder, FeedItem feedItem, int position) {
+	protected void populateViewHolder(final FeedViewHolder viewHolder, final FeedItem feedItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), FeedActivity.class);
+				intent.putExtra("feed_item", feedItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), FeedActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener("FeedFragment", FeedActivity.class, "Details");
 			}
 		});
