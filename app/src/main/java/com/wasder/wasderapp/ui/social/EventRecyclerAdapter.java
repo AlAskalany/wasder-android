@@ -40,15 +40,17 @@ public class EventRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EventViewHolder viewHolder, EventItem eventItem, int position) {
+	protected void populateViewHolder(final EventViewHolder viewHolder, final EventItem eventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EventActivity.class);
+				intent.putExtra("event_item", eventItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), EventActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Details");
 			}
 		});

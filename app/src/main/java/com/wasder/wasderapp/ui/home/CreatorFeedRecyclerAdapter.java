@@ -36,15 +36,17 @@ public class CreatorFeedRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, CreatorFeedItem creatorFeedItem, int position) {
+	protected void populateViewHolder(final CreatorFeedViewHolder viewHolder, final CreatorFeedItem creatorFeedItem, int position) {
 		
 		viewHolder.creatorFeedDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), CreatorFeedActivity.class);
+				intent.putExtra("creator_feed_item", creatorFeedItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), CreatorFeedActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.CreatorsFragment, viewHolder.creatorFeedItem, "Item");
 			}
 		});

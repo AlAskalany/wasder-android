@@ -40,15 +40,17 @@ public class FriendsEventsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FriendsEventViewHolder viewHolder, FriendEventItem friendEventItem, int position) {
+	protected void populateViewHolder(final FriendsEventViewHolder viewHolder, final FriendEventItem friendEventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), FriendEventActivity.class);
+				intent.putExtra("friend_event_item", friendEventItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), FriendEventActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Details");
 			}
 		});

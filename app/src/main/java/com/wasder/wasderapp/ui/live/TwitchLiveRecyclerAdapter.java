@@ -40,15 +40,17 @@ public class TwitchLiveRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, TwitchLiveItem twitchLiveItem, int position) {
+	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, final TwitchLiveItem twitchLiveItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchLiveActivity.class);
+				intent.putExtra("twitch_live_item", twitchLiveItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), TwitchLiveActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchLiveItem, "Details");
 			}
 		});

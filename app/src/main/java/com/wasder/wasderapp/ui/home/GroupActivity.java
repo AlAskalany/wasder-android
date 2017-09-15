@@ -5,12 +5,19 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.wasder.wasderapp.BaseActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.models.GroupItem;
+import com.wasder.wasderapp.util.Helpers;
 
 public class GroupActivity
 		extends BaseActivity {
+	
+	public static final String ARG_GROUP_ITEM = "group_item";
+	private GroupItem groupItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,18 @@ public class GroupActivity
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			//actionBar.setDisplayHomeAsUpEnabled(true);
+		}
+		
+		ImageView imageView = findViewById(R.id.activity_feed_imageView);
+		TextView textView = findViewById(R.id.activity_feed_textView);
+		if (getIntent().getExtras()
+		               .containsKey(ARG_GROUP_ITEM)) {
+			groupItem = (GroupItem) getIntent().getExtras()
+			                                   .getSerializable(ARG_GROUP_ITEM);
+			getSupportActionBar().setTitle(groupItem.getTitle());
+			final String imageUrl = groupItem.getImageUrl();
+			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
+			textView.setText(groupItem.getSupplementaryText());
 		}
 	}
 }

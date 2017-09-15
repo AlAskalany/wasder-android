@@ -40,15 +40,17 @@ public class EsportsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EsportsViewHolder viewHolder, EsportsItem esportsItem, int position) {
+	protected void populateViewHolder(final EsportsViewHolder viewHolder, final EsportsItem esportsItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EsportsActivity.class);
+				intent.putExtra("esports_item", esportsItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), EsportsActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Details");
 			}
 		});

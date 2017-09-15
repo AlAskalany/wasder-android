@@ -40,15 +40,17 @@ public class RecommendedEventsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, RecommendedEventItem recommendedEventItem, int position) {
+	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, final RecommendedEventItem recommendedEventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), RecommendedEventActivity.class);
+				intent.putExtra("recommended_event_item", recommendedEventItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), RecommendedEventActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Details");
 			}
 		});

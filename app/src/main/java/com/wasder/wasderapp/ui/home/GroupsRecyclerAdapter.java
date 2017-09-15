@@ -38,15 +38,17 @@ public class GroupsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final GroupViewHolder viewHolder, GroupItem groupItem, int position) {
+	protected void populateViewHolder(final GroupViewHolder viewHolder, final GroupItem groupItem, int position) {
 		
 		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), GroupActivity.class);
+				intent.putExtra("group_item", groupItem);
 				viewHolder.itemView.getContext()
-				                   .startActivity(new Intent(viewHolder.itemView.getContext(), GroupActivity.class));
+				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel, "Item");
 			}
 		});
