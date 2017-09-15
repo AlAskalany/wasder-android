@@ -16,7 +16,7 @@ public class TwitchStreamActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_twitch_stream);
 		Toolbar toolbar = findViewById(R.id.twitch_stream_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Twitch Stream");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);

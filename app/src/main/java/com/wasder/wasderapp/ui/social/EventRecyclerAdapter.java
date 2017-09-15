@@ -1,6 +1,7 @@
 package com.wasder.wasderapp.ui.social;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -46,7 +47,9 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.eventItem, "Details");
+				viewHolder.itemView.getContext()
+				                   .startActivity(new Intent(viewHolder.itemView.getContext(), EventActivity.class));
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Details");
 			}
 		});
 		
@@ -55,7 +58,7 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.eventItem, "Share");
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Share");
 			}
 		});
 		
@@ -64,7 +67,7 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.eventItem, "Profile");
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Profile");
 			}
 		});
 		viewHolder.titleTextView.setText(eventItem.getTitle());

@@ -1,6 +1,7 @@
 package com.wasder.wasderapp.ui.home;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -14,8 +15,10 @@ public class CreatorFeedActivity
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_creator_feed);
-		String s = getIntent().getStringExtra("Name");
 		Toolbar toolbar = findViewById(R.id.creator_feed_toolbar);
-		toolbar.setTitle(s);
+		toolbar.setTitle("Creator Feed");
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }

@@ -16,7 +16,7 @@ public class RecommendedEventActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recommended_event);
 		Toolbar toolbar = findViewById(R.id.recommended_events_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Recommended Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);

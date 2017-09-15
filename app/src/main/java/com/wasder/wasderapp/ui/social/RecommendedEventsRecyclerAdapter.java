@@ -1,6 +1,7 @@
 package com.wasder.wasderapp.ui.social;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -46,7 +47,9 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.recommendedEventItem, "Details");
+				viewHolder.itemView.getContext()
+				                   .startActivity(new Intent(viewHolder.itemView.getContext(), RecommendedEventActivity.class));
+				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Details");
 			}
 		});
 		
@@ -55,7 +58,7 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.recommendedEventItem, "Share");
+				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Share");
 			}
 		});
 		
@@ -64,7 +67,7 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.recommendedEventItem, "Profile");
+				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Profile");
 			}
 		});
 		viewHolder.titleTextView.setText(recommendedEventItem.getTitle());

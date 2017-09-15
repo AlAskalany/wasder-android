@@ -1,6 +1,7 @@
 package com.wasder.wasderapp.ui.live;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -46,6 +47,8 @@ public class TwitchLiveRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
+				viewHolder.itemView.getContext()
+				                   .startActivity(new Intent(viewHolder.itemView.getContext(), TwitchLiveActivity.class));
 				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchLiveItem, "Details");
 			}
 		});

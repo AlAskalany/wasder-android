@@ -1,6 +1,7 @@
 package com.wasder.wasderapp.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -44,6 +45,8 @@ public class GroupsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
+				viewHolder.itemView.getContext()
+				                   .startActivity(new Intent(viewHolder.itemView.getContext(), GroupActivity.class));
 				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel, "Item");
 			}
 		});

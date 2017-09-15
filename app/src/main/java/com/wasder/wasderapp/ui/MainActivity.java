@@ -39,15 +39,6 @@ import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
-import com.wasder.wasderapp.ui.home.CreatorFeedActivity;
-import com.wasder.wasderapp.ui.home.FeedActivity;
-import com.wasder.wasderapp.ui.home.GroupActivity;
-import com.wasder.wasderapp.ui.live.EsportsActivity;
-import com.wasder.wasderapp.ui.live.TwitchLiveActivity;
-import com.wasder.wasderapp.ui.live.TwitchStreamActivity;
-import com.wasder.wasderapp.ui.social.EventActivity;
-import com.wasder.wasderapp.ui.social.FriendEventActivity;
-import com.wasder.wasderapp.ui.social.RecommendedEventActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 import java.util.HashMap;
@@ -376,37 +367,38 @@ public class MainActivity
 		Log.d(TAG, "Tag: " + tag + " object: " + data + " Extra: " + extra);
 		switch (tag) {
 			case Helpers.TAG.FeedFragment:
-				if (extra == "Details") {
+				/*if (extra == "Details") {
 					startActivity(new Intent(MainActivity.this, FeedActivity.class));
 				} else if (extra == "Share") {
 					
 				} else if (extra == "Profile") {
 					startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-				}
+				}*/
+				
 				break;
 			case Helpers.TAG.CreatorsFragment:
-				startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
+				//startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
 				break;
 			case Helpers.TAG.GroupsFragment:
-				startActivity(new Intent(MainActivity.this, GroupActivity.class));
+				//startActivity(new Intent(MainActivity.this, GroupActivity.class));
 				break;
 			case Helpers.TAG.TwitchStreamFragment:
-				startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
+				//startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
 				break;
 			case Helpers.TAG.TwitchLiveFragment:
-				startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
+				//startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
 				break;
 			case Helpers.TAG.EsportsFragment:
-				startActivity(new Intent(MainActivity.this, EsportsActivity.class));
+				//startActivity(new Intent(MainActivity.this, EsportsActivity.class));
 				break;
 			case Helpers.TAG.EventsFragment:
-				startActivity(new Intent(MainActivity.this, EventActivity.class));
+				//startActivity(new Intent(MainActivity.this, EventActivity.class));
 				break;
 			case Helpers.TAG.RecommendedEventsFragment:
-				startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
+				//startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
 				break;
 			case Helpers.TAG.FriendsEventsFragment:
-				startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
+				//startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
 				break;
 			
 		}

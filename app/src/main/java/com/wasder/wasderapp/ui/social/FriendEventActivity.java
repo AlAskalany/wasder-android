@@ -16,7 +16,7 @@ public class FriendEventActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_friend_event);
 		Toolbar toolbar = findViewById(R.id.friend_event_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Friend Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);

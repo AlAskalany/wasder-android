@@ -16,7 +16,7 @@ public class EventActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event);
 		Toolbar toolbar = findViewById(R.id.event_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);

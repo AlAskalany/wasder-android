@@ -16,7 +16,7 @@ public class EsportsActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_esports);
 		Toolbar toolbar = findViewById(R.id.esports_toolbar);
-		toolbar.setTitle("Account");
+		toolbar.setTitle("Esports");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
