@@ -35,11 +35,11 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.AccountActivity;
+import com.wasder.wasderapp.BaseActivity;
 import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseNavigationFragment;
-import com.wasder.wasderapp.util.Helpers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -272,14 +272,6 @@ public class MainActivity
 	}
 	
 	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		
-		savedInstanceState.putString("UserName", mUserName);
-		// ... save more data
-		super.onSaveInstanceState(savedInstanceState);
-	}
-	
-	@Override
 	public void onBackPressed() {
 		
 		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
@@ -323,15 +315,6 @@ public class MainActivity
 	}
 	
 	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		
-		super.onRestoreInstanceState(savedInstanceState);
-		
-		mUserName = savedInstanceState.getString("UserName");
-		// ... recover more data
-	}
-	
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -351,7 +334,7 @@ public class MainActivity
 				actionCenterBottomSheetDialog.show();
 				break;
 			case R.id.action_settings:
-				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+				startActivity(new Intent(MainActivity.this, BaseActivity.class));
 				return true;
 			case R.id.action_sign_outout:
 				mAuth.signOut();
@@ -364,43 +347,5 @@ public class MainActivity
 	@Override
 	public void onFragmentInteractionListener(String tag, Object data, String extra) {
 		
-		Log.d(TAG, "Tag: " + tag + " object: " + data + " Extra: " + extra);
-		switch (tag) {
-			case Helpers.TAG.FeedFragment:
-				/*if (extra == "Details") {
-					startActivity(new Intent(MainActivity.this, FeedActivity.class));
-				} else if (extra == "Share") {
-					
-				} else if (extra == "Profile") {
-					startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-				}*/
-				
-				break;
-			case Helpers.TAG.CreatorsFragment:
-				//startActivity(new Intent(MainActivity.this, CreatorFeedActivity.class));
-				break;
-			case Helpers.TAG.GroupsFragment:
-				//startActivity(new Intent(MainActivity.this, GroupActivity.class));
-				break;
-			case Helpers.TAG.TwitchStreamFragment:
-				//startActivity(new Intent(MainActivity.this, TwitchStreamActivity.class));
-				break;
-			case Helpers.TAG.TwitchLiveFragment:
-				//startActivity(new Intent(MainActivity.this, TwitchLiveActivity.class));
-				break;
-			case Helpers.TAG.EsportsFragment:
-				//startActivity(new Intent(MainActivity.this, EsportsActivity.class));
-				break;
-			case Helpers.TAG.EventsFragment:
-				//startActivity(new Intent(MainActivity.this, EventActivity.class));
-				break;
-			case Helpers.TAG.RecommendedEventsFragment:
-				//startActivity(new Intent(MainActivity.this, RecommendedEventActivity.class));
-				break;
-			case Helpers.TAG.FriendsEventsFragment:
-				//startActivity(new Intent(MainActivity.this, FriendEventActivity.class));
-				break;
-			
-		}
 	}
 }
