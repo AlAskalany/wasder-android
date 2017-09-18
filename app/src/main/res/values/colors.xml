@@ -3,6 +3,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorFeedSheetTitle">@color/md_blue_grey_700</color>
+    <color name="colorBackground">@color/md_grey_400</color>
 
     <!-- google's material design colours from http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
 
