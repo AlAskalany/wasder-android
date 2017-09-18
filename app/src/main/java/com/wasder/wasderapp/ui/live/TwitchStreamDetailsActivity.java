@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.TwitchStreamItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class TwitchStreamActivity
-		extends BaseActivity {
+public class TwitchStreamDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_TWITCH_STREAM_ACTIVITY = "twitch_stream_item";
 	private TwitchStreamItem twitchStreamItem;

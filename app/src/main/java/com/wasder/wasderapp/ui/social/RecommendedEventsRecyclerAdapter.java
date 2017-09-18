@@ -47,7 +47,7 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), RecommendedEventActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), RecommendedEventDetailsActivity.class);
 				intent.putExtra("recommended_event_item", recommendedEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

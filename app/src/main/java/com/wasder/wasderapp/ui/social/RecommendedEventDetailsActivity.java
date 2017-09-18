@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.RecommendedEventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class RecommendedEventActivity
-		extends BaseActivity {
+public class RecommendedEventDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_RECOMMENDED_EVENT_ITEM = "recommended_event_item";
 	private RecommendedEventItem recommendedEventItem;

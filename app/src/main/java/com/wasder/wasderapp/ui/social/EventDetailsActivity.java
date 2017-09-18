@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.EventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class EventActivity
-		extends BaseActivity {
+public class EventDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_EVENT_ITEM = "event_item";
 	private EventItem eventItem;

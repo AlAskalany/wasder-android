@@ -43,7 +43,7 @@ public class CreatorFeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), CreatorFeedActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), CreatorFeedDetailsActivity.class);
 				intent.putExtra("creator_feed_item", creatorFeedItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

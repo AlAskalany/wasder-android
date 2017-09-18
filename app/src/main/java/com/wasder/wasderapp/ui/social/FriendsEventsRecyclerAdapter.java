@@ -47,7 +47,7 @@ public class FriendsEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), FriendEventActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), FriendEventDetailsActivity.class);
 				intent.putExtra("friend_event_item", friendEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

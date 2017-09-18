@@ -8,13 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.GroupItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class GroupActivity
-		extends BaseActivity {
+public class GroupDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_GROUP_ITEM = "group_item";
 	private GroupItem groupItem;

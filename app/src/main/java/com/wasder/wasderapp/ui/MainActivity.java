@@ -34,7 +34,7 @@ import android.widget.Toast;
 import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wasder.wasderapp.AccountActivity;
+import com.wasder.wasderapp.AccountDetailsActivity;
 import com.wasder.wasderapp.Builders.WasderUiBuilder;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.MarketItemListActivity;
@@ -292,7 +292,7 @@ public class MainActivity
 		
 		switch (id) {
 			case R.id.nav_account:
-				startActivity(new Intent(MainActivity.this, AccountActivity.class));
+				startActivity(new Intent(MainActivity.this, AccountDetailsActivity.class));
 				break;
 			case R.id.nav_settings:
 				startActivity(new Intent(MainActivity.this, SettingsActivity.class));

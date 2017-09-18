@@ -45,7 +45,7 @@ public class GroupsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), GroupActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), GroupDetailsActivity.class);
 				intent.putExtra("group_item", groupItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

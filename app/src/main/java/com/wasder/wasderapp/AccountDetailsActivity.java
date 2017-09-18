@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class AccountActivity
-		extends BaseActivity {
+public class AccountDetailsActivity
+		extends BaseDetailsActivity {
 	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide

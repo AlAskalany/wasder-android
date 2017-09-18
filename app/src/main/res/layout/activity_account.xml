@@ -22,7 +22,7 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context="com.wasder.wasderapp.AccountActivity"/>
+            tools:context="com.wasder.wasderapp.AccountDetailsActivity"/>
     </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>
 

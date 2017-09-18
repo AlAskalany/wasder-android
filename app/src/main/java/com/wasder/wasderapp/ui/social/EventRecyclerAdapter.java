@@ -47,7 +47,7 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), EventActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EventDetailsActivity.class);
 				intent.putExtra("event_item", eventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

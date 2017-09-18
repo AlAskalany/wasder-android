@@ -47,7 +47,7 @@ public class EsportsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), EsportsActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EsportsDetailsActivity.class);
 				intent.putExtra("esports_item", esportsItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

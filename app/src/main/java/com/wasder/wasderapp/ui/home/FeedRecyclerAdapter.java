@@ -45,11 +45,11 @@ public class FeedRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), FeedActivity.class);
-				intent.putExtra("feed_item", feedItem);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), FeedDetailsActivity.class);
+				intent.putExtra("data_item", feedItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener("FeedFragment", FeedActivity.class, "Details");
+				mListener.onFragmentInteractionListener("FeedFragment", FeedDetailsActivity.class, "Details");
 			}
 		});
 		

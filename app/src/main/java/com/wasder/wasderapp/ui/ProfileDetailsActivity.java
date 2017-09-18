@@ -16,13 +16,13 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 
 import java.io.InputStream;
 
-public class ProfileActivity
-		extends BaseActivity {
+public class ProfileDetailsActivity
+		extends BaseDetailsActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

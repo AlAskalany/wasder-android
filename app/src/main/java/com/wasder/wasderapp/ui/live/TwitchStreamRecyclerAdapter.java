@@ -47,7 +47,7 @@ public class TwitchStreamRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchStreamActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchStreamDetailsActivity.class);
 				intent.putExtra("twitch_stream_item", twitchStreamItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

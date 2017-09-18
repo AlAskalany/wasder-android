@@ -47,7 +47,7 @@ public class TwitchLiveRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchLiveActivity.class);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchLiveDetailsActivity.class);
 				intent.putExtra("twitch_live_item", twitchLiveItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);

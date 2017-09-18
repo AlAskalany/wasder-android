@@ -7,20 +7,21 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class BaseActivity
+import com.wasder.wasderapp.Interfaces.WasderDataModel;
+import com.wasder.wasderapp.util.Helpers;
+
+public class BaseDetailsActivity<T extends WasderDataModel>
 		extends AppCompatActivity {
+	
+	public static final String ARG_DATA_ITEM = "data_item";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_base);
-		Toolbar mToolbar = findViewById(R.id.toolbar_base);
-		setSupportActionBar(mToolbar);
-		ActionBar mActionBar = getSupportActionBar();
-		mActionBar.setDisplayHomeAsUpEnabled(true);
-		mActionBar.setDefaultDisplayHomeAsUpEnabled(true);
 	}
 	
 	public boolean onSupportNavigateUp() {
@@ -50,5 +51,41 @@ public class BaseActivity
 			return true;
 		}
 		return false;
+	}
+	
+	protected void SetActionBarTitle() {
+		
+		if (getIntent().getExtras()
+		               .containsKey(ARG_DATA_ITEM)) {
+			Bundle extraData = getIntent().getExtras();
+			T dataItem;
+			if (extraData != null) {
+				dataItem = (T) extraData.getSerializable(ARG_DATA_ITEM);
+				ActionBar actionBar = getSupportActionBar();
+				if (actionBar != null) {
+					actionBar.setTitle((dataItem != null) ? dataItem.getTitle() : "");
+				}
+				ImageView imageView = findViewById(R.id.activity_feed_imageView);
+				TextView textView = findViewById(R.id.activity_feed_textView);
+				final String imageUrl;
+				if (dataItem != null) {
+					imageUrl = dataItem.getImageUrl();
+					Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
+				}
+				
+				if (dataItem != null) {
+					textView.setText(dataItem.getSupplementaryText());
+				}
+			}
+		}
+	}
+	
+	protected void SetupActionBar(String title, int toolbarRes) {
+		
+		Toolbar toolbar = findViewById(toolbarRes);
+		toolbar.setTitle(title);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }

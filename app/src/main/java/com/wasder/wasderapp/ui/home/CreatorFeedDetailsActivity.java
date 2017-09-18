@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.CreatorFeedItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class CreatorFeedActivity
-		extends BaseActivity {
+public class CreatorFeedDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_CREATOR_FEED_ITEM = "creator_feed_item";
 	private CreatorFeedItem creatorFeedItem;

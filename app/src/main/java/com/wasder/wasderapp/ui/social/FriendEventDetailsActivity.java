@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseActivity;
+import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.FriendEventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class FriendEventActivity
-		extends BaseActivity {
+public class FriendEventDetailsActivity
+		extends BaseDetailsActivity {
 	
 	public static final String ARG_FRIEND_EVENT_ITEM = "friend_event_item";
 	private FriendEventItem friendEventItem;
