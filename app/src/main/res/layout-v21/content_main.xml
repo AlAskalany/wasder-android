@@ -10,7 +10,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:expanded="true">
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/main_collapsing_toolbar"
@@ -19,7 +19,7 @@
             app:collapsedTitleGravity="top|left|start"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="top|left|start"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
             app:titleEnabled="false"
             app:toolbarId="@+id/toolbar">
 
@@ -42,6 +42,7 @@
         android:clickable="true"
         android:overScrollMode="always"
         app:behavior_peekHeight="50dp"
+        app:layout_anchorGravity="bottom|center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </FrameLayout>
@@ -51,6 +52,7 @@
         style="@style/Theme.Design.BottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="16dp"
         android:theme="@style/Theme.Design.BottomSheetDialog"
         app:behavior_peekHeight="56dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
@@ -67,7 +69,6 @@
             android:layout_gravity="top"
             android:layout_marginBottom="25dp"
             android:background="?attr/colorPrimary"
-            app:elevation="16dp"
             app:itemIconTint="@android:drawable/screen_background_light_transparent"
             app:itemTextColor="@android:color/secondary_text_dark"
             app:menu="@menu/navigation">

@@ -2,10 +2,12 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout_bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:clickable="true">
 
     <LinearLayout
         android:id="@+id/action_center_bottom_sheet"
