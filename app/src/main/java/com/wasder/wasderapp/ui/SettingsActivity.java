@@ -90,8 +90,8 @@ public class SettingsActivity extends PreferenceActivity {
 	/**
 	 * Binds a preference's summary to its value. More specifically, when the
 	 * preference's value is changed, its summary (line of text below the
-	 * preference title) is updated to reflect the value. The summary is also
-	 * immediately updated upon calling this method. The exact display format is
+     * preference setTitle) is updated to reflect the value. The summary is also
+     * immediately updated upon calling this method. The exact display format is
 	 * dependent on the type of preference.
 	 *
 	 * @see #sBindPreferenceSummaryToValueListener
@@ -105,12 +105,22 @@ public class SettingsActivity extends PreferenceActivity {
 		sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, PreferenceManager.getDefaultSharedPreferences(preference.getContext()).getString(preference.getKey(), ""));
 		
 	}
-	
-	@Override
+
+    /**
+     * Helper method to determine if the device has an extra-large screen. For
+     * example, 10" tablets are extra-large.
+     */
+    private static boolean isXLargeTablet(Context context) {
+
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
+
+    }
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
-		
+
 		setupActionBar();
 	}
 	
@@ -118,7 +128,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
 	private void setupActionBar() {
-		
+
 		ActionBar actionBar = getActionBar();
 		if (actionBar != null) {
 			// Show the Up button in the action bar.
@@ -131,18 +141,8 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	@Override
 	public boolean onIsMultiPane() {
-		
+
 		return isXLargeTablet(this);
-	}
-	
-	/**
-	 * Helper method to determine if the device has an extra-large screen. For
-	 * example, 10" tablets are extra-large.
-	 */
-	private static boolean isXLargeTablet(Context context) {
-		
-		return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-		
 	}
 	
 	/**

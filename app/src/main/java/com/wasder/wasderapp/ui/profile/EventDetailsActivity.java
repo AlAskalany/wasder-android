@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.social;
+package com.wasder.wasderapp.ui.profile;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -8,21 +8,21 @@ import android.widget.TextView;
 
 import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
-import com.wasder.wasderapp.models.FriendEventItem;
+import com.wasder.wasderapp.models.EventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class FriendEventDetailsActivity
+public class EventDetailsActivity
 		extends BaseDetailsActivity {
 	
-	public static final String ARG_FRIEND_EVENT_ITEM = "friend_event_item";
-	private FriendEventItem friendEventItem;
+	public static final String ARG_EVENT_ITEM = "event_item";
+	private EventItem eventItem;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_friend_event);
-		Toolbar toolbar = findViewById(R.id.friend_event_toolbar);
-		toolbar.setTitle("Friend Event");
+		setContentView(R.layout.activity_event);
+		Toolbar toolbar = findViewById(R.id.event_toolbar);
+		toolbar.setTitle("Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -30,13 +30,13 @@ public class FriendEventDetailsActivity
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
-		               .containsKey(ARG_FRIEND_EVENT_ITEM)) {
-			friendEventItem = (FriendEventItem) getIntent().getExtras()
-			                                               .getSerializable(ARG_FRIEND_EVENT_ITEM);
-			getSupportActionBar().setTitle(friendEventItem.getTitle());
-			final String imageUrl = friendEventItem.getImageUrl();
+		               .containsKey(ARG_EVENT_ITEM)) {
+			eventItem = (EventItem) getIntent().getExtras()
+			                                   .getSerializable(ARG_EVENT_ITEM);
+			getSupportActionBar().setTitle(eventItem.getTitle());
+			final String imageUrl = eventItem.getImageUrl();
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(friendEventItem.getSupplementaryText());
+			textView.setText(eventItem.getSupplementaryText());
 		}
 	}
 }

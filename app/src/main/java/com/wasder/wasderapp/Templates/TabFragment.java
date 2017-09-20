@@ -19,8 +19,8 @@ import com.wasder.wasderapp.R;
  * Created by ahmed on 9/10/2017.
  */
 
-public class BaseTabFragment
-		extends Fragment {
+public class TabFragment
+        extends Fragment {
 	
 	private int columnCount;
 	private String title;
@@ -29,10 +29,10 @@ public class BaseTabFragment
 	private View view;
 	private Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass;
 	private String mTAG;
-	
-	public BaseTabFragment() {
-		
-		super();
+
+    public TabFragment() {
+
+        super();
 	}
 	
 	@Override

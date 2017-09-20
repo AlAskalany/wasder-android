@@ -7,6 +7,18 @@
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="@string/nav_action_account"/>
         <item
+            android:id="@+id/nav_friends"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="@string/nav_action_friends"/>
+        <item
+            android:id="@+id/nav_followers"
+            android:icon="@drawable/ic_directions_run_black_24dp"
+            android:title="@string/nav_action_followers"/>
+        <item
+            android:id="@+id/nav_achievements"
+            android:icon="@drawable/ic_stars_black_24dp"
+            android:title="@string/nav_action_achievements"/>
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/nav_action_settings"/>

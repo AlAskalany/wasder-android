@@ -12,7 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.wasder.wasderapp.Templates.BaseNavigationFragment;
+import com.wasder.wasderapp.Templates.NavigationFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -77,10 +77,10 @@ public class Helpers {
 	}
 	
 	public static class Fragments{
-		
-		public static void switchToNavigationFragment(int layout, FragmentTransaction ts, BaseNavigationFragment fragment) {
-			
-			ts.replace(layout, fragment);
+
+        public static void switchToNavigationFragment(int layout, FragmentTransaction ts, NavigationFragment fragment) {
+
+            ts.replace(layout, fragment);
 			ts.addToBackStack(null);
 			ts.commit();
 		}

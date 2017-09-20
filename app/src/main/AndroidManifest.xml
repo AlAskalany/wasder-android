@@ -111,7 +111,7 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.social.EventDetailsActivity"
+            android:name=".ui.profile.EventDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -120,13 +120,13 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.social.FriendEventDetailsActivity"
+            android:name=".ui.profile.FriendEventDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.social.RecommendedEventDetailsActivity"
+            android:name=".ui.profile.RecommendedEventDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -159,6 +159,30 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.MarketItemListActivity"/>
+        </activity>
+        <activity
+            android:name=".AchievementsActivity"
+            android:label="@string/title_activity_achivements"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".FriendsActivity"
+            android:label="@string/title_activity_friends"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".FollowersActivity"
+            android:label="@string/title_activity_followers"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
     </application>
 

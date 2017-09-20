@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.social;
+package com.wasder.wasderapp.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.RecommendedEventItem;
+import com.wasder.wasderapp.models.EventItem;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,18 +21,18 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class RecommendedEventsRecyclerAdapter
-		extends BaseRecyclerAdapter<RecommendedEventItem, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
+public class EventRecyclerAdapter
+		extends BaseRecyclerAdapter<EventItem, EventRecyclerAdapter.EventViewHolder> {
 	
-	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(RecommendedEventItem.class,
-		      R.layout.recommended_event_item,
-		      RecommendedEventViewHolder.class,
+		super(EventItem.class,
+		      R.layout.events_item,
+		      EventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "FeedRecyclerAdapter",
+		      "EventsRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -40,18 +40,18 @@ public class RecommendedEventsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, final RecommendedEventItem recommendedEventItem, int position) {
+	protected void populateViewHolder(final EventViewHolder viewHolder, final EventItem eventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), RecommendedEventDetailsActivity.class);
-				intent.putExtra("recommended_event_item", recommendedEventItem);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EventDetailsActivity.class);
+				intent.putExtra("event_item", eventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Details");
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Details");
 			}
 		});
 		
@@ -60,7 +60,7 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Share");
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Share");
 			}
 		});
 		
@@ -69,21 +69,21 @@ public class RecommendedEventsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Profile");
+				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Profile");
 			}
 		});
-		viewHolder.titleTextView.setText(recommendedEventItem.getTitle());
-		viewHolder.subheadTextView.setText(recommendedEventItem.getSubhead());
-		final String imageUrl = recommendedEventItem.getImageUrl();
+		viewHolder.titleTextView.setText(eventItem.getTitle());
+		viewHolder.subheadTextView.setText(eventItem.getSubhead());
+		final String imageUrl = eventItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = recommendedEventItem.getPhotoUrl();
+		final String photoUrl = eventItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(recommendedEventItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(eventItem.getSupplementaryText());
 	}
 	
-	public static class RecommendedEventViewHolder
+	public static class EventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +97,9 @@ public class RecommendedEventsRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		RecommendedEventItem recommendedEventItem;
+		EventItem eventItem;
 		
-		public RecommendedEventViewHolder(View itemView) {
+		public EventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +112,7 @@ public class RecommendedEventsRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.recommended_event_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.events_details_imageButton);
 		}
 	}
 }

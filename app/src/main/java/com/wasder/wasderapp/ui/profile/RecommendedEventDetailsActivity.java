@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.social;
+package com.wasder.wasderapp.ui.profile;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;

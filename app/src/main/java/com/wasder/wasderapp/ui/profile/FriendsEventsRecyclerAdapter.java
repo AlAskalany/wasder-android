@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.social;
+package com.wasder.wasderapp.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.EventItem;
+import com.wasder.wasderapp.models.FriendEventItem;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,18 +21,18 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class EventRecyclerAdapter
-		extends BaseRecyclerAdapter<EventItem, EventRecyclerAdapter.EventViewHolder> {
+public class FriendsEventsRecyclerAdapter
+		extends BaseRecyclerAdapter<FriendEventItem, FriendsEventsRecyclerAdapter.FriendsEventViewHolder> {
 	
-	public EventRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public FriendsEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(EventItem.class,
-		      R.layout.events_item,
-		      EventViewHolder.class,
+		super(FriendEventItem.class,
+		      R.layout.friends_events_item,
+		      FriendsEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "EventsRecyclerAdapter",
+		      "FeedRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -40,18 +40,18 @@ public class EventRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EventViewHolder viewHolder, final EventItem eventItem, int position) {
+	protected void populateViewHolder(final FriendsEventViewHolder viewHolder, final FriendEventItem friendEventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), EventDetailsActivity.class);
-				intent.putExtra("event_item", eventItem);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), FriendEventDetailsActivity.class);
+				intent.putExtra("friend_event_item", friendEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Details");
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Details");
 			}
 		});
 		
@@ -60,7 +60,7 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Share");
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Share");
 			}
 		});
 		
@@ -69,21 +69,21 @@ public class EventRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.EventsFragment, viewHolder.eventItem, "Profile");
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Profile");
 			}
 		});
-		viewHolder.titleTextView.setText(eventItem.getTitle());
-		viewHolder.subheadTextView.setText(eventItem.getSubhead());
-		final String imageUrl = eventItem.getImageUrl();
+		viewHolder.titleTextView.setText(friendEventItem.getTitle());
+		viewHolder.subheadTextView.setText(friendEventItem.getSubhead());
+		final String imageUrl = friendEventItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = eventItem.getPhotoUrl();
+		final String photoUrl = friendEventItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(eventItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(friendEventItem.getSupplementaryText());
 	}
 	
-	public static class EventViewHolder
+	public static class FriendsEventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +97,9 @@ public class EventRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		EventItem eventItem;
+		FriendEventItem friendEventItem;
 		
-		public EventViewHolder(View itemView) {
+		public FriendsEventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +112,7 @@ public class EventRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.events_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.friends_events_details_imageButton);
 		}
 	}
 }

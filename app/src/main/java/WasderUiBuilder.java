@@ -1,7 +1,7 @@
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
-import com.wasder.wasderapp.Templates.BaseTabFragment;
+import com.wasder.wasderapp.Templates.TabFragment;
 
 /**
  * Wasder AB CONFIDENTIAL
@@ -15,9 +15,9 @@ public class WasderUiBuilder {
 	}
 	
 	static class TabBuilder
-			extends BuilderBase<BaseTabFragment> {
-		
-		private ViewPager viewPager;
+            extends BuilderBase<TabFragment> {
+
+        private ViewPager viewPager;
 		private TabLayout tabLayout;
 		
 		public TabBuilder(ViewPager viewPager, TabLayout tabLayout, ViewPager viewPager1, TabLayout tabLayout1){
@@ -26,9 +26,9 @@ public class WasderUiBuilder {
 			this.tabLayout = tabLayout1;
 		}
 		@Override
-		public BaseTabFragment build() {
-			
-			return null;
+        public TabFragment build() {
+
+            return null;
 		}
 	}
 }
