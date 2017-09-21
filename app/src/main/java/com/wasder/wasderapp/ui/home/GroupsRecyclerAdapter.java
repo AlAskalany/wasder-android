@@ -22,60 +22,54 @@ import com.wasder.wasderapp.util.Helpers;
  */
 
 public class GroupsRecyclerAdapter
-		extends BaseRecyclerAdapter<GroupItem, GroupsRecyclerAdapter.GroupViewHolder> {
-	
-	public GroupsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
-		
-		super(GroupItem.class, R.layout.group_item,
-		      GroupViewHolder.class,
-		      FirebaseDatabase.getInstance()
-		                      .getReference()
-		                      .child("feed"), "GroupsRecyclerAdapter",
-		      context,
-		      mListener,
-		      feedLinearLayoutManager);
-		
-	}
-	
-	@Override
-	protected void populateViewHolder(final GroupViewHolder viewHolder, final GroupItem groupItem, int position) {
-		
-		viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), GroupDetailsActivity.class);
-				intent.putExtra("group_item", groupItem);
-				viewHolder.itemView.getContext()
-				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel, "Item");
-			}
-		});
-		viewHolder.groupImageView.setImageDrawable(mContext.getResources()
-		                                                   .getDrawable(R.drawable.gamers));
-		viewHolder.groupTitleTextView.setText("My Group!");
-		viewHolder.groupSubheadTextView.setText("Best Eva!");
-	}
-	
-	public static class GroupViewHolder
-			extends RecyclerView.ViewHolder {
-		
-		View mview;
-		ImageView groupImageView;
-		TextView groupTitleTextView;
-		TextView groupSubheadTextView;
-		ImageButton groupDetailsImageButton;
-		GroupItem feedModel;
-		
-		public GroupViewHolder(View itemView) {
-			
-			super(itemView);
-			mview = itemView;
-			groupImageView = itemView.findViewById(R.id.fragment_group_imageView);
-			groupTitleTextView = itemView.findViewById(R.id.fragment_group_title_textView);
-			groupSubheadTextView = itemView.findViewById(R.id.fragment_group_subhead_textView);
-			groupDetailsImageButton = itemView.findViewById(R.id.groups_details_imageButton);
-		}
-	}
+        extends BaseRecyclerAdapter<GroupItem, GroupsRecyclerAdapter.GroupViewHolder> {
+
+    public GroupsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+
+        super(GroupItem.class, R.layout.group_item, GroupViewHolder.class, FirebaseDatabase.getInstance().getReference().child("groups"),
+                "GroupsRecyclerAdapter", context, mListener, feedLinearLayoutManager);
+
+    }
+
+    @Override
+    protected void populateViewHolder(final GroupViewHolder viewHolder, final GroupItem groupItem, int position) {
+
+        viewHolder.groupDetailsImageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(viewHolder.itemView.getContext(), GroupDetailsActivity.class);
+                intent.putExtra("group_item", groupItem);
+                viewHolder.itemView.getContext()
+                        .startActivity(intent);
+                mListener.onFragmentInteractionListener(Helpers.TAG.GroupsFragment, viewHolder.feedModel, "Item");
+            }
+        });
+        final String imageUrl = groupItem.getImageUrl();
+        Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.groupImageView, false, 0);
+        viewHolder.groupTitleTextView.setText(groupItem.getTitle());
+        viewHolder.groupSubheadTextView.setText(groupItem.getSupplementaryText());
+    }
+
+    public static class GroupViewHolder
+            extends RecyclerView.ViewHolder {
+
+        View mview;
+        ImageView groupImageView;
+        TextView groupTitleTextView;
+        TextView groupSubheadTextView;
+        ImageButton groupDetailsImageButton;
+        GroupItem feedModel;
+
+        public GroupViewHolder(View itemView) {
+
+            super(itemView);
+            mview = itemView;
+            groupImageView = itemView.findViewById(R.id.fragment_group_imageView);
+            groupTitleTextView = itemView.findViewById(R.id.fragment_group_title_textView);
+            groupSubheadTextView = itemView.findViewById(R.id.fragment_group_subhead_textView);
+            groupDetailsImageButton = itemView.findViewById(R.id.groups_details_imageButton);
+        }
+    }
 }

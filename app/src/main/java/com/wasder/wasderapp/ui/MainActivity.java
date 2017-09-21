@@ -35,13 +35,15 @@ import android.widget.Toast;
 import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wasder.wasderapp.AccountDetailsActivity;
 import com.wasder.wasderapp.AchievementsActivity;
 import com.wasder.wasderapp.Builders.UiBuilder;
+import com.wasder.wasderapp.CalendarActivity;
 import com.wasder.wasderapp.FollowersActivity;
 import com.wasder.wasderapp.FriendsActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.MarketItemListActivity;
+import com.wasder.wasderapp.ProfileDetailsActivity;
+import com.wasder.wasderapp.PurseActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 
@@ -201,10 +203,18 @@ public class MainActivity
         });
 
         ImageButton purseImageButton = findViewById(R.id.feed_sheet_purse_imageButton);
-        marketImageButton.setOnClickListener(new View.OnClickListener() {
+        purseImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
+                startActivity(new Intent(MainActivity.this, PurseActivity.class));
+            }
+        });
+
+        ImageButton calendarImageButton = findViewById(R.id.feed_sheet_calendar_imageButton);
+        calendarImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
             }
         });
     }
@@ -304,7 +314,7 @@ public class MainActivity
 
         switch (id) {
             case R.id.nav_profile:
-                startActivity(new Intent(MainActivity.this, AccountDetailsActivity.class));
+                startActivity(new Intent(MainActivity.this, ProfileDetailsActivity.class));
                 break;
             case R.id.nav_friends:
                 startActivity(new Intent(MainActivity.this, FriendsActivity.class));

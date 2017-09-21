@@ -29,8 +29,8 @@ public class CreatorFeedRecyclerAdapter
 		      CreatorFeedViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
-		                      .child("feed"), "CreatorFeedAdapter",
-		      context,
+					  .child("creators"), "CreatorFeedAdapter",
+				context,
 		      mListener,
 		      linearLayoutManager);
 	}

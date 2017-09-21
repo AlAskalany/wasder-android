@@ -51,26 +51,26 @@ public class PMRecyclerAdapter
                 intent.putExtra("recommended_event_item", recommendedEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Details");
-			}
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Details");
+            }
 		});
 		
 		viewHolder.shareImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Share");
-			}
+
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Share");
+            }
 		});
 		
 		viewHolder.photoImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				
-				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Profile");
-			}
+
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Profile");
+            }
 		});
 		viewHolder.titleTextView.setText(recommendedEventItem.getTitle());
 		viewHolder.subheadTextView.setText(recommendedEventItem.getSubhead());

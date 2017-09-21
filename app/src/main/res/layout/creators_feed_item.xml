@@ -51,11 +51,15 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:autoSizeMaxTextSize="50dp"
+                    android:autoSizeMinTextSize="13dp"
+                    android:autoSizeStepGranularity="1dp"
+                    android:autoSizeTextType="uniform"
                     android:gravity="center_vertical"
+                    android:maxLines="1"
                     android:text="@string/creators_feed_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/md_white_1000"
-                    android:textSize="30sp"
                     tools:layout_editor_absoluteX="220dp"
                     tools:layout_editor_absoluteY="37dp"/>
 

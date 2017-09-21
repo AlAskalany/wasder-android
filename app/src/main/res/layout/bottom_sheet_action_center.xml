@@ -116,7 +116,8 @@
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_account_balance_wallet"/>
+                    android:tint="#848485"
+                    app:srcCompat="@drawable/ic_account_balance_wallet_black_24dp"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -124,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@string/bottom_sheet_market_button"
+                    android:text="@string/bottom_sheet_purse_button"
                     android:textAlignment="center"
                     android:textColor="@color/md_blue_grey_900"
                     android:textStyle="bold"/>

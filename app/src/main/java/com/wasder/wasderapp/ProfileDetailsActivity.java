@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class AccountDetailsActivity
+public class ProfileDetailsActivity
         extends BaseDetailsActivity {
 
     /**
@@ -39,7 +39,7 @@ public class AccountDetailsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         Toolbar toolbar = findViewById(R.id.account_activity_toolbar);
-        toolbar.setTitle("Account");
+        toolbar.setTitle("Profile");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -148,11 +148,11 @@ public class AccountDetailsActivity
 
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Info";
                 case 1:
-                    return "SECTION 2";
+                    return "Account";
                 case 2:
-                    return "SECTION 3";
+                    return "Content";
             }
             return null;
         }

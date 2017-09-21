@@ -76,8 +76,6 @@ public class FeedRecyclerAdapter
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
 		final String photoUrl = feedItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
-		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
-		                                                  .getDrawable(R.drawable.event_pic));
 		viewHolder.supplementaryTextView.setText(feedItem.getSupplementaryText());
 	}
 	

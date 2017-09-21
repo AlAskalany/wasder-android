@@ -16,6 +16,6 @@ public class FeedDetailsActivity<FeedItem>
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		this.SetupActionBar("Feed", R.id.feed_toolbar);
-		this.SetActionBarTitle();
+		//this.SetActionBarTitle();
 	}
 }

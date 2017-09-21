@@ -30,7 +30,7 @@ public class Helpers {
 		public static final String TwitchStreamFragment = "TwitchStreamFragment";
 		public static final String EsportsFragment = "EsportsFragment";
 		public static final String EventsFragment = "EventsFragment";
-		public static final String RecommendedEventsFragment = "RecommendedEventsFragment";
+		public static final String MentionsFragment = "MentionsFragment";
 		public static final String FriendsEventsFragment = "FriendsEventsFragment";
 	}
 	
