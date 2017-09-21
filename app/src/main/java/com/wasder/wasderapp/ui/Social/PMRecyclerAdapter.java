@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.profile;
+package com.wasder.wasderapp.ui.Social;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,12 +21,12 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class RecommendedEventsRecyclerAdapter
-		extends BaseRecyclerAdapter<RecommendedEventItem, RecommendedEventsRecyclerAdapter.RecommendedEventViewHolder> {
-	
-	public RecommendedEventsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
-		
-		super(RecommendedEventItem.class,
+public class PMRecyclerAdapter
+        extends BaseRecyclerAdapter<RecommendedEventItem, PMRecyclerAdapter.RecommendedEventViewHolder> {
+
+    public PMRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+
+        super(RecommendedEventItem.class,
 		      R.layout.recommended_event_item,
 		      RecommendedEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
@@ -46,9 +46,9 @@ public class RecommendedEventsRecyclerAdapter
 			
 			@Override
 			public void onClick(View view) {
-				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), RecommendedEventDetailsActivity.class);
-				intent.putExtra("recommended_event_item", recommendedEventItem);
+
+                Intent intent = new Intent(viewHolder.itemView.getContext(), PMDetailsActivity.class);
+                intent.putExtra("recommended_event_item", recommendedEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
 				mListener.onFragmentInteractionListener(Helpers.TAG.RecommendedEventsFragment, viewHolder.recommendedEventItem, "Details");

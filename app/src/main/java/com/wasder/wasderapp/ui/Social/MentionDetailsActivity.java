@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.profile;
+package com.wasder.wasderapp.ui.Social;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -11,8 +11,8 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.EventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class EventDetailsActivity
-		extends BaseDetailsActivity {
+public class MentionDetailsActivity
+        extends BaseDetailsActivity {
 	
 	public static final String ARG_EVENT_ITEM = "event_item";
 	private EventItem eventItem;

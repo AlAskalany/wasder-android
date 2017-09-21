@@ -174,9 +174,33 @@ public class MainActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         actionCenterBottomSheetDialog = new BottomSheetDialog(this);
+        Context context = this.getBaseContext();
         actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
 
+        /*View sheetView = (View) findViewById(R.id.frameLayout_bottom_sheet);
+        final BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(sheetView);
+        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });*/
+
         ImageButton marketImageButton = findViewById(R.id.feed_sheet_market_imageButton);
+        marketImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
+            }
+        });
+
+        ImageButton purseImageButton = findViewById(R.id.feed_sheet_purse_imageButton);
         marketImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -228,10 +252,10 @@ public class MainActivity
                         .live_viewpager).setTag("LiveFragment").addTab(TabType.TwitchStream).addTab(TabType.TwitchLive).addTab(TabType.Esports)
                 .build();
 
-        socialFragment = new UiBuilder.NavFragment().Create().setTitle("Profile").setNavigationView(R.id.nav_view)
+        socialFragment = new UiBuilder.NavFragment().Create().setTitle("Social").setNavigationView(R.id.nav_view)
                 .setDrawerLayout(R.id.drawer_layout).setLayout(R.layout.main_profile_fragment).setTabLayout(R.id.profile_tablayout)
-                .setViewPager(R.id.profile_viewpager).setTag("ProfileFragment").addTab(TabType.AllEvents).addTab(TabType.RecommendedEvents)
-                .addTab(TabType.FriendsEvents).build();
+                .setViewPager(R.id.profile_viewpager).setTag("SocialFragment").addTab(TabType.Mentions).addTab(TabType.PM)
+                .addTab(TabType.GroupMentions).build();
     }
 
     @Override
@@ -279,7 +303,7 @@ public class MainActivity
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.nav_account:
+            case R.id.nav_profile:
                 startActivity(new Intent(MainActivity.this, AccountDetailsActivity.class));
                 break;
             case R.id.nav_friends:

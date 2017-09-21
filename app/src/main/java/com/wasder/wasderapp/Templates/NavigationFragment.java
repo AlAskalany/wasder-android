@@ -175,7 +175,7 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.nav_account:
+            case R.id.nav_profile:
                 break;
             case R.id.nav_settings:
 

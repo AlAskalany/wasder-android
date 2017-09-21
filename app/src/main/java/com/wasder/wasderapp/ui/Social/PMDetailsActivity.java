@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.profile;
+package com.wasder.wasderapp.ui.Social;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -11,8 +11,8 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.RecommendedEventItem;
 import com.wasder.wasderapp.util.Helpers;
 
-public class RecommendedEventDetailsActivity
-		extends BaseDetailsActivity {
+public class PMDetailsActivity
+        extends BaseDetailsActivity {
 	
 	public static final String ARG_RECOMMENDED_EVENT_ITEM = "recommended_event_item";
 	private RecommendedEventItem recommendedEventItem;

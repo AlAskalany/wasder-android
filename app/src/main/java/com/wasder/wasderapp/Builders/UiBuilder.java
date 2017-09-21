@@ -4,15 +4,15 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.Templates.TabFragment;
+import com.wasder.wasderapp.ui.Social.GroupMentionsRecyclerAdapter;
+import com.wasder.wasderapp.ui.Social.MentionsRecyclerAdapter;
+import com.wasder.wasderapp.ui.Social.PMRecyclerAdapter;
 import com.wasder.wasderapp.ui.home.CreatorFeedRecyclerAdapter;
 import com.wasder.wasderapp.ui.home.FeedRecyclerAdapter;
 import com.wasder.wasderapp.ui.home.GroupsRecyclerAdapter;
 import com.wasder.wasderapp.ui.live.EsportsRecyclerAdapter;
 import com.wasder.wasderapp.ui.live.TwitchLiveRecyclerAdapter;
 import com.wasder.wasderapp.ui.live.TwitchStreamRecyclerAdapter;
-import com.wasder.wasderapp.ui.profile.EventRecyclerAdapter;
-import com.wasder.wasderapp.ui.profile.FriendsEventsRecyclerAdapter;
-import com.wasder.wasderapp.ui.profile.RecommendedEventsRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +30,10 @@ public class UiBuilder {
         TwitchStream("TwitchStreamFragment", "Twitch Streams", R.layout.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class),
         TwitchLive("TwitchLiveFragment", "Twitch Live", R.layout.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class),
         Esports("EsportsFragment", "Esports", R.layout.esports_recycler_view, EsportsRecyclerAdapter.class),
-        AllEvents("EventsFragment", "All Events", R.layout.events_recycler_view, EventRecyclerAdapter.class),
-        RecommendedEvents("RecommendedEventsFragment", "Recommended Events", R.layout.recommended_events_recycler_view,
-                RecommendedEventsRecyclerAdapter.class),
-        FriendsEvents("FriendsEventsFragment", "Friends Events", R.layout.friends_events_recycler_view, FriendsEventsRecyclerAdapter.class);
+        Mentions("MentionsFragment", "Mentions", R.layout.mentions_recycler_view, MentionsRecyclerAdapter.class),
+        PM("PMFragment", "PM", R.layout.pm_recycler_view,
+                PMRecyclerAdapter.class),
+        GroupMentions("GroupMentionsFragment", "Group Mentions", R.layout.group_mentions_recycler_view, GroupMentionsRecyclerAdapter.class);
 
         private final String title;
         private final int layout;
