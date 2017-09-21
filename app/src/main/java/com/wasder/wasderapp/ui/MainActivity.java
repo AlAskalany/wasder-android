@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -174,6 +175,14 @@ public class MainActivity
 
         actionCenterBottomSheetDialog = new BottomSheetDialog(this);
         actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
+
+        ImageButton marketImageButton = findViewById(R.id.feed_sheet_market_imageButton);
+        marketImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
+            }
+        });
     }
 
     private void SetupFirebaseAuth() {
