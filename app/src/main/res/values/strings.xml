@@ -228,4 +228,5 @@
     </string>
     <string name="title_activity_followers">FollowersActivity</string>
     <string name="title_activity_achivements">AchivementsActivity</string>
+    <string name="action_search">Search</string>
 </resources>
