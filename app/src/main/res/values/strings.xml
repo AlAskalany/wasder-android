@@ -231,4 +231,9 @@
     <string name="action_search">Search</string>
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="bottom_sheet_purse_button">Purse</string>
+    <string name="action_feed_bookmark">Bookmark</string>
+    <string name="action_feed_register">Register</string>
+    <string name="action_feed_set_reminder">Set Reminder</string>
+    <string name="dialog_confirm_button">Confirm</string>
+    <string name="dialog_cancel_button">Cancel</string>
 </resources>

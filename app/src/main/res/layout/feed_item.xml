@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_center_focus_strong_black_24dp"/>
+                app:srcCompat="@drawable/ic_more_horiz_black_24dp"/>
         </LinearLayout>
 
         <ImageView
