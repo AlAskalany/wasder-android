@@ -58,7 +58,6 @@ public class FeedTabFragment extends TabFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		title = "Feed";
 		view = inflater.inflate(R.layout.feed_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.feedRecyclerView);
 		if (recyclerView != null) {

@@ -59,7 +59,6 @@ public class GroupsMentionsTabFragment extends TabFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		title = "Feed";
 		view = inflater.inflate(R.layout.group_mentions_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.groups_mentions_RecyclerView);
 		if (recyclerView != null) {

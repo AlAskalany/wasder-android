@@ -8,8 +8,8 @@
 
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/feedRecyclerView"
-        android:name="com.wasder.example.FeedFragment"
+        android:id="@+id/groups_recyclerView"
+        android:name="com.wasder.wasderapp.GroupsTabFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"

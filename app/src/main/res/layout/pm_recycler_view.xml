@@ -9,7 +9,7 @@
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/pm_RecyclerView"
-        android:name="com.wasder.example.FeedFragment"
+        android:name="com.wasder.wasderapp.PMTabFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"

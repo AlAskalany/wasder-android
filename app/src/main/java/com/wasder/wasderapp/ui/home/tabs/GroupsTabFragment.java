@@ -59,7 +59,7 @@ public class GroupsTabFragment extends TabFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		view = inflater.inflate(R.layout.group_mentions_recycler_view, container, false);
-		RecyclerView recyclerView = view.findViewById(R.id.feedRecyclerView);
+		RecyclerView recyclerView = view.findViewById(R.id.groups_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
 			LinearLayoutManager layoutManager;

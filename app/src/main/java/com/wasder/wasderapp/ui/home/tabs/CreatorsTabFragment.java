@@ -59,7 +59,7 @@ public class CreatorsTabFragment extends TabFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		view = inflater.inflate(R.layout.creators_feed_recycler_view, container, false);
-		RecyclerView recyclerView = view.findViewById(R.id.feedRecyclerView);
+		RecyclerView recyclerView = view.findViewById(R.id.creators_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
 			LinearLayoutManager layoutManager;
