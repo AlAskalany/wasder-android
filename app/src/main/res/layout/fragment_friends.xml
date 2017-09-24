@@ -16,9 +16,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/fragment_friends_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                >
+                style="@style/ToolbarLayoutStyle">
             </android.support.v7.widget.Toolbar>
 
             <SearchView
