@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ProfileDetailsActivity
+public class OwnProfileDetailsActivity
         extends BaseDetailsActivity {
 
     /**
@@ -37,8 +37,8 @@ public class ProfileDetailsActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
-        Toolbar toolbar = findViewById(R.id.account_activity_toolbar);
+        setContentView(R.layout.activity_own_profile);
+        Toolbar toolbar = findViewById(R.id.account_own_profile);
         toolbar.setTitle("Profile");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -111,7 +111,7 @@ public class ProfileDetailsActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_own_profile, container, false);
             TextView textView = rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;

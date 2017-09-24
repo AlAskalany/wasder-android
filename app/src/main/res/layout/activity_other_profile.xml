@@ -13,7 +13,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingtoolbar_profile"
+            android:id="@+id/collapsingtoolbar_other_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
@@ -30,7 +30,7 @@
                 android:src="@drawable/gameplay"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_profile"
+                android:id="@+id/toolbar_other_profile"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
             </android.support.v7.widget.Toolbar>

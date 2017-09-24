@@ -21,34 +21,34 @@ import com.wasder.wasderapp.R;
 
 import java.io.InputStream;
 
-public class ProfileDetailsActivity
+public class OtherProfileDetailsActivity
 		extends BaseDetailsActivity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile);
-		Toolbar toolbar = findViewById(R.id.toolbar_profile);
+		setContentView(R.layout.activity_other_profile);
+		Toolbar toolbar = findViewById(R.id.toolbar_other_profile);
 		toolbar.setTitleTextColor(Color.WHITE);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_profile);
+		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_other_profile);
 		collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDefaultDisplayHomeAsUpEnabled(true);
-		
+
 		FirebaseAuth mAuth = FirebaseAuth.getInstance();
 		FirebaseUser user = mAuth.getCurrentUser();
 		ImageView imageView = findViewById(R.id.app_bar_image);
 		Uri imageUri = user.getPhotoUrl();
 		new DownloadImageTask((ImageView) findViewById(R.id.app_bar_image)).execute(imageUri.toString());
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		int id = item.getItemId();
 		switch (id) {
 			case R.id.homeAsUp:
@@ -58,19 +58,19 @@ public class ProfileDetailsActivity
 				return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		
+
 		ImageView bmImage;
-		
+
 		public DownloadImageTask(ImageView bmImage) {
-			
+
 			this.bmImage = bmImage;
 		}
-		
+
 		@Override
 		protected Bitmap doInBackground(String... urls) {
-			
+
 			String urldisplay = urls[0];
 			Bitmap mIcon11 = null;
 			try {
@@ -82,9 +82,9 @@ public class ProfileDetailsActivity
 			}
 			return mIcon11;
 		}
-		
+
 		protected void onPostExecute(Bitmap result) {
-			
+
 			bmImage.setImageBitmap(result);
 		}
 	}

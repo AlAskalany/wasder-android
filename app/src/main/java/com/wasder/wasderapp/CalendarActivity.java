@@ -23,7 +23,7 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.activity_calendar_toolbar);
         setSupportActionBar(toolbar);
         // Set up the action bar to show a dropdown list.
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

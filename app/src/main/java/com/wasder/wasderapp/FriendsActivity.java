@@ -11,7 +11,7 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.fragment_friends_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(true);

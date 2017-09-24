@@ -13,19 +13,19 @@ import com.wasder.wasderapp.R;
  * Created by ahmed on 9/4/2017.
  */
 
-public class ListDialog extends Dialog {
+public class FeedRegisterDialog extends Dialog {
 
-	public ListDialog(@NonNull Context context) {
+	public FeedRegisterDialog(@NonNull Context context) {
 		super(context);
-		setContentView(R.layout.dialog);
-		Button dialogConfirmButton = findViewById(R.id.dialog_confirm_button);
+		setContentView(R.layout.dialog_feed_register);
+		Button dialogConfirmButton = findViewById(R.id.dialog_feed_register_confirm_button);
 		dialogConfirmButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				hide();
 			}
 		});
-		Button dialogCancelButton = findViewById(R.id.dialog_cancel_button);
+		Button dialogCancelButton = findViewById(R.id.dialog_feed_register_cancel_button);
 		dialogCancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -34,11 +34,11 @@ public class ListDialog extends Dialog {
 		});
 	}
 
-	public static ListDialog newInstance(Context context) {
-		return new ListDialog(context);
+	public static FeedRegisterDialog newInstance(Context context) {
+		return new FeedRegisterDialog(context);
 	}
 
-	public void ShowListDialog(Context context) {
+	public void ShowListFeedRegisterDialog(Context context) {
 		this.show();
 	}
 }

@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.dialogs.ListDialog;
+import com.wasder.wasderapp.dialogs.FeedRegisterDialog;
 import com.wasder.wasderapp.models.FeedItem;
 import com.wasder.wasderapp.util.Helpers;
 
@@ -58,8 +58,8 @@ public class FeedRecyclerAdapter
 							case R.id.action_feed_bookmark:
 								return true;
 							case R.id.action_feed_register:
-								ListDialog listDialog = new ListDialog(view.getContext());
-								listDialog.show();
+								FeedRegisterDialog feedRegisterDialog = new FeedRegisterDialog(view.getContext());
+								feedRegisterDialog.show();
 
 								return true;
 							case R.id.action_feed_set_reminder:

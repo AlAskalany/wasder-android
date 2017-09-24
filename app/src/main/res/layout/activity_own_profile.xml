@@ -19,7 +19,7 @@
             app:toolbarId="@+id/toolbar">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/account_activity_toolbar"
+                android:id="@+id/account_own_profile"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
             </android.support.v7.widget.Toolbar>

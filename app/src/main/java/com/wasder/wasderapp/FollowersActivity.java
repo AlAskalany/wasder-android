@@ -11,7 +11,7 @@ public class FollowersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.fragment_followers_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(true);

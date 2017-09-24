@@ -42,7 +42,7 @@ import com.wasder.wasderapp.FollowersActivity;
 import com.wasder.wasderapp.FriendsActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.MarketItemListActivity;
-import com.wasder.wasderapp.ProfileDetailsActivity;
+import com.wasder.wasderapp.OwnProfileDetailsActivity;
 import com.wasder.wasderapp.PurseActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
@@ -314,7 +314,7 @@ public class MainActivity
 
 		switch (id) {
 			case R.id.nav_profile:
-				startActivity(new Intent(MainActivity.this, ProfileDetailsActivity.class));
+				startActivity(new Intent(MainActivity.this, OwnProfileDetailsActivity.class));
 				break;
 			case R.id.nav_friends:
 				startActivity(new Intent(MainActivity.this, FriendsActivity.class));

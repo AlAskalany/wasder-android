@@ -37,7 +37,7 @@ public class AchievementsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.activity_achievements_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(true);
@@ -46,7 +46,7 @@ public class AchievementsActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.container);
+        mViewPager = findViewById(R.id.activity_achievements_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
