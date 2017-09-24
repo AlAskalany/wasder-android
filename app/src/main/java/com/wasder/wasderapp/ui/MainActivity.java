@@ -43,6 +43,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.MarketItemListActivity;
 import com.wasder.wasderapp.PurseActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.StudioActivity;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
@@ -184,6 +185,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			public void onClick(View view) {
 				
 				startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+			}
+		});
+		ImageButton studioImageButton = findViewById(R.id.feed_sheet_studio_imageButton);
+		studioImageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				
+				startActivity(new Intent(MainActivity.this, StudioActivity.class));
 			}
 		});
 	}
