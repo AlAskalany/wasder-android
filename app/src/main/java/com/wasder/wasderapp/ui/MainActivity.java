@@ -41,12 +41,12 @@ import com.wasder.wasderapp.FollowersActivity;
 import com.wasder.wasderapp.FriendsActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.MarketItemListActivity;
-import com.wasder.wasderapp.OwnProfileDetailsActivity;
 import com.wasder.wasderapp.PurseActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
+import com.wasder.wasderapp.ui.profile.OwnProfileDetailsActivity;
 
 import java.util.HashMap;
 import java.util.Map;
