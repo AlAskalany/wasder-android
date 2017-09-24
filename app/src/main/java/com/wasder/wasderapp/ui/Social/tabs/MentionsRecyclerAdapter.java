@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.Social;
+package com.wasder.wasderapp.ui.Social.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.EventItem;
+import com.wasder.wasderapp.ui.Social.MentionDetailsActivity;
 
 /**
  * Wasder AB CONFIDENTIAL

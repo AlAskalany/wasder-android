@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.live;
+package com.wasder.wasderapp.ui.Social.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.EsportsItem;
+import com.wasder.wasderapp.models.RecommendedEventItem;
+import com.wasder.wasderapp.ui.Social.PMDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,18 +22,18 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class EsportsRecyclerAdapter
-		extends BaseRecyclerAdapter<EsportsItem, EsportsRecyclerAdapter.EsportsViewHolder> {
-	
-	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
-		
-		super(EsportsItem.class,
-		      R.layout.esports_item,
-		      EsportsViewHolder.class,
+public class PMRecyclerAdapter
+        extends BaseRecyclerAdapter<RecommendedEventItem, PMRecyclerAdapter.RecommendedEventViewHolder> {
+
+    public PMRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+
+        super(RecommendedEventItem.class,
+		      R.layout.recommended_event_item,
+		      RecommendedEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "EsportsRecyclerAdapter",
+		      "FeedRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -40,50 +41,50 @@ public class EsportsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final EsportsViewHolder viewHolder, final EsportsItem esportsItem, int position) {
+	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, final RecommendedEventItem recommendedEventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), EsportsDetailsActivity.class);
-				intent.putExtra("esports_item", esportsItem);
+
+                Intent intent = new Intent(viewHolder.itemView.getContext(), PMDetailsActivity.class);
+                intent.putExtra("recommended_event_item", recommendedEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Details");
-			}
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Details");
+            }
 		});
 		
 		viewHolder.shareImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				
-				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Share");
-			}
+
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Share");
+            }
 		});
 		
 		viewHolder.photoImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				
-				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Profile");
-			}
+
+                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Profile");
+            }
 		});
-		viewHolder.titleTextView.setText(esportsItem.getTitle());
-		viewHolder.subheadTextView.setText(esportsItem.getSubhead());
-		final String imageUrl = esportsItem.getImageUrl();
+		viewHolder.titleTextView.setText(recommendedEventItem.getTitle());
+		viewHolder.subheadTextView.setText(recommendedEventItem.getSubhead());
+		final String imageUrl = recommendedEventItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = esportsItem.getPhotoUrl();
+		final String photoUrl = recommendedEventItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(esportsItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(recommendedEventItem.getSupplementaryText());
 	}
 	
-	public static class EsportsViewHolder
+	public static class RecommendedEventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +98,9 @@ public class EsportsRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		EsportsItem esportsItem;
+		RecommendedEventItem recommendedEventItem;
 		
-		public EsportsViewHolder(View itemView) {
+		public RecommendedEventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +113,7 @@ public class EsportsRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.esports_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.recommended_event_details_imageButton);
 		}
 	}
 }

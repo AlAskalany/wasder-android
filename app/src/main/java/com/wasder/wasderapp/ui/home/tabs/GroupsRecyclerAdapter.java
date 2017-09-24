@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.home;
+package com.wasder.wasderapp.ui.home.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.models.GroupItem;
+import com.wasder.wasderapp.ui.home.GroupDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 /**

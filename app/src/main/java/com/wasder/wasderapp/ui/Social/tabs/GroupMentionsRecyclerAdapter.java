@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.Social;
+package com.wasder.wasderapp.ui.Social.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.RecommendedEventItem;
+import com.wasder.wasderapp.models.FriendEventItem;
+import com.wasder.wasderapp.ui.Social.GroupMentionDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,14 +22,14 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class PMRecyclerAdapter
-        extends BaseRecyclerAdapter<RecommendedEventItem, PMRecyclerAdapter.RecommendedEventViewHolder> {
+public class GroupMentionsRecyclerAdapter
+        extends BaseRecyclerAdapter<FriendEventItem, GroupMentionsRecyclerAdapter.FriendsEventViewHolder> {
 
-    public PMRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+    public GroupMentionsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 
-        super(RecommendedEventItem.class,
-		      R.layout.recommended_event_item,
-		      RecommendedEventViewHolder.class,
+        super(FriendEventItem.class,
+		      R.layout.friends_events_item,
+		      FriendsEventViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
@@ -40,50 +41,50 @@ public class PMRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final RecommendedEventViewHolder viewHolder, final RecommendedEventItem recommendedEventItem, int position) {
+	protected void populateViewHolder(final FriendsEventViewHolder viewHolder, final FriendEventItem friendEventItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 
-                Intent intent = new Intent(viewHolder.itemView.getContext(), PMDetailsActivity.class);
-                intent.putExtra("recommended_event_item", recommendedEventItem);
+                Intent intent = new Intent(viewHolder.itemView.getContext(), GroupMentionDetailsActivity.class);
+                intent.putExtra("friend_event_item", friendEventItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Details");
-            }
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Details");
+			}
 		});
 		
 		viewHolder.shareImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-
-                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Share");
-            }
+				
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Share");
+			}
 		});
 		
 		viewHolder.photoImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-
-                mListener.onFragmentInteractionListener(Helpers.TAG.MentionsFragment, viewHolder.recommendedEventItem, "Profile");
-            }
+				
+				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Profile");
+			}
 		});
-		viewHolder.titleTextView.setText(recommendedEventItem.getTitle());
-		viewHolder.subheadTextView.setText(recommendedEventItem.getSubhead());
-		final String imageUrl = recommendedEventItem.getImageUrl();
+		viewHolder.titleTextView.setText(friendEventItem.getTitle());
+		viewHolder.subheadTextView.setText(friendEventItem.getSubhead());
+		final String imageUrl = friendEventItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = recommendedEventItem.getPhotoUrl();
+		final String photoUrl = friendEventItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(recommendedEventItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(friendEventItem.getSupplementaryText());
 	}
 	
-	public static class RecommendedEventViewHolder
+	public static class FriendsEventViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +98,9 @@ public class PMRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		RecommendedEventItem recommendedEventItem;
+		FriendEventItem friendEventItem;
 		
-		public RecommendedEventViewHolder(View itemView) {
+		public FriendsEventViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +113,7 @@ public class PMRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.recommended_event_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.friends_events_details_imageButton);
 		}
 	}
 }

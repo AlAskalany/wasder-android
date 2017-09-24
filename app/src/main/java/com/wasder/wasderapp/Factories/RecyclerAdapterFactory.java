@@ -21,8 +21,8 @@ public class RecyclerAdapterFactory {
 		
 		try {
 			Constructor<? extends BaseRecyclerAdapter> con = fragmentClass.getConstructor(Context.class,
-			                                                                              LinearLayoutManager.class,
-			                                                                              OnFragmentInteractionListener.class);
+					LinearLayoutManager.class,
+					OnFragmentInteractionListener.class);
 			return con.newInstance(context, layoutManager, mListener);
 		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();

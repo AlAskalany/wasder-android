@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.Templates;
+package com.wasder.wasderapp.ui.Social;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,6 +20,11 @@ import android.view.ViewGroup;
 
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.NavigationFragment;
+import com.wasder.wasderapp.Templates.TabFragment;
+import com.wasder.wasderapp.ui.Social.tabs.GroupsMentionsTabFragment;
+import com.wasder.wasderapp.ui.Social.tabs.MentionsTabFragment;
+import com.wasder.wasderapp.ui.Social.tabs.PMTabFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,16 +36,8 @@ import java.util.Map;
  * Created by ahmed on 9/10/2017.
  */
 
-public class NavigationFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class SocialNavigationFragment extends NavigationFragment implements NavigationView.OnNavigationItemSelectedListener {
 	
-	//	private static final String ARG_TAG = "param_tag";
-	//	private static final String ARG_TITLE = "param_title";
-	//	private static final String ARG_LAYOUT = "param_layout";
-	//	private static final String ARG_TOOLBAR = "param_toolbar";
-	//	private static final String ARG_DRAWER_LAYOUT = "param_drawer_layout";
-	//	private static final String ARG_NAVIGATION_VIEW = "param_navigation_view";
-	//	private static final String ARG_VIEWPAGER = "param_viewpager";
-	//	private static final String ARG_TAB_LAYOUT = "param_tab_layout";
 	private String mTAG;
 	private String mFragmentTitle;
 	private int mResLayout;
@@ -56,24 +53,14 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	private TabLayout tabLayout;
 	private SectionsPagerAdapter sectionPagerAdapter;
 	
-	public NavigationFragment() {
+	public SocialNavigationFragment() {
 		
 	}
 	
-	public static NavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resDrawerLayout,
-	                                             int resNavigationView, int resViewPager, int resTabLayout) {
+	public static SocialNavigationFragment newInstance(String tag, String fragmentTitle, int resDrawerLayout, int resNavigationView, int
+			resTabLayout) {
 		
-		NavigationFragment fragment = new NavigationFragment();
-		//		Bundle args = new Bundle();
-		//		args.putString(ARG_TAG, tag);
-		//		args.putString(ARG_TITLE, fragmentTitle);
-		//		args.putInt(ARG_LAYOUT, setLayout);
-		//		args.putInt(ARG_TOOLBAR, resToolbar);
-		//		args.putInt(ARG_DRAWER_LAYOUT, resDrawerLayout);
-		//		args.putInt(ARG_NAVIGATION_VIEW, resNavigationView);
-		//		args.putInt(ARG_VIEWPAGER, resViewPager);
-		//		args.putInt(ARG_TAB_LAYOUT, resTabLayout);
-		//		fragment.setArguments(args);
+		SocialNavigationFragment fragment = new SocialNavigationFragment();
 		return fragment;
 	}
 	
@@ -102,36 +89,25 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-			//			mTAG = getArguments().getString(ARG_TAG);
-			//			mFragmentTitle = getArguments().getString(ARG_TITLE);
-			//			mResLayout = getArguments().getInt(ARG_LAYOUT);
-			//			mResToolbar = getArguments().getInt(ARG_TOOLBAR);
-			//			mResDrawerLayout = getArguments().getInt(ARG_DRAWER_LAYOUT);
-			//			mResNavigationView = getArguments().getInt(ARG_NAVIGATION_VIEW);
-			//			mResViewPager = getArguments().getInt(ARG_VIEWPAGER);
-			//			mResTabLayout = getArguments().getInt(ARG_TAB_LAYOUT);
-		}
+		MentionsTabFragment mentionsTabFragment = MentionsTabFragment.newInstance();
+		PMTabFragment pmTabFragment = PMTabFragment.newInstance();
+		GroupsMentionsTabFragment groupsMentionsTabFragment = GroupsMentionsTabFragment.newInstance();
+		mTabFragments.add(mentionsTabFragment);
+		mTabFragments.add(pmTabFragment);
+		mTabFragments.add(groupsMentionsTabFragment);
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(this.mResLayout, container, false);
-		//Toolbar toolbar = view.findViewById(mResToolbar);
-		//activity = (AppCompatActivity) getActivity();
-		//activity.setSupportActionBar(toolbar);
-		//ActionBar actionBar = activity.getSupportActionBar();
-		//if (actionBar != null) {
-		//	actionBar.setTitle(mFragmentTitle);
-		//}
+		View view = inflater.inflate(R.layout.main_social_fragment, container, false);
 		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		viewPager = view.findViewById(mResViewPager);
+		viewPager = view.findViewById(R.id.social_viewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
-		tabLayout = view.findViewById(mResTabLayout);
+		tabLayout = getActivity().findViewById(R.id.tabLayout_main_activity);
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
 	}
@@ -148,20 +124,6 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 		super.onDetach();
 		mListener = null;
 	}
-	
-	//@Override
-	//public void onSaveInstanceState(Bundle outState) {
-	//super.onSaveInstanceState(outState);
-	//outState.putInt("someVarA", someVarA);
-	//outState.putString("someVarB", someVarB);
-	//}
-	
-	//@Override
-	//public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-	//super.onActivityCreated(savedInstanceState);
-	//someVarA = savedInstanceState.getInt("someVarA");
-	//someVarB = savedInstanceState.getString("someVarB");
-	//}
 	
 	/**
 	 * Called when an item in the navigation menu is selected.

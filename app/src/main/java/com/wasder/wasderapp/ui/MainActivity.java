@@ -36,7 +36,6 @@ import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.AchievementsActivity;
-import com.wasder.wasderapp.Builders.UiBuilder;
 import com.wasder.wasderapp.CalendarActivity;
 import com.wasder.wasderapp.FollowersActivity;
 import com.wasder.wasderapp.FriendsActivity;
@@ -46,43 +45,38 @@ import com.wasder.wasderapp.OwnProfileDetailsActivity;
 import com.wasder.wasderapp.PurseActivity;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
+import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
+import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.wasder.wasderapp.Builders.UiBuilder.TabType;
-
 /**
  * The type Main activity.
  */
-public class MainActivity
-		extends AppCompatActivity
-		implements NavigationView.OnNavigationItemSelectedListener,
-		OnFragmentInteractionListener<Object, String>,
-		FragmentManager.OnBackStackChangedListener {
-
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+		OnFragmentInteractionListener<Object, String>, FragmentManager.OnBackStackChangedListener {
+	
 	private static final String TAG = "MainActivity";
 	public String mUserName = "User Name";
 	public String mEmail = "User E-mail";
 	IInAppBillingService mService;
 	ServiceConnection mServiceConn = new ServiceConnection() {
-
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-
+			
 			mService = IInAppBillingService.Stub.asInterface(service);
 		}
-
+		
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
-
+			
 			mService = null;
 		}
 	};
-
-	NavigationFragment homeFragment;
-	NavigationFragment liveFragment;
-	NavigationFragment socialFragment;
+	HomeNavigationFragment homeFragment;
+	LiveNavigationFragment liveFragment;
+	SocialNavigationFragment socialFragment;
 	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
@@ -96,10 +90,9 @@ public class MainActivity
 	private Toolbar mToolbar;
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
-
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+			
 			FragmentManager manager = getSupportFragmentManager();
 			FragmentTransaction ts = manager.beginTransaction();
 			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
@@ -117,17 +110,16 @@ public class MainActivity
 				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
 				return true;
 			}
-
 			return false;
 		}
 	};
 	private BottomSheetBehavior sheetBehavior;
 	private CollapsingToolbarLayout collapsingToolbarLayout;
 	private BottomSheetDialog actionCenterBottomSheetDialog;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
@@ -139,26 +131,20 @@ public class MainActivity
 		// "Connection", 2000);
 		//snackbar.show();
 		if (activeInfo != null && activeInfo.isConnected()) {
-			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
 		}
-
 		SetupFirebaseAuth();
-
 		CreateNavigationFragments();
-
 		fragmentMap.put(R.id.navigation_home, homeFragment);
 		fragmentMap.put(R.id.navigation_live, liveFragment);
 		fragmentMap.put(R.id.navigation_social, socialFragment);
-
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
 		transaction.commit();
-
+		
 		mToolbar = findViewById(R.id.toolbar_main_activity);
 		setSupportActionBar(mToolbar);
 		ActionBar actionBar = getSupportActionBar();
@@ -171,62 +157,44 @@ public class MainActivity
 		toggle.syncState();
 		NavigationView navigationView = findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-
 		bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
 		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
 		Context context = this.getBaseContext();
 		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
-
-        /*View sheetView = (View) findViewById(R.id.frameLayout_bottom_sheet);
-        final BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(sheetView);
-        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });*/
-
 		ImageButton marketImageButton = findViewById(R.id.feed_sheet_market_imageButton);
 		marketImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				
 				startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
 			}
 		});
-
 		ImageButton purseImageButton = findViewById(R.id.feed_sheet_purse_imageButton);
 		purseImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				
 				startActivity(new Intent(MainActivity.this, PurseActivity.class));
 			}
 		});
-
 		ImageButton calendarImageButton = findViewById(R.id.feed_sheet_calendar_imageButton);
 		calendarImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				
 				startActivity(new Intent(MainActivity.this, CalendarActivity.class));
 			}
 		});
 	}
-
+	
 	private void SetupFirebaseAuth() {
-
+		
 		mAuth = FirebaseAuth.getInstance();
 		mAuthListener = new FirebaseAuth.AuthStateListener() {
-
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
+				
 				FirebaseUser user = mAuth.getCurrentUser();
 				if (user != null) {
 					Log.d(TAG, "Signed in");
@@ -234,7 +202,6 @@ public class MainActivity
 					mEmail = user.getEmail();
 					mPhotoUrl = user.getPhotoUrl();
 					mUid = user.getUid();
-
 					navigationView = findViewById(R.id.nav_view);
 					headerView = navigationView.getHeaderView(0);
 					userNameTextView = headerView.findViewById(R.id.nav_header_user_name);
@@ -248,54 +215,43 @@ public class MainActivity
 			}
 		};
 	}
-
+	
 	private void CreateNavigationFragments() {
-
-		homeFragment = new UiBuilder.NavFragment().Create().setTitle("Home").setNavigationView(R.id.nav_view)
-				.setDrawerLayout(R.id.drawer_layout).setLayout(R.layout.main_home_fragment).setTabLayout(R.id.home_tablayout)
-				.setViewPager(R.id
-						.home_viewpager).setTag("HomeFragment").addTab(TabType.Feed).addTab(TabType.Creators).addTab(TabType.Groups).build();
-
-		liveFragment = new UiBuilder.NavFragment().Create().setTitle("Live").setNavigationView(R.id.nav_view)
-				.setDrawerLayout(R.id.drawer_layout).setLayout(R.layout.main_live_fragment).setTabLayout(R.id.live_tablayout)
-				.setViewPager(R.id
-						.live_viewpager).setTag("LiveFragment").addTab(TabType.TwitchStream).addTab(TabType.TwitchLive).addTab(TabType.Esports)
-				.build();
-
-		socialFragment = new UiBuilder.NavFragment().Create().setTitle("Social").setNavigationView(R.id.nav_view)
-				.setDrawerLayout(R.id.drawer_layout).setLayout(R.layout.main_profile_fragment).setTabLayout(R.id.profile_tablayout)
-				.setViewPager(R.id.profile_viewpager).setTag("SocialFragment").addTab(TabType.Mentions).addTab(TabType.PM)
-				.addTab(TabType.GroupMentions).build();
+		
+		homeFragment = HomeNavigationFragment.newInstance("HomeFragment", "Home", R.id.drawer_layout, R.id.nav_view, R.id.tabLayout_main_activity);
+		liveFragment = LiveNavigationFragment.newInstance("LiveFragment", "Live", R.id.drawer_layout, R.id.nav_view, R.id.tabLayout_main_activity);
+		socialFragment = SocialNavigationFragment.newInstance("SocialFragment", "Social", R.id.drawer_layout, R.id.nav_view, R.id
+				.tabLayout_main_activity);
 	}
-
+	
 	@Override
 	public void onStart() {
-
+		
 		super.onStart();
 		mAuth.addAuthStateListener(mAuthListener);
 	}
-
+	
 	@Override
 	public void onStop() {
-
+		
 		super.onStop();
 		if (mAuthListener != null) {
 			mAuth.removeAuthStateListener(mAuthListener);
 		}
 	}
-
+	
 	@Override
 	public void onDestroy() {
-
+		
 		super.onDestroy();
 		if (mService != null) {
 			unbindService(mServiceConn);
 		}
 	}
-
+	
 	@Override
 	public void onBackPressed() {
-
+		
 		Log.d("BackStackCount", String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -303,15 +259,13 @@ public class MainActivity
 		} else {
 			super.onBackPressed();
 		}
-
 	}
-
+	
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+		
 		int id = item.getItemId();
-
 		switch (id) {
 			case R.id.nav_profile:
 				startActivity(new Intent(MainActivity.this, OwnProfileDetailsActivity.class));
@@ -329,36 +283,33 @@ public class MainActivity
 				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 				break;
 		}
-
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
-
+	
 	/**
 	 * Called whenever the contents of the back stack change.
 	 */
 	@Override
 	public void onBackStackChanged() {
-
+		
 		Log.d(TAG, String.valueOf(getSupportFragmentManager().getBackStackEntryCount()));
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-
 		//noinspection SimplifiableIfStatement
 		switch (id) {
 			case R.id.action_open_action_center:
@@ -371,12 +322,11 @@ public class MainActivity
 				mAuth.signOut();
 				break;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	@Override
 	public void onFragmentInteractionListener(String tag, Object data, String extra) {
-
+		
 	}
 }

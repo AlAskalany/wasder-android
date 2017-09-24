@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.live;
+package com.wasder.wasderapp.ui.live.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.TwitchStreamItem;
+import com.wasder.wasderapp.models.TwitchLiveItem;
+import com.wasder.wasderapp.ui.live.TwitchLiveDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,14 +22,14 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class TwitchStreamRecyclerAdapter
-		extends BaseRecyclerAdapter<TwitchStreamItem, TwitchStreamRecyclerAdapter.TwitchStreamViewHolder> {
+public class TwitchLiveRecyclerAdapter
+		extends BaseRecyclerAdapter<TwitchLiveItem, TwitchLiveRecyclerAdapter.TwitchLiveViewHolder> {
 	
-	public TwitchStreamRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+	public TwitchLiveRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(TwitchStreamItem.class,
-		      R.layout.twitch_stream_item,
-		      TwitchStreamViewHolder.class,
+		super(TwitchLiveItem.class,
+		      R.layout.twitch_live_item,
+		      TwitchLiveViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
@@ -40,18 +41,18 @@ public class TwitchStreamRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final TwitchStreamViewHolder viewHolder, final TwitchStreamItem twitchStreamItem, int position) {
+	protected void populateViewHolder(final TwitchLiveViewHolder viewHolder, final TwitchLiveItem twitchLiveItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchStreamDetailsActivity.class);
-				intent.putExtra("twitch_stream_item", twitchStreamItem);
+				Intent intent = new Intent(viewHolder.itemView.getContext(), TwitchLiveDetailsActivity.class);
+				intent.putExtra("twitch_live_item", twitchLiveItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchStreamItem, "Details");
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchLiveItem, "Details");
 			}
 		});
 		
@@ -60,7 +61,7 @@ public class TwitchStreamRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchStreamItem, "Share");
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchLiveItem, "Share");
 			}
 		});
 		
@@ -69,21 +70,21 @@ public class TwitchStreamRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchStreamItem, "Profile");
+				mListener.onFragmentInteractionListener("FeedFragment", viewHolder.twitchLiveItem, "Profile");
 			}
 		});
-		viewHolder.titleTextView.setText(twitchStreamItem.getTitle());
-		viewHolder.subheadTextView.setText(twitchStreamItem.getSubhead());
-		final String imageUrl = twitchStreamItem.getImageUrl();
+		viewHolder.titleTextView.setText(twitchLiveItem.getTitle());
+		viewHolder.subheadTextView.setText(twitchLiveItem.getSubhead());
+		final String imageUrl = twitchLiveItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = twitchStreamItem.getPhotoUrl();
+		final String photoUrl = twitchLiveItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(twitchStreamItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(twitchLiveItem.getSupplementaryText());
 	}
 	
-	public static class TwitchStreamViewHolder
+	public static class TwitchLiveViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +98,9 @@ public class TwitchStreamRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		TwitchStreamItem twitchStreamItem;
+		TwitchLiveItem twitchLiveItem;
 		
-		public TwitchStreamViewHolder(View itemView) {
+		public TwitchLiveViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +113,7 @@ public class TwitchStreamRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.twitch_stream_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.twitch_live_details_imageButton);
 		}
 	}
 }

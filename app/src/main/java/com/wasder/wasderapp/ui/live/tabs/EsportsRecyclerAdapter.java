@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.Social;
+package com.wasder.wasderapp.ui.live.tabs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
-import com.wasder.wasderapp.models.FriendEventItem;
+import com.wasder.wasderapp.models.EsportsItem;
+import com.wasder.wasderapp.ui.live.EsportsDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
 /**
@@ -21,18 +22,18 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class GroupMentionsRecyclerAdapter
-        extends BaseRecyclerAdapter<FriendEventItem, GroupMentionsRecyclerAdapter.FriendsEventViewHolder> {
-
-    public GroupMentionsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
-
-        super(FriendEventItem.class,
-		      R.layout.friends_events_item,
-		      FriendsEventViewHolder.class,
+public class EsportsRecyclerAdapter
+		extends BaseRecyclerAdapter<EsportsItem, EsportsRecyclerAdapter.EsportsViewHolder> {
+	
+	public EsportsRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
+		
+		super(EsportsItem.class,
+		      R.layout.esports_item,
+		      EsportsViewHolder.class,
 		      FirebaseDatabase.getInstance()
 		                      .getReference()
 		                      .child("feed"),
-		      "FeedRecyclerAdapter",
+		      "EsportsRecyclerAdapter",
 		      context,
 		      mListener,
 		      feedLinearLayoutManager);
@@ -40,18 +41,18 @@ public class GroupMentionsRecyclerAdapter
 	}
 	
 	@Override
-	protected void populateViewHolder(final FriendsEventViewHolder viewHolder, final FriendEventItem friendEventItem, int position) {
+	protected void populateViewHolder(final EsportsViewHolder viewHolder, final EsportsItem esportsItem, int position) {
 		
 		viewHolder.detailsImageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-
-                Intent intent = new Intent(viewHolder.itemView.getContext(), GroupMentionDetailsActivity.class);
-                intent.putExtra("friend_event_item", friendEventItem);
+				
+				Intent intent = new Intent(viewHolder.itemView.getContext(), EsportsDetailsActivity.class);
+				intent.putExtra("esports_item", esportsItem);
 				viewHolder.itemView.getContext()
 				                   .startActivity(intent);
-				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Details");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Details");
 			}
 		});
 		
@@ -60,7 +61,7 @@ public class GroupMentionsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Share");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Share");
 			}
 		});
 		
@@ -69,21 +70,21 @@ public class GroupMentionsRecyclerAdapter
 			@Override
 			public void onClick(View view) {
 				
-				mListener.onFragmentInteractionListener(Helpers.TAG.FeedFragment, viewHolder.friendEventItem, "Profile");
+				mListener.onFragmentInteractionListener("EsportsFragment", viewHolder.esportsItem, "Profile");
 			}
 		});
-		viewHolder.titleTextView.setText(friendEventItem.getTitle());
-		viewHolder.subheadTextView.setText(friendEventItem.getSubhead());
-		final String imageUrl = friendEventItem.getImageUrl();
+		viewHolder.titleTextView.setText(esportsItem.getTitle());
+		viewHolder.subheadTextView.setText(esportsItem.getSubhead());
+		final String imageUrl = esportsItem.getImageUrl();
 		Helpers.Firebase.DownloadUrlImage(imageUrl, viewHolder.feedImageView, false, 0);
-		final String photoUrl = friendEventItem.getPhotoUrl();
+		final String photoUrl = esportsItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.feedImageView.setImageDrawable(mContext.getResources()
 		                                                  .getDrawable(R.drawable.event_pic));
-		viewHolder.supplementaryTextView.setText(friendEventItem.getSupplementaryText());
+		viewHolder.supplementaryTextView.setText(esportsItem.getSupplementaryText());
 	}
 	
-	public static class FriendsEventViewHolder
+	public static class EsportsViewHolder
 			extends RecyclerView.ViewHolder {
 		
 		View mview;
@@ -97,9 +98,9 @@ public class GroupMentionsRecyclerAdapter
 		ImageButton bookmarkImageButton;
 		ImageButton shareImageButton;
 		ImageButton detailsImageButton;
-		FriendEventItem friendEventItem;
+		EsportsItem esportsItem;
 		
-		public FriendsEventViewHolder(View itemView) {
+		public EsportsViewHolder(View itemView) {
 			
 			super(itemView);
 			mview = itemView;
@@ -112,7 +113,7 @@ public class GroupMentionsRecyclerAdapter
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
 			shareImageButton = itemView.findViewById(R.id.feed_share_imageButton);
-			detailsImageButton = itemView.findViewById(R.id.friends_events_details_imageButton);
+			detailsImageButton = itemView.findViewById(R.id.esports_details_imageButton);
 		}
 	}
 }
