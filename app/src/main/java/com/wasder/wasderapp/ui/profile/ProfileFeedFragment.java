@@ -1,23 +1,19 @@
 package com.wasder.wasderapp.ui.profile;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.ui.home.tabs.FeedRecyclerAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFeedFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFeedFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	
 	// TODO: Rename parameter arguments, choose names that match
@@ -30,6 +26,7 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	private String mParam2;
 	private String mTitle = "Feed";
 	private OnFragmentInteractionListener mListener;
+	private int columnCount;
 	
 	public ProfileFeedFragment() {
 		// Required empty public constructor
@@ -73,16 +70,19 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_profile_feed, container, false);
+		View view = inflater.inflate(R.layout.fragment_profile_feed, container, false);
+		RecyclerView recyclerView = view.findViewById(R.id.activity_own_profile_feed_recyclerView);
+		if (recyclerView != null) {
+			Context context = view.getContext();
+			LinearLayoutManager layoutManager;
+			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
+			recyclerView.setLayoutManager(layoutManager);
+			FeedRecyclerAdapter feedRecyclerAdapter = new FeedRecyclerAdapter(getContext(), new LinearLayoutManager(getContext()), mListener);
+			recyclerView.setAdapter(feedRecyclerAdapter);
+		}
+		return view;
 	}
 	
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
-		
-		if (mListener != null) {
-			mListener.onFragmentInteraction(uri);
-		}
-	}
 	
 	@Override
 	public void onAttach(Context context) {
@@ -101,21 +101,5 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 		
 		super.onDetach();
 		mListener = null;
-	}
-	
-	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated
-	 * to the activity and potentially other fragments contained in that
-	 * activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
-	public interface OnFragmentInteractionListener {
-		
-		// TODO: Update argument type and name
-		void onFragmentInteraction(Uri uri);
 	}
 }

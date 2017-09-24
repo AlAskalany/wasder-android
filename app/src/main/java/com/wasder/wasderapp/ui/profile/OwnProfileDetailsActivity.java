@@ -1,6 +1,5 @@
 package com.wasder.wasderapp.ui.profile;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wasder.wasderapp.BaseDetailsActivity;
+import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 
 import java.util.ArrayList;
@@ -22,8 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OwnProfileDetailsActivity extends BaseDetailsActivity implements ProfileInfoFragment.OnFragmentInteractionListener,
-		ProfileFeedFragment.OnFragmentInteractionListener {
+public class OwnProfileDetailsActivity extends BaseDetailsActivity implements OnFragmentInteractionListener {
 	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -36,11 +35,10 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements Pr
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_own_profile);
-		
-		ProfileInfoFragment profileInfoFragment = ProfileInfoFragment.newInstance("AAA", "BBB");
 		ProfileFeedFragment profileFeedFragment = ProfileFeedFragment.newInstance("AAA", "BBB");
-		mTabFragments.add(profileInfoFragment);
+		ProfileInfoFragment profileInfoFragment = ProfileInfoFragment.newInstance("AAA", "BBB");
 		mTabFragments.add(profileFeedFragment);
+		mTabFragments.add(profileInfoFragment);
 		
 		NestedScrollView nestedScrollView = findViewById(R.id.activity_own_profile_nestedScrollView);
 		nestedScrollView.setFillViewport(true);
@@ -89,7 +87,7 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements Pr
 	}
 	
 	@Override
-	public void onFragmentInteraction(Uri uri) {
+	public void onFragmentInteractionListener(String tag, Object data, Object extra) {
 		
 	}
 	
