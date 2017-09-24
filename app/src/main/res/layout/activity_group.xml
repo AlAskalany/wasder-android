@@ -14,15 +14,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="112dp"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleGravity="top"
-            app:expandedTitleMargin="8dp"
-            app:expandedTitleMarginStart="50dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+            style="@style/CollapsingToolbarLayoutStyle"
             app:toolbarId="@+id/toolbar_group_activity">
 
             <ImageView

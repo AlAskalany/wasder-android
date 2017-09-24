@@ -22,4 +22,15 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="CollapsingToolbarLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">112dp</item>
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed|enterAlways</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+    </style>
+
+    <style name="CollapsingToolbarLayoutWithTabsStyle" parent="CollapsingToolbarLayoutStyle">
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+    </style>
+
 </resources>
