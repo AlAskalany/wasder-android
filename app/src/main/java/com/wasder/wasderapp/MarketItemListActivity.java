@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ public class MarketItemListActivity
 	 * device.
 	 */
 	private boolean mTwoPane;
+	private int mColumnCount = 3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,11 @@ public class MarketItemListActivity
 	
 	private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 		
+		if (mColumnCount <= 1) {
+			recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+		} else {
+			recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
+		}
 		recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
 	}
 	
@@ -100,7 +108,7 @@ public class MarketItemListActivity
 		public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 			
 			View view = LayoutInflater.from(parent.getContext())
-			                          .inflate(R.layout.marketitem_list_content, parent, false);
+					.inflate(R.layout.marketitem_list_content, parent, false);
 			return new ViewHolder(view);
 		}
 		
@@ -122,8 +130,8 @@ public class MarketItemListActivity
 						MarketItemDetailFragment fragment = new MarketItemDetailFragment();
 						fragment.setArguments(arguments);
 						getSupportFragmentManager().beginTransaction()
-						                           .replace(R.id.marketitem_detail_container, fragment)
-						                           .commit();
+								.replace(R.id.marketitem_detail_container, fragment)
+								.commit();
 					} else {
 						Context context = v.getContext();
 						Intent intent = new Intent(context, MarketItemDetailActivity.class);
