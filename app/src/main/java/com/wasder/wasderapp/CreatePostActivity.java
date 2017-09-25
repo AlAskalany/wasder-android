@@ -1,8 +1,10 @@
 package com.wasder.wasderapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.wasder.wasderapp.models.FeedItem;
+import com.wasder.wasderapp.ui.LoginActivity;
 
 public class CreatePostActivity extends AppCompatActivity {
 	
@@ -41,22 +45,36 @@ public class CreatePostActivity extends AppCompatActivity {
 	private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
 	private static final String TAG = "CreatePostActivity";
 	private DatabaseReference mFirebaseDatabaseReference;
-	private ImageButton addImageButton;
+	private ImageButton mattachImageButton;
 	private EditText mMessageEditText;
-	private ImageButton sendImageButton;
+	private ImageButton mSendButton;
 	private String mUsername = "Askalany";
 	private String mPhotoUrl = "https://ubistatic19-a.akamaihd.net/resource/en-us/game/rainbow6/siege/r6-game-info-units_210380.jpg";
 	private FirebaseAuth mFirebaseAuth;
 	private FirebaseUser mFirebaseUser;
+	private SharedPreferences mSharedPreferences;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		// Initialize Firebase Auth
 		mFirebaseAuth = FirebaseAuth.getInstance();
 		mFirebaseUser = mFirebaseAuth.getCurrentUser();
+		
+		if (mFirebaseUser == null) {
+			// Not signed in, launch the Sign In activity
+			startActivity(new Intent(this, LoginActivity.class));
+			finish();
+			return;
+		} else {
+			mUsername = mFirebaseUser.getDisplayName();
+			if (mFirebaseUser.getPhotoUrl() != null) {
+				mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+			}
+		}
 		mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		Toolbar toolbar = findViewById(R.id.create_post_toolbar);
 		toolbar.setTitle("Post");
@@ -66,8 +84,8 @@ public class CreatePostActivity extends AppCompatActivity {
 			bar.setDisplayHomeAsUpEnabled(true);
 		}
 		mMessageEditText = findViewById(R.id.post_editText);
-		/*mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
-				.getInt(CodelabPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});*/
+		mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
+				.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
 		mMessageEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -78,9 +96,9 @@ public class CreatePostActivity extends AppCompatActivity {
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 				
 				if (charSequence.toString().trim().length() > 0) {
-					sendImageButton.setEnabled(true);
+					mSendButton.setEnabled(true);
 				} else {
-					sendImageButton.setEnabled(false);
+					mSendButton.setEnabled(false);
 				}
 			}
 			
@@ -91,8 +109,8 @@ public class CreatePostActivity extends AppCompatActivity {
 		});
 		
 		
-		addImageButton = findViewById(R.id.add_image_imageButton);
-		addImageButton.setOnClickListener(new View.OnClickListener() {
+		mattachImageButton = findViewById(R.id.add_image_imageButton);
+		mattachImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				
@@ -106,12 +124,13 @@ public class CreatePostActivity extends AppCompatActivity {
 			}
 		});
 		
-		sendImageButton = findViewById(R.id.create_post_send_imageButton);
-		sendImageButton.setOnClickListener(new View.OnClickListener() {
+		mSendButton = findViewById(R.id.create_post_send_imageButton);
+		mSendButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				
-				FeedItem feedItem = new FeedItem();
+				FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText().toString
+						(), mMessageEditText.getText().toString(), mPhotoUrl, null, mMessageEditText.getText().toString());
 				mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(feedItem);
 				mMessageEditText.setText("");
 				//mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
@@ -132,7 +151,8 @@ public class CreatePostActivity extends AppCompatActivity {
 				if (data != null) {
 					final Uri uri = data.getData();
 					Log.d(TAG, "Uri: " + uri.toString());
-					FeedItem tempMessage = new FeedItem("uId", "id", "Tit;e", "Subhead", mPhotoUrl, LOADING_IMAGE_URL, "Supplementary text");
+					FeedItem tempMessage = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
+							.toString(), mMessageEditText.getText().toString(), mPhotoUrl, LOADING_IMAGE_URL, mMessageEditText.getText().toString());
 					mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
 							.setValue(tempMessage, new DatabaseReference.CompletionListener() {
 								@Override
@@ -215,8 +235,9 @@ public class CreatePostActivity extends AppCompatActivity {
 						
 						if (task.isSuccessful()) {
 							FeedItem feedItem =
-									new FeedItem("uId", "id", "Title", "Subhead", mPhotoUrl, task.getResult().getDownloadUrl().toString(),
-											"Supplementary text");
+									new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
+											.toString(), mMessageEditText.getText().toString(), mPhotoUrl, task.getResult().getDownloadUrl()
+											.toString(), mMessageEditText.getText().toString());
 							mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
 									.setValue(feedItem);
 						} else {
