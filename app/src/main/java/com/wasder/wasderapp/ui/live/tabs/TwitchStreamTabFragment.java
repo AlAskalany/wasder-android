@@ -23,10 +23,7 @@ public class TwitchStreamTabFragment extends TabFragment {
 	
 	private int columnCount;
 	private String title = "Twitch Stream";
-	private int resLayout;
 	private OnFragmentInteractionListener mListener;
-	private View view;
-	private String mTAG;
 	
 	public TwitchStreamTabFragment() {
 		
@@ -50,15 +47,9 @@ public class TwitchStreamTabFragment extends TabFragment {
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(R.layout.twitch_stream_recycler_view, container, false);
+		View view = inflater.inflate(R.layout.twitch_stream_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.twitch_stream_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
@@ -96,11 +87,9 @@ public class TwitchStreamTabFragment extends TabFragment {
 	
 	public void setResLayout(int resLayout) {
 		
-		this.resLayout = resLayout;
 	}
 	
 	public void setTag(String tag) {
 		
-		this.mTAG = tag;
 	}
 }

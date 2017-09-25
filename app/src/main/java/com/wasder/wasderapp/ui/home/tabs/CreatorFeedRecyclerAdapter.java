@@ -67,18 +67,18 @@ public class CreatorFeedRecyclerAdapter
 	public static class CreatorFeedViewHolder
 			extends RecyclerView.ViewHolder {
 		
-		View mView;
-		TextView titleTextView;
-		TextView subheadTextView;
-		ImageButton photoImageButton;
-		ImageView creatorFeedImageView;
-		TextView supplementaryTextView;
-		ImageButton commentImageButton;
-		ImageButton likeImageButton;
+		final View mView;
+		final TextView titleTextView;
+		final TextView subheadTextView;
+		final ImageButton photoImageButton;
+		final ImageView creatorFeedImageView;
+		final TextView supplementaryTextView;
+		final ImageButton commentImageButton;
+		final ImageButton likeImageButton;
+		final ImageButton shareImageButton;
+		final ImageButton creatorFeedDetailsImageButton;
 		ImageButton bookmarkImageButton;
-		ImageButton shareImageButton;
 		CreatorFeedItem creatorFeedItem;
-		ImageButton creatorFeedDetailsImageButton;
 		
 		public CreatorFeedViewHolder(View view) {
 			

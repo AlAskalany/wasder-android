@@ -38,7 +38,6 @@ public class MarketItemListActivity
 	 * device.
 	 */
 	private boolean mTwoPane;
-	private int mColumnCount = 3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +67,14 @@ public class MarketItemListActivity
 	
 	private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 		
+		int mColumnCount = 3;
+		//noinspection ConstantConditions
 		if (mColumnCount <= 1) {
 			recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 		} else {
 			recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), mColumnCount));
 		}
-		recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+		recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter());
 	}
 	
 	@Override
@@ -99,9 +100,9 @@ public class MarketItemListActivity
 		
 		private final List<DummyContent.DummyItem> mValues;
 		
-		public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+		public SimpleItemRecyclerViewAdapter() {
 			
-			mValues = items;
+			mValues = DummyContent.ITEMS;
 		}
 		
 		@Override

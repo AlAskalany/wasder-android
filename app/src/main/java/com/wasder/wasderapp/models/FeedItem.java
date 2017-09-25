@@ -13,4 +13,9 @@ public class FeedItem
 	public FeedItem() {
 		
 	}
+	
+	public FeedItem(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
+		
+		super(uId, id, title, subhead, photoUrl, imageUrl, supplementaryText);
+	}
 }

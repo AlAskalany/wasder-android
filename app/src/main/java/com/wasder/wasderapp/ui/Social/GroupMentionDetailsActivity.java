@@ -14,8 +14,8 @@ import com.wasder.wasderapp.util.Helpers;
 public class GroupMentionDetailsActivity
         extends BaseDetailsActivity {
 	
-	public static final String ARG_FRIEND_EVENT_ITEM = "friend_event_item";
-	private FriendEventItem friendEventItem;
+	private static final String ARG_FRIEND_EVENT_ITEM = "friend_event_item";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,16 +25,23 @@ public class GroupMentionDetailsActivity
 		toolbar.setTitle("Friend Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
 		               .containsKey(ARG_FRIEND_EVENT_ITEM)) {
-			friendEventItem = (FriendEventItem) getIntent().getExtras()
-			                                               .getSerializable(ARG_FRIEND_EVENT_ITEM);
-			getSupportActionBar().setTitle(friendEventItem.getTitle());
-			final String imageUrl = friendEventItem.getImageUrl();
+			FriendEventItem friendEventItem = (FriendEventItem) getIntent().getExtras()
+					.getSerializable(ARG_FRIEND_EVENT_ITEM);
+			if (friendEventItem != null) {
+				getSupportActionBar().setTitle(friendEventItem.getTitle());
+			}
+			String imageUrl = null;
+			if (friendEventItem != null) {
+				imageUrl = friendEventItem.getImageUrl();
+			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
 			textView.setText(friendEventItem.getSupplementaryText());
 		}

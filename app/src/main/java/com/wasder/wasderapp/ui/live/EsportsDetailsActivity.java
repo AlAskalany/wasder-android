@@ -14,8 +14,8 @@ import com.wasder.wasderapp.util.Helpers;
 public class EsportsDetailsActivity
 		extends BaseDetailsActivity {
 	
-	public static final String ARG_ESPORTS_ITEM = "esports_item";
-	private EsportsItem esportsItem;
+	private static final String ARG_ESPORTS_ITEM = "esports_item";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,16 +25,23 @@ public class EsportsDetailsActivity
 		toolbar.setTitle("Esports");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
 		               .containsKey(ARG_ESPORTS_ITEM)) {
-			esportsItem = (EsportsItem) getIntent().getExtras()
-			                                       .getSerializable(ARG_ESPORTS_ITEM);
-			getSupportActionBar().setTitle(esportsItem.getTitle());
-			final String imageUrl = esportsItem.getImageUrl();
+			EsportsItem esportsItem = (EsportsItem) getIntent().getExtras()
+					.getSerializable(ARG_ESPORTS_ITEM);
+			if (esportsItem != null) {
+				getSupportActionBar().setTitle(esportsItem.getTitle());
+			}
+			String imageUrl = null;
+			if (esportsItem != null) {
+				imageUrl = esportsItem.getImageUrl();
+			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
 			textView.setText(esportsItem.getSupplementaryText());
 		}

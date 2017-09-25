@@ -199,6 +199,13 @@
         </activity>
         <activity android:name=".StudioActivity">
         </activity>
+        <activity
+            android:name=".CreatePostActivity"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

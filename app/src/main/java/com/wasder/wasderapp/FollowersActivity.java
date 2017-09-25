@@ -14,7 +14,9 @@ public class FollowersActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.fragment_followers_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
+	    if (bar != null) {
+		    bar.setDisplayHomeAsUpEnabled(true);
+	    }
     }
 
 }

@@ -18,19 +18,15 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
 public abstract class BaseRecyclerAdapter<M extends WasderDataModel, V extends RecyclerView.ViewHolder>
 		extends FirebaseRecyclerAdapter<M, V> {
 	
-	protected String TAG;
-	protected Context mContext;
-	protected OnFragmentInteractionListener<Object, String> mListener;
-	protected RecyclerView.LayoutManager layoutManager;
+	protected final Context mContext;
+	protected final OnFragmentInteractionListener<Object, String> mListener;
 	
-	public BaseRecyclerAdapter(Class<M> modelClass, int modelLayout, Class<V> viewHolderClass, Query ref, String TAG, Context mContext,
-	                               OnFragmentInteractionListener mListener, final LinearLayoutManager layoutManager) {
+	protected BaseRecyclerAdapter(Class<M> modelClass, int modelLayout, Class<V> viewHolderClass, Query ref, String TAG, Context mContext,
+	                              OnFragmentInteractionListener mListener, final LinearLayoutManager layoutManager) {
 		
 		super(modelClass, modelLayout, viewHolderClass, ref);
-		this.TAG = TAG;
 		this.mContext = mContext;
 		this.mListener = mListener;
-		this.layoutManager = layoutManager;
 		this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			
 			@Override

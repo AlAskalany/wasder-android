@@ -14,6 +14,8 @@ import com.wasder.wasderapp.Factories.RecyclerAdapterFactory;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Wasder AB CONFIDENTIAL
  * Created by ahmed on 9/10/2017.
@@ -26,11 +28,9 @@ public class TabFragment
 	private String title;
 	private int resLayout;
 	private OnFragmentInteractionListener<Object, String> mListener;
-	private View view;
 	private Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass;
-	private String mTAG;
-
-    public TabFragment() {
+	
+	public TabFragment() {
 
         super();
 	}
@@ -47,22 +47,27 @@ public class TabFragment
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(resLayout, container, false);
+		View view = inflater.inflate(resLayout, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.feedRecyclerView);
-		if (recyclerView instanceof RecyclerView) {
+		if (recyclerView != null) {
 			Context context = view.getContext();
 			LinearLayoutManager layoutManager;
 			layoutManager = columnCount <= 1 ? new LinearLayoutManager(context) : new GridLayoutManager(context, columnCount);
 			recyclerView.setLayoutManager(layoutManager);
-			BaseRecyclerAdapter b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager, mListener);
+			BaseRecyclerAdapter b = null;
+			try {
+				b = RecyclerAdapterFactory.getInstance(recyclerViewAdapterBaseClass, context, layoutManager, mListener);
+			} catch (java.lang.InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
 			recyclerView.setAdapter(b);
 			
 		}
@@ -99,10 +104,5 @@ public class TabFragment
 	public void setRecyclerViewAdapterBaseClass(Class<? extends BaseRecyclerAdapter> recyclerViewAdapterBaseClass) {
 		
 		this.recyclerViewAdapterBaseClass = recyclerViewAdapterBaseClass;
-	}
-	
-	public void setTag(String tag) {
-		
-		this.mTAG = tag;
 	}
 }

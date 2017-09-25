@@ -27,7 +27,9 @@ public class CalendarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Set up the action bar to show a dropdown list.
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+	    if (actionBar != null) {
+		    actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
     }
 
 

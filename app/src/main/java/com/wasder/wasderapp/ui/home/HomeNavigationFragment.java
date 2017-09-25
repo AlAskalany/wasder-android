@@ -40,25 +40,18 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	private String mTAG;
 	private String mFragmentTitle;
-	private int mResLayout;
 	private int mResToolbar;
 	private int mResDrawerLayout;
 	private int mResNavigationView;
-	private int mResViewPager;
-	private int mResTabLayout;
 	private List<TabFragment> mTabFragments = new ArrayList<>();
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
-	private ViewPager viewPager;
-	private TabLayout tabLayout;
-	private SectionsPagerAdapter sectionPagerAdapter;
 	
 	public HomeNavigationFragment() {
 		
 	}
 	
-	public static HomeNavigationFragment newInstance(String tag, String fragmentTitle, int resDrawerLayout, int resNavigationView, int
-			resTabLayout) {
+	public static HomeNavigationFragment newInstance() {
 		
 		HomeNavigationFragment fragment = new HomeNavigationFragment();
 		return fragment;
@@ -101,21 +94,15 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.main_home_fragment, container, false);
-		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		viewPager = view.findViewById(R.id.home_viewpager);
+		ViewPager viewPager = view.findViewById(R.id.home_viewpager);
 		viewPager.setAdapter(sectionPagerAdapter);
-		tabLayout = getActivity().findViewById(R.id.tabLayout_main_activity);
+		TabLayout tabLayout = getActivity().findViewById(R.id.tabLayout_main_activity);
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
-	}
-	
-	@Override
-	public void onStart() {
-		
-		super.onStart();
 	}
 	
 	@Override
@@ -182,7 +169,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	public void setmResLayout(int mResLayout) {
 		
-		this.mResLayout = mResLayout;
+		int mResLayout1 = mResLayout;
 	}
 	
 	public int getmResToolbar() {
@@ -212,12 +199,12 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	public void setmResViewPager(int mResViewPager) {
 		
-		this.mResViewPager = mResViewPager;
+		int mResViewPager1 = mResViewPager;
 	}
 	
 	public void setmResTabLayout(int mResTabLayout) {
 		
-		this.mResTabLayout = mResTabLayout;
+		int mResTabLayout1 = mResTabLayout;
 	}
 	
 	/**
@@ -226,7 +213,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	static class SectionsPagerAdapter
 			extends FragmentStatePagerAdapter {
 		
-		private Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
+		private final Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		
 		/**
 		 * Instantiates a new Sections pager adapter.

@@ -5,7 +5,7 @@ package com.wasder.wasderapp.ui.profile;
  * Created by ahmed on 9/24/2017.
  */
 
-public interface ProfileTab {
+interface ProfileTab {
 	
 	String getTitle();
 }

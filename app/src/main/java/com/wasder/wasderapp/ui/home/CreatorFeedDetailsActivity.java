@@ -14,8 +14,7 @@ import com.wasder.wasderapp.util.Helpers;
 public class CreatorFeedDetailsActivity
 		extends BaseDetailsActivity {
 	
-	public static final String ARG_CREATOR_FEED_ITEM = "creator_feed_item";
-	private CreatorFeedItem creatorFeedItem;
+	private static final String ARG_CREATOR_FEED_ITEM = "creator_feed_item";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +25,23 @@ public class CreatorFeedDetailsActivity
 		toolbar.setTitle("Creator Feed");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
 		               .containsKey(ARG_CREATOR_FEED_ITEM)) {
-			creatorFeedItem = (CreatorFeedItem) getIntent().getExtras()
-			                                               .getSerializable(ARG_CREATOR_FEED_ITEM);
-			getSupportActionBar().setTitle(creatorFeedItem.getTitle());
-			final String imageUrl = creatorFeedItem.getImageUrl();
+			CreatorFeedItem creatorFeedItem = (CreatorFeedItem) getIntent().getExtras()
+					.getSerializable(ARG_CREATOR_FEED_ITEM);
+			if (creatorFeedItem != null) {
+				getSupportActionBar().setTitle(creatorFeedItem.getTitle());
+			}
+			String imageUrl = null;
+			if (creatorFeedItem != null) {
+				imageUrl = creatorFeedItem.getImageUrl();
+			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
 			textView.setText(creatorFeedItem.getSupplementaryText());
 		}

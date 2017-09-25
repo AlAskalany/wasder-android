@@ -23,10 +23,7 @@ public class MentionsTabFragment extends TabFragment {
 	
 	private int columnCount;
 	private String title = "Mentions";
-	private int resLayout;
 	private OnFragmentInteractionListener mListener;
-	private View view;
-	private String mTAG;
 	
 	public MentionsTabFragment() {
 		
@@ -51,15 +48,9 @@ public class MentionsTabFragment extends TabFragment {
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(R.layout.mentions_recycler_view, container, false);
+		View view = inflater.inflate(R.layout.mentions_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.mentions_RecyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
@@ -97,11 +88,9 @@ public class MentionsTabFragment extends TabFragment {
 	
 	public void setResLayout(int resLayout) {
 		
-		this.resLayout = resLayout;
 	}
 	
 	public void setTag(String tag) {
 		
-		this.mTAG = tag;
 	}
 }

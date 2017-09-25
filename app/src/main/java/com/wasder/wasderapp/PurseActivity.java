@@ -14,7 +14,11 @@ public class PurseActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.activity_purse_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Purse");
-        actionBar.setDisplayHomeAsUpEnabled(true);
+	    if (actionBar != null) {
+		    actionBar.setTitle("Purse");
+	    }
+	    if (actionBar != null) {
+		    actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
     }
 }

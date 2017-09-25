@@ -49,7 +49,7 @@ public class Helpers {
 						public void onComplete(@NonNull Task<Uri> task) {
 							
 							if (task.isSuccessful()) {
-								String downloadUrl = task.getResult().toString();
+								task.getResult().toString();
 								Glide.with(imageView.getContext()).load(imageUrl).into(imageView);
 							} else {
 								Log.d(TAG, "Getting Download URL was not successful", task.getException());
@@ -76,7 +76,7 @@ public class Helpers {
 		}
 	}
 	
-	public static class Fragments{
+	private static class Fragments {
 
         public static void switchToNavigationFragment(int layout, FragmentTransaction ts, NavigationFragment fragment) {
 

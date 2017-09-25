@@ -17,17 +17,13 @@ import java.lang.reflect.InvocationTargetException;
 public class RecyclerAdapterFactory {
 	
 	public static BaseRecyclerAdapter getInstance(Class<? extends BaseRecyclerAdapter> fragmentClass, Context context, LinearLayoutManager
-			layoutManager, OnFragmentInteractionListener mListener) {
+			layoutManager, OnFragmentInteractionListener mListener) throws InstantiationException, IllegalAccessException, NoSuchMethodException,
+			InvocationTargetException {
 		
-		try {
-			Constructor<? extends BaseRecyclerAdapter> con = fragmentClass.getConstructor(Context.class,
-					LinearLayoutManager.class,
-					OnFragmentInteractionListener.class);
-			return con.newInstance(context, layoutManager, mListener);
-		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return null;
+		Constructor<? extends BaseRecyclerAdapter> con = fragmentClass.getConstructor(Context.class,
+				LinearLayoutManager.class,
+				OnFragmentInteractionListener.class);
+		return con.newInstance(context, layoutManager, mListener);
 	}
 	
 }

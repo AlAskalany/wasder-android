@@ -55,13 +55,13 @@ public class GroupsRecyclerAdapter
 
     public static class GroupViewHolder
             extends RecyclerView.ViewHolder {
-
-        View mview;
-        ImageView groupImageView;
-        TextView groupTitleTextView;
-        TextView groupSubheadTextView;
-        ImageButton groupDetailsImageButton;
-        GroupItem feedModel;
+	
+	    final View mview;
+	    final ImageView groupImageView;
+	    final TextView groupTitleTextView;
+	    final TextView groupSubheadTextView;
+	    final ImageButton groupDetailsImageButton;
+	    GroupItem feedModel;
 
         public GroupViewHolder(View itemView) {
 

@@ -14,8 +14,8 @@ import com.wasder.wasderapp.util.Helpers;
 public class TwitchStreamDetailsActivity
 		extends BaseDetailsActivity {
 	
-	public static final String ARG_TWITCH_STREAM_ACTIVITY = "twitch_stream_item";
-	private TwitchStreamItem twitchStreamItem;
+	private static final String ARG_TWITCH_STREAM_ACTIVITY = "twitch_stream_item";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,16 +25,23 @@ public class TwitchStreamDetailsActivity
 		toolbar.setTitle("Twitch Stream");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
 		               .containsKey(ARG_TWITCH_STREAM_ACTIVITY)) {
-			twitchStreamItem = (TwitchStreamItem) getIntent().getExtras()
-			                                                 .getSerializable(ARG_TWITCH_STREAM_ACTIVITY);
-			getSupportActionBar().setTitle(twitchStreamItem.getTitle());
-			final String imageUrl = twitchStreamItem.getImageUrl();
+			TwitchStreamItem twitchStreamItem = (TwitchStreamItem) getIntent().getExtras()
+					.getSerializable(ARG_TWITCH_STREAM_ACTIVITY);
+			if (twitchStreamItem != null) {
+				getSupportActionBar().setTitle(twitchStreamItem.getTitle());
+			}
+			String imageUrl = null;
+			if (twitchStreamItem != null) {
+				imageUrl = twitchStreamItem.getImageUrl();
+			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
 			textView.setText(twitchStreamItem.getSupplementaryText());
 		}

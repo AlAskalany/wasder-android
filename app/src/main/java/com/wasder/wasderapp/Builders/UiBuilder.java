@@ -122,7 +122,7 @@ public class UiBuilder {
 	public static class NavFragment
 			implements BuilderBase<NavigationFragment> {
 		
-		List<TabFragment> tabs = new ArrayList<>();
+		final List<TabFragment> tabs = new ArrayList<>();
 		private String tag;
 		private String title;
 		private int layout;
@@ -267,7 +267,8 @@ public class UiBuilder {
 		 * @param tabAdapter the tab adapter
 		 * @return the tab fragment builder
 		 */
-		TabFragmentBuilder tab(String tag, String title, NumColumns numColumns, int resLayout, Class<? extends BaseRecyclerAdapter> tabAdapter) {
+		TabFragmentBuilder tab(String tag, String title, @SuppressWarnings("SameParameterValue") NumColumns numColumns, int resLayout, Class<?
+				extends BaseRecyclerAdapter> tabAdapter) {
 			
 			this.tag = tag;
 			this.title = title;
@@ -281,7 +282,6 @@ public class UiBuilder {
 		public TabFragment build() {
 			
 			TabFragment fragment = new TabFragment();
-			fragment.setTag(tag);
 			fragment.setTitle(title);
 			fragment.setResLayout(layout);
 			fragment.setColumnCount(columnCount);

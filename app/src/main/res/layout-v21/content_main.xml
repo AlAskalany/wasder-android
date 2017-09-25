@@ -89,5 +89,21 @@
 
     </FrameLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:scaleType="center"
+        app:backgroundTint="@color/md_amber_400"
+        app:elevation="4dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_black_24dp"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

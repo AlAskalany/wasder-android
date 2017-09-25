@@ -18,6 +18,7 @@ public class WasderDataModel
 	private String uId;
 	private String subhead;
 	
+	@SuppressWarnings("WeakerAccess")
 	public WasderDataModel() {
 		
 	}

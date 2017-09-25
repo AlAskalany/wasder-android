@@ -22,10 +22,7 @@ public class GroupsTabFragment extends TabFragment {
 	
 	private int columnCount;
 	private String title = "Groups";
-	private int resLayout;
 	private OnFragmentInteractionListener<Object, String> mListener;
-	private View view;
-	private String mTAG;
 	
 	public GroupsTabFragment() {
 		
@@ -50,15 +47,9 @@ public class GroupsTabFragment extends TabFragment {
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(R.layout.groups_recycler_view, container, false);
+		View view = inflater.inflate(R.layout.groups_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.groups_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
@@ -96,11 +87,9 @@ public class GroupsTabFragment extends TabFragment {
 	
 	public void setResLayout(int resLayout) {
 		
-		this.resLayout = resLayout;
 	}
 	
 	public void setTag(String tag) {
 		
-		this.mTAG = tag;
 	}
 }

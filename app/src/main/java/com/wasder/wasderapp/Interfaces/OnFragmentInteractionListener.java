@@ -7,5 +7,6 @@ package com.wasder.wasderapp.Interfaces;
 
 public interface OnFragmentInteractionListener<T, M> {
 	
+	@SuppressWarnings("EmptyMethod")
 	void onFragmentInteractionListener(String tag, T data, M extra);
 }

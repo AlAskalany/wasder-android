@@ -14,6 +14,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -37,6 +38,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.AchievementsActivity;
 import com.wasder.wasderapp.CalendarActivity;
+import com.wasder.wasderapp.CreatePostActivity;
 import com.wasder.wasderapp.FollowersActivity;
 import com.wasder.wasderapp.FriendsActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
@@ -59,10 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		OnFragmentInteractionListener<Object, String>, FragmentManager.OnBackStackChangedListener {
 	
 	private static final String TAG = "MainActivity";
-	public String mUserName = "User Name";
-	public String mEmail = "User E-mail";
-	IInAppBillingService mService;
-	ServiceConnection mServiceConn = new ServiceConnection() {
+	private final Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
+	private String mUserName = "User Name";
+	private String mEmail = "User E-mail";
+	private IInAppBillingService mService;
+	private final ServiceConnection mServiceConn = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			
@@ -75,10 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			mService = null;
 		}
 	};
-	HomeNavigationFragment homeFragment;
-	LiveNavigationFragment liveFragment;
-	SocialNavigationFragment socialFragment;
-	private Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
+	private HomeNavigationFragment homeFragment;
+	private LiveNavigationFragment liveFragment;
+	private SocialNavigationFragment socialFragment;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Uri mPhotoUrl;
@@ -87,9 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private View headerView;
 	private TextView userNameTextView;
 	private TextView emailTextView;
-	private BottomNavigationView bottomNavigationView;
 	private Toolbar mToolbar;
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+	private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -158,10 +159,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		toggle.syncState();
 		NavigationView navigationView = findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		bottomNavigationView = findViewById(R.id.navigation);
+		BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
-		Context context = this.getBaseContext();
+		this.getBaseContext();
 		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
 		ImageButton marketImageButton = findViewById(R.id.feed_sheet_market_imageButton);
 		marketImageButton.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +194,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			public void onClick(View view) {
 				
 				startActivity(new Intent(MainActivity.this, StudioActivity.class));
+			}
+		});
+		
+		FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+		fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				
+				startActivity(new Intent(MainActivity.this, CreatePostActivity.class));
 			}
 		});
 	}
@@ -227,10 +237,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	private void CreateNavigationFragments() {
 		
-		homeFragment = HomeNavigationFragment.newInstance("HomeFragment", "Home", R.id.drawer_layout, R.id.nav_view, R.id.tabLayout_main_activity);
-		liveFragment = LiveNavigationFragment.newInstance("LiveFragment", "Live", R.id.drawer_layout, R.id.nav_view, R.id.tabLayout_main_activity);
-		socialFragment = SocialNavigationFragment.newInstance("SocialFragment", "Social", R.id.drawer_layout, R.id.nav_view, R.id
-				.tabLayout_main_activity);
+		homeFragment = HomeNavigationFragment.newInstance();
+		liveFragment = LiveNavigationFragment.newInstance();
+		socialFragment = SocialNavigationFragment.newInstance();
 	}
 	
 	@Override

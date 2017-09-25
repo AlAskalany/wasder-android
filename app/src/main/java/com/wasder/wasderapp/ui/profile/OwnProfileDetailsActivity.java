@@ -24,19 +24,14 @@ import java.util.Map;
 
 public class OwnProfileDetailsActivity extends BaseDetailsActivity implements OnFragmentInteractionListener {
 	
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	private ViewPager mViewPager;
-	private List<ProfileTab> mTabFragments = new ArrayList<>();
-	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private final List<ProfileTab> mTabFragments = new ArrayList<>();
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_own_profile);
-		ProfileFeedFragment profileFeedFragment = ProfileFeedFragment.newInstance("AAA", "BBB");
-		ProfileInfoFragment profileInfoFragment = ProfileInfoFragment.newInstance("AAA", "BBB");
+		ProfileFeedFragment profileFeedFragment = ProfileFeedFragment.newInstance();
+		ProfileInfoFragment profileInfoFragment = ProfileInfoFragment.newInstance();
 		mTabFragments.add(profileFeedFragment);
 		mTabFragments.add(profileInfoFragment);
 		
@@ -47,15 +42,20 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements On
 		toolbar.setTitle("Profile");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 		for (ProfileTab tabFragment : mTabFragments) {
 			mSectionsPagerAdapter.addFragment(tabFragment, tabFragment.getTitle());
 		}
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = findViewById(R.id.activity_own_profile_viewPager);
+		/*
+	  The {@link ViewPager} that will host the section contents.
+	 */
+		ViewPager mViewPager = findViewById(R.id.activity_own_profile_viewPager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 		TabLayout tabLayout = findViewById(R.id.activity_own_profile_tabLayout);
@@ -96,7 +96,7 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements On
 	 */
 	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		
-		private Map<Integer, Pair<String, ProfileTab>> fragmentMap = new HashMap<>();
+		private final Map<Integer, Pair<String, ProfileTab>> fragmentMap = new HashMap<>();
 		
 		/**
 		 * Instantiates a new Sections pager adapter.

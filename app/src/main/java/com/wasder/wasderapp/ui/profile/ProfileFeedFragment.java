@@ -21,10 +21,6 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
 	
-	// TODO: Rename and change types of parameters
-	private String mParam1;
-	private String mParam2;
-	private String mTitle = "Feed";
 	private OnFragmentInteractionListener mListener;
 	private int columnCount;
 	
@@ -36,23 +32,22 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	 * Use this factory method to create a new instance of
 	 * this fragment using the provided parameters.
 	 *
-	 * @param param1 Parameter 1.
-	 * @param param2 Parameter 2.
 	 * @return A new instance of fragment ProfileInfoFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static ProfileFeedFragment newInstance(String param1, String param2) {
+	public static ProfileFeedFragment newInstance() {
 		
 		ProfileFeedFragment fragment = new ProfileFeedFragment();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
-		args.putString(ARG_PARAM2, param2);
+		args.putString(ARG_PARAM1, "AAA");
+		args.putString(ARG_PARAM2, "BBB");
 		fragment.setArguments(args);
 		return fragment;
 	}
 	
 	public String getTitle() {
 		
+		String mTitle = "Feed";
 		return mTitle;
 	}
 	
@@ -61,8 +56,8 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 		
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
+			getArguments().getString(ARG_PARAM1);
+			getArguments().getString(ARG_PARAM2);
 		}
 	}
 	

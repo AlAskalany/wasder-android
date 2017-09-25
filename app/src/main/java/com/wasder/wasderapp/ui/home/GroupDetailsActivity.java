@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
@@ -14,11 +13,10 @@ import com.wasder.wasderapp.util.Helpers;
 
 public class GroupDetailsActivity
         extends BaseDetailsActivity {
-
-    public static final String ARG_GROUP_ITEM = "group_item";
-    private GroupItem groupItem;
-
-    @Override
+	
+	private static final String ARG_GROUP_ITEM = "group_item";
+	
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -34,13 +32,18 @@ public class GroupDetailsActivity
         }
 
         ImageView imageView = findViewById(R.id.app_bar_image);
-        TextView textView = findViewById(R.id.activity_feed_textView);
-        if (getIntent().getExtras()
+	    findViewById(R.id.activity_feed_textView);
+		if (getIntent().getExtras()
                 .containsKey(ARG_GROUP_ITEM)) {
-            groupItem = (GroupItem) getIntent().getExtras()
-                    .getSerializable(ARG_GROUP_ITEM);
-            getSupportActionBar().setTitle(groupItem.getTitle());
-            final String imageUrl = groupItem.getImageUrl();
+	        GroupItem groupItem = (GroupItem) getIntent().getExtras()
+			        .getSerializable(ARG_GROUP_ITEM);
+	        if (groupItem != null) {
+		        getSupportActionBar().setTitle(groupItem.getTitle());
+	        }
+	        String imageUrl = null;
+	        if (groupItem != null) {
+		        imageUrl = groupItem.getImageUrl();
+	        }
             Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
         }
     }

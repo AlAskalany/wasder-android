@@ -14,7 +14,9 @@ public class FriendsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.fragment_friends_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
+	    if (bar != null) {
+		    bar.setDisplayHomeAsUpEnabled(true);
+	    }
     }
 
 }

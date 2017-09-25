@@ -58,11 +58,11 @@ public class MentionsRecyclerAdapter
 	public static class EventViewHolder
 			extends RecyclerView.ViewHolder {
 		
-		View mview;
+		final View mview;
+		final TextView subheadTextView;
+		final ImageButton photoImageButton;
+		final TextView supplementaryTextView;
 		TextView titleTextView;
-		TextView subheadTextView;
-		ImageButton photoImageButton;
-		TextView supplementaryTextView;
 
         public EventViewHolder(View itemView) {
 			

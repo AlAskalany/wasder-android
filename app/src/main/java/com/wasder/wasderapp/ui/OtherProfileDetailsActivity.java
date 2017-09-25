@@ -35,15 +35,24 @@ public class OtherProfileDetailsActivity
 		ActionBar actionBar = getSupportActionBar();
 		CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_other_profile);
 		collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
+		}
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		actionBar.setDefaultDisplayHomeAsUpEnabled(true);
 
 		FirebaseAuth mAuth = FirebaseAuth.getInstance();
 		FirebaseUser user = mAuth.getCurrentUser();
-		ImageView imageView = findViewById(R.id.app_bar_image);
-		Uri imageUri = user.getPhotoUrl();
-		new DownloadImageTask((ImageView) findViewById(R.id.app_bar_image)).execute(imageUri.toString());
+		findViewById(R.id.app_bar_image);
+		Uri imageUri = null;
+		if (user != null) {
+			imageUri = user.getPhotoUrl();
+		}
+		if (imageUri != null) {
+			new DownloadImageTask((ImageView) findViewById(R.id.app_bar_image)).execute(imageUri.toString());
+		}
 	}
 
 	@Override
@@ -60,8 +69,8 @@ public class OtherProfileDetailsActivity
 	}
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
-		ImageView bmImage;
+		
+		final ImageView bmImage;
 
 		public DownloadImageTask(ImageView bmImage) {
 

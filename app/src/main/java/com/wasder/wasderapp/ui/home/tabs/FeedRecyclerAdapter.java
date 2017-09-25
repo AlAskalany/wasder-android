@@ -109,18 +109,18 @@ public class FeedRecyclerAdapter
 
 	public static class FeedViewHolder
 			extends RecyclerView.ViewHolder {
-
-		View mview;
-		TextView titleTextView;
-		TextView subheadTextView;
-		ImageButton photoImageButton;
-		ImageView feedImageView;
-		TextView supplementaryTextView;
-		ImageButton commentImageButton;
-		ImageButton likeImageButton;
-		ImageButton bookmarkImageButton;
-		ImageButton shareImageButton;
-		ImageButton detailsImageButton;
+		
+		final View mview;
+		final TextView titleTextView;
+		final TextView subheadTextView;
+		final ImageButton photoImageButton;
+		final ImageView feedImageView;
+		final TextView supplementaryTextView;
+		final ImageButton commentImageButton;
+		final ImageButton likeImageButton;
+		final ImageButton bookmarkImageButton;
+		final ImageButton shareImageButton;
+		final ImageButton detailsImageButton;
 		FeedItem feedItem;
 
 		public FeedViewHolder(View itemView) {

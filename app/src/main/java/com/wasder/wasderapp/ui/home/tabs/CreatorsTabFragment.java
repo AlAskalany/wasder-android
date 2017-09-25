@@ -22,10 +22,7 @@ public class CreatorsTabFragment extends TabFragment {
 	
 	private int columnCount;
 	private String title = "Creators";
-	private int resLayout;
 	private OnFragmentInteractionListener<Object, String> mListener;
-	private View view;
-	private String mTAG;
 	
 	public CreatorsTabFragment() {
 		
@@ -50,15 +47,9 @@ public class CreatorsTabFragment extends TabFragment {
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		view = inflater.inflate(R.layout.creators_feed_recycler_view, container, false);
+		View view = inflater.inflate(R.layout.creators_feed_recycler_view, container, false);
 		RecyclerView recyclerView = view.findViewById(R.id.creators_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
@@ -97,11 +88,9 @@ public class CreatorsTabFragment extends TabFragment {
 	
 	public void setResLayout(int resLayout) {
 		
-		this.resLayout = resLayout;
 	}
 	
 	public void setTag(String tag) {
 		
-		this.mTAG = tag;
 	}
 }

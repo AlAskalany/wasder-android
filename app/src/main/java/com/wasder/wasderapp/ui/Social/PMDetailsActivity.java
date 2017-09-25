@@ -14,8 +14,7 @@ import com.wasder.wasderapp.util.Helpers;
 public class PMDetailsActivity
         extends BaseDetailsActivity {
 	
-	public static final String ARG_RECOMMENDED_EVENT_ITEM = "recommended_event_item";
-	private RecommendedEventItem recommendedEventItem;
+	private static final String ARG_RECOMMENDED_EVENT_ITEM = "recommended_event_item";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +25,23 @@ public class PMDetailsActivity
 		toolbar.setTitle("Recommended Event");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		
 		ImageView imageView = findViewById(R.id.activity_feed_imageView);
 		TextView textView = findViewById(R.id.activity_feed_textView);
 		if (getIntent().getExtras()
 		               .containsKey(ARG_RECOMMENDED_EVENT_ITEM)) {
-			recommendedEventItem = (RecommendedEventItem) getIntent().getExtras()
-			                                                         .getSerializable(ARG_RECOMMENDED_EVENT_ITEM);
-			getSupportActionBar().setTitle(recommendedEventItem.getTitle());
-			final String imageUrl = recommendedEventItem.getImageUrl();
+			RecommendedEventItem recommendedEventItem = (RecommendedEventItem) getIntent().getExtras()
+					.getSerializable(ARG_RECOMMENDED_EVENT_ITEM);
+			if (recommendedEventItem != null) {
+				getSupportActionBar().setTitle(recommendedEventItem.getTitle());
+			}
+			String imageUrl = null;
+			if (recommendedEventItem != null) {
+				imageUrl = recommendedEventItem.getImageUrl();
+			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
 			textView.setText(recommendedEventItem.getSupplementaryText());
 		}

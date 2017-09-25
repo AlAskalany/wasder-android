@@ -16,13 +16,7 @@ import com.wasder.wasderapp.util.Helpers;
 public class BaseDetailsActivity<T extends WasderDataModel>
 		extends AppCompatActivity {
 	
-	public static final String ARG_DATA_ITEM = "data_item";
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-	}
+	private static final String ARG_DATA_ITEM = "data_item";
 	
 	public boolean onSupportNavigateUp() {
 		
@@ -80,12 +74,14 @@ public class BaseDetailsActivity<T extends WasderDataModel>
 		}
 	}
 	
-	protected void SetupActionBar(String title, int toolbarRes) {
+	protected void SetupActionBar() {
 		
-		Toolbar toolbar = findViewById(toolbarRes);
-		toolbar.setTitle(title);
+		Toolbar toolbar = findViewById(R.id.feed_toolbar);
+		toolbar.setTitle("Feed");
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 }

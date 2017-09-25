@@ -3,8 +3,6 @@ package com.wasder.wasderapp.ui.Social;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
@@ -25,10 +23,12 @@ public class MentionDetailsActivity
         toolbar.setTitle("Mention");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        ImageView imageView = findViewById(R.id.activity_feed_imageView);
-        TextView textView = findViewById(R.id.activity_feed_textView);
+	    if (actionBar != null) {
+		    actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
+	
+	    findViewById(R.id.activity_feed_imageView);
+	    findViewById(R.id.activity_feed_textView);
         /*if (getIntent().getExtras()
                        .containsKey(ARG_EVENT_ITEM)) {
 			eventItem = (EventItem) getIntent().getExtras()

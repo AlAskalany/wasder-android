@@ -52,9 +52,6 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	private List<TabFragment> mTabFragments = new ArrayList<>();
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
-	private ViewPager viewPager;
-	private TabLayout tabLayout;
-	private SectionsPagerAdapter sectionPagerAdapter;
 	
 	public NavigationFragment() {
 		
@@ -99,22 +96,6 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-			//			mTAG = getArguments().getString(ARG_TAG);
-			//			mFragmentTitle = getArguments().getString(ARG_TITLE);
-			//			mResLayout = getArguments().getInt(ARG_LAYOUT);
-			//			mResToolbar = getArguments().getInt(ARG_TOOLBAR);
-			//			mResDrawerLayout = getArguments().getInt(ARG_DRAWER_LAYOUT);
-			//			mResNavigationView = getArguments().getInt(ARG_NAVIGATION_VIEW);
-			//			mResViewPager = getArguments().getInt(ARG_VIEWPAGER);
-			//			mResTabLayout = getArguments().getInt(ARG_TAB_LAYOUT);
-		}
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(this.mResLayout, container, false);
@@ -125,21 +106,15 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 		//if (actionBar != null) {
 		//	actionBar.setTitle(mFragmentTitle);
 		//}
-		sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		viewPager = view.findViewById(mResViewPager);
+		ViewPager viewPager = view.findViewById(mResViewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
-		tabLayout = view.findViewById(mResTabLayout);
+		TabLayout tabLayout = view.findViewById(mResTabLayout);
 		tabLayout.setupWithViewPager(viewPager);
 		return view;
-	}
-	
-	@Override
-	public void onStart() {
-		
-		super.onStart();
 	}
 	
 	@Override
@@ -264,7 +239,7 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	static class SectionsPagerAdapter
 			extends FragmentStatePagerAdapter {
 		
-		private Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
+		private final Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		
 		/**
 		 * Instantiates a new Sections pager adapter.

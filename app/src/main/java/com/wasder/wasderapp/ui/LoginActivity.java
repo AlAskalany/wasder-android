@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	private static final String[] DUMMY_CREDENTIALS = new String[]{"foo@example.com:hello", "bar@example.com:world"};
 	private static final int RC_SIGN_IN = 9001;
 	private FirebaseAuth firebaseAuth;
-	private FirebaseAuth.AuthStateListener authStateListener;
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
@@ -108,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		});
 		
 		firebaseAuth = FirebaseAuth.getInstance();
-		authStateListener = new FirebaseAuth.AuthStateListener() {
+		new FirebaseAuth.AuthStateListener() {
 			
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -203,7 +202,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		View focusView = null;
 		
 		// Check for a valid password, if the user entered one.
-		if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+		if (!TextUtils.isEmpty(password) && isPasswordInvalid(password)) {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
@@ -214,7 +213,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!isEmailValid(email)) {
+		} else if (isEmailInvalid(email)) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -233,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		}
 	}
 	
-	public void attemptRegisteration() {
+	private void attemptRegisteration() {
 		
 		if (mAuthTask != null) {
 			return;
@@ -251,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		View focusView = null;
 		
 		// Check for a valid password, if the user entered one.
-		if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+		if (!TextUtils.isEmpty(password) && isPasswordInvalid(password)) {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
@@ -262,7 +261,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!isEmailValid(email)) {
+		} else if (isEmailInvalid(email)) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -319,14 +318,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		return false;
 	}
 	
-	private boolean isPasswordValid(String password) {
+	private boolean isPasswordInvalid(String password) {
 		//TODO: Replace this with your own logic
-		return password.length() > 4;
+		return password.length() <= 4;
 	}
 	
-	private boolean isEmailValid(String email) {
+	private boolean isEmailInvalid(String email) {
 		//TODO: Replace this with your own logic
-		return email.contains("@");
+		return !email.contains("@");
 	}
 	
 	/**
@@ -337,34 +336,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
 		// the progress spinner.
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+		int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+		
+		mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+		mLoginFormView.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
 			
-			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-			mLoginFormView.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
 				
-				@Override
-				public void onAnimationEnd(Animator animation) {
-					
-					mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-				}
-			});
+				mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+			}
+		});
+		
+		mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+		mProgressView.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
 			
-			mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-			mProgressView.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
 				
-				@Override
-				public void onAnimationEnd(Animator animation) {
-					
-					mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-				}
-			});
-		} else {
-			// The ViewPropertyAnimator APIs are not available, so simply show
-			// and hide the relevant UI components.
-			mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-		}
+				mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+			}
+		});
 	}
 	
 	@Override
@@ -372,7 +364,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		
 		super.onStart();
 		// Check if user is signed in (non-null) and update UI accordingly.
-		FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+		firebaseAuth.getCurrentUser();
 		//updateUI(currentUser);
 	}
 	
@@ -411,7 +403,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 				if (task.isSuccessful()) {
 					// Sign in success, update UI with the signed-in user's information
 					Log.d(TAG, "signInWithCredential:success");
-					FirebaseUser user = firebaseAuth.getCurrentUser();
+					firebaseAuth.getCurrentUser();
 					startActivity(new Intent(LoginActivity.this, MainActivity.class));
 					finish();
 					//updateUI(user);
