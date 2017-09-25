@@ -60,6 +60,7 @@ public class FeedTabFragment extends TabFragment {
 			recyclerView.setLayoutManager(layoutManager);
 			FeedRecyclerAdapter feedRecyclerAdapter = new FeedRecyclerAdapter(getContext(), new LinearLayoutManager(getContext()), mListener);
 			recyclerView.setAdapter(feedRecyclerAdapter);
+			layoutManager.setReverseLayout(true);
 			
 		}
 		recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {

@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -50,10 +48,13 @@ public class CreatePostActivity extends AppCompatActivity {
 	private EditText mMessageEditText;
 	private ImageButton mSendButton;
 	private String mUsername = "Askalany";
-	private String mPhotoUrl = "https://ubistatic19-a.akamaihd.net/resource/en-us/game/rainbow6/siege/r6-game-info-units_210380.jpg";
 	private FirebaseAuth mFirebaseAuth;
 	private FirebaseUser mFirebaseUser;
 	private SharedPreferences mSharedPreferences;
+	private StorageReference mStorageReference;
+	private String mPhotoUrl;
+	private String mKey;
+	private Uri mImageUrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,10 @@ public class CreatePostActivity extends AppCompatActivity {
 				mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(feedItem);
 				mMessageEditText.setText("");
 				//mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
+				if (mImageUrl != null) {
+					putImageInStorage(mStorageReference, mImageUrl, mKey);
+				}
+				onBackPressed();
 			}
 		});
 		
@@ -162,8 +167,10 @@ public class CreatePostActivity extends AppCompatActivity {
 								String key = databaseReference.getKey();
 								StorageReference storageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key)
 										.child(uri.getLastPathSegment());
+								mStorageReference = storageReference;
+								mImageUrl = uri;
+								mKey = key;
 								
-								putImageInStorage(storageReference, uri, key);
 							} else {
 								Log.w(TAG, "Unable to write message to database.", databaseError.toException());
 							}
@@ -190,35 +197,6 @@ public class CreatePostActivity extends AppCompatActivity {
 				Log.d(TAG, "Failed to send invitation.");
 			}
 		}
-	}
-	
-	public boolean onSupportNavigateUp() {
-		
-		Intent upIntent = getSupportParentActivityIntent();
-		if (upIntent != null) {
-			// Do not reload previous activity when home back button is pressed
-			upIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			if (supportShouldUpRecreateTask(upIntent)) {
-				TaskStackBuilder b = TaskStackBuilder.create(this);
-				onCreateSupportNavigateUpTaskStack(b);
-				onPrepareSupportNavigateUpTaskStack(b);
-				b.startActivities();
-				
-				try {
-					ActivityCompat.finishAffinity(this);
-				} catch (IllegalStateException e) {
-					// This can only happen on 4.1+, when we don't have a parent or a result set.
-					// In that case we should just finish().
-					finish();
-				}
-			} else {
-				// This activity is part of the application's task, so simply
-				// navigate up to the hierarchical parent activity.
-				supportNavigateUpTo(upIntent);
-			}
-			return true;
-		}
-		return false;
 	}
 	
 	private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {

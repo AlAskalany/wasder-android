@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.ChangeEventListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
@@ -35,6 +36,27 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 		super(FeedItem.class, R.layout.feed_item, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
 				"FeedRecyclerAdapter", context, mListener, feedLinearLayoutManager);
 		
+	}
+	
+	@Override
+	protected void onChildChanged(ChangeEventListener.EventType type, int index, int oldIndex) {
+		
+		switch (type) {
+			case ADDED:
+				notifyItemInserted(index);
+				break;
+			case CHANGED:
+				notifyItemChanged(index);
+				break;
+			case REMOVED:
+				notifyItemRemoved(index);
+				break;
+			case MOVED:
+				notifyItemMoved(oldIndex, index);
+				break;
+			default:
+				throw new IllegalStateException("Incomplete case statement");
+		}
 	}
 	
 	@Override

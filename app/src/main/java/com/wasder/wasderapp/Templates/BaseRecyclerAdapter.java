@@ -15,8 +15,7 @@ import com.wasder.wasderapp.Interfaces.WasderDataModel;
  * Created by ahmed on 9/10/2017.
  */
 
-public abstract class BaseRecyclerAdapter<M extends WasderDataModel, V extends RecyclerView.ViewHolder>
-		extends FirebaseRecyclerAdapter<M, V> {
+public abstract class BaseRecyclerAdapter<M extends WasderDataModel, V extends RecyclerView.ViewHolder> extends FirebaseRecyclerAdapter<M, V> {
 	
 	protected final Context mContext;
 	protected final OnFragmentInteractionListener<Object, String> mListener;
