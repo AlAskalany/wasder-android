@@ -85,8 +85,8 @@ public class CreatePostActivity extends AppCompatActivity {
 			bar.setDisplayHomeAsUpEnabled(true);
 		}
 		mMessageEditText = findViewById(R.id.post_editText);
-		mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
-				.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
+		mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH,
+				DEFAULT_MSG_LENGTH_LIMIT))});
 		mMessageEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -154,27 +154,21 @@ public class CreatePostActivity extends AppCompatActivity {
 					Log.d(TAG, "Uri: " + uri.toString());
 					FeedItem tempMessage = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
 							.toString(), mMessageEditText.getText().toString(), mPhotoUrl, LOADING_IMAGE_URL, mMessageEditText.getText().toString());
-					mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
-							.setValue(tempMessage, new DatabaseReference.CompletionListener() {
-								@Override
-								public void onComplete(DatabaseError databaseError,
-								                       DatabaseReference databaseReference) {
-									
-									if (databaseError == null) {
-										String key = databaseReference.getKey();
-										StorageReference storageReference =
-												FirebaseStorage.getInstance()
-														.getReference(mFirebaseUser.getUid())
-														.child(key)
-														.child(uri.getLastPathSegment());
-										
-										putImageInStorage(storageReference, uri, key);
-									} else {
-										Log.w(TAG, "Unable to write message to database.",
-												databaseError.toException());
-									}
-								}
-							});
+					mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(tempMessage, new DatabaseReference.CompletionListener() {
+						@Override
+						public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+							
+							if (databaseError == null) {
+								String key = databaseReference.getKey();
+								StorageReference storageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key)
+										.child(uri.getLastPathSegment());
+								
+								putImageInStorage(storageReference, uri, key);
+							} else {
+								Log.w(TAG, "Unable to write message to database.", databaseError.toException());
+							}
+						}
+					});
 				}
 			}
 		} else if (requestCode == REQUEST_INVITE) {
@@ -229,23 +223,19 @@ public class CreatePostActivity extends AppCompatActivity {
 	
 	private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
 		
-		storageReference.putFile(uri).addOnCompleteListener(CreatePostActivity.this,
-				new OnCompleteListener<UploadTask.TaskSnapshot>() {
-					@Override
-					public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-						
-						if (task.isSuccessful()) {
-							FeedItem feedItem =
-									new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
-											.toString(), mMessageEditText.getText().toString(), mPhotoUrl, task.getResult().getDownloadUrl()
-											.toString(), mMessageEditText.getText().toString());
-							mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
-									.setValue(feedItem);
-						} else {
-							Log.w(TAG, "Image upload task was not successful.",
-									task.getException());
-						}
-					}
-				});
+		storageReference.putFile(uri).addOnCompleteListener(CreatePostActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
+			@Override
+			public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+				
+				if (task.isSuccessful()) {
+					FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
+							.toString(), mMessageEditText.getText().toString(), mPhotoUrl, task.getResult().getDownloadUrl().toString(),
+							mMessageEditText.getText().toString());
+					mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key).setValue(feedItem);
+				} else {
+					Log.w(TAG, "Image upload task was not successful.", task.getException());
+				}
+			}
+		});
 	}
 }

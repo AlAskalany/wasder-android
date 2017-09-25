@@ -28,17 +28,12 @@ import com.wasder.wasderapp.util.Helpers;
  * Created by ahmed on 9/8/2017.
  */
 
-public class FeedRecyclerAdapter
-		extends BaseRecyclerAdapter<FeedItem, FeedRecyclerAdapter.FeedViewHolder> {
+public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyclerAdapter.FeedViewHolder> {
 	
 	public FeedRecyclerAdapter(Context context, LinearLayoutManager feedLinearLayoutManager, OnFragmentInteractionListener mListener) {
 		
-		super(FeedItem.class, R.layout.feed_item,
-				FeedViewHolder.class,
-				FirebaseDatabase.getInstance().getReference().child("feed"), "FeedRecyclerAdapter",
-				context,
-				mListener,
-				feedLinearLayoutManager);
+		super(FeedItem.class, R.layout.feed_item, FeedViewHolder.class, FirebaseDatabase.getInstance().getReference().child("feed"),
+				"FeedRecyclerAdapter", context, mListener, feedLinearLayoutManager);
 		
 	}
 	
@@ -71,7 +66,7 @@ public class FeedRecyclerAdapter
 							case R.id.action_feed_bookmark:
 								return true;
 							case R.id.action_feed_register:
-								FeedRegisterDialog feedRegisterDialog = new FeedRegisterDialog(view.getContext());
+								FeedRegisterDialog feedRegisterDialog = new FeedRegisterDialog(view.getContext(), feedItem);
 								feedRegisterDialog.show();
 								
 								return true;
@@ -122,8 +117,7 @@ public class FeedRecyclerAdapter
 		viewHolder.supplementaryTextView.setText(feedItem.getSupplementaryText());
 	}
 	
-	public static class FeedViewHolder
-			extends RecyclerView.ViewHolder {
+	public static class FeedViewHolder extends RecyclerView.ViewHolder {
 		
 		final View mview;
 		final TextView titleTextView;

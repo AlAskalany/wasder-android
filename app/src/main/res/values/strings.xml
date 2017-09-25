@@ -236,4 +236,10 @@
     <string name="action_feed_set_reminder">Set Reminder</string>
     <string name="dialog_confirm_button">Confirm</string>
     <string name="dialog_cancel_button">Cancel</string>
+    <string name="register_for_event">Register For Event</string>
+    <string name="host_cool_gamer">Host: Cool Gamer</string>
+    <string name="dota_gameplay">DOTA GAMEPLAY</string>
+    <string name="saturday_oct_25_2017">Saturday, Oct 25 2017</string>
+    <string name="_02_00_pm_05_30_pm">02:00 PM - 05:30 PM</string>
+    <string name="_250_wasderz">250 Wasderz</string>
 </resources>

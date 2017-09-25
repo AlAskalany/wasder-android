@@ -11,14 +11,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -29,7 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,197 +39,108 @@ import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
 import com.wasder.wasderapp.ui.profile.OwnProfileDetailsActivity;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.wasder.wasderapp.util.Helpers;
 
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-		OnFragmentInteractionListener<Object, String>, FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener
+		<Object, String>, FragmentManager.OnBackStackChangedListener, View.OnClickListener, ServiceConnection, FirebaseAuth.AuthStateListener {
 	
 	private static final String TAG = "MainActivity";
-	private final Map<Integer, NavigationFragment> fragmentMap = new HashMap<>();
-	private String mUserName = "User Name";
-	private String mEmail = "User E-mail";
+	private final SparseArrayCompat<NavigationFragment> mNavFragments = new SparseArrayCompat<>();
 	private IInAppBillingService mService;
-	private final ServiceConnection mServiceConn = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			
-			mService = IInAppBillingService.Stub.asInterface(service);
-		}
-		
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			
-			mService = null;
-		}
-	};
-	private HomeNavigationFragment homeFragment;
-	private LiveNavigationFragment liveFragment;
-	private SocialNavigationFragment socialFragment;
 	private FirebaseAuth mAuth;
 	private FirebaseAuth.AuthStateListener mAuthListener;
-	private Uri mPhotoUrl;
-	private String mUid;
-	private NavigationView navigationView;
-	private View headerView;
-	private TextView userNameTextView;
-	private TextView emailTextView;
 	private Toolbar mToolbar;
-	private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView
+	private ActionBar mActionBar;
+	private final BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigationListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 			
-			FragmentManager manager = getSupportFragmentManager();
-			FragmentTransaction ts = manager.beginTransaction();
-			Fragment currentFragment = manager.findFragmentById(R.id.framelayout_fragment_container);
-			NavigationFragment newFragment;
-			if (currentFragment != null) {
-				manager.saveFragmentInstanceState(currentFragment);
+			if (getCurrentNavigationFragment() != null) {
+				getSupportFragmentManager().saveFragmentInstanceState(getCurrentNavigationFragment());
 			}
-			newFragment = fragmentMap.get(item.getItemId());
-			if (newFragment != currentFragment) {
-				String title = newFragment.getmFragmentTitle();
-				mToolbar.setTitle(title);
-				ts.replace(R.id.framelayout_fragment_container, newFragment);
-				ts.addToBackStack(null);
-				ts.commit();
-				//Helpers.Fragments.switchToNavigationFragment(container, ts, newFragment);
+			NavigationFragment fragment = mNavFragments.get(item.getItemId());
+			if (fragment != getCurrentNavigationFragment()) {
+				mActionBar.setTitle(fragment.getmFragmentTitle());
+				getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
 				return true;
 			}
 			return false;
 		}
 	};
-	private BottomSheetBehavior sheetBehavior;
-	private CollapsingToolbarLayout collapsingToolbarLayout;
-	private BottomSheetDialog actionCenterBottomSheetDialog;
-	private BottomNavigationView bottomNavigationView;
+	
+	private Fragment getCurrentNavigationFragment() {
+		
+		return getSupportFragmentManager().findFragmentById(R.id.container);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		bindInAppBillingService();
+		showNetworkStatus();
+		setupFirebaseAuthAndUser();
+		CreateNavigationFragments();
+		mToolbar = findViewById(R.id.toolbar_main_activity);
+		setSupportActionBar(mToolbar);
+		mActionBar = getSupportActionBar();
+		if (mActionBar != null) {
+			mActionBar.setTitle(mNavFragments.get(R.id.navigation_home).getmFragmentTitle());
+		}
+		setActionBarToggleWithDrawerLayout(((DrawerLayout) findViewById(R.id.drawer_layout)));
+		((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(this);
+		((BottomNavigationView) findViewById(R.id.navigation)).setOnNavigationItemSelectedListener(mBottomNavigationListener);
+		findViewById(R.id.market_button).setOnClickListener(this);
+		findViewById(R.id.purse_button).setOnClickListener(this);
+		findViewById(R.id.calendar_button).setOnClickListener(this);
+		findViewById(R.id.studio_button).setOnClickListener(this);
+		findViewById(R.id.floatingActionButton).setOnClickListener(this);
+	}
+	
+	private void setupFirebaseAuthAndUser() {
+		
+		mAuth = FirebaseAuth.getInstance();
+		mAuthListener = this;
+	}
+	
+	private void bindInAppBillingService() {
+		
 		Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
 		serviceIntent.setPackage("com.android.vending");
-		bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
+	}
+	
+	private void showNetworkStatus() {
+		
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeInfo = connectivityManager.getActiveNetworkInfo();
-		//Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_main_linearlayout),
-		// "Connection", 2000);
-		//snackbar.show();
 		if (activeInfo != null && activeInfo.isConnected()) {
 			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
 		}
-		SetupFirebaseAuth();
-		CreateNavigationFragments();
-		fragmentMap.put(R.id.navigation_home, homeFragment);
-		fragmentMap.put(R.id.navigation_live, liveFragment);
-		fragmentMap.put(R.id.navigation_social, socialFragment);
-		FragmentManager manager = getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.framelayout_fragment_container, homeFragment, "Home");
-		transaction.commit();
-		
-		mToolbar = findViewById(R.id.toolbar_main_activity);
-		setSupportActionBar(mToolbar);
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			mToolbar.setTitle(homeFragment.getmFragmentTitle());
-		}
-		DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
-				.navigation_drawer_close);
-		toggle.syncState();
-		NavigationView navigationView = findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
-		bottomNavigationView = findViewById(R.id.navigation);
-		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
-		this.getBaseContext();
-		actionCenterBottomSheetDialog.setContentView(R.layout.bottom_sheet_action_center);
-		ImageButton marketImageButton = findViewById(R.id.feed_sheet_market_imageButton);
-		marketImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
-			}
-		});
-		ImageButton purseImageButton = findViewById(R.id.feed_sheet_purse_imageButton);
-		purseImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				startActivity(new Intent(MainActivity.this, PurseActivity.class));
-			}
-		});
-		ImageButton calendarImageButton = findViewById(R.id.feed_sheet_calendar_imageButton);
-		calendarImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				startActivity(new Intent(MainActivity.this, CalendarActivity.class));
-			}
-		});
-		ImageButton studioImageButton = findViewById(R.id.feed_sheet_studio_imageButton);
-		studioImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				startActivity(new Intent(MainActivity.this, StudioActivity.class));
-			}
-		});
-		
-		FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				startActivity(new Intent(MainActivity.this, CreatePostActivity.class));
-			}
-		});
 	}
 	
-	private void SetupFirebaseAuth() {
+	private void setActionBarToggleWithDrawerLayout(DrawerLayout drawerLayout) {
 		
-		mAuth = FirebaseAuth.getInstance();
-		mAuthListener = new FirebaseAuth.AuthStateListener() {
-			@Override
-			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-				
-				FirebaseUser user = mAuth.getCurrentUser();
-				if (user != null) {
-					Log.d(TAG, "Signed in");
-					mUserName = user.getDisplayName();
-					mEmail = user.getEmail();
-					mPhotoUrl = user.getPhotoUrl();
-					mUid = user.getUid();
-					navigationView = findViewById(R.id.nav_view);
-					headerView = navigationView.getHeaderView(0);
-					userNameTextView = headerView.findViewById(R.id.nav_header_user_name);
-					userNameTextView.setText(mUserName);
-					emailTextView = headerView.findViewById(R.id.nav_header_user_details);
-					emailTextView.setText(mEmail);
-				} else {
-					Log.d(TAG, "Signed out");
-					startActivity(new Intent(MainActivity.this, LoginActivity.class));
-				}
-			}
-		};
+		if (drawerLayout != null) {
+			ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string
+					.navigation_drawer_close);
+			toggle.syncState();
+		}
 	}
 	
 	private void CreateNavigationFragments() {
 		
-		homeFragment = HomeNavigationFragment.newInstance();
-		liveFragment = LiveNavigationFragment.newInstance();
-		socialFragment = SocialNavigationFragment.newInstance();
+		mNavFragments.put(R.id.navigation_home, HomeNavigationFragment.newInstance());
+		mNavFragments.put(R.id.navigation_live, LiveNavigationFragment.newInstance());
+		mNavFragments.put(R.id.navigation_social, SocialNavigationFragment.newInstance());
+		getSupportFragmentManager().beginTransaction().add(R.id.container, mNavFragments.get(R.id.navigation_home), "Home").commit();
 	}
 	
 	@Override
@@ -256,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		super.onDestroy();
 		if (mService != null) {
-			unbindService(mServiceConn);
+			unbindService(this);
 		}
 	}
 	
@@ -276,26 +184,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 		
-		int id = item.getItemId();
-		switch (id) {
+		Intent intent = null;
+		Context context = MainActivity.this;
+		switch (item.getItemId()) {
 			case R.id.nav_profile:
-				startActivity(new Intent(MainActivity.this, OwnProfileDetailsActivity.class));
+				intent = new Intent(context, OwnProfileDetailsActivity.class);
 				break;
 			case R.id.nav_friends:
-				startActivity(new Intent(MainActivity.this, FriendsActivity.class));
+				intent = new Intent(context, FriendsActivity.class);
 				break;
 			case R.id.nav_followers:
-				startActivity(new Intent(MainActivity.this, FollowersActivity.class));
+				intent = new Intent(context, FollowersActivity.class);
 				break;
 			case R.id.nav_achievements:
-				startActivity(new Intent(MainActivity.this, AchievementsActivity.class));
+				intent = new Intent(context, AchievementsActivity.class);
 				break;
 			case R.id.nav_settings:
-				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+				intent = new Intent(context, SettingsActivity.class);
+				break;
+			default:
 				break;
 		}
-		DrawerLayout drawer = findViewById(R.id.drawer_layout);
-		drawer.closeDrawer(GravityCompat.START);
+		if (intent != null) {
+			startActivity(intent);
+		}
+		this.<DrawerLayout>findViewById(R.id.drawer_layout).closeDrawer(GravityCompat.START);
 		return true;
 	}
 	
@@ -324,7 +237,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		//noinspection SimplifiableIfStatement
 		switch (id) {
 			case R.id.action_open_action_center:
-				actionCenterBottomSheetDialog.show();
+				BottomSheetDialog sheet = new BottomSheetDialog(this);
+				sheet.setContentView(R.layout.bottom_sheet_action_center);
+				sheet.show();
 				break;
 			case R.id.action_settings:
 				startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
@@ -339,10 +254,82 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onFragmentInteractionListener(String tag, Object data, String extra) {
 		// TODO hide and show bottom navigation bar upon scrolling
+		//noinspection StatementWithEmptyBody,StringEquality
 		if (tag == "ScrollDown") {
-			//bottomNavigationView.setVisibility(BottomNavigationView.GONE);
-		} else if (tag == "ScrollUp") {
-			//bottomNavigationView.setVisibility(BottomNavigationView.VISIBLE);
+			//bottomNavigation.setVisibility(BottomNavigationView.GONE);
+		} else //noinspection StatementWithEmptyBody,StringEquality
+			if (tag == "ScrollUp") {
+				//bottomNavigation.setVisibility(BottomNavigationView.VISIBLE);
+			}
+	}
+	
+	@Override
+	public void onClick(View view) {
+		
+		switch (view.getId()) {
+			case R.id.purse_button:
+				startActivity(new Intent(MainActivity.this, PurseActivity.class));
+				break;
+			case R.id.calendar_button:
+				startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+				break;
+			case R.id.studio_button:
+				startActivity(new Intent(MainActivity.this, StudioActivity.class));
+				break;
+			case R.id.market_button:
+				startActivity(new Intent(MainActivity.this, MarketItemListActivity.class));
+				break;
+			case R.id.floatingActionButton:
+				startActivity(new Intent(MainActivity.this, CreatePostActivity.class));
+				break;
+			default:
+				break;
 		}
+	}
+	
+	@Override
+	public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+		
+		mService = IInAppBillingService.Stub.asInterface(iBinder);
+	}
+	
+	@Override
+	public void onServiceDisconnected(ComponentName componentName) {
+		
+		mService = null;
+	}
+	
+	// Firebase authentication state listener
+	@Override
+	public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+		
+		FirebaseUser user = mAuth.getCurrentUser();
+		NavigationView navigationView = findViewById(R.id.nav_view);
+		if (user != null && navigationView != null) {
+			Log.d(TAG, "Signed in");
+			user.getUid();
+			setNavigationDrawerImage(navigationView, user.getPhotoUrl());
+			setNavigationDrawerName(navigationView, user.getDisplayName());
+			setNavigationDrawerDetails(navigationView, user.getEmail());
+		} else {
+			Log.d(TAG, "Signed out");
+			startActivity(new Intent(MainActivity.this, LoginActivity.class));
+		}
+	}
+	
+	private void setNavigationDrawerImage(NavigationView navigationView, Uri photoUrl) {
+		
+		ImageView imageView = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
+		Helpers.Firebase.DownloadUrlImage(photoUrl.toString(), imageView, true, R.drawable.wasder_logo);
+	}
+	
+	private void setNavigationDrawerName(NavigationView navigationView, String userName) {
+		
+		((TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_user_name)).setText(userName);
+	}
+	
+	private void setNavigationDrawerDetails(NavigationView navigationView, String details) {
+		
+		((TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_user_details)).setText(details);
 	}
 }

@@ -79,7 +79,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/feed_sheet_market_imageButton"
+                    android:id="@+id/market_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -109,7 +109,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/feed_sheet_purse_imageButton"
+                    android:id="@+id/purse_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -138,7 +138,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/feed_sheet_calendar_imageButton"
+                    android:id="@+id/calendar_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -177,7 +177,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/feed_sheet_studio_imageButton"
+                    android:id="@+id/studio_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -1,56 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layout_gravity="center">
+    android:theme="@style/Base.Theme.AppCompat.Dialog"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:drawable/screen_background_dark_transparent"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/dialog_image_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@android:color/transparent"
-            android:contentDescription="@string/image_description"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_round"/>
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Register For Event"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="DOTA GAMEPLAY"
+                android:text="@string/dota_gameplay"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="30sp"
@@ -62,100 +38,81 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:text="Host: Cool Gamer"
+                android:text="@string/host_cool_gamer"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintLeft_toRightOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6"
-                />
+                app:layout_constraintTop_toTopOf="@+id/textView6"/>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/saturday_oct_25_2017"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintLeft_toLeftOf="@+id/imageButton2"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton2"/>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/_02_00_pm_05_30_pm"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintLeft_toLeftOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/_250_wasderz"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+
         </LinearLayout>
 
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Saturday, Oct 25 2017"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintLeft_toLeftOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        android:text="02:00 PM - 05:30 PM"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintLeft_toLeftOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="7dp"
-        android:text="250 Wasderz"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/dialog_feed_register_confirm_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="7dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/md_green_800"
-            android:text="@string/dialog_confirm_button"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintLeft_toRightOf="@+id/textView11"
-            app:layout_constraintRight_toRightOf="parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
 
-        <Button
-            android:id="@+id/dialog_feed_register_cancel_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="7dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/md_red_800"
-            android:text="@string/dialog_cancel_button"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintLeft_toRightOf="@+id/textView11"
-            app:layout_constraintRight_toRightOf="parent"/>
+            <Button
+                android:id="@+id/dialog_feed_register_confirm_button"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/md_green_800"
+                android:text="@string/dialog_confirm_button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textView11"
+                app:layout_constraintLeft_toRightOf="@+id/textView11"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <Button
+                android:id="@+id/dialog_feed_register_cancel_button"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/md_red_700"
+                android:text="@string/dialog_cancel_button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textView11"
+                app:layout_constraintLeft_toRightOf="@+id/textView11"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
