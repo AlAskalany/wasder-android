@@ -1,9 +1,10 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.util.Helpers;
 
 public class DisplayImageActivity extends AppCompatActivity {

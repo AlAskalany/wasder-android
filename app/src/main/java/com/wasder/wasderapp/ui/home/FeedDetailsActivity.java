@@ -2,8 +2,8 @@ package com.wasder.wasderapp.ui.home;
 
 import android.os.Bundle;
 
-import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 
 public class FeedDetailsActivity<FeedItem>
 		extends BaseDetailsActivity {

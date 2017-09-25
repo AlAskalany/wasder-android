@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.wasder.wasderapp.DisplayImageActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.dialogs.FeedRegisterDialog;
 import com.wasder.wasderapp.models.FeedItem;
+import com.wasder.wasderapp.ui.DisplayImageActivity;
 import com.wasder.wasderapp.ui.home.FeedDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 

@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,8 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.WasderPreferences;
 import com.wasder.wasderapp.models.FeedItem;
-import com.wasder.wasderapp.ui.LoginActivity;
 
 public class CreatePostActivity extends AppCompatActivity {
 	

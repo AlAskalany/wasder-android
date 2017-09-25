@@ -10,7 +10,7 @@
               android:divider="?android:attr/dividerHorizontal"
               android:orientation="horizontal"
               android:showDividers="middle"
-              tools:context="com.wasder.wasderapp.MarketItemListActivity">
+              tools:context="com.wasder.wasderapp.ui.MarketItemListActivity">
 
     <!--
     This layout is a two-pane layout for the MarketItems
@@ -27,7 +27,7 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
                                             app:layoutManager="LinearLayoutManager"
-                                            tools:context="com.wasder.wasderapp.MarketItemListActivity"
+                                            tools:context="com.wasder.wasderapp.ui.MarketItemListActivity"
                                             tools:listitem="@layout/marketitem_list_content"/>
 
     <FrameLayout

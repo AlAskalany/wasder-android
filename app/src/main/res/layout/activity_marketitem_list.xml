@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"
-            tools:context="com.wasder.wasderapp.MarketItemListActivity"
+            tools:context="com.wasder.wasderapp.ui.MarketItemListActivity"
             tools:listitem="@layout/marketitem_list_content">
 
 

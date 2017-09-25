@@ -145,7 +145,7 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".MarketItemListActivity"
+            android:name=".ui.MarketItemListActivity"
             android:label="@string/title_marketitem_list"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
@@ -153,15 +153,15 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".MarketItemDetailActivity"
+            android:name=".ui.MarketItemDetailActivity"
             android:label="@string/title_marketitem_detail"
-            android:parentActivityName=".MarketItemListActivity">
+            android:parentActivityName=".ui.MarketItemListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.wasder.wasderapp.MarketItemListActivity"/>
+                android:value="com.wasder.wasderapp.ui.MarketItemListActivity"/>
         </activity>
         <activity
-            android:name=".AchievementsActivity"
+            android:name=".ui.AchievementsActivity"
             android:label="@string/title_activity_achievements"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
@@ -169,7 +169,7 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".FriendsActivity"
+            android:name=".ui.FriendsActivity"
             android:label="@string/title_activity_friends"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
@@ -177,36 +177,38 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".FollowersActivity"
+            android:name=".ui.FollowersActivity"
             android:label="@string/title_activity_followers"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
-        <activity android:name=".PurseActivity">
+        <activity android:name=".ui.PurseActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".CalendarActivity"
+            android:name=".ui.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
-        <activity android:name=".StudioActivity">
+        <activity android:name=".ui.StudioActivity">
         </activity>
         <activity
-            android:name=".CreatePostActivity"
+            android:name=".ui.CreatePostActivity"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
-        <activity android:name=".DisplayImageActivity">
+        <activity android:name=".ui.DisplayImageActivity">
+        </activity>
+        <activity android:name=".ui.EventActivity">
         </activity>
     </application>
 

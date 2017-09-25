@@ -5,7 +5,7 @@
     android:id="@+id/activity_own_profile_coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudioActivity">
+    tools:context=".ui.StudioActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

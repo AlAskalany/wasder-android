@@ -1,9 +1,11 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.wasder.wasderapp.R;
 
 public class FriendsActivity extends AppCompatActivity {
 

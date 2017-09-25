@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 import com.wasder.wasderapp.models.EventItem;
 
 public class MentionDetailsActivity
@@ -18,8 +18,8 @@ public class MentionDetailsActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
-        Toolbar toolbar = findViewById(R.id.event_toolbar);
+	    setContentView(R.layout.activity_mention_details);
+	    Toolbar toolbar = findViewById(R.id.event_toolbar);
         toolbar.setTitle("Mention");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

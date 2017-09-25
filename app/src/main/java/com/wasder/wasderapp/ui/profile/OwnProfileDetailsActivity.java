@@ -13,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

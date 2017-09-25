@@ -16,8 +16,8 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 
 import java.io.InputStream;
 

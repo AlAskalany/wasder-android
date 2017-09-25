@@ -6,8 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wasder.wasderapp.BaseDetailsActivity;
 import com.wasder.wasderapp.R;
+import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 import com.wasder.wasderapp.models.TwitchLiveItem;
 import com.wasder.wasderapp.util.Helpers;
 

@@ -1,7 +1,9 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.wasder.wasderapp.R;
 
 public class StudioActivity extends AppCompatActivity {
 	

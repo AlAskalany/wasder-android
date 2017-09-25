@@ -1,4 +1,4 @@
-package com.wasder.wasderapp;
+package com.wasder.wasderapp.Templates;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wasder.wasderapp.Interfaces.WasderDataModel;
+import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.util.Helpers;
 
 public class BaseDetailsActivity<T extends WasderDataModel>
