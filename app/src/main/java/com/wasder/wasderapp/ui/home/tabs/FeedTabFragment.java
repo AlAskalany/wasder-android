@@ -20,6 +20,7 @@ import com.wasder.wasderapp.Templates.TabFragment;
 
 public class FeedTabFragment extends TabFragment {
 	
+	private static final String TAG = "FeedTabFragment";
 	private int columnCount;
 	private String title = "Feed";
 	private OnFragmentInteractionListener mListener;
@@ -61,6 +62,29 @@ public class FeedTabFragment extends TabFragment {
 			recyclerView.setAdapter(feedRecyclerAdapter);
 			
 		}
+		recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+			/**
+			 * Callback method to be invoked when the RecyclerView has been scrolled. This will be
+			 * called after the scroll has completed.
+			 * <p>
+			 * This callback will also be called if visible item range changes after a layout
+			 * calculation. In that case, dx and dy will be 0.
+			 *
+			 * @param recyclerView The RecyclerView which scrolled.
+			 * @param dx           The amount of horizontal scroll.
+			 * @param dy           The amount of vertical scroll.
+			 */
+			@Override
+			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+				
+				super.onScrolled(recyclerView, dx, dy);
+				if (dy > 0) {
+					mListener.onFragmentInteractionListener("ScrollDown", null, null);
+				} else if (dy < 0) {
+					mListener.onFragmentInteractionListener("ScrollUp", null, null);
+				}
+			}
+		});
 		return view;
 	}
 	

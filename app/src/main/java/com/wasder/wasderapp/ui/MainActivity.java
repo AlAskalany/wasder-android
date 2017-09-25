@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private BottomSheetBehavior sheetBehavior;
 	private CollapsingToolbarLayout collapsingToolbarLayout;
 	private BottomSheetDialog actionCenterBottomSheetDialog;
+	private BottomNavigationView bottomNavigationView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		toggle.syncState();
 		NavigationView navigationView = findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+		bottomNavigationView = findViewById(R.id.navigation);
 		bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 		actionCenterBottomSheetDialog = new BottomSheetDialog(this);
 		this.getBaseContext();
@@ -345,6 +346,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public void onFragmentInteractionListener(String tag, Object data, String extra) {
-		
+		// TODO hide and show bottom navigation bar upon scrolling
+		if (tag == "ScrollDown") {
+			//bottomNavigationView.setVisibility(BottomNavigationView.GONE);
+		} else if (tag == "ScrollUp") {
+			//bottomNavigationView.setVisibility(BottomNavigationView.VISIBLE);
+		}
 	}
 }
