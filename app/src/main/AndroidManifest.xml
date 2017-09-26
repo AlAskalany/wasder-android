@@ -111,7 +111,7 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.Social.MentionDetailsActivity"
+            android:name=".ui$Social.MentionDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -120,13 +120,13 @@
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
         <activity
-            android:name=".ui.Social.GroupMentionDetailsActivity"
+            android:name=".ui$Social.GroupMentionDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.Social.PMDetailsActivity"
+            android:name=".ui$Social.PMDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -147,7 +147,8 @@
         <activity
             android:name=".ui.MarketItemListActivity"
             android:label="@string/title_marketitem_list"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
@@ -155,7 +156,8 @@
         <activity
             android:name=".ui.MarketItemDetailActivity"
             android:label="@string/title_marketitem_detail"
-            android:parentActivityName=".ui.MarketItemListActivity">
+            android:parentActivityName=".ui.MarketItemListActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MarketItemListActivity"/>
@@ -163,7 +165,8 @@
         <activity
             android:name=".ui.AchievementsActivity"
             android:label="@string/title_activity_achievements"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
@@ -171,7 +174,8 @@
         <activity
             android:name=".ui.FriendsActivity"
             android:label="@string/title_activity_friends"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
@@ -179,7 +183,8 @@
         <activity
             android:name=".ui.FollowersActivity"
             android:label="@string/title_activity_followers"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
@@ -192,7 +197,8 @@
         <activity
             android:name=".ui.CalendarActivity"
             android:label="@string/title_activity_calendar"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
@@ -201,14 +207,27 @@
         </activity>
         <activity
             android:name=".ui.CreatePostActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
-        <activity android:name=".ui.DisplayImageActivity">
+        <activity
+            android:name=".ui.DisplayImageActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
-        <activity android:name=".ui.EventActivity">
+        <activity
+            android:name=".ui.EventActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wasder.wasderapp.ui.MainActivity"/>
         </activity>
     </application>
 
