@@ -21,6 +21,7 @@ import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.dialogs.FeedRegisterDialog;
 import com.wasder.wasderapp.models.FeedItem;
 import com.wasder.wasderapp.ui.DisplayImageActivity;
+import com.wasder.wasderapp.ui.OtherProfileDetailsActivity;
 import com.wasder.wasderapp.ui.home.FeedDetailsActivity;
 import com.wasder.wasderapp.util.Helpers;
 
@@ -127,6 +128,16 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 				
 				Intent intent = new Intent(view.getContext(), FeedDetailsActivity.class);
 				intent.putExtra("data_item", feedItem);
+				view.getContext().startActivity(intent);
+			}
+		});
+		viewHolder.photoImageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				
+				Intent intent = new Intent(view.getContext(), OtherProfileDetailsActivity.class);
+				intent.putExtra("data_item", feedItem.getTitle());
+				intent.putExtra("photo_item", feedItem.getPhotoUrl());
 				view.getContext().startActivity(intent);
 			}
 		});

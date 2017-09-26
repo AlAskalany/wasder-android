@@ -131,8 +131,9 @@ public class CreatePostActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				
-				FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText().toString
-						(), mMessageEditText.getText().toString(), mPhotoUrl, null, mMessageEditText.getText().toString());
+				FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mFirebaseUser.getDisplayName()
+						/*mMessageEditText.getText().toString
+						()*/, mMessageEditText.getText().toString(), mPhotoUrl, null, mMessageEditText.getText().toString());
 				mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(feedItem);
 				mMessageEditText.setText("");
 				//mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
