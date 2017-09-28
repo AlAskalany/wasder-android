@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/fragment_profile_feed_frameLayout"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+             tools:context="com.wasder.wasderapp.ui.profile.ProfileFeedFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/activity_own_profile_feed_recyclerView"
+        android:name="com.wasder.wasderapp.FeedTabFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/feed_item"/>
+</FrameLayout>

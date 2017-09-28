@@ -1,38 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.wasder.example.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    android:background="?android:attr/colorBackground">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        style="@style/AppBarLayoutStyle"
+        app:expanded="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main_collapsing_toolbar"
+            style="@style/CollapsingToolbarLayoutWithTabsStyle"
+            app:toolbarId="@+id/toolbar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_main_activity"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:minHeight="56dp"
+                app:title="Wasder"
+                app:titleTextColor="@android:color/white"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout_main_activity"
+            style="@style/TabLayoutStyle">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Center"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"/>
+        </android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:clickable="true"
+        android:overScrollMode="always"
+        app:behavior_peekHeight="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <FrameLayout
+        android:id="@+id/frameLayout_bottom_sheet"
+        style="@style/Theme.Design.BottomSheetDialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation"/>
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.Design.BottomSheetDialog"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
 
-</LinearLayout>
+        <include
+            layout="@layout/bottom_sheet_action_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="top"
+            android:layout_marginBottom="25dp"
+            android:background="?attr/colorPrimary"
+            app:elevation="16dp"
+            app:itemIconTint="@android:drawable/screen_background_light_transparent"
+            app:itemTextColor="@android:color/secondary_text_dark"
+            app:menu="@menu/navigation">
+
+        </android.support.design.widget.BottomNavigationView>
+
+    </FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:scaleType="center"
+        android:tint="@color/md_yellow_500"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="4dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_circle_black_24dp"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

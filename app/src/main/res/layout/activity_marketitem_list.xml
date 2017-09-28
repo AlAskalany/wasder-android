@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout_marketitem_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_market_item_list"
+        style="@style/AppBarLayoutStyle">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            style="@style/CollapsingToolbarLayoutStyle"
+            android:layout_height="130dp"
+            app:toolbarId="@+id/toolbar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_market_item_list"
+                style="@style/ToolbarLayoutStyle">
+            </android.support.v7.widget.Toolbar>
+
+            <SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_gravity="top|bottom|right|end"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/marketitem_list"
+            android:name="com.wasder.wasderapp.MarketItemListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.wasder.wasderapp.ui.MarketItemListActivity"
+            tools:listitem="@layout/marketitem_list_content">
+
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
