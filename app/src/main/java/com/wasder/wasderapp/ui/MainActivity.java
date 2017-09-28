@@ -26,7 +26,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +38,13 @@ import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
 import com.wasder.wasderapp.ui.profile.OwnProfileDetailsActivity;
-import com.wasder.wasderapp.util.Helpers;
 
 /**
  * The type Main activity.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener
-		<Object, String>, FragmentManager.OnBackStackChangedListener, View.OnClickListener, ServiceConnection, FirebaseAuth.AuthStateListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+		OnFragmentInteractionListener<Object, String>, FragmentManager.OnBackStackChangedListener, View.OnClickListener, ServiceConnection,
+		FirebaseAuth.AuthStateListener {
 	
 	private static final String TAG = "MainActivity";
 	private final SparseArrayCompat<NavigationFragment> mNavFragments = new SparseArrayCompat<>();
@@ -308,9 +307,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		if (user != null && navigationView != null) {
 			Log.d(TAG, "Signed in");
 			user.getUid();
-			setNavigationDrawerImage(navigationView, user.getPhotoUrl());
-			setNavigationDrawerName(navigationView, user.getDisplayName());
-			setNavigationDrawerDetails(navigationView, user.getEmail());
+			//setNavigationDrawerImage(navigationView, user.getPhotoUrl());
+			//setNavigationDrawerName(navigationView, user.getDisplayName());
+			//setNavigationDrawerDetails(navigationView, user.getEmail());
 		} else {
 			Log.d(TAG, "Signed out");
 			startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -319,8 +318,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	
 	private void setNavigationDrawerImage(NavigationView navigationView, Uri photoUrl) {
 		
-		ImageView imageView = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
-		Helpers.Firebase.DownloadUrlImage(photoUrl.toString(), imageView, true, R.drawable.wasder_logo);
+		//ImageView imageView = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
+		//Helpers.Firebase.DownloadUrlImage(photoUrl.toString(), imageView, true, R.drawable.wasder_logo);
 	}
 	
 	private void setNavigationDrawerName(NavigationView navigationView, String userName) {

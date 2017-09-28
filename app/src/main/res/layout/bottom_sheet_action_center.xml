@@ -188,7 +188,7 @@
                     app:srcCompat="@drawable/ic_ondemand_video_black_24dp"/>
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textView_studio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

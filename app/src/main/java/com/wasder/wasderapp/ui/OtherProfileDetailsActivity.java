@@ -21,8 +21,8 @@ import java.io.InputStream;
 
 public class OtherProfileDetailsActivity extends BaseDetailsActivity {
 	
-	private final String ARG_DATA_ITEM = "data_item";
-	private final String ARG_PHOTO_ITEM = "photo_item";
+	private static final String ARG_DATA_ITEM = "data_item";
+	private static final String ARG_PHOTO_ITEM = "photo_item";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,9 @@ public class OtherProfileDetailsActivity extends BaseDetailsActivity {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
-		actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+		if (actionBar != null) {
+			actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+		}
 		/*FirebaseAuth mAuth = FirebaseAuth.getInstance();
 		FirebaseUser user = mAuth.getCurrentUser();
 		findViewById(R.id.app_bar_image);
@@ -90,10 +92,10 @@ public class OtherProfileDetailsActivity extends BaseDetailsActivity {
 		@Override
 		protected Bitmap doInBackground(String... urls) {
 			
-			String urldisplay = urls[0];
+			String urlDisplay = urls[0];
 			Bitmap mIcon11 = null;
 			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
+				InputStream in = new java.net.URL(urlDisplay).openStream();
 				mIcon11 = BitmapFactory.decodeStream(in);
 			} catch (Exception e) {
 				Log.e("Error", e.getMessage());
