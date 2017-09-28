@@ -11,7 +11,7 @@ android {
         debug {
             keyAlias 'wasder-debug'
             keyPassword 'Nader-2004'
-            storeFile file('/wasder-keystore.jks')
+            storeFile file('/app/wasder-keystore.jks')
             storePassword 'Nader-2004'
         }
     }
