@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		findViewById(R.id.calendar_button).setOnClickListener(this);
 		findViewById(R.id.studio_button).setOnClickListener(this);
 		findViewById(R.id.floatingActionButton).setOnClickListener(this);
+		
+		
 	}
 	
 	private void setupFirebaseAuthAndUser() {
