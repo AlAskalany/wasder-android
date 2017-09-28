@@ -1,1 +1,1 @@
-include ':app', ':wasderlibrary'
+include ':app', ':wasderlibrary', ':backend'
