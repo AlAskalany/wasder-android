@@ -5,13 +5,13 @@ android {
         release {
             keyAlias 'wasder-release'
             keyPassword 'Nader-2004'
-            storeFile file('../wasder-keystore.jks')
+            storeFile file('${projectDir}/app/wasder-keystore.jks')
             storePassword 'Nader-2004'
         }
         debug {
             keyAlias 'wasder-debug'
             keyPassword 'Nader-2004'
-            storeFile file('../wasder-keystore.jks')
+            storeFile file('${projectDir}/app/wasder-keystore.jks')
             storePassword 'Nader-2004'
         }
     }
