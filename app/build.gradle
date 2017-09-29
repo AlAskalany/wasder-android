@@ -43,8 +43,8 @@ android {
     productFlavors {
     }
     lintOptions {
-          abortOnError false
-      }
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -72,6 +72,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.github.bumptech.glide:glide:4.1.1'
     compile 'org.jetbrains:annotations-java5:15.0'
+    androidTestCompile('com.android.support.test.uiautomator:uiautomator-v18:2.1.1')
 }
 
 
