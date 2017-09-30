@@ -32,25 +32,26 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.WasderPreferences;
 import com.wasder.wasderapp.models.FeedItem;
 
+import org.jetbrains.annotations.NotNull;
+
 public class CreatePostActivity extends AppCompatActivity {
 	
-	public static final String MESSAGES_CHILD = "feed";
-	public static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
+	private static final String MESSAGES_CHILD = "feed";
+	private static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
+	@SuppressWarnings("unused")
 	public static final String ANONYMOUS = "anonymous";
 	private static final int REQUEST_INVITE = 1;
 	private static final int REQUEST_IMAGE = 2;
+	@SuppressWarnings("unused")
 	private static final String MESSAGE_SENT_EVENT = "message_sent";
+	@SuppressWarnings("unused")
 	private static final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
 	private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
 	private static final String TAG = "CreatePostActivity";
 	private DatabaseReference mFirebaseDatabaseReference;
-	private ImageButton mattachImageButton;
 	private EditText mMessageEditText;
 	private ImageButton mSendButton;
-	private String mUsername = "Askalany";
-	private FirebaseAuth mFirebaseAuth;
 	private FirebaseUser mFirebaseUser;
-	private SharedPreferences mSharedPreferences;
 	private StorageReference mStorageReference;
 	private String mPhotoUrl;
 	private String mKey;
@@ -61,9 +62,9 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		// Initialize Firebase Auth
-		mFirebaseAuth = FirebaseAuth.getInstance();
+		FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 		mFirebaseUser = mFirebaseAuth.getCurrentUser();
 		
 		if (mFirebaseUser == null) {
@@ -72,7 +73,7 @@ public class CreatePostActivity extends AppCompatActivity {
 			finish();
 			return;
 		} else {
-			mUsername = mFirebaseUser.getDisplayName();
+			String mUsername = mFirebaseUser.getDisplayName();
 			if (mFirebaseUser.getPhotoUrl() != null) {
 				mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
 			}
@@ -111,12 +112,12 @@ public class CreatePostActivity extends AppCompatActivity {
 		});
 		
 		
-		mattachImageButton = findViewById(R.id.add_image_imageButton);
+		ImageButton mattachImageButton = findViewById(R.id.add_image_imageButton);
 		mattachImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				
-				Intent intent = null;
+				Intent intent;
 				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
 					intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 					intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -166,9 +167,8 @@ public class CreatePostActivity extends AppCompatActivity {
 							
 							if (databaseError == null) {
 								String key = databaseReference.getKey();
-								StorageReference storageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key)
+								mStorageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key)
 										.child(uri.getLastPathSegment());
-								mStorageReference = storageReference;
 								mImageUrl = uri;
 								mKey = key;
 								
@@ -200,16 +200,23 @@ public class CreatePostActivity extends AppCompatActivity {
 		}
 	}
 	
-	private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
+	private void putImageInStorage(@NotNull StorageReference storageReference, @NonNull Uri uri, @NotNull final String key) {
 		
 		storageReference.putFile(uri).addOnCompleteListener(CreatePostActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
 			@Override
 			public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 				
 				if (task.isSuccessful()) {
-					FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
-							.toString(), mMessageEditText.getText().toString(), mPhotoUrl, task.getResult().getDownloadUrl().toString(),
-							mMessageEditText.getText().toString());
+					Uri downloadUrl = task.getResult().getDownloadUrl();
+					String imageUrl = null;
+					if (downloadUrl != null) {
+						imageUrl = downloadUrl.toString();
+					}
+					Editable text = mMessageEditText.getText();
+					String supplementaryText = text.toString();
+					String uid = mFirebaseUser.getUid();
+					FeedItem feedItem = new FeedItem(uid, supplementaryText, supplementaryText, supplementaryText, mPhotoUrl, imageUrl,
+							supplementaryText);
 					mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key).setValue(feedItem);
 				} else {
 					Log.w(TAG, "Image upload task was not successful.", task.getException());

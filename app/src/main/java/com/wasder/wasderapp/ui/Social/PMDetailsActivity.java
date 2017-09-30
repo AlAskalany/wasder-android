@@ -43,7 +43,9 @@ public class PMDetailsActivity
 				imageUrl = recommendedEventItem.getImageUrl();
 			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(recommendedEventItem.getSupplementaryText());
+			if (recommendedEventItem != null) {
+				textView.setText(recommendedEventItem.getSupplementaryText());
+			}
 		}
 	}
 }

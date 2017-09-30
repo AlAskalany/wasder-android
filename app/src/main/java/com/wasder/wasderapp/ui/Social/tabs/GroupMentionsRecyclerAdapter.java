@@ -87,19 +87,25 @@ public class GroupMentionsRecyclerAdapter
 	public static class FriendsEventViewHolder
 			extends RecyclerView.ViewHolder {
 		
+		@SuppressWarnings("unused")
 		final View mview;
 		final TextView titleTextView;
 		final TextView subheadTextView;
 		final ImageButton photoImageButton;
 		final ImageView feedImageView;
 		final TextView supplementaryTextView;
+		@SuppressWarnings("unused")
 		final ImageButton commentImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton likeImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton bookmarkImageButton;
 		final ImageButton shareImageButton;
 		final ImageButton detailsImageButton;
+		@SuppressWarnings("unused")
 		FriendEventItem friendEventItem;
 		
+		@SuppressWarnings("unused")
 		public FriendsEventViewHolder(View itemView) {
 			
 			super(itemView);

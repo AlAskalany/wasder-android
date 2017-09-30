@@ -26,6 +26,7 @@ public class PurseActivity extends AppCompatActivity {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
+		//noinspection unchecked
 		new ServletPostAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 	}
 }

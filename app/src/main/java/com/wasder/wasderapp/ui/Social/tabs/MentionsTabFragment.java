@@ -32,8 +32,7 @@ public class MentionsTabFragment extends TabFragment {
 	
 	public static MentionsTabFragment newInstance() {
 		
-		MentionsTabFragment fragment = new MentionsTabFragment();
-		return fragment;
+		return new MentionsTabFragment();
 	}
 	
 	@Override
@@ -90,6 +89,7 @@ public class MentionsTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings("EmptyMethod")
 	public void setTag(String tag) {
 		
 	}

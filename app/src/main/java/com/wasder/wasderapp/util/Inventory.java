@@ -26,8 +26,8 @@ import java.util.Map;
  */
 public class Inventory {
 	
-	Map<String, SkuDetails> mSkuMap = new HashMap<String, SkuDetails>();
-	Map<String, Purchase> mPurchaseMap = new HashMap<String, Purchase>();
+	Map<String, SkuDetails> mSkuMap = new HashMap<>();
+	Map<String, Purchase> mPurchaseMap = new HashMap<>();
 	
 	Inventory() {
 		
@@ -84,7 +84,7 @@ public class Inventory {
 	 */
 	List<String> getAllOwnedSkus() {
 		
-		return new ArrayList<String>(mPurchaseMap.keySet());
+		return new ArrayList<>(mPurchaseMap.keySet());
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class Inventory {
 	 */
 	List<String> getAllOwnedSkus(String itemType) {
 		
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		for (Purchase p : mPurchaseMap.values()) {
 			if (p.getItemType().equals(itemType))
 				result.add(p.getSku());
@@ -105,7 +105,7 @@ public class Inventory {
 	 */
 	List<Purchase> getAllPurchases() {
 		
-		return new ArrayList<Purchase>(mPurchaseMap.values());
+		return new ArrayList<>(mPurchaseMap.values());
 	}
 	
 	void addSkuDetails(SkuDetails d) {

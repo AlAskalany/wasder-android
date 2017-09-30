@@ -24,8 +24,9 @@ public class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void,
 	
 	private Context context;
 	
+	@SafeVarargs
 	@Override
-	protected String doInBackground(Pair<Context, String>... params) {
+	protected final String doInBackground(Pair<Context, String>... params) {
 		
 		context = params[0].first;
 		String name = params[0].second;

@@ -25,6 +25,7 @@ public abstract class BaseRecyclerAdapter<M extends WasderDataModel, V extends R
 		
 		super(modelClass, modelLayout, viewHolderClass, ref);
 		this.mContext = mContext;
+		//noinspection unchecked
 		this.mListener = mListener;
 		this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 			

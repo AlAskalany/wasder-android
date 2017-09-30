@@ -53,8 +53,7 @@ public class SocialNavigationFragment extends NavigationFragment implements Navi
 	
 	public static SocialNavigationFragment newInstance() {
 		
-		SocialNavigationFragment fragment = new SocialNavigationFragment();
-		return fragment;
+		return new SocialNavigationFragment();
 	}
 	
 	public List<TabFragment> getmTabFragments() {
@@ -243,7 +242,7 @@ public class SocialNavigationFragment extends NavigationFragment implements Navi
 		public void addFragment(Fragment fragment, String title) {
 			
 			int positon = fragmentMap.size();
-			fragmentMap.put(positon, new Pair<String, Fragment>(title, fragment));
+			fragmentMap.put(positon, new Pair<>(title, fragment));
 		}
 	}
 }

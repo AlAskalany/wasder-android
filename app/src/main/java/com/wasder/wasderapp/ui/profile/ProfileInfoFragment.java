@@ -42,8 +42,7 @@ public class ProfileInfoFragment extends Fragment implements ProfileTab {
 	
 	public String getTitle() {
 		
-		String mTitle = "Info";
-		return mTitle;
+		return "Info";
 	}
 	
 	@Override

@@ -32,8 +32,7 @@ public class PMTabFragment extends TabFragment {
 	
 	public static PMTabFragment newInstance() {
 		
-		PMTabFragment fragment = new PMTabFragment();
-		return fragment;
+		return new PMTabFragment();
 	}
 	
 	@Override
@@ -90,6 +89,7 @@ public class PMTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings("EmptyMethod")
 	public void setTag(String tag) {
 		
 	}

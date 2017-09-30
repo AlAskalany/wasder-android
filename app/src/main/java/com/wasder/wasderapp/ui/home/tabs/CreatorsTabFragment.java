@@ -31,8 +31,7 @@ public class CreatorsTabFragment extends TabFragment {
 	
 	public static CreatorsTabFragment newInstance() {
 		
-		CreatorsTabFragment fragment = new CreatorsTabFragment();
-		return fragment;
+		return new CreatorsTabFragment();
 	}
 	
 	@Override
@@ -40,7 +39,8 @@ public class CreatorsTabFragment extends TabFragment {
 		
 		super.onAttach(context);
 		if (context instanceof OnFragmentInteractionListener) {
-			mListener = (OnFragmentInteractionListener) context;
+			//noinspection unchecked
+			mListener = (OnFragmentInteractionListener<Object, String>) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement " + "OnFragmentInteractionListener");
 		}
@@ -90,6 +90,7 @@ public class CreatorsTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings({"EmptyMethod", "unused"})
 	public void setTag(String tag) {
 		
 	}

@@ -122,22 +122,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dialog_feed_register_confirm_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="7dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/md_green_800"
-            android:text="@string/dialog_confirm_button"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintLeft_toRightOf="@+id/textView11"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <Button
             android:id="@+id/dialog_feed_register_cancel_button"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
@@ -148,6 +132,22 @@
             android:layout_weight="1"
             android:backgroundTint="@color/md_red_800"
             android:text="@string/dialog_cancel_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintLeft_toRightOf="@+id/textView11"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Button
+            android:id="@+id/dialog_feed_register_confirm_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="7dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/md_green_800"
+            android:text="@string/dialog_confirm_button"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintLeft_toRightOf="@+id/textView11"

@@ -24,22 +24,27 @@ public class User {
 	/**
 	 * User display name
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public String displayName;
 	/**
 	 * User email
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public String email;
 	/**
 	 * User email verification flag
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public boolean emailVerified;
 	/**
 	 *
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public Uri photoUrl;
 	/**
 	 * User ID
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public String uid;
 	
 	/**
@@ -54,6 +59,7 @@ public class User {
 	 * @param email       User email
 	 * @param photoUrl    user photo
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public User(String displayName, String email, Uri photoUrl) {
 		
 		this.displayName = displayName;
@@ -112,6 +118,7 @@ public class User {
 	 *
 	 * @param email User email
 	 */
+	@SuppressWarnings("WeakerAccess")
 	@Exclude
 	public void setEmail(String email) {
 		
@@ -134,6 +141,7 @@ public class User {
 	 *
 	 * @param photoUrl User photo URL
 	 */
+	@SuppressWarnings("WeakerAccess")
 	@Exclude
 	public void setPhotoUrl(Uri photoUrl) {
 		
@@ -143,7 +151,7 @@ public class User {
 	/**
 	 * Get {@link #displayName}
 	 *
-	 * @return
+	 * @return Display name
 	 */
 	@Exclude
 	public String getDisplayName() {
@@ -156,6 +164,7 @@ public class User {
 	 *
 	 * @param displayName User display name
 	 */
+	@SuppressWarnings("WeakerAccess")
 	@Exclude
 	public void setDisplayName(String displayName) {
 		
@@ -193,6 +202,7 @@ public class User {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					
+					//noinspection StatementWithEmptyBody
 					if (task.isSuccessful()) {
 						setDisplayName(user.getDisplayName());
 						// TODO create toast informing user of name update success
@@ -219,6 +229,7 @@ public class User {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					
+					//noinspection StatementWithEmptyBody
 					if (task.isSuccessful()) {
 						setPhotoUrl(user.getPhotoUrl());
 						// TODO create toast informing user of photo url update success
@@ -244,6 +255,7 @@ public class User {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					
+					//noinspection StatementWithEmptyBody
 					if (task.isSuccessful()) {
 						setEmail(user.getEmail());
 						// TODO inform user of email update success
@@ -269,6 +281,7 @@ public class User {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					
+					//noinspection StatementWithEmptyBody
 					if (task.isSuccessful()) {
 						// TODO inform user of password update success
 						// TODO Sign-out the user and re-login
@@ -289,11 +302,11 @@ public class User {
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 		if (user != null) {
 			for (UserInfo profile : user.getProviderData()) {
-				String providerId = profile.getProviderId();
-				String uid = profile.getUid();
-				String displayName = profile.getDisplayName();
-				String email = profile.getEmail();
-				Uri photoUrl = profile.getPhotoUrl();
+				@SuppressWarnings("UnusedAssignment") String providerId = profile.getProviderId();
+				@SuppressWarnings("UnusedAssignment") String uid = profile.getUid();
+				@SuppressWarnings("UnusedAssignment") String displayName = profile.getDisplayName();
+				@SuppressWarnings("UnusedAssignment") String email = profile.getEmail();
+				@SuppressWarnings("UnusedAssignment") Uri photoUrl = profile.getPhotoUrl();
 			}
 		}
 	}

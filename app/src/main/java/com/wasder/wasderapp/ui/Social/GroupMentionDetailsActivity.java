@@ -43,7 +43,9 @@ public class GroupMentionDetailsActivity
 				imageUrl = friendEventItem.getImageUrl();
 			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(friendEventItem.getSupplementaryText());
+			if (friendEventItem != null) {
+				textView.setText(friendEventItem.getSupplementaryText());
+			}
 		}
 	}
 }

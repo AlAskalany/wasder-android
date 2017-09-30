@@ -48,6 +48,7 @@ public class BaseDetailsActivity<T extends WasderDataModel>
 		return false;
 	}
 	
+	@SuppressWarnings("unused")
 	protected void SetActionBarTitle() {
 		
 		if (getIntent().getExtras()
@@ -55,6 +56,7 @@ public class BaseDetailsActivity<T extends WasderDataModel>
 			Bundle extraData = getIntent().getExtras();
 			T dataItem;
 			if (extraData != null) {
+				//noinspection unchecked
 				dataItem = (T) extraData.getSerializable(ARG_DATA_ITEM);
 				ActionBar actionBar = getSupportActionBar();
 				if (actionBar != null) {

@@ -19,6 +19,7 @@ public class CalendarActivity extends AppCompatActivity {
      * The serialization (saved instance state) Bundle key representing the
      * current dropdown position.
      */
+    @SuppressWarnings("unused")
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
     @Override
@@ -74,6 +75,7 @@ public class CalendarActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
+        @SuppressWarnings("unused")
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();

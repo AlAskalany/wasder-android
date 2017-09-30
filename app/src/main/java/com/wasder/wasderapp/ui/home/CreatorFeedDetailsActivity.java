@@ -43,7 +43,9 @@ public class CreatorFeedDetailsActivity
 				imageUrl = creatorFeedItem.getImageUrl();
 			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(creatorFeedItem.getSupplementaryText());
+			if (creatorFeedItem != null) {
+				textView.setText(creatorFeedItem.getSupplementaryText());
+			}
 		}
 	}
 }

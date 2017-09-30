@@ -23,6 +23,7 @@ public class WasderDataModel
 		
 	}
 	
+	@SuppressWarnings("WeakerAccess")
 	public WasderDataModel(String uId, String id, String title, String subhead, String photoUrl, String imageUrl, String supplementaryText) {
 		
 		this.id = id;
@@ -94,6 +95,7 @@ public class WasderDataModel
 		this.subhead = subhead;
 	}
 	
+	@SuppressWarnings("SpellCheckingInspection")
 	public String getuId() {
 		
 		return uId;

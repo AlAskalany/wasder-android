@@ -57,7 +57,9 @@ public class OtherProfileDetailsActivity extends BaseDetailsActivity {
 		
 		if (getIntent().getExtras().containsKey(ARG_DATA_ITEM)) {
 			String name = getIntent().getExtras().getString(ARG_DATA_ITEM);
-			actionBar.setTitle(name);
+			if (actionBar != null) {
+				actionBar.setTitle(name);
+			}
 			String photoUrl = getIntent().getExtras().getString(ARG_PHOTO_ITEM);
 			ImageView profileImageView = findViewById(R.id.profileImage);
 			Helpers.Firebase.DownloadUrlImage(photoUrl, profileImageView, true, R.drawable.avatar);

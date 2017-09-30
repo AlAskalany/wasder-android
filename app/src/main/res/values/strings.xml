@@ -132,7 +132,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_marketitem_list">MarketItems</string>
     <string name="title_marketitem_detail">MarketItem Detail</string>
-    <string name="title_profile">Profie</string>
+    <string name="title_profile">Profile</string>
     <string name="nav_action_friends">Friends</string>
     <string name="nav_action_followers">Followers</string>
     <string name="nav_action_achievements">Achievements</string>
@@ -145,7 +145,7 @@
         "technologically advanced and open to imagination and magic.\n"
         "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
         "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
+        "flexibility of the material creates new affordances that supersede those in the physical "
         "world, without breaking the rules of physics.\n"
         "The fundamentals of light, surface, and movement are key to conveying how objects move, "
         "interact, and exist in space and in relation to each other. Realistic lighting shows "
@@ -168,7 +168,7 @@
         "All action takes place in a single environment. Objects are presented to the user without "
         "breaking the continuity of experience even as they transform and reorganize.\n"
         "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+        "Feedback is subtle yet clear. Transitions are efficient yet coherent.\n\n"
 
         "3D world.\n\n"
 
@@ -227,7 +227,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_followers">Followers</string>
-    <string name="title_activity_achievements">Achivements</string>
+    <string name="title_activity_achievements">Achievements</string>
     <string name="action_search">Search</string>
     <string name="title_activity_calendar">Calendar</string>
     <string name="bottom_sheet_purse_button">Purse</string>

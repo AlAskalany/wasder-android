@@ -31,8 +31,7 @@ public class GroupsTabFragment extends TabFragment {
 	
 	public static GroupsTabFragment newInstance() {
 		
-		GroupsTabFragment fragment = new GroupsTabFragment();
-		return fragment;
+		return new GroupsTabFragment();
 	}
 	
 	@Override
@@ -40,6 +39,7 @@ public class GroupsTabFragment extends TabFragment {
 		
 		super.onAttach(context);
 		if (context instanceof OnFragmentInteractionListener) {
+			//noinspection unchecked
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement " + "OnFragmentInteractionListener");
@@ -89,6 +89,7 @@ public class GroupsTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings({"EmptyMethod", "unused"})
 	public void setTag(String tag) {
 		
 	}

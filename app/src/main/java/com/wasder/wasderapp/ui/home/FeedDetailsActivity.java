@@ -8,6 +8,7 @@ import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 public class FeedDetailsActivity<FeedItem>
 		extends BaseDetailsActivity {
 	
+	@SuppressWarnings("unused")
 	private int layout;
 	
 	@Override

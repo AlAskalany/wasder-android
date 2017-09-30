@@ -53,8 +53,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	public static HomeNavigationFragment newInstance() {
 		
-		HomeNavigationFragment fragment = new HomeNavigationFragment();
-		return fragment;
+		return new HomeNavigationFragment();
 	}
 	
 	public List<TabFragment> getmTabFragments() {
@@ -169,7 +168,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	public void setmResLayout(int mResLayout) {
 		
-		int mResLayout1 = mResLayout;
+		@SuppressWarnings("UnusedAssignment") int mResLayout1 = mResLayout;
 	}
 	
 	public int getmResToolbar() {
@@ -199,12 +198,12 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	
 	public void setmResViewPager(int mResViewPager) {
 		
-		int mResViewPager1 = mResViewPager;
+		@SuppressWarnings("UnusedAssignment") int mResViewPager1 = mResViewPager;
 	}
 	
 	public void setmResTabLayout(int mResTabLayout) {
 		
-		int mResTabLayout1 = mResTabLayout;
+		@SuppressWarnings("UnusedAssignment") int mResTabLayout1 = mResTabLayout;
 	}
 	
 	/**
@@ -246,7 +245,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 		public void addFragment(Fragment fragment, String title) {
 			
 			int positon = fragmentMap.size();
-			fragmentMap.put(positon, new Pair<String, Fragment>(title, fragment));
+			fragmentMap.put(positon, new Pair<>(title, fragment));
 		}
 	}
 }

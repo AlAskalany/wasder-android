@@ -129,7 +129,7 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements On
 		public void addFragment(ProfileTab fragment, String title) {
 			
 			int positon = fragmentMap.size();
-			fragmentMap.put(positon, new Pair<String, ProfileTab>(title, fragment));
+			fragmentMap.put(positon, new Pair<>(title, fragment));
 		}
 	}
 }

@@ -43,7 +43,9 @@ public class TwitchStreamDetailsActivity
 				imageUrl = twitchStreamItem.getImageUrl();
 			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(twitchStreamItem.getSupplementaryText());
+			if (twitchStreamItem != null) {
+				textView.setText(twitchStreamItem.getSupplementaryText());
+			}
 		}
 	}
 }

@@ -89,6 +89,7 @@ public class EsportsTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings({"EmptyMethod", "unused"})
 	public void setTag(String tag) {
 		
 	}

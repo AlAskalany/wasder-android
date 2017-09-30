@@ -60,7 +60,6 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 	public static NavigationFragment newInstance(String tag, String fragmentTitle, int layout, int resDrawerLayout,
 	                                             int resNavigationView, int resViewPager, int resTabLayout) {
 		
-		NavigationFragment fragment = new NavigationFragment();
 		//		Bundle args = new Bundle();
 		//		args.putString(ARG_TAG, tag);
 		//		args.putString(ARG_TITLE, fragmentTitle);
@@ -71,7 +70,7 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 		//		args.putInt(ARG_VIEWPAGER, resViewPager);
 		//		args.putInt(ARG_TAB_LAYOUT, resTabLayout);
 		//		fragment.setArguments(args);
-		return fragment;
+		return new NavigationFragment();
 	}
 	
 	public List<TabFragment> getmTabFragments() {
@@ -272,7 +271,7 @@ public class NavigationFragment extends Fragment implements NavigationView.OnNav
 		public void addFragment(Fragment fragment, String title) {
 			
 			int positon = fragmentMap.size();
-			fragmentMap.put(positon, new Pair<String, Fragment>(title, fragment));
+			fragmentMap.put(positon, new Pair<>(title, fragment));
 		}
 	}
 }

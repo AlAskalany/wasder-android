@@ -53,8 +53,7 @@ public class LiveNavigationFragment extends NavigationFragment implements Naviga
 	
 	public static LiveNavigationFragment newInstance() {
 		
-		LiveNavigationFragment fragment = new LiveNavigationFragment();
-		return fragment;
+		return new LiveNavigationFragment();
 	}
 	
 	public List<TabFragment> getmTabFragments() {
@@ -243,7 +242,7 @@ public class LiveNavigationFragment extends NavigationFragment implements Naviga
 		public void addFragment(Fragment fragment, String title) {
 			
 			int positon = fragmentMap.size();
-			fragmentMap.put(positon, new Pair<String, Fragment>(title, fragment));
+			fragmentMap.put(positon, new Pair<>(title, fragment));
 		}
 	}
 }

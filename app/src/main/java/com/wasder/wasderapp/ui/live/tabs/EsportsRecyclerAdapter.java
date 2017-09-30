@@ -87,19 +87,25 @@ public class EsportsRecyclerAdapter
 	public static class EsportsViewHolder
 			extends RecyclerView.ViewHolder {
 		
+		@SuppressWarnings("unused")
 		final View mview;
 		final TextView titleTextView;
 		final TextView subheadTextView;
 		final ImageButton photoImageButton;
 		final ImageView feedImageView;
 		final TextView supplementaryTextView;
+		@SuppressWarnings("unused")
 		final ImageButton commentImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton likeImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton bookmarkImageButton;
 		final ImageButton shareImageButton;
 		final ImageButton detailsImageButton;
+		@SuppressWarnings("unused")
 		EsportsItem esportsItem;
 		
+		@SuppressWarnings("unused")
 		public EsportsViewHolder(View itemView) {
 			
 			super(itemView);

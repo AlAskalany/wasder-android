@@ -69,6 +69,7 @@ import java.util.List;
  * attempting to start a second asynchronous operation while the first one
  * has not yet completed will result in an exception being thrown.
  */
+@SuppressWarnings("ConstantConditions")
 public class IabHelper {
 	
 	// Billing response codes

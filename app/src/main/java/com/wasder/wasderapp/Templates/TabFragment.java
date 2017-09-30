@@ -40,6 +40,7 @@ public class TabFragment
 		
 		super.onAttach(context);
 		if (context instanceof OnFragmentInteractionListener) {
+			//noinspection unchecked
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
 			throw new RuntimeException(context.toString() + " must implement " + "OnFragmentInteractionListener");

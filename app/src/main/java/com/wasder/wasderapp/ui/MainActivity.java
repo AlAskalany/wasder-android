@@ -318,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 	}
 	
+	@SuppressWarnings("EmptyMethod")
 	private void setNavigationDrawerImage(NavigationView navigationView, Uri photoUrl) {
 		
 		//ImageView imageView = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);

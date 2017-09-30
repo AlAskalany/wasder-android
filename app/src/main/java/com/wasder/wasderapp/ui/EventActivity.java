@@ -32,15 +32,22 @@ public class EventActivity extends AppCompatActivity {
 		if (getIntent().getExtras().containsKey(ARG_EVENT)) {
 			FeedItem feedItem = (FeedItem) getIntent().getExtras().getSerializable(ARG_EVENT);
 			ImageView imageView = findViewById(R.id.app_bar_image);
-			String imageUrl = feedItem.getImageUrl();
+			String imageUrl = null;
+			if (feedItem != null) {
+				imageUrl = feedItem.getImageUrl();
+			}
 			if (imageUrl != null && imageView != null) {
 				Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, true, R.drawable.event_pic);
 			}
 			if (actionBar != null) {
-				actionBar.setTitle(feedItem.getTitle());
+				if (feedItem != null) {
+					actionBar.setTitle(feedItem.getTitle());
+				}
 			}
 			TextView textView1 = findViewById(R.id.textView16);
-			textView1.setText(feedItem.getSubhead());
+			if (feedItem != null) {
+				textView1.setText(feedItem.getSubhead());
+			}
 			TextView textView2 = findViewById(R.id.textView15);
 			textView2.setText(feedItem.getSupplementaryText());
 		}

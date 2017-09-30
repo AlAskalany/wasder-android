@@ -41,6 +41,7 @@ public class FeedRegisterDialog extends Dialog {
 		});
 	}
 	
+	@SuppressWarnings("unused")
 	public static FeedRegisterDialog newInstance(Context context, FeedItem feedItem) {
 		
 		return new FeedRegisterDialog(context, feedItem);

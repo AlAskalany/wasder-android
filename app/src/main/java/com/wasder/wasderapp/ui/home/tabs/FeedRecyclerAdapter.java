@@ -152,23 +152,28 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 	
 	public static class FeedViewHolder extends RecyclerView.ViewHolder {
 		
-		final View mview;
+		@SuppressWarnings("unused")
+		final View mView;
 		final TextView titleTextView;
 		final TextView subheadTextView;
 		final ImageButton photoImageButton;
 		final ImageView feedImageView;
 		final TextView supplementaryTextView;
+		@SuppressWarnings("unused")
 		final ImageButton commentImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton likeImageButton;
+		@SuppressWarnings("unused")
 		final ImageButton bookmarkImageButton;
 		final ImageButton shareButton;
 		final ImageButton detailsImageButton;
+		@SuppressWarnings("unused")
 		FeedItem feedItem;
 		
 		public FeedViewHolder(View itemView) {
 			
 			super(itemView);
-			mview = itemView;
+			mView = itemView;
 			titleTextView = itemView.findViewById(R.id.feed_card_header);
 			subheadTextView = itemView.findViewById(R.id.feed_card_subheader);
 			photoImageButton = itemView.findViewById(R.id.feed_card_avatar);

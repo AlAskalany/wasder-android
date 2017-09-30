@@ -43,7 +43,9 @@ public class EsportsDetailsActivity
 				imageUrl = esportsItem.getImageUrl();
 			}
 			Helpers.Firebase.DownloadUrlImage(imageUrl, imageView, false, 0);
-			textView.setText(esportsItem.getSupplementaryText());
+			if (esportsItem != null) {
+				textView.setText(esportsItem.getSupplementaryText());
+			}
 		}
 	}
 }

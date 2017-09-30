@@ -49,7 +49,6 @@ public class Helpers {
 						public void onComplete(@NonNull Task<Uri> task) {
 							
 							if (task.isSuccessful()) {
-								task.getResult().toString();
 								Glide.with(imageView.getContext()).load(imageUrl).into(imageView);
 							} else {
 								Log.d(TAG, "Getting Download URL was not successful", task.getException());

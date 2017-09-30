@@ -89,6 +89,7 @@ public class TwitchStreamTabFragment extends TabFragment {
 		
 	}
 	
+	@SuppressWarnings("EmptyMethod")
 	public void setTag(String tag) {
 		
 	}

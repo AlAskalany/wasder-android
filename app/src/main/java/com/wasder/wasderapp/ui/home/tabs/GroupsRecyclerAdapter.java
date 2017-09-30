@@ -56,11 +56,13 @@ public class GroupsRecyclerAdapter
     public static class GroupViewHolder
             extends RecyclerView.ViewHolder {
 	
+	    @SuppressWarnings("unused")
 	    final View mview;
 	    final ImageView groupImageView;
 	    final TextView groupTitleTextView;
 	    final TextView groupSubheadTextView;
 	    final ImageButton groupDetailsImageButton;
+	    @SuppressWarnings("unused")
 	    GroupItem feedModel;
 
         public GroupViewHolder(View itemView) {
