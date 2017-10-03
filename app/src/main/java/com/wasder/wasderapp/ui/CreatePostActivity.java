@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 public class CreatePostActivity extends AppCompatActivity {
 	
 	private final String MESSAGES_CHILD = "feed";
-	private static final int DEFAULT_MSG_LENGTH_LIMIT = 540;
+	private static final int DEFAULT_MSG_LENGTH_LIMIT = 40000;
 	@SuppressWarnings("unused")
 	public final String ANONYMOUS = "anonymous";
 	private final int REQUEST_INVITE = 1;

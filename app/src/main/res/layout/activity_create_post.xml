@@ -27,52 +27,49 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+        android:layout_marginBottom="150dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/post_editText"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"/>
+    </android.support.v4.widget.NestedScrollView>
 
-            <EditText
-                android:id="@+id/post_editText"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text|textMultiLine"
-                android:textAlignment="textStart"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/add_image_imageButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/ic_image_black_24dp"/>
 
-                <ImageButton
-                    android:id="@+id/add_image_imageButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|end"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:tint="@android:color/white"
-                    app:srcCompat="@drawable/ic_image_black_24dp"/>
+        <ImageButton
+            android:id="@+id/create_post_send_imageButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_menu_send"/>
+    </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/create_post_send_imageButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|end"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_menu_send"/>
-            </LinearLayout>
-
-        </LinearLayout>
-    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
