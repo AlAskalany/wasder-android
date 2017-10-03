@@ -4,10 +4,8 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseRecyclerAdapter;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.Templates.TabFragment;
-import com.wasder.wasderapp.ui.Social.tabs.GroupMentionsRecyclerAdapter;
-import com.wasder.wasderapp.ui.Social.tabs.MentionsRecyclerAdapter;
-import com.wasder.wasderapp.ui.Social.tabs.PMRecyclerAdapter;
-import com.wasder.wasderapp.ui.home.tabs.CreatorFeedRecyclerAdapter;
+import com.wasder.wasderapp.ui.Messages.tabs.MentionsRecyclerAdapter;
+import com.wasder.wasderapp.ui.Messages.tabs.PMRecyclerAdapter;
 import com.wasder.wasderapp.ui.home.tabs.FeedRecyclerAdapter;
 import com.wasder.wasderapp.ui.home.tabs.GroupsRecyclerAdapter;
 import com.wasder.wasderapp.ui.live.tabs.EsportsRecyclerAdapter;
@@ -24,16 +22,12 @@ import java.util.List;
 public class UiBuilder {
 	
 	public enum TabType {
-		Feed("FeedFragment", "Feed", R.layout.feed_recycler_view, FeedRecyclerAdapter.class),
-		Creators("CreatorsFragment", "Creators", R.layout.creators_feed_recycler_view, CreatorFeedRecyclerAdapter.class),
-		Groups("GroupsFragment", "Groups", R.layout.groups_recycler_view, GroupsRecyclerAdapter.class),
-		TwitchStream("TwitchStreamFragment", "Twitch Streams", R.layout.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class),
-		TwitchLive("TwitchLiveFragment", "Twitch Live", R.layout.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class),
-		Esports("EsportsFragment", "Esports", R.layout.esports_recycler_view, EsportsRecyclerAdapter.class),
-		Mentions("MentionsFragment", "Mentions", R.layout.mentions_recycler_view, MentionsRecyclerAdapter.class),
-		PM("PMFragment", "PM", R.layout.pm_recycler_view,
-				PMRecyclerAdapter.class),
-		GroupMentions("GroupMentionsFragment", "Group Mentions", R.layout.group_mentions_recycler_view, GroupMentionsRecyclerAdapter.class);
+		Feed("FeedFragment", "Feed", R.layout.feed_recycler_view, FeedRecyclerAdapter.class), Groups("GroupsFragment", "Groups", R.layout
+				.groups_recycler_view, GroupsRecyclerAdapter.class), TwitchStream("TwitchStreamFragment", "Twitch Streams", R.layout
+				.twitch_stream_recycler_view, TwitchStreamRecyclerAdapter.class), TwitchLive("TwitchLiveFragment", "Twitch Live", R.layout
+				.twitch_live_recycler_view, TwitchLiveRecyclerAdapter.class), Esports("EsportsFragment", "Esports", R.layout.esports_recycler_view,
+				EsportsRecyclerAdapter.class), Mentions("MentionsFragment", "Mentions", R.layout.mentions_recycler_view, MentionsRecyclerAdapter
+				.class), PM("PMFragment", "PM", R.layout.pm_recycler_view, PMRecyclerAdapter.class);
 		
 		private final String title;
 		private final int layout;
@@ -75,8 +69,7 @@ public class UiBuilder {
 		/**
 		 * One num columns.
 		 */
-		ONE(1),
-		/**
+		ONE(1), /**
 		 * Two num columns.
 		 */
 		TWO(2);
@@ -99,9 +92,7 @@ public class UiBuilder {
 	}
 	
 	public enum NavigationFragmentType {
-		HOME,
-		LIVE,
-		SOCIAL
+		HOME, LIVE, SOCIAL
 	}
 	
 	/**
@@ -119,8 +110,7 @@ public class UiBuilder {
 		T build();
 	}
 	
-	public static class NavFragment
-			implements BuilderBase<NavigationFragment> {
+	public static class NavFragment implements BuilderBase<NavigationFragment> {
 		
 		final List<TabFragment> tabs = new ArrayList<>();
 		private String tag;
@@ -156,8 +146,7 @@ public class UiBuilder {
 		
 		public NavFragment addTab(TabType tabType) {
 			
-			tabs.add(new UiBuilder.TabFragmentBuilder().createTab(tabType)
-					.build());
+			tabs.add(new UiBuilder.TabFragmentBuilder().createTab(tabType).build());
 			return this;
 		}
 		
@@ -218,8 +207,7 @@ public class UiBuilder {
 	/**
 	 * The type Tab fragment builder.
 	 */
-	public static class TabFragmentBuilder
-			implements BuilderBase<TabFragment> {
+	public static class TabFragmentBuilder implements BuilderBase<TabFragment> {
 		
 		//(String setTitle, int columnCount, int setLayout, Class<? extends BaseRecyclerAdapter>
 		//recyclerViewAdapterBaseClass)

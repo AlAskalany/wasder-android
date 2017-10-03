@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui;
+package com.wasder.wasderapp.ui.Messages;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,9 +22,8 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.Templates.TabFragment;
-import com.wasder.wasderapp.ui.Social.tabs.GroupsMentionsTabFragment;
-import com.wasder.wasderapp.ui.Social.tabs.MentionsTabFragment;
-import com.wasder.wasderapp.ui.Social.tabs.PMTabFragment;
+import com.wasder.wasderapp.ui.Messages.tabs.MentionsTabFragment;
+import com.wasder.wasderapp.ui.Messages.tabs.PMTabFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ import java.util.Map;
  * Created by ahmed on 9/10/2017.
  */
 
-public class SocialNavigationFragment extends NavigationFragment implements NavigationView.OnNavigationItemSelectedListener {
+public class MessagesNavigationFragment extends NavigationFragment implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private String mTAG;
 	private String mFragmentTitle;
@@ -47,13 +46,19 @@ public class SocialNavigationFragment extends NavigationFragment implements Navi
 	private AppCompatActivity activity;
 	private OnFragmentInteractionListener mListener;
 	
-	public SocialNavigationFragment() {
+	public MessagesNavigationFragment() {
 		
 	}
 	
-	public static SocialNavigationFragment newInstance() {
+	public static MessagesNavigationFragment newInstance() {
 		
-		return new SocialNavigationFragment();
+		return new MessagesNavigationFragment();
+	}
+	
+	public static MessagesNavigationFragment newInstance(String tag, String fragmentTitle, int resDrawerLayout, int resNavigationView, int
+			resTabLayout) {
+		
+		return new MessagesNavigationFragment();
 	}
 	
 	public List<TabFragment> getmTabFragments() {
@@ -83,21 +88,19 @@ public class SocialNavigationFragment extends NavigationFragment implements Navi
 		super.onCreate(savedInstanceState);
 		MentionsTabFragment mentionsTabFragment = MentionsTabFragment.newInstance();
 		PMTabFragment pmTabFragment = PMTabFragment.newInstance();
-		GroupsMentionsTabFragment groupsMentionsTabFragment = GroupsMentionsTabFragment.newInstance();
 		mTabFragments.add(mentionsTabFragment);
 		mTabFragments.add(pmTabFragment);
-		mTabFragments.add(groupsMentionsTabFragment);
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.main_social_fragment, container, false);
+		View view = inflater.inflate(R.layout.main_messages_fragment, container, false);
 		SectionsPagerAdapter sectionPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 		for (TabFragment tab : mTabFragments) {
 			sectionPagerAdapter.addFragment(tab, tab.getTitle());
 		}
-		ViewPager viewPager = view.findViewById(R.id.social_viewPager);
+		ViewPager viewPager = view.findViewById(R.id.messages_viewPager);
 		viewPager.setAdapter(sectionPagerAdapter);
 		TabLayout tabLayout = getActivity().findViewById(R.id.tabLayout_main_activity);
 		tabLayout.setupWithViewPager(viewPager);
@@ -206,8 +209,7 @@ public class SocialNavigationFragment extends NavigationFragment implements Navi
 	/**
 	 * The type Sections pager adapter.
 	 */
-	static class SectionsPagerAdapter
-			extends FragmentStatePagerAdapter {
+	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		
 		private final Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		

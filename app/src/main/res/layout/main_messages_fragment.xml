@@ -8,7 +8,7 @@
     tools:context="com.wasder.wasderapp.ui.MainActivity">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/social_viewPager"
+        android:id="@+id/messages_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

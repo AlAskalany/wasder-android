@@ -22,7 +22,6 @@ import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
 import com.wasder.wasderapp.Templates.TabFragment;
-import com.wasder.wasderapp.ui.home.tabs.CreatorsTabFragment;
 import com.wasder.wasderapp.ui.home.tabs.FeedTabFragment;
 import com.wasder.wasderapp.ui.home.tabs.GroupsTabFragment;
 
@@ -82,10 +81,8 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 		
 		super.onCreate(savedInstanceState);
 		FeedTabFragment feedTabFragment = FeedTabFragment.newInstance();
-		CreatorsTabFragment creatorsTabFragment = CreatorsTabFragment.newInstance();
 		GroupsTabFragment groupsTabFragment = GroupsTabFragment.newInstance();
 		mTabFragments.add(feedTabFragment);
-		mTabFragments.add(creatorsTabFragment);
 		mTabFragments.add(groupsTabFragment);
 	}
 	
@@ -209,8 +206,7 @@ public class HomeNavigationFragment extends NavigationFragment implements Naviga
 	/**
 	 * The type Sections pager adapter.
 	 */
-	static class SectionsPagerAdapter
-			extends FragmentStatePagerAdapter {
+	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		
 		private final Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		

@@ -47,7 +47,7 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	
 	public String getTitle() {
 		
-		return "Feed";
+		return "Profile";
 	}
 	
 	@Override

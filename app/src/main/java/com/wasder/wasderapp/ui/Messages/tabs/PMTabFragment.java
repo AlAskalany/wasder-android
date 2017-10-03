@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.Social.tabs;
+package com.wasder.wasderapp.ui.Messages.tabs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,20 +19,20 @@ import com.wasder.wasderapp.ui.home.tabs.FeedRecyclerAdapter;
  * Created by ahmed on 9/10/2017.
  */
 
-public class MentionsTabFragment extends TabFragment {
+public class PMTabFragment extends TabFragment {
 	
 	private int columnCount;
-	private String title = "Mentions";
+	private String title = "PM";
 	private OnFragmentInteractionListener mListener;
 	
-	public MentionsTabFragment() {
+	public PMTabFragment() {
 		
 		super();
 	}
 	
-	public static MentionsTabFragment newInstance() {
+	public static PMTabFragment newInstance() {
 		
-		return new MentionsTabFragment();
+		return new PMTabFragment();
 	}
 	
 	@Override
@@ -49,8 +49,8 @@ public class MentionsTabFragment extends TabFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.mentions_recycler_view, container, false);
-		RecyclerView recyclerView = view.findViewById(R.id.mentions_RecyclerView);
+		View view = inflater.inflate(R.layout.pm_recycler_view, container, false);
+		RecyclerView recyclerView = view.findViewById(R.id.pm_RecyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
 			LinearLayoutManager layoutManager;

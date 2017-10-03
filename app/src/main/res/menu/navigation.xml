@@ -12,8 +12,8 @@
         android:title="@string/title_live"/>
 
     <item
-        android:id="@+id/navigation_social"
+        android:id="@+id/navigation_messages"
         android:icon="@drawable/ic_person_black_24dp"
-        android:title="@string/title_social"/>
+        android:title="@string/title_messages"/>
 
 </menu>

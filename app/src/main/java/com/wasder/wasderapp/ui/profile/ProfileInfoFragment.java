@@ -56,8 +56,7 @@ public class ProfileInfoFragment extends Fragment implements ProfileTab {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_profile_info, container, false);
 	}
@@ -69,8 +68,7 @@ public class ProfileInfoFragment extends Fragment implements ProfileTab {
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
-			throw new RuntimeException(context.toString()
-					+ " must implement OnFragmentInteractionListener");
+			throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
 		}
 	}
 	

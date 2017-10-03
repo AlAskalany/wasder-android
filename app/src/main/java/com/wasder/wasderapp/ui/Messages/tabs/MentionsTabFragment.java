@@ -1,4 +1,4 @@
-package com.wasder.wasderapp.ui.Social.tabs;
+package com.wasder.wasderapp.ui.Messages.tabs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,20 +19,20 @@ import com.wasder.wasderapp.ui.home.tabs.FeedRecyclerAdapter;
  * Created by ahmed on 9/10/2017.
  */
 
-public class GroupsMentionsTabFragment extends TabFragment {
+public class MentionsTabFragment extends TabFragment {
 	
 	private int columnCount;
-	private String title = "Groups Mentions";
+	private String title = "Mentions";
 	private OnFragmentInteractionListener mListener;
 	
-	public GroupsMentionsTabFragment() {
+	public MentionsTabFragment() {
 		
 		super();
 	}
 	
-	public static GroupsMentionsTabFragment newInstance() {
+	public static MentionsTabFragment newInstance() {
 		
-		return new GroupsMentionsTabFragment();
+		return new MentionsTabFragment();
 	}
 	
 	@Override
@@ -49,8 +49,8 @@ public class GroupsMentionsTabFragment extends TabFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.group_mentions_recycler_view, container, false);
-		RecyclerView recyclerView = view.findViewById(R.id.groups_mentions_RecyclerView);
+		View view = inflater.inflate(R.layout.mentions_recycler_view, container, false);
+		RecyclerView recyclerView = view.findViewById(R.id.mentions_RecyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();
 			LinearLayoutManager layoutManager;
@@ -89,7 +89,7 @@ public class GroupsMentionsTabFragment extends TabFragment {
 		
 	}
 	
-	@SuppressWarnings({"EmptyMethod", "unused"})
+	@SuppressWarnings("EmptyMethod")
 	public void setTag(String tag) {
 		
 	}

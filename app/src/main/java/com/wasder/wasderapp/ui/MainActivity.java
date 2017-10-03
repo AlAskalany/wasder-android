@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
+import com.wasder.wasderapp.ui.Messages.MessagesNavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
 import com.wasder.wasderapp.ui.profile.OwnProfileDetailsActivity;
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		mNavFragments.put(R.id.navigation_home, HomeNavigationFragment.newInstance());
 		mNavFragments.put(R.id.navigation_live, LiveNavigationFragment.newInstance());
-		mNavFragments.put(R.id.navigation_social, SocialNavigationFragment.newInstance());
+		mNavFragments.put(R.id.navigation_messages, MessagesNavigationFragment.newInstance());
 		getSupportFragmentManager().beginTransaction().add(R.id.container, mNavFragments.get(R.id.navigation_home), "Home").commit();
 	}
 	
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		
 		switch (view.getId()) {
 			case R.id.purse_button:
-				startActivity(new Intent(MainActivity.this, PurseActivity.class));
+				startActivity(new Intent(MainActivity.this, Main2Activity.class));
 				break;
 			case R.id.calendar_button:
 				startActivity(new Intent(MainActivity.this, CalendarActivity.class));

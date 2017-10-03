@@ -20,7 +20,7 @@ import com.wasder.wasderapp.Templates.TabFragment;
 
 public class GroupsTabFragment extends TabFragment {
 	
-	private int columnCount;
+	private int columnCount =2;
 	private String title = "Groups";
 	private OnFragmentInteractionListener<Object, String> mListener;
 	

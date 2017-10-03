@@ -29,7 +29,8 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout_main_activity"
-            style="@style/TabLayoutStyle">
+            style="@style/TabLayoutStyle"
+            app:tabMode="scrollable">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
@@ -95,17 +96,14 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="60dp"
+        android:layout_gravity="center_vertical|left"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:clickable="true"
         android:scaleType="center"
-        android:tint="@color/md_yellow_500"
-        app:backgroundTint="@android:color/transparent"
-        app:elevation="4dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp"/>
+        app:fabSize="mini"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="top|right"
+        app:srcCompat="@mipmap/ic_launcher_round"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -36,17 +36,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class CreatePostActivity extends AppCompatActivity {
 	
-	private static final String MESSAGES_CHILD = "feed";
-	private static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
+	private final String MESSAGES_CHILD = "feed";
+	private static final int DEFAULT_MSG_LENGTH_LIMIT = 540;
 	@SuppressWarnings("unused")
-	public static final String ANONYMOUS = "anonymous";
-	private static final int REQUEST_INVITE = 1;
-	private static final int REQUEST_IMAGE = 2;
+	public final String ANONYMOUS = "anonymous";
+	private final int REQUEST_INVITE = 1;
+	private final int REQUEST_IMAGE = 2;
 	@SuppressWarnings("unused")
-	private static final String MESSAGE_SENT_EVENT = "message_sent";
+	private final String MESSAGE_SENT_EVENT = "message_sent";
 	@SuppressWarnings("unused")
-	private static final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
-	private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
+	private final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
+	private final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
 	private static final String TAG = "CreatePostActivity";
 	private DatabaseReference mFirebaseDatabaseReference;
 	private EditText mMessageEditText;
@@ -80,7 +80,7 @@ public class CreatePostActivity extends AppCompatActivity {
 		}
 		mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		Toolbar toolbar = findViewById(R.id.create_post_toolbar);
-		toolbar.setTitle("Post");
+		toolbar.setTitle("Posts");
 		setSupportActionBar(toolbar);
 		ActionBar bar = getSupportActionBar();
 		if (bar != null) {
@@ -112,8 +112,8 @@ public class CreatePostActivity extends AppCompatActivity {
 		});
 		
 		
-		ImageButton mattachImageButton = findViewById(R.id.add_image_imageButton);
-		mattachImageButton.setOnClickListener(new View.OnClickListener() {
+		ImageButton matchImageButton = findViewById(R.id.add_image_imageButton);
+		matchImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				
@@ -167,13 +167,13 @@ public class CreatePostActivity extends AppCompatActivity {
 							
 							if (databaseError == null) {
 								String key = databaseReference.getKey();
-								mStorageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key)
-										.child(uri.getLastPathSegment());
+								mStorageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key).child(uri
+										.getLastPathSegment());
 								mImageUrl = uri;
 								mKey = key;
 								
 							} else {
-								Log.w(TAG, "Unable to write message to database.", databaseError.toException());
+								Log.w(TAG, "Unable to write message to database", databaseError.toException());
 							}
 						}
 					});

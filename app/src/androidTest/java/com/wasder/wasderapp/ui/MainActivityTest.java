@@ -42,7 +42,7 @@ public class MainActivityTest {
 		//Thread.sleep(2000);
 		onView(withId(R.id.main_content_include)).perform(swipeLeft());
 		//Thread.sleep(2000);
-		onView(withId(R.id.navigation_social)).check(matches(isDisplayed())).perform(click());
+		onView(withId(R.id.navigation_messages)).check(matches(isDisplayed())).perform(click());
 		//Thread.sleep(2000);
 		onView(withId(R.id.main_content_include)).perform(swipeLeft());
 		//Thread.sleep(2000);

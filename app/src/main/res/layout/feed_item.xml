@@ -11,14 +11,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/feed_card_avatar"
@@ -73,6 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
             android:contentDescription="@string/image_description"
             android:maxHeight="200dp"
             android:minHeight="100dp"
@@ -82,18 +89,25 @@
         <TextView
             android:id="@+id/feed_card_supplementary_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
             android:text="@string/cardView_supplementary_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/feed_card_comment_imageButton"

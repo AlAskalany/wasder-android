@@ -15,7 +15,6 @@
 
         <android.support.design.widget.CollapsingToolbarLayout
             style="@style/CollapsingToolbarLayoutStyle"
-            android:layout_height="130dp"
             app:toolbarId="@+id/toolbar">
 
             <android.support.v7.widget.Toolbar
