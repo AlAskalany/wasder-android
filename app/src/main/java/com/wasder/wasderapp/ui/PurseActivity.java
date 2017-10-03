@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ServletPostAsyncTask;
 
@@ -17,6 +18,8 @@ public class PurseActivity extends AppCompatActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_purse);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Purse_Activity");
 		Toolbar toolbar = findViewById(R.id.activity_purse_toolbar);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();

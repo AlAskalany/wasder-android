@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplitude.api.Amplitude;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -86,6 +87,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Login_Activity");
 		// Configure Google Sign In
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string
 				.default_web_client_id)).requestEmail().build();

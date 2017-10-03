@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.ui.home.tabs.FeedRecyclerAdapter;
@@ -54,6 +55,8 @@ public class ProfileFeedFragment extends Fragment implements ProfileTab {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		Amplitude.getInstance().initialize(getActivity(), "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getActivity().getApplication());
+		Amplitude.getInstance().logEvent("Started_Profile_Feed_Fragment");
 		if (getArguments() != null) {
 			getArguments().getString(ARG_PARAM1);
 			getArguments().getString(ARG_PARAM2);

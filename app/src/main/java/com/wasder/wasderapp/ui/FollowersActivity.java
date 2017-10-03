@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 
 public class FollowersActivity extends AppCompatActivity {
@@ -13,6 +14,8 @@ public class FollowersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followers);
+	    Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+	    Amplitude.getInstance().logEvent("Started_Followers_Activity");
         Toolbar toolbar = findViewById(R.id.fragment_followers_toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();

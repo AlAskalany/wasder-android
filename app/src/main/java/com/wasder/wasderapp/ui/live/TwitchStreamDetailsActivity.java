@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 import com.wasder.wasderapp.models.TwitchStreamItem;
@@ -21,6 +22,8 @@ public class TwitchStreamDetailsActivity
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_twitch_stream);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Twitch_Stream_Activity");
 		Toolbar toolbar = findViewById(R.id.twitch_stream_toolbar);
 		toolbar.setTitle("Twitch Stream");
 		setSupportActionBar(toolbar);

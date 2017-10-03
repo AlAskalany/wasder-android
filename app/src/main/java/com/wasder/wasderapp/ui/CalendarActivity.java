@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 
 public class CalendarActivity extends AppCompatActivity {
@@ -26,6 +27,8 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+        Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+        Amplitude.getInstance().logEvent("Started_Calendar_Activity");
         Toolbar toolbar = findViewById(R.id.activity_calendar_toolbar);
         setSupportActionBar(toolbar);
         // Set up the action bar to show a dropdown list.

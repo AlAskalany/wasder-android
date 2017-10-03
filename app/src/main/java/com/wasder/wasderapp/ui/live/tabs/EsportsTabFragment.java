@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.TabFragment;
@@ -50,6 +51,8 @@ public class EsportsTabFragment extends TabFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.esports_recycler_view, container, false);
+		Amplitude.getInstance().initialize(getActivity(), "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getActivity().getApplication());
+		Amplitude.getInstance().logEvent("Started_Esports_Tab_Fragment");
 		RecyclerView recyclerView = view.findViewById(R.id.esports_recyclerView);
 		if (recyclerView != null) {
 			Context context = view.getContext();

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseDetailsActivity;
@@ -30,6 +31,8 @@ public class OwnProfileDetailsActivity extends BaseDetailsActivity implements On
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_own_profile);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Own_Profile_Details_Activity");
 		ProfileFeedFragment profileFeedFragment = ProfileFeedFragment.newInstance();
 		ProfileInfoFragment profileInfoFragment = ProfileInfoFragment.newInstance();
 		mTabFragments.add(profileFeedFragment);

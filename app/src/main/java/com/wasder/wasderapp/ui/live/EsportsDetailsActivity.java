@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.BaseDetailsActivity;
 import com.wasder.wasderapp.models.EsportsItem;
@@ -21,6 +22,8 @@ public class EsportsDetailsActivity
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_esports);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Esports_Details_Activity");
 		Toolbar toolbar = findViewById(R.id.esports_toolbar);
 		toolbar.setTitle("Esports");
 		setSupportActionBar(toolbar);

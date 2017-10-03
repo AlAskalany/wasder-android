@@ -72,6 +72,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'com.github.bumptech.glide:glide:4.1.1'
     compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.amplitude:android-sdk:2.14.1'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 }

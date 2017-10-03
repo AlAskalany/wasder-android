@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
@@ -81,6 +82,9 @@ public class LiveNavigationFragment extends NavigationFragment implements Naviga
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		Amplitude.getInstance().initialize(getActivity(), "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getActivity().getApplication
+				());
+		Amplitude.getInstance().logEvent("Started_Live_Navigation_Fragment");
 		TwitchStreamTabFragment twitchStreamTabFragment = TwitchStreamTabFragment.newInstance();
 		TwitchLiveTabFragment twitchLiveTabFragment = TwitchLiveTabFragment.newInstance();
 		EsportsTabFragment esportsTabFragment = EsportsTabFragment.newInstance();
@@ -206,8 +210,7 @@ public class LiveNavigationFragment extends NavigationFragment implements Naviga
 	/**
 	 * The type Sections pager adapter.
 	 */
-	static class SectionsPagerAdapter
-			extends FragmentStatePagerAdapter {
+	static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 		
 		private final Map<Integer, Pair<String, Fragment>> fragmentMap = new HashMap<>();
 		

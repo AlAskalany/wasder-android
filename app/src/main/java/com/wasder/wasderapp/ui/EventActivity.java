@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplitude.api.Amplitude;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.models.FeedItem;
 import com.wasder.wasderapp.util.Helpers;
@@ -21,6 +22,9 @@ public class EventActivity extends AppCompatActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event);
+		
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Event_Activity");
 		
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);

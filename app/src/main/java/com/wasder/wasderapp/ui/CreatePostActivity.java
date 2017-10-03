@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.amplitude.api.Amplitude;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -62,6 +63,8 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
+		Amplitude.getInstance().logEvent("Started_Create_Post_Activity");
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		// Initialize Firebase Auth
 		FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
