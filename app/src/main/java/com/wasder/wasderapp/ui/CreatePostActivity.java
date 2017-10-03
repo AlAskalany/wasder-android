@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,8 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -57,6 +60,7 @@ public class CreatePostActivity extends AppCompatActivity {
 	private String mPhotoUrl;
 	private String mKey;
 	private Uri mImageUrl;
+	private boolean textExists;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +88,12 @@ public class CreatePostActivity extends AppCompatActivity {
 		mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		Toolbar toolbar = findViewById(R.id.create_post_toolbar);
 		toolbar.setTitle("Posts");
+		
 		setSupportActionBar(toolbar);
 		ActionBar bar = getSupportActionBar();
 		if (bar != null) {
 			bar.setDisplayHomeAsUpEnabled(true);
+			bar.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 		}
 		mMessageEditText = findViewById(R.id.post_editText);
 		mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH,
@@ -102,9 +108,13 @@ public class CreatePostActivity extends AppCompatActivity {
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 				
 				if (charSequence.toString().trim().length() > 0) {
+					textExists = true;
 					mSendButton.setEnabled(true);
+					invalidateOptionsMenu();
 				} else {
+					textExists = false;
 					mSendButton.setEnabled(false);
+					invalidateOptionsMenu();
 				}
 			}
 			
@@ -135,6 +145,35 @@ public class CreatePostActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				
+				
+			}
+		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.create_post, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		
+		if (!textExists) {
+			menu.findItem(R.id.action_post).setEnabled(false);
+		} else {
+			menu.findItem(R.id.action_post).setEnabled(true);
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		int id = item.getItemId();
+		switch (id) {
+			case R.id.action_post:
 				FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mFirebaseUser.getDisplayName()
 						/*mMessageEditText.getText().toString
 						()*/, mMessageEditText.getText().toString(), mPhotoUrl, null, mMessageEditText.getText().toString());
@@ -145,10 +184,11 @@ public class CreatePostActivity extends AppCompatActivity {
 					putImageInStorage(mStorageReference, mImageUrl, mKey);
 				}
 				onBackPressed();
-			}
-		});
-		
-		
+				break;
+			default:
+				break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override

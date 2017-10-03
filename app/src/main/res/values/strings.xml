@@ -243,4 +243,5 @@
     <string name="_02_00_pm_05_30_pm">02:00 PM - 05:30 PM</string>
     <string name="_250_wasderz">250 Wasderz</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="action_post">Post</string>
 </resources>

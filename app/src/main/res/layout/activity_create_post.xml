@@ -2,9 +2,11 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_post_coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -31,13 +33,17 @@
         android:id="@+id/post_editText"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
+        android:background="@android:color/transparent"
         android:ems="10"
+        android:hint="Write your post ..."
         android:inputType="text|textMultiLine"
+        android:padding="8dp"
+        android:singleLine="false"
         android:textAlignment="textStart"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:typeface="normal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <LinearLayout
