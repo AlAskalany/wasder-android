@@ -2,14 +2,16 @@ package com.wasder.wasderapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +23,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.amplitude.api.Amplitude;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +43,10 @@ import com.google.firebase.storage.UploadTask;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.WasderPreferences;
 import com.wasder.wasderapp.models.FeedItem;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class CreatePostActivity extends AppCompatActivity {
 	
@@ -58,12 +66,18 @@ public class CreatePostActivity extends AppCompatActivity {
 	private Uri mImage;
 	private boolean mTextExists;
 	private String imageUrl;
+	private ImageView mPostImage;
+	private FrameLayout postImageContainer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_post);
+		
+		postImageContainer = findViewById(R.id.post_image_container);
+		postImageContainer.setVisibility(View.INVISIBLE);
+		
 		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
 		Amplitude.getInstance().logEvent("Started_Create_Post_Activity");
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -118,7 +132,7 @@ public class CreatePostActivity extends AppCompatActivity {
 			}
 		});
 		
-		
+		mPostImage = findViewById(R.id.post_image);
 		ImageButton matchImageButton = findViewById(R.id.add_image_imageButton);
 		matchImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -137,7 +151,7 @@ public class CreatePostActivity extends AppCompatActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		
 		getMenuInflater().inflate(R.menu.create_post, menu);
 		return true;
 	}
@@ -147,7 +161,6 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		if (!mTextExists) {
 			menu.findItem(R.id.action_post).setEnabled(false);
-			//menu.findItem(R.id.action_post).getIcon().setAlpha();
 			Drawable drawable = menu.findItem(R.id.action_post).getIcon();
 			drawable.mutate();
 			drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
@@ -165,44 +178,8 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		int id = item.getItemId();
 		switch (id) {
-			// If post menu item was selected
 			case R.id.action_post:
-				String uId = mUser.getUid();
-				// check of an image was selected
-				if (mImage != null) {
-					// if an image was selected, then upload it to the storage
-					StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-					StorageReference userStorageReference = storageReference.child(uId);
-					StorageReference postStorageReference = userStorageReference.child("post");
-					StorageReference ref = postStorageReference.child(mImage.getLastPathSegment());
-					
-					UploadTask uploadTask = ref.putFile(mImage);
-					uploadTask.addOnFailureListener(new OnFailureListener() {
-						@Override
-						public void onFailure(@NonNull Exception e) {
-							
-							Log.d(TAG, "Image upload was unsuccessful");
-						}
-					}).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-						@Override
-						public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-							
-							Uri downloadUrl = taskSnapshot.getDownloadUrl();
-						}
-					}).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-						@Override
-						public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-							
-							if (task.isSuccessful()) {
-								imageUrl = task.getResult().getDownloadUrl().toString();
-								PutPostInDatabase(imageUrl);
-							}
-						}
-					});
-				} else {
-					PutPostInDatabase(null);
-				}
-				
+				PutPostInDatabase();
 				break;
 			default:
 				break;
@@ -210,19 +187,7 @@ public class CreatePostActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		
-		super.onActivityResult(requestCode, resultCode, data);
-		Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-		if (requestCode == REQUEST_IMAGE) {
-			if (resultCode == RESULT_OK) {
-				mImage = data != null ? data.getData() : null;
-			}
-		}
-	}
-	
-	private void PutPostInDatabase(@Nullable String imageUrl) {
+	private void PutPostInDatabase() {
 		// Create feed item, with image storage download url or null
 		String uId = mUser.getUid();
 		String text = mEditText.getText().toString();
@@ -242,5 +207,92 @@ public class CreatePostActivity extends AppCompatActivity {
 				}
 			}
 		});
+	}
+	
+	private void UploadImageToStorage() {
+		
+		String uId = mUser.getUid();
+		// check of an image was selected
+		if (mImage != null) {
+			// if an image was selected, then upload it to the storage
+			StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+			StorageReference ref = storageReference.child(uId).child("post").child(mImage.getLastPathSegment());
+			
+			UploadTask uploadTask = ref.putFile(mImage);
+			uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+				@Override
+				public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+					
+					if (task.isSuccessful()) {
+						Uri downloadUrl = task.getResult().getDownloadUrl();
+						imageUrl = downloadUrl != null ? downloadUrl.toString() : null;
+					} else {
+						Log.d(TAG, "Image upload was unsuccessful");
+					}
+				}
+			});
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+		if (requestCode == REQUEST_IMAGE) {
+			if (resultCode == RESULT_OK) {
+				mImage = data != null ? data.getData() : null;
+				try {
+					Bitmap bitmap = getThumbnail(mImage);
+					if (bitmap != null) {
+						postImageContainer.setVisibility(View.VISIBLE);
+						mPostImage.setImageBitmap(bitmap);
+						ImageButton removeImageButton = (ImageButton) findViewById(R.id.remove_image_button);
+						removeImageButton.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								
+								mPostImage.setImageBitmap(null);
+								postImageContainer.setVisibility(View.INVISIBLE);
+							}
+						});
+					}
+					//Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImage);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	private Bitmap getThumbnail(Uri uri) throws IOException {
+		
+		Bitmap bitmap;
+		BitmapFactory.Options onlyBoundsOptions;
+		InputStream input = this.getContentResolver().openInputStream(uri);
+		try {
+			onlyBoundsOptions = new BitmapFactory.Options();
+			onlyBoundsOptions.inJustDecodeBounds = true;
+			onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+			BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
+		} finally {
+			if (input != null) {
+				input.close();
+			}
+		}
+		if ((onlyBoundsOptions.outWidth == -1) || (onlyBoundsOptions.outHeight == -1)) {
+			return null;
+		}
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		input = this.getContentResolver().openInputStream(uri);
+		try {
+			bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+		} finally {
+			if (input != null) {
+				input.close();
+			}
+		}
+		return bitmap;
 	}
 }
