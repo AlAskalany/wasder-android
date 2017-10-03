@@ -86,21 +86,38 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/event_pic"/>
 
-        <TextView
-            android:id="@+id/feed_card_supplementary_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:maxLength="540"
-            android:maxLines="5"
-            android:text="@string/cardView_supplementary_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/feed_card_supplementary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLength="540"
+                android:maxLines="5"
+                android:text="@string/cardView_supplementary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+            <ImageButton
+                android:id="@+id/expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="?attr/actionBarItemBackground"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_expand_more_black_24dp"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

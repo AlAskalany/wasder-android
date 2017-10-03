@@ -2,6 +2,8 @@ package com.wasder.wasderapp.ui.home.tabs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -148,6 +150,24 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 		final String photoUrl = feedItem.getPhotoUrl();
 		Helpers.Firebase.DownloadUrlImage(photoUrl, viewHolder.photoImageButton, true, R.drawable.avatar);
 		viewHolder.supplementaryTextView.setText(feedItem.getSupplementaryText());
+		
+		viewHolder.expandButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				
+				if (!viewHolder.expanded) {
+					viewHolder.supplementaryTextView.setMaxLines(10);
+					viewHolder.expandButton.setImageDrawable(ResourcesCompat.getDrawable(view.getResources(), R.drawable.ic_expand_less_black_24dp,
+							null));
+					viewHolder.expanded = true;
+				} else {
+					viewHolder.supplementaryTextView.setMaxLines(5);
+					viewHolder.expandButton.setImageDrawable(ResourcesCompat.getDrawable(view.getResources(), R.drawable.ic_expand_more_black_24dp,
+							null));
+					viewHolder.expanded = false;
+				}
+			}
+		});
 	}
 	
 	public static class FeedViewHolder extends RecyclerView.ViewHolder {
@@ -159,6 +179,7 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 		final ImageButton photoImageButton;
 		final ImageView feedImageView;
 		final TextView supplementaryTextView;
+		final ImageButton expandButton;
 		@SuppressWarnings("unused")
 		final ImageButton commentImageButton;
 		@SuppressWarnings("unused")
@@ -167,6 +188,7 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 		final ImageButton bookmarkImageButton;
 		final ImageButton shareButton;
 		final ImageButton detailsImageButton;
+		boolean expanded;
 		@SuppressWarnings("unused")
 		FeedItem feedItem;
 		
@@ -179,6 +201,8 @@ public class FeedRecyclerAdapter extends BaseRecyclerAdapter<FeedItem, FeedRecyc
 			photoImageButton = itemView.findViewById(R.id.feed_card_avatar);
 			feedImageView = itemView.findViewById(R.id.feed_card_rich_media);
 			supplementaryTextView = itemView.findViewById(R.id.feed_card_supplementary_text);
+			expandButton = itemView.findViewById(R.id.expand);
+			expanded = false;
 			commentImageButton = itemView.findViewById(R.id.feed_card_comment_imageButton);
 			likeImageButton = itemView.findViewById(R.id.feed_likee_imageButton);
 			bookmarkImageButton = itemView.findViewById(R.id.feed_bookmark_imageButton);
