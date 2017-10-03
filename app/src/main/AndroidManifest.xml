@@ -225,6 +225,14 @@
         </activity>
         <activity android:name=".ui.Main2Activity">
         </activity>
+
+        <service
+            android:name=".MyJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
