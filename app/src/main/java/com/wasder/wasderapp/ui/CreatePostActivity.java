@@ -9,9 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,8 +25,9 @@ import android.widget.ImageButton;
 
 import com.amplitude.api.Amplitude;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -41,31 +40,24 @@ import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.WasderPreferences;
 import com.wasder.wasderapp.models.FeedItem;
 
-import org.jetbrains.annotations.NotNull;
-
 public class CreatePostActivity extends AppCompatActivity {
 	
 	private final String MESSAGES_CHILD = "feed";
 	private static final int DEFAULT_MSG_LENGTH_LIMIT = 40000;
 	@SuppressWarnings("unused")
 	public final String ANONYMOUS = "anonymous";
-	private final int REQUEST_INVITE = 1;
-	private final int REQUEST_IMAGE = 2;
+	private final int REQUEST_IMAGE = 1;
 	@SuppressWarnings("unused")
 	private final String MESSAGE_SENT_EVENT = "message_sent";
 	@SuppressWarnings("unused")
 	private final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
-	private final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
 	private static final String TAG = "CreatePostActivity";
-	private DatabaseReference mFirebaseDatabaseReference;
-	private EditText mMessageEditText;
-	private ImageButton mSendButton;
-	private FirebaseUser mFirebaseUser;
-	private StorageReference mStorageReference;
+	private EditText mEditText;
+	private FirebaseUser mUser;
 	private String mPhotoUrl;
-	private String mKey;
-	private Uri mImageUrl;
-	private boolean textExists;
+	private Uri mImage;
+	private boolean mTextExists;
+	private String imageUrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,20 +69,19 @@ public class CreatePostActivity extends AppCompatActivity {
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		// Initialize Firebase Auth
 		FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-		mFirebaseUser = mFirebaseAuth.getCurrentUser();
+		mUser = mFirebaseAuth.getCurrentUser();
 		
-		if (mFirebaseUser == null) {
+		if (mUser == null) {
 			// Not signed in, launch the Sign In activity
 			startActivity(new Intent(this, LoginActivity.class));
 			finish();
 			return;
 		} else {
-			String mUsername = mFirebaseUser.getDisplayName();
-			if (mFirebaseUser.getPhotoUrl() != null) {
-				mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+			String mUsername = mUser.getDisplayName();
+			if (mUser.getPhotoUrl() != null) {
+				mPhotoUrl = mUser.getPhotoUrl().toString();
 			}
 		}
-		mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 		Toolbar toolbar = findViewById(R.id.create_post_toolbar);
 		toolbar.setTitle("Posts");
 		
@@ -100,10 +91,10 @@ public class CreatePostActivity extends AppCompatActivity {
 			bar.setDisplayHomeAsUpEnabled(true);
 			bar.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 		}
-		mMessageEditText = findViewById(R.id.post_editText);
-		mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH,
+		mEditText = findViewById(R.id.post_editText);
+		mEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences.getInt(WasderPreferences.FRIENDLY_MSG_LENGTH,
 				DEFAULT_MSG_LENGTH_LIMIT))});
-		mMessageEditText.addTextChangedListener(new TextWatcher() {
+		mEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 				
@@ -113,12 +104,10 @@ public class CreatePostActivity extends AppCompatActivity {
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 				
 				if (charSequence.toString().trim().length() > 0) {
-					textExists = true;
-					mSendButton.setEnabled(true);
+					mTextExists = true;
 					invalidateOptionsMenu();
 				} else {
-					textExists = false;
-					mSendButton.setEnabled(false);
+					mTextExists = false;
 					invalidateOptionsMenu();
 				}
 			}
@@ -144,15 +133,6 @@ public class CreatePostActivity extends AppCompatActivity {
 				}
 			}
 		});
-		
-		mSendButton = findViewById(R.id.create_post_send_imageButton);
-		mSendButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				
-				
-			}
-		});
 	}
 	
 	@Override
@@ -165,7 +145,7 @@ public class CreatePostActivity extends AppCompatActivity {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		
-		if (!textExists) {
+		if (!mTextExists) {
 			menu.findItem(R.id.action_post).setEnabled(false);
 			//menu.findItem(R.id.action_post).getIcon().setAlpha();
 			Drawable drawable = menu.findItem(R.id.action_post).getIcon();
@@ -185,17 +165,44 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		int id = item.getItemId();
 		switch (id) {
+			// If post menu item was selected
 			case R.id.action_post:
-				FeedItem feedItem = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mFirebaseUser.getDisplayName()
-						/*mMessageEditText.getText().toString
-						()*/, mMessageEditText.getText().toString(), mPhotoUrl, null, mMessageEditText.getText().toString());
-				mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(feedItem);
-				mMessageEditText.setText("");
-				//mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
-				if (mImageUrl != null) {
-					putImageInStorage(mStorageReference, mImageUrl, mKey);
+				String uId = mUser.getUid();
+				// check of an image was selected
+				if (mImage != null) {
+					// if an image was selected, then upload it to the storage
+					StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+					StorageReference userStorageReference = storageReference.child(uId);
+					StorageReference postStorageReference = userStorageReference.child("post");
+					StorageReference ref = postStorageReference.child(mImage.getLastPathSegment());
+					
+					UploadTask uploadTask = ref.putFile(mImage);
+					uploadTask.addOnFailureListener(new OnFailureListener() {
+						@Override
+						public void onFailure(@NonNull Exception e) {
+							
+							Log.d(TAG, "Image upload was unsuccessful");
+						}
+					}).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+						@Override
+						public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+							
+							Uri downloadUrl = taskSnapshot.getDownloadUrl();
+						}
+					}).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+						@Override
+						public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+							
+							if (task.isSuccessful()) {
+								imageUrl = task.getResult().getDownloadUrl().toString();
+								PutPostInDatabase(imageUrl);
+							}
+						}
+					});
+				} else {
+					PutPostInDatabase(null);
 				}
-				onBackPressed();
+				
 				break;
 			default:
 				break;
@@ -208,73 +215,30 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-		
 		if (requestCode == REQUEST_IMAGE) {
 			if (resultCode == RESULT_OK) {
-				if (data != null) {
-					final Uri uri = data.getData();
-					Log.d(TAG, "Uri: " + uri.toString());
-					FeedItem tempMessage = new FeedItem(mFirebaseUser.getUid(), mMessageEditText.getText().toString(), mMessageEditText.getText()
-							.toString(), mMessageEditText.getText().toString(), mPhotoUrl, LOADING_IMAGE_URL, mMessageEditText.getText().toString());
-					mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(tempMessage, new DatabaseReference.CompletionListener() {
-						@Override
-						public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-							
-							if (databaseError == null) {
-								String key = databaseReference.getKey();
-								mStorageReference = FirebaseStorage.getInstance().getReference(mFirebaseUser.getUid()).child(key).child(uri
-										.getLastPathSegment());
-								mImageUrl = uri;
-								mKey = key;
-								
-							} else {
-								Log.w(TAG, "Unable to write message to database", databaseError.toException());
-							}
-						}
-					});
-				}
-			}
-		} else if (requestCode == REQUEST_INVITE) {
-			if (resultCode == RESULT_OK) {
-				// Use Firebase Measurement to log that invitation was sent.
-				Bundle payload = new Bundle();
-				payload.putString(FirebaseAnalytics.Param.VALUE, "inv_sent");
-				
-				// Check how many invitations were sent and log.
-				//String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
-				//Log.d(TAG, "Invitations sent: " + ids.length);
-			} else {
-				// Use Firebase Measurement to log that invitation was not sent
-				Bundle payload = new Bundle();
-				payload.putString(FirebaseAnalytics.Param.VALUE, "inv_not_sent");
-				//mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, payload);
-				
-				// Sending failed or it was canceled, show failure message to the user
-				Log.d(TAG, "Failed to send invitation.");
+				mImage = data != null ? data.getData() : null;
 			}
 		}
 	}
 	
-	private void putImageInStorage(@NotNull StorageReference storageReference, @NonNull Uri uri, @NotNull final String key) {
-		
-		storageReference.putFile(uri).addOnCompleteListener(CreatePostActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
+	private void PutPostInDatabase(@Nullable String imageUrl) {
+		// Create feed item, with image storage download url or null
+		String uId = mUser.getUid();
+		String text = mEditText.getText().toString();
+		FeedItem feedItem = new FeedItem(uId, text, text, text, mPhotoUrl, imageUrl, text);
+		// Add the feed item to database
+		DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+		databaseReference.child(MESSAGES_CHILD).push().setValue(feedItem, new DatabaseReference.CompletionListener() {
 			@Override
-			public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+			public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 				
-				if (task.isSuccessful()) {
-					Uri downloadUrl = task.getResult().getDownloadUrl();
-					String imageUrl = null;
-					if (downloadUrl != null) {
-						imageUrl = downloadUrl.toString();
-					}
-					Editable text = mMessageEditText.getText();
-					String supplementaryText = text.toString();
-					String uid = mFirebaseUser.getUid();
-					FeedItem feedItem = new FeedItem(uid, supplementaryText, supplementaryText, supplementaryText, mPhotoUrl, imageUrl,
-							supplementaryText);
-					mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key).setValue(feedItem);
-				} else {
-					Log.w(TAG, "Image upload task was not successful.", task.getException());
+				if (databaseError == null) {
+					onBackPressed();
+				}
+				// if adding the item to the database was unsuccessful, warn user
+				else {
+					Log.d(TAG, "Post creation was unsuccessful");
 				}
 			}
 		});

@@ -63,14 +63,6 @@
             android:tint="@android:color/white"
             app:srcCompat="@drawable/ic_image_black_24dp"/>
 
-        <ImageButton
-            android:id="@+id/create_post_send_imageButton"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|end"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_menu_send"/>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
