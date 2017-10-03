@@ -56,6 +56,7 @@ dependencies {
     compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    compile "com.android.support:mediarouter-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-core-ui:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-core-utils:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
