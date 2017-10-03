@@ -2,11 +2,16 @@ package com.wasder.wasderapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -162,8 +167,15 @@ public class CreatePostActivity extends AppCompatActivity {
 		
 		if (!textExists) {
 			menu.findItem(R.id.action_post).setEnabled(false);
+			//menu.findItem(R.id.action_post).getIcon().setAlpha();
+			Drawable drawable = menu.findItem(R.id.action_post).getIcon();
+			drawable.mutate();
+			drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
 		} else {
 			menu.findItem(R.id.action_post).setEnabled(true);
+			Drawable drawable = menu.findItem(R.id.action_post).getIcon();
+			drawable.mutate();
+			drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 		}
 		return true;
 	}
