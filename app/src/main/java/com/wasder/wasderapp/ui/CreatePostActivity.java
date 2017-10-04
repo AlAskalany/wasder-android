@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,25 +27,30 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.amplitude.api.Amplitude;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.RetryStrategy;
+import com.firebase.jobdispatcher.Trigger;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.wasder.wasderapp.FeedPostService;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.WasderPreferences;
-import com.wasder.wasderapp.models.FeedItem;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreatePostActivity extends AppCompatActivity {
 	
@@ -179,7 +183,9 @@ public class CreatePostActivity extends AppCompatActivity {
 		int id = item.getItemId();
 		switch (id) {
 			case R.id.action_post:
-				PutPostInDatabase();
+				// Create a new dispatcher using the Google Play driver.
+				//createPost(mImage);
+				finish();
 				break;
 			default:
 				break;
@@ -187,51 +193,24 @@ public class CreatePostActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private void PutPostInDatabase() {
-		// Create feed item, with image storage download url or null
-		String uId = mUser.getUid();
-		String text = mEditText.getText().toString();
-		FeedItem feedItem = new FeedItem(uId, text, text, text, mPhotoUrl, imageUrl, text);
-		// Add the feed item to database
-		DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-		databaseReference.child(MESSAGES_CHILD).push().setValue(feedItem, new DatabaseReference.CompletionListener() {
-			@Override
-			public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-				
-				if (databaseError == null) {
-					onBackPressed();
-				}
-				// if adding the item to the database was unsuccessful, warn user
-				else {
-					Log.d(TAG, "Post creation was unsuccessful");
-				}
-			}
-		});
-	}
-	
-	private void UploadImageToStorage() {
+	private void createPost(Uri image) {
 		
-		String uId = mUser.getUid();
-		// check of an image was selected
-		if (mImage != null) {
-			// if an image was selected, then upload it to the storage
-			StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-			StorageReference ref = storageReference.child(uId).child("post").child(mImage.getLastPathSegment());
-			
-			UploadTask uploadTask = ref.putFile(mImage);
-			uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-				@Override
-				public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-					
-					if (task.isSuccessful()) {
-						Uri downloadUrl = task.getResult().getDownloadUrl();
-						imageUrl = downloadUrl != null ? downloadUrl.toString() : null;
-					} else {
-						Log.d(TAG, "Image upload was unsuccessful");
-					}
-				}
-			});
-		}
+		FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+		Bundle extras = new Bundle();
+		String imageUri = (image != null) ? image.toString() : null;
+		extras.putString("image_uri", imageUri);
+		extras.putString("text", mEditText.getText().toString());
+		Job myJob = dispatcher.newJobBuilder().setService(FeedPostService.class) // the JobService that will be called
+				.setExtras(extras)              // put extras
+				.setTag("my-unique-tag")        // uniquely identifies the job
+				.setLifetime(Lifetime.UNTIL_NEXT_BOOT) //
+				.setTrigger(Trigger.executionWindow(0, 60)) //
+				.setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL) //
+				.setReplaceCurrent(false) //
+				.setRecurring(false) // one time job
+				.build();
+		
+		dispatcher.mustSchedule(myJob);
 	}
 	
 	@Override

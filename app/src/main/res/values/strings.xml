@@ -244,4 +244,14 @@
     <string name="_250_wasderz">250 Wasderz</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_post">Post</string>
+
+    <!-- Authentication providers -->
+    <!-- Twitter -->
+    <string name="twitter_consumer_key" translatable="false">eDgm9hSo6aDnO7yZW2cQM4yhu</string>
+    <string name="twitter_consumer_secret" translatable="false">uxlSqqGy3ZPHQ1DK2OXgWd5hDaE0vhR1yrAWHvevam4Bsjmg7c</string>
+    <!-- ... -->
+    <string name="facebook_application_id" translatable="false">1909212625762516</string>
+    <string name="facebook_app_id">1909212625762516</string>
+    <!-- Facebook Application ID, prefixed by 'fb'.  Enables Chrome Custom tabs. -->
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1909212625762516</string>
 </resources>

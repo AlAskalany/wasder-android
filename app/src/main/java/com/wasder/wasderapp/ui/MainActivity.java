@@ -33,8 +33,20 @@ import android.widget.Toast;
 import com.amplitude.api.Amplitude;
 
 import com.android.vending.billing.IInAppBillingService;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.provider.FirebaseInitProvider;
 import com.wasder.wasderapp.Interfaces.OnFragmentInteractionListener;
 import com.wasder.wasderapp.R;
 import com.wasder.wasderapp.Templates.NavigationFragment;
@@ -42,6 +54,10 @@ import com.wasder.wasderapp.ui.Messages.MessagesNavigationFragment;
 import com.wasder.wasderapp.ui.home.HomeNavigationFragment;
 import com.wasder.wasderapp.ui.live.LiveNavigationFragment;
 import com.wasder.wasderapp.ui.profile.OwnProfileDetailsActivity;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Main activity.
@@ -57,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private FirebaseAuth.AuthStateListener mAuthListener;
 	private Toolbar mToolbar;
 	private ActionBar mActionBar;
+	private FirebaseFirestore mFirestore;
 	private final BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigationListener = new BottomNavigationView
 			.OnNavigationItemSelectedListener() {
 		@Override
@@ -84,7 +101,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		// Start sign in if necessary
+		
 		setContentView(R.layout.activity_main);
+		
+		FirebaseFirestore.setLoggingEnabled(true);
+		initFirestore();
 		// Initialize the Amplitude SDK
 		Amplitude.getInstance().initialize(this, "937ae55b73eb164890021fe9b2d4fa63").enableForegroundTracking(getApplication());
 		Amplitude.getInstance().logEvent("Started_Main_Activity");
@@ -106,8 +128,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		findViewById(R.id.calendar_button).setOnClickListener(this);
 		findViewById(R.id.studio_button).setOnClickListener(this);
 		findViewById(R.id.floatingActionButton).setOnClickListener(this);
+	}
+	
+	private void initFirestore() {
 		
-		
+		//		mFirestore = FirebaseFirestore.getInstance();
 	}
 	
 	private void setupFirebaseAuthAndUser() {
@@ -321,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			//setNavigationDrawerDetails(navigationView, user.getEmail());
 		} else {
 			Log.d(TAG, "Signed out");
-			startActivity(new Intent(MainActivity.this, LoginActivity.class));
+			startActivity(new Intent(MainActivity.this, SplashActivity.class));
 		}
 	}
 	
